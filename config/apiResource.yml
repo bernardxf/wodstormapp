@@ -1,0 +1,8 @@
+login:
+  path: /login
+  defaults: { _controller: 'Crossfit\Controllers\LoginController::login' }
+  methods:  [GET]
+logout:
+  path: /logout
+  defaults: { _controller: 'Crossfit\Controllers\LoginController::logout' }
+  methods:  [GET]

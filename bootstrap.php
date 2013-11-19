@@ -26,6 +26,9 @@ $app->register(new CorsServiceProvider(), array(
     "cors.allowMethods" => "GET,POST,PUT,DELETE"
 ));
 
+$app->register(new Silex\Provider\SessionServiceProvider());
+$app['session']->start();
+
 $app->after($app["cors"]);
 
 $app['debug'] = true;

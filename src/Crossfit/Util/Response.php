@@ -1,6 +1,8 @@
 <?php
 namespace Crossfit\Util;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class Response
 {
 	private $messages = array();
@@ -19,6 +21,6 @@ class Response
 		$response['messages'] = $this->messages;
 		$response['data'] = $this->data;
 
-		return json_encode($response);
+		return new JsonResponse($response);
 	}
 }

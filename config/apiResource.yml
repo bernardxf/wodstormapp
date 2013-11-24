@@ -12,3 +12,24 @@ dashboard:
   path: /dashboard
   defaults: { _controller: 'Crossfit\Controllers\DashboardController::carregaDashboard' }
   methods:  [GET]
+
+plano:
+  path: /plano
+  defaults: {_controller : 'Crossfit\Controllers\PlanoController::carregaPlano' }
+  methods: [GET]
+cadPlano:
+  path: /plano/{id_plano}
+  defaults: {_controller : 'Crossfit\Controllers\PlanoController::carregaCadPlano' }
+  methods: [GET]
+salvaPlano:
+  path: /plano
+  defaults: {_controller : 'Crossfit\Controllers\PlanoController::salvaPlano' }
+  methods: [POST]
+removePlano:
+  path: /plano/{id_plano}
+  defaults: {_controller : 'Crossfit\Controllers\PlanoController::removePlano' }
+  methods: [DELETE]
+cadPlanoSelects:
+  path: /plano/selects
+  defaults: {_controller : 'Crossfit\Controllers\PlanoController::carregaSelects' }
+  methods: [GET]

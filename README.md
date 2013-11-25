@@ -6,7 +6,7 @@ CROSSFIT SERVER
 1. Caso não tenha, baixe o composer, para o controle de dependencias do sistema [Composer](http://getcomposer.org/download/).
 
 2. Com o arquivo composer.phar colocado no diretorio raiz do projeto, onde se encontra o arquivo composer.json, execute
-na linha de comando
+na linha de comando.
 
 <pre>
   php composer.phar install

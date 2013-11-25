@@ -1,3 +1,4 @@
+# Rotas para o controller de LOGIN
 login:
   path: /login
   defaults: { _controller: 'Crossfit\Controllers\LoginController::login' }
@@ -8,11 +9,13 @@ logout:
   defaults: { _controller: 'Crossfit\Controllers\LoginController::logout' }
   methods:  [POST]
 
+# Rotas para o controller de DASHBOARD
 dashboard:
   path: /dashboard
   defaults: { _controller: 'Crossfit\Controllers\DashboardController::carregaDashboard' }
   methods:  [GET]
 
+# Rotas para o controller de PLANO
 plano:
   path: /plano
   defaults: {_controller : 'Crossfit\Controllers\PlanoController::carregaPlano' }
@@ -21,15 +24,15 @@ cadPlano:
   path: /plano/{id_plano}
   defaults: {_controller : 'Crossfit\Controllers\PlanoController::carregaCadPlano' }
   methods: [GET]
-salvaPlano:
+novoPlano:
   path: /plano
   defaults: {_controller : 'Crossfit\Controllers\PlanoController::salvaPlano' }
+  methods: [POST]
+atualizaPlano:
+  path: /plano/{id_plano}
+  defaults: {_controller : 'Crossfit\Controllers\PlanoController::atualizaPlano' }
   methods: [POST]
 removePlano:
   path: /plano/{id_plano}
   defaults: {_controller : 'Crossfit\Controllers\PlanoController::removePlano' }
   methods: [DELETE]
-cadPlanoSelects:
-  path: /plano/selects
-  defaults: {_controller : 'Crossfit\Controllers\PlanoController::carregaSelects' }
-  methods: [GET]

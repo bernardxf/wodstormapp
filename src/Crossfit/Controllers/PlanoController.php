@@ -31,6 +31,7 @@ class PlanoController
 
 	public static function salvaPlano(Request $request)
 	{
+		$response = new Response();
 		$dataset = json_decode($request->getContent());
 
 		$planoDataset = [
@@ -39,15 +40,24 @@ class PlanoController
 			'valor' => $dataset->valor
 		];
 
+		Plano::salvaPlano($planoDataset);		
+
+		return $response->getAsJson();
+	}
+
+	public static function atualizaPlano($id_plano, Request $request)
+	{
 		$response = new Response();
+		$dataset = json_decode($request->getContent());
 
-		if($dataset->id_plano){
-			Plano::atualizaPlano($planoDataset, $dataset->id_plano);
-		} else {
-			Plano::salvaPlano($planoDataset);	
-		}
+		$planoDataset = [
+			'nome' => $dataset->nome,
+			'tipo' => $dataset->tipo,
+			'valor' => $dataset->valor
+		];		
+
+		$resultado = Plano::atualizaPlano($planoDataset, $id_plano);
 		
-
 		return $response->getAsJson();
 	}
 

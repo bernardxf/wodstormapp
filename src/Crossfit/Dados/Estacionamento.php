@@ -7,8 +7,33 @@ class Estacionamento
 {
 	public static function retornaTodos()
 	{
-		$sql = 'select * from estacionamento';
+		$sql = 'select estacionamento.*, aluno.nome as aluno from estacionamento join aluno on estacionamento.id_aluno_fk = aluno.id_aluno';
 		$resultado = Conexao::get()->fetchAll($sql);
+		return $resultado;
+	}
+
+	public static function retornaSelecionado($id_estacionamento)
+	{
+		$sql = 'select * from estacionamento where id_estacionamento = ?';
+		$resultado = Conexao::get()->fetchAssoc($sql, array($id_estacionamento));
+		return $resultado;
+	}
+
+	public static function salvaEstacionamento($estacionamentoDataset)
+	{
+		$resultado = Conexao::get()->insert('estacionamento', $estacionamentoDataset);
+		return $ressultado;
+	}
+
+	public static function atualizaEstacionamento($estacionamentoDataset, $id_estacionamento)
+	{
+		$resultado = Conexao::get()->update('estacionamento', $estacionamentoDataset, array('id_estacionamento' => $id_estacionamento));
+		return $ressultado;
+	}
+
+	public static function removeEstacionamento($id_estacionamento)
+	{
+		$resultado = Conexao::get()->delete('estacionamento', array('id_estacionamento' => $id_estacionamento));
 		return $resultado;
 	}
 

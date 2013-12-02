@@ -21,7 +21,7 @@ class Aluno
 
 	public static function retornaTodosSimples()
 	{
-		$sql = "select id_aluno, nome from aluno";
+		$sql = "select id_aluno, nome from aluno order by nome";
 		$resultado = Conexao::get()->fetchAll($sql);
 		return $resultado;
 	}

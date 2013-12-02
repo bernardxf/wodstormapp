@@ -59,3 +59,26 @@ removeDesconto:
   path: /desconto/{id_desconto}
   defaults: {_controller : 'Crossfit\Controllers\DescontoController::removeDesconto' }
   methods: [DELETE]
+
+# Rotas para o controller de ESTACIONAMENTO
+
+estacionamento:
+  path: /estacionamento
+  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::carregaEstacionamento' }
+  methods: [GET]
+cadEstacionamento:
+  path: /estacionamento/{id_estacionamento}
+  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::carregaCadEstacionamento' }
+  methods: [GET]
+novoEstacionamento:
+  path: /estacionamento
+  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::salvaEstacionamento' }
+  methods: [POST]
+atualizaEstacionamento:
+  path: /estacionamento/{id_estacionamento}
+  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::atualizaEstacionamento' }
+  methods: [POST]
+removeEstacionamento:
+  path: /estacionamento/{id_estacionamento}
+  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::removeEstacionamento' }
+  methods: [DELETE]

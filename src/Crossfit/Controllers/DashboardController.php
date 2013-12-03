@@ -3,7 +3,7 @@ namespace Crossfit\Controllers;
 
 use Crossfit\Dados\Dashboard;
 use Crossfit\Dados\Aluno;
-use Crossfit\Dados\Plano;
+use Crossfit\Dados\Contrato;
 use Crossfit\Dados\Estacionamento;
 use Crossfit\Util\Response;
 
@@ -15,7 +15,7 @@ class DashboardController
 
 		$dashboard = Dashboard::retorna();
 		$aniversarios = Aluno::retornaAniversariantes();
-		$plano = Plano::retornaVencimentoPlanos();
+		$plano = Contrato::retornaVencimentoContrato();
 		$trancado = Aluno::retornaTrancados();
 		$estacionamento = Estacionamento::retornaVencimentoEstacionamento();
 

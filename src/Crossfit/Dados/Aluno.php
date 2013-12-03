@@ -28,14 +28,14 @@ class Aluno
 
 	public static function retornaAniversariantes()
 	{
-		$sql = "SELECT nome, DATE_FORMAT(data_nasc, '%d/%m/%Y') as data_nasc FROM aluno WHERE DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') ORDER BY data_nasc";
+		$sql = "SELECT nome, data_nasc FROM aluno WHERE DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') ORDER BY data_nasc";
 		$resultado = Conexao::get()->fetchAll($sql);
 		return $resultado;
 	}
 
 	public static function retornaTrancados()
 	{
-		$sql = "SELECT nome, aluno_status FROM aluno WHERE aluno_status = 'trancado' ORDER BY nome ASC";
+		$sql = "SELECT nome, aluno_status FROM aluno WHERE aluno_status = 'T' ORDER BY nome ASC";
 		$resultado = Conexao::get()->fetchAll($sql);
 		return $resultado;
 	}

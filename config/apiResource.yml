@@ -37,48 +37,46 @@ removePlano:
   defaults: {_controller : 'Crossfit\Controllers\PlanoController::removePlano' }
   methods: [DELETE]
 
-# Rotas para o controller de DESCONTO
-
-desconto:
-  path: /desconto
-  defaults: {_controller : 'Crossfit\Controllers\DescontoController::carregaDesconto' }
+  # Rotas para o controller de Formas de Pagamento
+formapagamento:
+  path: /formapagamento
+  defaults: {_controller : 'Crossfit\Controllers\FormaPagamentoController::carregaFormaPagamento' }
   methods: [GET]
-cadDesconto:
-  path: /desconto/{id_desconto}
-  defaults: {_controller : 'Crossfit\Controllers\DescontoController::carregaCadDesconto' }
+cadFormaPagamento:
+  path: /formapagamento/{id_forma_pagamento}
+  defaults: {_controller : 'Crossfit\Controllers\FormaPagamentoController::carregaCadFormaPagamento' }
   methods: [GET]
-novoDesconto:
-  path: /desconto
-  defaults: {_controller : 'Crossfit\Controllers\DescontoController::salvaDesconto' }
+novoFormaPagamento:
+  path: /formapagamento
+  defaults: {_controller : 'Crossfit\Controllers\FormaPagamentoController::salvaFormaPagamento' }
   methods: [POST]
-atualizaDesconto:
-  path: /desconto/{id_desconto}
-  defaults: {_controller : 'Crossfit\Controllers\DescontoController::atualizaDesconto' }
+atualizaFormaPagamento:
+  path: /formapagamento/{id_forma_pagamento}
+  defaults: {_controller : 'Crossfit\Controllers\FormaPagamentoController::atualizaFormaPagamento' }
   methods: [POST]
-removeDesconto:
-  path: /desconto/{id_desconto}
-  defaults: {_controller : 'Crossfit\Controllers\DescontoController::removeDesconto' }
+removeFormaPagamento:
+  path: /formapagamento/{id_forma_pagamento}
+  defaults: {_controller : 'Crossfit\Controllers\FormaPagamentoController::removeFormaPagamento' }
   methods: [DELETE]
 
-# Rotas para o controller de ESTACIONAMENTO
-
-estacionamento:
-  path: /estacionamento
-  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::carregaEstacionamento' }
+# Rotas para o controller de Aula Experimental
+aulaexp:
+  path: /aulaexp
+  defaults: {_controller : 'Crossfit\Controllers\AulaExpController::carregaAulaExp' }
   methods: [GET]
-cadEstacionamento:
-  path: /estacionamento/{id_estacionamento}
-  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::carregaCadEstacionamento' }
+cadAulaExp:
+  path: /aulaexp/{id_aulaexp}
+  defaults: {_controller : 'Crossfit\Controllers\AulaExpController::carregaCadAulaExp' }
   methods: [GET]
-novoEstacionamento:
-  path: /estacionamento
-  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::salvaEstacionamento' }
+novoAulaExp:
+  path: /aulaexp
+  defaults: {_controller : 'Crossfit\Controllers\AulaExpController::salvaAulaExp' }
   methods: [POST]
-atualizaEstacionamento:
-  path: /estacionamento/{id_estacionamento}
-  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::atualizaEstacionamento' }
+atualizaAulaExp:
+  path: /aulaexp/{id_aulaexp}
+  defaults: {_controller : 'Crossfit\Controllers\AulaExpController::atualizaAulaExp' }
   methods: [POST]
-removeEstacionamento:
-  path: /estacionamento/{id_estacionamento}
-  defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::removeEstacionamento' }
+removeAulaExp:
+  path: /aulaexp/{id_aulaexp}
+  defaults: {_controller : 'Crossfit\Controllers\AulaExpController::removeAulaExp' }
   methods: [DELETE]

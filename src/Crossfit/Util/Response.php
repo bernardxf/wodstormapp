@@ -1,7 +1,7 @@
 <?php
 namespace Crossfit\Util;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response as SResponse;
 
 class Response
 {
@@ -28,6 +28,6 @@ class Response
 		$response['data'] = $this->data;
 		$response['success'] = $this->success;
 
-		return new JsonResponse($response);
+		return new SResponse(json_encode($response));
 	}
 }

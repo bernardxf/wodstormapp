@@ -3,6 +3,7 @@
         "silex/silex": "~1.0",
         "symfony/yaml":"v2.2.0",
         "symfony/config":"v2.2.0",
+        "twig/twig": ">=1.2.0",
         "doctrine/dbal": "2.1.*",
         "jdesrosiers/silex-cors-provider": "~0.1"
     }

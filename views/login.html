@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="public/assets/css/Login.css" type="text/css" />
+<div id="login-container">	
+	
+	<!-- <div id="logo">
+		<a href="./login.html">
+			<img src="./img/logos/logo-login.png" alt="Logo" />
+		</a>
+	</div> -->
+
+	<div id="login">
+
+		<h3>Bem vindo ao BoxAdm.</h3>
+
+		<form id="login-form" class="form">
+
+			<div class="form-group">
+				<label for="login-username">Usuário</label>
+				<input type="text" class="form-control" id="login-usuario" placeholder="Usuário" ng-model="loginDataset.usuario">
+			</div>
+
+			<div class="form-group">
+				<label for="login-password">Senha</label>
+				<input type="password" class="form-control" id="login-senha" placeholder="Senha" ng-model="loginDataset.senha">
+			</div>
+
+			<div class="form-group">
+				<label for="login-organizacao">Organização</label>
+				<input type="text" class="form-control" id="login-organizacao" placeholder="Organização" ng-model="loginDataset.organizacao">
+			</div>
+
+			<div class="form-group">
+
+				<button id="login-btn" class="btn btn-primary btn-block" ng-click="login();">Login &nbsp; <i class="fa fa-play-circle"></i></button>
+
+			</div>
+		</form>
+
+
+		<a class="btn btn-default" >Esqueceu a senha?</a>
+
+	</div> <!-- /#login -->
+
+	<a href="javascript:;" id="signup-btn" class="btn btn-lg btn-block">
+		Criar nova conta. (Em Breve!)
+	</a>
+
+
+</div> <!-- /#login-container -->

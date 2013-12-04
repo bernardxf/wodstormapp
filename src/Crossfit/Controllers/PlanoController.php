@@ -4,10 +4,11 @@ namespace Crossfit\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\Plano;
 use Crossfit\Util\Response;
+use Silex\Application;
 
 class PlanoController
 {
-	public static function carregaPlano()
+	public static function carregaPlano(Application $app)
 	{
 		$response = new Response();
 

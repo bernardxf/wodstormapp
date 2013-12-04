@@ -2,20 +2,21 @@
 namespace Crossfit\Dados;
 
 use Crossfit\Conexao;
+use Crossfit\App;
 
 class Desconto
 {
 	public static function retornaTodos()
 	{
-		$sql = 'select * from desconto';
-		$resultado = Conexao::get()->fetchAll($sql);
+		$sql = 'select * from desconto where id_organizacao = ?';
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
 	public static function retornaSelecionado($id_desconto)
 	{	
-		$sql = 'select * from desconto where id_desconto = ?';
-		$resultado = Conexao::get()->fetchAssoc($sql, array($id_desconto));
+		$sql = 'select * from desconto where id_desconto = ? and id_organizacao = ?';
+		$resultado = Conexao::get()->fetchAssoc($sql, array($id_desconto, App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 

@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\Plano;
 use Crossfit\Util\Response;
 use Silex\Application;
+use Crossfit\App;
 
 class PlanoController
 {
@@ -38,7 +39,8 @@ class PlanoController
 		$planoDataset = [
 			'nome' => $dataset->nome,
 			'tipo' => $dataset->tipo,
-			'valor' => $dataset->valor
+			'valor' => $dataset->valor,
+			'id_organizacao' => App::getSession()->get('organizacao')
 		];
 
 		Plano::salvaPlano($planoDataset);		

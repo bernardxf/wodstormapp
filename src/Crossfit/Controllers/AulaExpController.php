@@ -41,7 +41,8 @@ class AulaExpController
 			'telefone' => $dataset->telefone,
 			'email' => $dataset->email,
 			'confirmado' => $dataset->confirmado,
-			'presente' => $dataset->presente
+			'presente' => $dataset->presente,
+			'id_organizacao' => App::getSession()->get('organizacao')
 		];
 
 		AulaExp::salvaAulaExp($aulaexpDataset);		

@@ -37,7 +37,8 @@ class DescontoController
 
 		$descontoDataset = [
 			'nome' => $dataset->nome,
-			'porc_desc' => $dataset->porc_desc
+			'porc_desc' => $dataset->porc_desc,
+			'id_organizacao' => App::getSession()->get('organizacao')
 		];
 
 		Desconto::salvaDesconto($descontoDataset);		

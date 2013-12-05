@@ -197,3 +197,12 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 		});
 	};
 }]);
+
+AppControllers.controller('RelAlunoController', ['$scope', function($scope){
+	$scope.relalunoDataset = null;
+	$scope.selectAluno = null;
+	
+	$scope.carregaRelAluno = function(){
+		$scope.selectAluno = response.data.selectAluno;	
+	};
+}]);

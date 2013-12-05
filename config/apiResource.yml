@@ -125,3 +125,9 @@ removeAulaExp:
   path: /aulaexp/{id_aulaexp}
   defaults: {_controller : 'Crossfit\Controllers\AulaExpController::removeAulaExp' }
   methods: [DELETE]
+
+  # Rotas para o controller de Relatório de Aluno
+relaluno:
+  path: /relaluno
+  defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::carregaRelAluno' }
+  methods:  [GET]

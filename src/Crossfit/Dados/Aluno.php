@@ -7,15 +7,15 @@ class Aluno
 {
 	public static function retornaTodos()
 	{
-		$sql = 'select * from aluno';
-		$resultado = Conexao::get()->fetchAll($sql);
+		$sql = 'select * from aluno where id_organizacao = ?';
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
 	public static function retornaSelecionado($id_aluno)
 	{
-		$sql = "select * from aluno where id_aluno = ?";
-		$resultado = Conexao::get()->fetchAssoc($sql, array($id_aluno));
+		$sql = "select * from aluno where id_aluno = ? and id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAssoc($sql, array($id_aluno, App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 

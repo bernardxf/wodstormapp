@@ -48,6 +48,7 @@ class EstacionamentoController
 			'plano_fim' => $dataset->plano_fim,
 			'estacionamento_status' => $dataset->status,
 			'observacao' => $dataset->observacao,
+			'id_organizacao' => App::getSession()->get('organizacao')
 			);
 
 		$resultado = Estacionamento::salvaEstacionamento($estacionamentoDataset);

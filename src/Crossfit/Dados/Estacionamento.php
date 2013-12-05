@@ -16,7 +16,7 @@ class Estacionamento
 	public static function retornaSelecionado($id_estacionamento)
 	{
 		$sql = 'select * from estacionamento where id_estacionamento = ? and id_organizacao = ?';
-		$resultado = Conexao::get()->fetchAssoc($sql, array($id_plano, App::getSession()->get('organizacao')));
+		$resultado = Conexao::get()->fetchAssoc($sql, array($id_estacionamento, App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 

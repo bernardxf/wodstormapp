@@ -37,6 +37,9 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/cad_aulaexp/:aulaexp?', {
 		templateUrl: 'views/cad_aulaexp.html',
 		controller: 'AulaExpController'
+	}).when('/relaluno', {
+		templateUrl: 'views/relaluno.html',
+		controller: 'RelAlunoController'
 	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);

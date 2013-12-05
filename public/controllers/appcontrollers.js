@@ -19,34 +19,25 @@ AppControllers.controller('Page404Controller', ['$scope', '$rootScope', function
 	
 }]);
 
-AppControllers.controller('PlanoController', ['$scope', '$routeParams', 'PlanoResource', function($scope, $routeParams, PlanoResource){
+AppControllers.controller('PlanoController', ['$scope','$routeParams', '$location', 'PlanoResource', function ($scope, $routeParams, $location, PlanoResource) {
 	$scope.planoDataset = null;
+
 	$scope.carregaPlano = function(){
 		PlanoResource.get({},function(response){
 			$scope.planoDataset = response.data;
 		});
 	};
 
-	$scope.deletaPlano = function(plano){
-		PlanoResource.remove({id_plano: plano.id_plano}, function(response){
-			$scope.carregaPlano();
-		});
-	};
-}]);
-
-AppControllers.controller('CadPlanoController', ['$scope','$routeParams', '$location', 'PlanoResource', function ($scope, $routeParams, $location, PlanoResource) {
-	$scope.cadPlanoDataset = null;
-
 	$scope.carregaCadPlano = function(){
 		PlanoResource.get({id_plano : $routeParams.plano}, function(response){
 			if(!angular.isArray(response.data)){
-				$scope.cadPlanoDataset = response.data;
+				$scope.planoDataset = response.data;
 			}
 		});
 	};
 
 	$scope.salvaPlano = function(){
-		var plano = $scope.cadPlanoDataset;
+		var plano = $scope.planoDataset;
 		PlanoResource.save(plano, function(response){
 			$location.path('/plano');
 		});
@@ -54,6 +45,12 @@ AppControllers.controller('CadPlanoController', ['$scope','$routeParams', '$loca
 
 	$scope.cancelaEdicaoPlano = function(){
 		$location.path('/plano');
+	};
+
+	$scope.deletaPlano = function(plano){
+		PlanoResource.remove({id_plano: plano.id_plano}, function(response){
+			$scope.carregaPlano();
+		});
 	};
 
 }]);
@@ -95,7 +92,6 @@ AppControllers.controller('FormaPagamentoController', ['$scope', '$routeParams',
 
 AppControllers.controller('DescontoController', ['$scope','$routeParams', '$location', 'DescontoResource', function ($scope, $routeParams, $location, DescontoResource) {
 	$scope.descontoDataset = null;
-	$scope.cadDescontoDataset = null;
 
 	$scope.carregaDesconto = function(){
 		DescontoResource.get({}, function(response){
@@ -106,13 +102,13 @@ AppControllers.controller('DescontoController', ['$scope','$routeParams', '$loca
 	$scope.carregaCadDesconto = function(){
 		DescontoResource.get({id_desconto: $routeParams.desconto}, function(response){
 			if(!angular.isArray(response.data)){
-				$scope.cadDescontoDataset = response.data;	
+				$scope.descontoDataset = response.data;	
 			}
 		});
 	};
 
 	$scope.salvaDesconto = function(){
-		var desconto = $scope.cadDescontoDataset;
+		var desconto = $scope.descontoDataset;
 		DescontoResource.save(desconto, function(response){
 			$location.path('/desconto');
 		});
@@ -163,6 +159,41 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 	$scope.deletaEstacionamento = function(estacionamento){
 		EstacionamentoResource.remove({id_estacionamento : estacionamento.id_estacionamento}, function(response){
 			$scope.carregaEstacionamento();
+		});
+	};
+}]);
+
+AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$location', 'AulaExpResource', function($scope, $routeParams, $location, AulaExpResource){
+	$scope.aulaexpDataset = null;
+	
+	$scope.carregaAulaExp = function(){
+		AulaExpResource.get({id_aulaexp : $routeParams.aulaexp},function(response){
+			$scope.aulaexpDataset = response.data;
+		});
+	};
+
+	$scope.carregaCadAulaExp = function(){
+		AulaExpResource.get({id_aulaexp : $routeParams.aulaexp}, function(response){
+			if(!angular.isArray(response.data)){
+				$scope.aulaexpDataset = response.data;
+			}
+		});
+	};
+
+	$scope.salvaAulaExp = function(){
+		var aulaexp = $scope.aulaexpDataset;
+		AulaExpResource.save(aulaexp, function(response){
+			$location.path('/aulaexp');
+		});
+	};
+
+	$scope.cancelaEdicaoAulaExp = function(){
+		$location.path('/aulaexp');
+	};
+
+	$scope.deletaAulaExp = function(aulaexp){
+		AulaExpResource.remove({id_aulaexp: aulaexp.id_aulaexp}, function(response){
+			$scope.carregaAulaExp();
 		});
 	};
 }]);

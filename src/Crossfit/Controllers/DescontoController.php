@@ -4,10 +4,11 @@ namespace Crossfit\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\Desconto;
 use Crossfit\Util\Response;
+use Silex\Application;
 
 class DescontoController
 {
-	public static function carregaDesconto()
+	public static function carregaDesconto(Application $app)
 	{
 		$response = new Response();
 

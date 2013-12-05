@@ -4,10 +4,11 @@ namespace Crossfit\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\AulaExp;
 use Crossfit\Util\Response;
+use Silex\Application;
 
 class AulaExpController
 {
-	public static function carregaAulaExp()
+	public static function carregaAulaExp(Application $app)
 	{
 		$response = new Response();
 
@@ -72,15 +73,6 @@ class AulaExpController
 		$response = new Response();
 
 		AulaExp::removeAulaExp($id_aulaexp);
-
-		return $response->getAsJson();
-	}
-
-	public static function pesquisaAulaExp($data_aula)
-	{
-		$response = new Response();
-
-		AulaExp::pesquisaAulaExp($data_aula);
 
 		return $response->getAsJson();
 	}

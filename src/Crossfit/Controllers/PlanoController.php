@@ -57,7 +57,7 @@ class PlanoController
 			'valor' => $dataset->valor
 		];		
 
-		$resultado = Plano::atualizaPlano($planoDataset, $id_plano);
+		Plano::atualizaPlano($planoDataset, $id_plano);
 		
 		return $response->getAsJson();
 	}

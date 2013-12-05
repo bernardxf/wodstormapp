@@ -2,20 +2,21 @@
 namespace Crossfit\Dados;
 
 use Crossfit\Conexao;
+use Crossfit\App;
 
 class FormaPagamento
 {
 	public static function retornaTodos()
 	{
-		$sql = "select * from forma_pagamento"; 
-		$resultado = Conexao::get()->fetchAll($sql);
+		$sql = "select * from forma_pagamento where id_organizacao = ?"; 
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
 	public static function retornaSelecionado($id_forma_pagamento)
 	{
-		$sql = "select * from forma_pagamento where id_forma_pagamento = ?";
-		$resultado = Conexao::get()->fetchAssoc($sql, array($id_forma_pagamento));
+		$sql = "select * from forma_pagamento where id_forma_pagamento = ? and id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAssoc($sql, array($id_forma_pagamento, App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 

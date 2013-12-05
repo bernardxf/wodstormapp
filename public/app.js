@@ -12,7 +12,7 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 		controller: 'PlanoController'
 	}).when('/cad_plano/:plano?', {
 		templateUrl: 'views/cad_plano.html',
-		controller: 'CadPlanoController'
+		controller: 'PlanoController'
 	}).when('/formapagamento', {
 		templateUrl: 'views/formapagamento.html',
 		controller: 'FormaPagamentoController'
@@ -31,7 +31,13 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/cad_estacionamento/:estacionamento?', {
 		templateUrl: 'views/cad_estacionamento.html',
 		controller: 'EstacionamentoController'
-	}).otherwise({ redirectTo: '/404', templateUrl: 'app/views/page404.html', controller: 'Page404Controller' });
+	}).when('/aulaexp', {
+		templateUrl: 'views/aulaexp.html',
+		controller: 'AulaExpController'
+	}).when('/cad_aulaexp/:aulaexp?', {
+		templateUrl: 'views/cad_aulaexp.html',
+		controller: 'AulaExpController'
+	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);
 
@@ -65,4 +71,8 @@ crossfitApp.factory('DescontoResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('EstacionamentoResource', ['$resource', function ($resource) {
 	return $resource('/api/estacionamento/:id_estacionamento',{id_estacionamento:'@id_estacionamento'});
+}]);
+
+crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
+	return $resource('/api/aulaexp/:id_aulaexp',{id_aulaexp:'@id_aulaexp'});
 }]);

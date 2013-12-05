@@ -5,10 +5,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\Estacionamento;
 use Crossfit\Dados\Aluno;
 use Crossfit\Util\Response;
+use Silex\Application;
 
 class EstacionamentoController
 {
-	public static function carregaEstacionamento()
+	public static function carregaEstacionamento(Application $app)
 	{
 		$response = new Response();
 

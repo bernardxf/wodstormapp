@@ -4,10 +4,11 @@ namespace Crossfit\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\FormaPagamento;
 use Crossfit\Util\Response;
+use Silex\Application;
 
 class FormaPagamentoController
 {
-	public static function carregaFormaPagamento()
+	public static function carregaFormaPagamento(Application $app)
 	{
 		$response = new Response();
 
@@ -52,7 +53,7 @@ class FormaPagamentoController
 			'nome' => $dataset->nome
 		];		
 
-		$resultado = FormaPagamento::atualizaFormaPagamento($formapagamentoDataset, $id_forma_pagamento);
+		FormaPagamento::atualizaFormaPagamento($formapagamentoDataset, $id_forma_pagamento);
 		
 		return $response->getAsJson();
 	}

@@ -2,20 +2,21 @@
 namespace Crossfit\Dados;
 
 use Crossfit\Conexao;
+use Crossfit\App;
 
 class Estacionamento
 {
 	public static function retornaTodos()
 	{
-		$sql = 'select estacionamento.*, aluno.nome as aluno from estacionamento join aluno on estacionamento.id_aluno_fk = aluno.id_aluno';
-		$resultado = Conexao::get()->fetchAll($sql);
+		$sql = 'select estacionamento.*, aluno.nome as aluno from estacionamento join aluno on estacionamento.id_aluno_fk = aluno.id_aluno where id_organizacao = ?';
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
 	public static function retornaSelecionado($id_estacionamento)
 	{
-		$sql = 'select * from estacionamento where id_estacionamento = ?';
-		$resultado = Conexao::get()->fetchAssoc($sql, array($id_estacionamento));
+		$sql = 'select * from estacionamento where id_estacionamento = ? and id_organizacao = ?';
+		$resultado = Conexao::get()->fetchAssoc($sql, array($id_plano, App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 

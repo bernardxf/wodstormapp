@@ -126,6 +126,29 @@ removeAulaExp:
   defaults: {_controller : 'Crossfit\Controllers\AulaExpController::removeAulaExp' }
   methods: [DELETE]
 
+
+# Rotas para o controller de Aluno
+aluno:
+  path: /aluno
+  defaults: {_controller : 'Crossfit\Controllers\AlunoController::carregaAluno' }
+  methods: [GET]
+cadAluno:
+  path: /aluno/{id_aluno}
+  defaults: {_controller : 'Crossfit\Controllers\AlunoController::carregaCadAluno' }
+  methods: [GET]
+novoAluno:
+  path: /aluno
+  defaults: {_controller : 'Crossfit\Controllers\AlunoController::salvaAluno' }
+  methods: [POST]
+atualizaAluno:
+  path: /aluno/{id_aluno}
+  defaults: {_controller : 'Crossfit\Controllers\AlunoController::atualizaAluno' }
+  methods: [POST]
+removeAulaExp:
+  path: /aluno/{id_aluno}
+  defaults: {_controller : 'Crossfit\Controllers\AlunoController::removeAluno' }
+  methods: [DELETE]
+
   # Rotas para o controller de Relatório de Aluno
 relaluno:
   path: /relaluno

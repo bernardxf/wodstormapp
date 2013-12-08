@@ -2,6 +2,7 @@
 namespace Crossfit\Dados;
 
 use Crossfit\Conexao;
+use Crossfit\App;
 
 class Aluno
 {
@@ -16,6 +17,24 @@ class Aluno
 	{
 		$sql = "select * from aluno where id_aluno = ? and id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAssoc($sql, array($id_aluno, App::getSession()->get('organizacao')));
+		return $resultado;
+	}
+
+	public static function salvaAluno($alunoDataset)
+	{
+		$resultado = Conexao::get()->insert('aluno', $alunoDataset);
+		return $resultado;
+	}
+
+	public static function atualizaAluno($id_aluno, $alunoDataset)
+	{
+		$resultado = Conexao::get()->update('aluno', $alunoDataset, array('id_aluno' => $id_aluno));
+		return $resultado;
+	}
+
+	public static function removeAluno($id_aluno)
+	{
+		$resultado = Conexao::get()->delete('aluno', array('id_aluno' => $id_aluno));
 		return $resultado;
 	}
 

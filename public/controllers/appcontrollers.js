@@ -206,3 +206,41 @@ AppControllers.controller('RelAlunoController', ['$scope', function($scope){
 		$scope.selectAluno = response.data.selectAluno;	
 	};
 }]);
+
+
+AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', '$location', '$routeParams', function ($scope, AlunoResource, $location, $routeParams) {
+	$scope.alunoDataset = null;
+	$scope.cadAlunoDataset = null;
+
+	$scope.carregaAluno = function(){
+		AlunoResource.get({}, function(response){
+			$scope.alunoDataset = response.data;
+		});
+	};
+
+	$scope.carregaCadAluno = function(){
+		AlunoResource.get({id_aluno : $routeParams.aluno}, function(response){
+			if(!angular.isArray(response.data)){
+				$scope.cadAlunoDataset = response.data;
+			}
+		});
+	};
+
+	$scope.salvaAluno = function(){
+		var aluno = $scope.cadAlunoDataset;
+		AlunoResource.save(aluno, function(response){
+			$location.path('/aluno');
+		});
+	};
+
+	$scope.cancelaEdicaoAluno = function(){
+		$location.path('/aluno');
+	};
+
+	$scope.deletaAluno = function(aluno){
+		AlunoResource.remove({id_aluno : aluno.id_aluno}, function(){
+			$scope.carregaAluno();
+		});
+	};
+
+}]);

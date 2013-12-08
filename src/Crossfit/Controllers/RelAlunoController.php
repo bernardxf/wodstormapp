@@ -11,13 +11,25 @@ use Crossfit\App;
 
 class RelAlunoController
 {
-	public static function carregaRelAluno(Application $app)
+	public static function carregaRelAluno()
 	{
 		$response = new Response();
 
-		$selectAluno = Aluno::retornaTodosSimples();
+		$resultado = Aluno::retornaTodosSimples();
 
-		$response->setData($selectAluno);
+		$response->setData($resultado);
+
+		return $response->getAsJson();
+
+	}
+
+	public static function pesquisaRelAluno($id_aluno, $data_ini, $data_fim)
+	{
+		$response = new Response();
+
+		$resultado = RelAluno::retornaSelecionado($id_aluno, $data_ini, $data_fim);
+
+		$response->setData($resultado);
 
 		return $response->getAsJson();
 	}

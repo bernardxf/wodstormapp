@@ -79,3 +79,7 @@ crossfitApp.factory('EstacionamentoResource', ['$resource', function ($resource)
 crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
 	return $resource('/api/aulaexp/:id_aulaexp',{id_aulaexp:'@id_aulaexp'});
 }]);
+
+crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
+	return $resource('/api/relaluno');
+}]);

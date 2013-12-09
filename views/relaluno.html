@@ -51,6 +51,22 @@
 								</tbody>
 							</table>
 						</div> <!-- /.table-responsive -->
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
+								<thead>
+									<tr>
+										<th>Data</th>
+										<th>Hora</th>
+									</tr>
+								</thead>
+								<tbody>
+									 <tr ng-repeat="dia in relalunoDataset.dias">
+				                        <td>{{dia.data}}</td>
+				                        <td>{{dia.horario}}</td>
+				                    </tr>
+								</tbody>
+							</table>
+						</div> <!-- /.table-responsive -->
 					</div> <!-- /.portlet-content -->
 				</div> <!--/.portlet -->
 			</div> <!-- /.col -->

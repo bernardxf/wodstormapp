@@ -23,7 +23,7 @@ class RelAlunoController
 
 	}
 
-	public static function pesquisaRelAluno($id_aluno, $data_ini, $data_fim)
+	public static function pesquisaRelAluno()
 	{
 		$response = new Response();
 

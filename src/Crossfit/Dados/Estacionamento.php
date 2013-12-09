@@ -8,7 +8,7 @@ class Estacionamento
 {
 	public static function retornaTodos()
 	{
-		$sql = 'select estacionamento.*, aluno.nome as aluno from estacionamento join aluno on estacionamento.id_aluno_fk = aluno.id_aluno where id_organizacao = ?';
+		$sql = 'select estacionamento.*, aluno.nome as aluno from estacionamento join aluno on estacionamento.id_aluno = aluno.id_aluno where estacionamento.id_organizacao = ?';
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}

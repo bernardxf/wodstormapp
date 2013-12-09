@@ -20,6 +20,24 @@ class Aluno
 		return $resultado;
 	}
 
+	public static function salvaAluno($alunoDataset)
+	{
+		$resultado = Conexao::get()->insert('aluno', $alunoDataset);
+		return $resultado;
+	}
+
+	public static function atualizaAluno($id_aluno, $alunoDataset)
+	{
+		$resultado = Conexao::get()->update('aluno', $alunoDataset, array('id_aluno' => $id_aluno));
+		return $resultado;
+	}
+
+	public static function removeAluno($id_aluno)
+	{
+		$resultado = Conexao::get()->delete('aluno', array('id_aluno' => $id_aluno));
+		return $resultado;
+	}
+
 	public static function retornaTodosSimples()
 	{
 		$sql = "select id_aluno, nome from aluno where id_organizacao = ? order by nome";

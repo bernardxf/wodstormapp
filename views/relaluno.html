@@ -17,6 +17,7 @@
 						</div>
 						<div class="form-group">	
 							<label for="nome">Nome</label>
+							<!-- <input type="text" id="text-input" class="form-control" ng-model="relalunoDataset.id_aluno"> -->
 							<select id="nome" class="form-control" ng-model="relalunoDataset.id_aluno" ui-select2 data-placeholder="Selecione um aluno">
 								<option></option>
 								<option ng-repeat="aluno in selectAluno" value="{{aluno.id_aluno}}">{{aluno.nome}}</option>
@@ -47,6 +48,22 @@
 										<td>{{relalunoDataset.aluno[0].plano}}</td>
 										<td>{{relalunoDataset.presencas[0].num_presencas}}</td>
 									</tr>
+								</tbody>
+							</table>
+						</div> <!-- /.table-responsive -->
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
+								<thead>
+									<tr>
+										<th>Data</th>
+										<th>Hora</th>
+									</tr>
+								</thead>
+								<tbody>
+									 <tr ng-repeat="dia in relalunoDataset.dias">
+				                        <td>{{dia.data}}</td>
+				                        <td>{{dia.horario}}</td>
+				                    </tr>
 								</tbody>
 							</table>
 						</div> <!-- /.table-responsive -->

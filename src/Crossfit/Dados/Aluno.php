@@ -40,8 +40,8 @@ class Aluno
 
 	public static function retornaTodosSimples()
 	{
-		$sql = "select id_aluno, nome from aluno order by nome";
-		$resultado = Conexao::get()->fetchAll($sql);
+		$sql = "select id_aluno, nome from aluno where id_organizacao = ? order by nome";
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 

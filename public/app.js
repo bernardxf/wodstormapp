@@ -93,6 +93,10 @@ crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
 	return $resource('/api/aulaexp/:id_aulaexp',{id_aulaexp:'@id_aulaexp'});
 }]);
 
+crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
+	return $resource('/api/relaluno');
+}]);
+
 crossfitApp.factory('AlunoResource', ['$resource', function ($resource) {
 	return $resource('/api/aluno/:id_aluno',{id_aluno:'@id_aluno'});
 }]);

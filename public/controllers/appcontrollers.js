@@ -125,7 +125,7 @@ AppControllers.controller('DescontoController', ['$scope','$routeParams', '$loca
 	};
 }]);
 
-AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', '$location', 'EstacionamentoResource', function ($scope, $routeParams, $location, EstacionamentoResource) {
+AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', '$location', 'EstacionamentoResource','$timeout', function ($scope, $routeParams, $location, EstacionamentoResource, $timeout) {
 	$scope.estacionamentoDataset = null;
 	$scope.cadEstacionamentoDataset = null;
 	$scope.selectAluno = null;
@@ -138,10 +138,12 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 
 	$scope.carregaCadEstacionamento = function(){
 		EstacionamentoResource.get({id_estacionamento: $routeParams.estacionamento}, function(response){
-			if(!angular.isArray(response.data.estacionamento)){
-				$scope.cadEstacionamentoDataset = response.data.estacionamento;	
-			}
 			$scope.selectAluno = response.data.selectAluno;	
+			$timeout(function(){
+				if(!angular.isArray(response.data.estacionamento)){
+					$scope.cadEstacionamentoDataset = response.data.estacionamento;	
+				}
+			});
 		});
 	};
 
@@ -240,6 +242,51 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', '$locat
 	$scope.deletaAluno = function(aluno){
 		AlunoResource.remove({id_aluno : aluno.id_aluno}, function(){
 			$scope.carregaAluno();
+		});
+	};
+
+}]);
+
+AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '$location', '$routeParams', '$timeout', function ($scope, ContratoResource, $location, $routeParams, $timeout) {
+	$scope.aluno = $routeParams.aluno;
+	$scope.contratoDataset = null;
+	$scope.cadContratoDataset = null;
+
+	$scope.carregaContrato = function(){
+		ContratoResource.get({id_aluno : $routeParams.aluno}, function(response){
+			$scope.contratoDataset = response.data.contrato;
+		});
+	};
+
+	$scope.carregaCadContrato = function(){
+		ContratoResource.get({id_aluno : $routeParams.aluno, id_contrato : $routeParams.contrato}, function(response){
+			$scope.selectPlano = response.data.selectPlano;
+			$scope.selectDesconto = response.data.selectDesconto;
+			$scope.selectFormaPagamento = response.data.selectFormaPagamento;
+			$timeout(function(){
+				if(!angular.isArray(response.data.contrato)){
+					$scope.cadContratoDataset = response.data.contrato;
+				}	
+			});
+		});
+	};
+
+	$scope.salvaContrato = function(){
+		var contrato = $scope.cadContratoDataset;
+		contrato.id_aluno = $routeParams.aluno;
+		ContratoResource.save(contrato, function(response){
+			$location.path('/contrato/'+contrato.id_aluno);
+		});
+	};
+
+	$scope.cancelaEdicaoContrato = function(){
+		var contrato = $scope.cadContratoDataset;
+		$location.path('/contrato/'+contrato.id_aluno);
+	};
+
+	$scope.deletaContrato = function(contrato){
+		ContratoResource.remove({id_aluno : contrato.id_aluno, id_contrato : contrato.id_contrato}, function(){
+			$scope.carregaContrato();
 		});
 	};
 

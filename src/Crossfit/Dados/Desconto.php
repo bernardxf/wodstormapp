@@ -13,6 +13,14 @@ class Desconto
 		return $resultado;
 	}
 
+	public static function retornaTodosSimples()
+	{
+		$sql = "SELECT id_desconto, nome from desconto where id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+
+		return $resultado;
+	}
+
 	public static function retornaSelecionado($id_desconto)
 	{	
 		$sql = 'select * from desconto where id_desconto = ? and id_organizacao = ?';

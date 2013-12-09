@@ -13,6 +13,14 @@ class Plano
 		return $resultado;
 	}
 
+	public static function retornaTodosSimples()
+	{
+		$sql = "SELECT id_plano, nome from plano WHERE id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+
+		return $resultado;
+	}
+
 	public static function retornaSelecionado($id_plano)
 	{
 		$sql = "select * from plano where id_plano = ? and id_organizacao = ?";

@@ -13,6 +13,13 @@ class FormaPagamento
 		return $resultado;
 	}
 
+	public static function retornaTodosSimples()
+	{
+		$sql = "select id_forma_pagamento, nome from forma_pagamento where id_organizacao = ?"; 
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+		return $resultado;	
+	}
+
 	public static function retornaSelecionado($id_forma_pagamento)
 	{
 		$sql = "select * from forma_pagamento where id_forma_pagamento = ? and id_organizacao = ?";

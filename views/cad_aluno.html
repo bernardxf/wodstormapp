@@ -9,6 +9,12 @@
 
 			<div class="portlet-header">
 				<h3><i class="fa fa-tasks"></i>Aluno</h3>
+				<ul class="portlet-tools pull-right" ng-if="cadAlunoDataset.id_aluno">
+					<li>
+						<a href="#/contrato/{{cadAlunoDataset.id_aluno}}" class="btn btn-sm btn-success">Contratos</a>
+					</li>
+				</ul>
+
 			</div> <!-- /.portlet-header -->
 
 			<div class="portlet-content">

@@ -144,12 +144,34 @@ atualizaAluno:
   path: /aluno/{id_aluno}
   defaults: {_controller : 'Crossfit\Controllers\AlunoController::atualizaAluno' }
   methods: [POST]
-removeAulaExp:
+removeAluno:
   path: /aluno/{id_aluno}
   defaults: {_controller : 'Crossfit\Controllers\AlunoController::removeAluno' }
   methods: [DELETE]
 
-  # Rotas para o controller de Relatório de Aluno
+# Rotas para o controller de Contrato
+contrato:
+  path: /contrato/{id_aluno}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::carregaContrato' }
+  methods: [GET]
+cadContrato:
+  path: /contrato/{id_aluno}/{id_contrato}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::carregaCadContrato' }
+  methods: [GET]
+novoContrato:
+  path: /contrato/{id_aluno}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::salvaContrato' }
+  methods: [POST]
+atualizaContrato:
+  path: /contrato/{id_aluno}/{id_contrato}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::atualizaContrato' }
+  methods: [POST]
+removeContrato:
+  path: /contrato/{id_aluno}/{id_contrato}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::removeContrato' }
+  methods: [DELETE]
+
+# Rotas para o controller de Relatório de Aluno
 relaluno:
   path: /relaluno
   defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::carregaRelAluno' }

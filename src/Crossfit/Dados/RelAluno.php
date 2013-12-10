@@ -8,27 +8,15 @@ class RelAluno
 {
 	public static function retornaSelecionado($id_aluno, $data_ini, $data_fim)
 	{
-		$sql = "SELECT a.nome, p.nome
-				FROM aluno AS a, plano AS p
-				JOIN contrato AS c ON c.id_plano = p.id_plano
-				WHERE a.id_aluno = ? AND a.id_organizacao = ?
-				ORDER BY p.nome DESC
-				LIMIT 1";
-		$aluno = Conexao::get()->fetchAll($sql, array($id_aluno, App::getSession()->get('organizacao')));
+		$sql = "select aluno.nome as aluno, plano.nome as plano, count(*) as num_presencas from aluno
+				join contrato on aluno.id_aluno = contrato.id_aluno
+				join plano on contrato.id_plano = plano.id_plano
+				join alunos_aula on aluno.id_aluno = alunos_aula.id_aluno
+				join aula on alunos_aula.id_aula = aula.id_aula
+				where aula.data between ? and ?
+				and aluno.id_aluno = ?";
 
-		$sql = "SELECT count(*) AS num_presencas FROM aluno AS a
-				JOIN alunos_aula AS aa on a.id_aluno = aa.id_aluno
-				JOIN aula AS au ON aa.id_aula = au.id_aula
-				WHERE a.id_aluno = ? AND au.data BETWEEN '?' AND '?' AND a.id_organizacao = ?";
-		$presencas = Conexao::get()->fetchAll($sql, array($id_aluno, $data_ini, $data_fim, App::getSession()->get('organizacao')));
-
-		$sql = "SELECT au.data, au.horario FROM aula AS au
-				JOIN alunos_aula AS aa ON aa.id_aula = au.id_aula
-				JOIN aluno AS a ON aa.id_aluno = a.id_aluno
-				WHERE a.id_aluno = ? AND au.data BETWEEN '?' AND '?' AND a.id_organizacao = ?";
-		$dias = Conexao::get()->fetchAll($sql, array($id_aluno, $data_ini, $data_fim, App::getSession()->get('organizacao')));
-		
-		$resultado = array("aluno" => $aluno, "presencas" => $presencas, "dias" => $dias);
+		$resultado = Conexao::get()->fetchAssoc($sql, array($data_ini, $data_fim, $id_aluno));
 
 		return $resultado;
 

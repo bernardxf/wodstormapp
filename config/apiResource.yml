@@ -173,6 +173,10 @@ removeContrato:
 
 # Rotas para o controller de Relatório de Aluno
 relaluno:
-  path: /relaluno/
+  path: /relaluno
   defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::carregaRelAluno' }
   methods:  [GET]
+pesquisaRelAluno:
+  path: /relaluno
+  defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::pesquisaRelAluno' }
+  methods:  [POST]

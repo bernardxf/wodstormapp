@@ -202,6 +202,7 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 
 AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', function ($scope, RelAlunoResource) {
 	$scope.relalunoDataset = null;
+	$scope.relAlunoResponseDataset = null;
 	$scope.selectAluno = null;
 	
 	$scope.carregaRelAluno = function(){
@@ -211,8 +212,9 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 	};
 
 	$scope.pesquisaRelAluno = function(){
-		RelAlunoResource.get({},function(response){
-			$scope.relalunoDataset = response.data;
+		var pesquisa = $scope.relalunoDataset;
+		RelAlunoResource.pesquisa(pesquisa,function(response){
+			$scope.relAlunoResponseDataset = response.data;
 		});	
 	};
 }]);

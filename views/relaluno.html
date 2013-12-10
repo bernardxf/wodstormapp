@@ -4,33 +4,48 @@
 	</div> <!-- #content-header -->	
 	<div id="content-container">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-12">
 				<div class="portlet">
 					<div class="portlet-header">
-						<h3><i class="fa fa-tasks"></i>Pesquisar</h3>
+						<h3><i class="fa fa-tasks"></i>Pesquisa</h3>
 					</div> <!-- /.portlet-header -->
 					<div class="portlet-content">
-						<div class="form-group">
-							<label for="text-input">Data</label>
-							<input type="date" id="text-input" class="form-control" ng-model="relalunoDataset.data_ini">
-							<input type="date" id="text-input" class="form-control" ng-model="relalunoDataset.data_fim">
+						<div class="col-sm-2">
+							<div class="form-group">
+								<label for="datainicial">Data Inicial</label>
+								<input type="date" id="datainicial" class="form-control" ng-model="relalunoDataset.data_ini"/>
+							</div>		
 						</div>
-						<div class="form-group">	
-							<label for="nome">Nome</label>
-							<!-- <input type="text" id="text-input" class="form-control" ng-model="relalunoDataset.id_aluno"> -->
-							<select id="nome" class="form-control" ng-model="relalunoDataset.id_aluno" ui-select2 data-placeholder="Selecione um aluno">
-								<option></option>
-								<option ng-repeat="aluno in selectAluno" value="{{aluno.id_aluno}}">{{aluno.nome}}</option>
-							</select>
+						<div class="col-sm-2">
+							<div class="form-group">
+								<label for="datafinal">Data Final</label>
+								<input type="date" id="datafinal" class="form-control" ng-model="relalunoDataset.data_fim"/>
+							</div>		
 						</div>
-						<button type="button" class="btn btn-success" ng-click="pesquisaRelAluno();">Pesquisar</button>
+						<div class="col-sm-7">
+							<div class="form-group">	
+								<label for="aluno">Aluno</label>
+								<select id="aluno" class="form-control" ng-model="relalunoDataset.id_aluno" ui-select2 data-placeholder="Selecione um aluno">
+									<option></option>
+									<option ng-repeat="aluno in selectAluno" value="{{aluno.id_aluno}}">{{aluno.nome}}</option>
+								</select>
+							</div>		
+						</div>	
+						<div class="col-sm-1">
+							<span>&nbsp</span>
+							<div class="form-group">
+								<button type="button" class="btn btn-success" ng-click="pesquisaRelAluno();">Pesquisar</button>
+							</div>			
+						</div>	
 					</div> <!-- /.portlet-content -->
 				</div> <!--/.portlet -->
 			</div> <!-- /.col -->
-			<div class="col-sm-8">
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
 				<div class="portlet">
 					<div class="portlet-header">
-						<h3><i class="fa fa-tasks"></i>Resultado Busca</h3>
+						<h3><i class="fa fa-tasks"></i>Resultado</h3>
 					</div> <!-- /.portlet-header -->
 					<div class="portlet-content">
 						<div class="table-responsive">
@@ -44,26 +59,10 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>{{relalunoDataset.aluno[0].aluno}}</td>
-										<td>{{relalunoDataset.aluno[0].plano}}</td>
-										<td>{{relalunoDataset.presencas[0].num_presencas}}</td>
+										<td>{{relAlunoResponseDataset.aluno}}</td>
+										<td>{{relAlunoResponseDataset.plano}}</td>
+										<td>{{relAlunoResponseDataset.num_presencas}}</td>
 									</tr>
-								</tbody>
-							</table>
-						</div> <!-- /.table-responsive -->
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
-								<thead>
-									<tr>
-										<th>Data</th>
-										<th>Hora</th>
-									</tr>
-								</thead>
-								<tbody>
-									 <tr ng-repeat="dia in relalunoDataset.dias">
-				                        <td>{{dia.data}}</td>
-				                        <td>{{dia.horario}}</td>
-				                    </tr>
 								</tbody>
 							</table>
 						</div> <!-- /.table-responsive -->

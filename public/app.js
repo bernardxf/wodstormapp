@@ -48,8 +48,7 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 		controller: 'ContratoController'
 	}).when('/cad_contrato/:aluno/:contrato?', {
 		templateUrl: 'views/cad_contrato.html',
-		controller: 'ContratoController',
-		reloadOnSearch: false
+		controller: 'ContratoController'
 	}).when('/relaluno', {
 		templateUrl: 'views/relaluno.html',
 		controller: 'RelAlunoController'
@@ -94,7 +93,7 @@ crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
-	return $resource('/api/relaluno');
+	return $resource('/api/relaluno', {}, {pesquisa: {method: 'POST'}});
 }]);
 
 crossfitApp.factory('AlunoResource', ['$resource', function ($resource) {

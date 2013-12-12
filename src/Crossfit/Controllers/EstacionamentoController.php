@@ -6,6 +6,7 @@ use Crossfit\Dados\Estacionamento;
 use Crossfit\Dados\Aluno;
 use Crossfit\Util\Response;
 use Silex\Application;
+use Crossfit\App;
 
 class EstacionamentoController
 {

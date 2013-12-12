@@ -16,7 +16,7 @@
 					<div class="col-sm-12">
 						<div class="form-group">
 							<label for="estacionamentoAluno">Aluno</label>
-							<select id="estacionamentoAluno" class="form-control" ng-model="cadEstacionamentoDataset.id_aluno_fk" ui-select2 data-placeholder="Selecione um aluno">
+							<select id="estacionamentoAluno" class="form-control" ng-model="cadEstacionamentoDataset.id_aluno" ui-select2 data-placeholder="Selecione um aluno">
 								<option></option>
 								<option ng-repeat="aluno in selectAluno" value="{{aluno.id_aluno}}">{{aluno.nome}}</option>
 							</select>
@@ -41,7 +41,11 @@
 						</div>
 						<div class="form-group">
 							<label for="estacionamentoStatus">Status</label>
-							<input type="text" id="estacionamentoStatus" class="form-control" ng-model="cadEstacionamentoDataset.status">
+							<select id="estacionamentoStatus" class="form-control" ng-model="cadEstacionamentoDataset.status">
+								<option value="A">Ativo</option>
+								<option value="I">Inativo</option>
+								<option value="T">Trancado</option>
+							</select>
 						</div>
 					</div>
 					<div class="col-sm-6">

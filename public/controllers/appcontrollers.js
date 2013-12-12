@@ -125,7 +125,7 @@ AppControllers.controller('DescontoController', ['$scope','$routeParams', '$loca
 	};
 }]);
 
-AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', '$location', 'EstacionamentoResource', function ($scope, $routeParams, $location, EstacionamentoResource) {
+AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', '$location', 'EstacionamentoResource','$timeout', function ($scope, $routeParams, $location, EstacionamentoResource, $timeout) {
 	$scope.estacionamentoDataset = null;
 	$scope.cadEstacionamentoDataset = null;
 	$scope.selectAluno = null;
@@ -138,10 +138,12 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 
 	$scope.carregaCadEstacionamento = function(){
 		EstacionamentoResource.get({id_estacionamento: $routeParams.estacionamento}, function(response){
-			if(!angular.isArray(response.data.estacionamento)){
-				$scope.cadEstacionamentoDataset = response.data.estacionamento;	
-			}
 			$scope.selectAluno = response.data.selectAluno;	
+			$timeout(function(){
+				if(!angular.isArray(response.data.estacionamento)){
+					$scope.cadEstacionamentoDataset = response.data.estacionamento;	
+				}
+			});
 		});
 	};
 
@@ -200,6 +202,7 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 
 AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', function ($scope, RelAlunoResource) {
 	$scope.relalunoDataset = null;
+	$scope.relAlunoResponseDataset = null;
 	$scope.selectAluno = null;
 	
 	$scope.carregaRelAluno = function(){
@@ -209,8 +212,9 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 	};
 
 	$scope.pesquisaRelAluno = function(){
-		RelAlunoResource.get({},function(response){
-			$scope.relalunoDataset = response.data;
+		var pesquisa = $scope.relalunoDataset;
+		RelAlunoResource.pesquisa(pesquisa,function(response){
+			$scope.relAlunoResponseDataset = response.data;
 		});	
 	};
 }]);
@@ -251,4 +255,88 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', '$locat
 		});
 	};
 
+}]);
+
+AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '$location', '$routeParams', '$timeout', function ($scope, ContratoResource, $location, $routeParams, $timeout) {
+	$scope.aluno = $routeParams.aluno;
+	$scope.contratoDataset = null;
+	$scope.cadContratoDataset = null;
+
+	$scope.carregaContrato = function(){
+		ContratoResource.get({id_aluno : $routeParams.aluno}, function(response){
+			$scope.contratoDataset = response.data.contrato;
+		});
+	};
+
+	$scope.carregaCadContrato = function(){
+		ContratoResource.get({id_aluno : $routeParams.aluno, id_contrato : $routeParams.contrato}, function(response){
+			$scope.selectPlano = response.data.selectPlano;
+			$scope.selectDesconto = response.data.selectDesconto;
+			$scope.selectFormaPagamento = response.data.selectFormaPagamento;
+			$timeout(function(){
+				if(!angular.isArray(response.data.contrato)){
+					$scope.cadContratoDataset = response.data.contrato;
+				}	
+			});
+		});
+	};
+
+	$scope.salvaContrato = function(){
+		var contrato = $scope.cadContratoDataset;
+		contrato.id_aluno = $routeParams.aluno;
+		ContratoResource.save(contrato, function(response){
+			$location.path('/contrato/'+contrato.id_aluno);
+		});
+	};
+
+	$scope.cancelaEdicaoContrato = function(){
+		var contrato = $scope.cadContratoDataset;
+		$location.path('/contrato/'+contrato.id_aluno);
+	};
+
+	$scope.deletaContrato = function(contrato){
+		ContratoResource.remove({id_aluno : contrato.id_aluno, id_contrato : contrato.id_contrato}, function(){
+			$scope.carregaContrato();
+		});
+	};
+
+}]);
+
+AppControllers.controller('ServicoController', ['$scope','$routeParams', '$location', 'ServicoResource', '$timeout', function ($scope, $routeParams, $location, ServicoResource, $timeout) {
+	$scope.servicoDataset = null;
+	$scope.selectAluno = null;
+
+	$scope.carregaServico = function(){
+		ServicoResource.get({}, function(response){
+			$scope.servicoDataset = response.data;
+		});
+	};
+
+	$scope.carregaCadServico = function(){
+		ServicoResource.get({id_servico: $routeParams.servico}, function(response){
+			$scope.selectAluno = response.data.selectAluno;	
+			$timeout(function(){
+				if(!angular.isArray(response.data.servico)){
+					$scope.servicoDataset = response.data.servico;	
+				}
+			});
+		});
+	};
+
+	$scope.salvaServico = function(){
+		var servico = $scope.servicoDataset;
+		ServicoResource.save(servico, function(response){
+			$location.path('/servico');
+		});
+	};
+
+	$scope.cancelaEdicaoServico = function(){
+		$location.path('/servico');
+	};
+
+	$scope.deletaServico = function(servico){
+		ServicoResource.remove({id_servico : servico.id_servico}, function(response){
+			$scope.carregaServico();
+		});
+	};
 }]);

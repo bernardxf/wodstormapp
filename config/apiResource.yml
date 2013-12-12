@@ -60,7 +60,6 @@ removeDesconto:
   methods: [DELETE]
 
 # Rotas para o controller de ESTACIONAMENTO
-
 estacionamento:
   path: /estacionamento
   defaults: {_controller : 'Crossfit\Controllers\EstacionamentoController::carregaEstacionamento' }
@@ -144,13 +143,61 @@ atualizaAluno:
   path: /aluno/{id_aluno}
   defaults: {_controller : 'Crossfit\Controllers\AlunoController::atualizaAluno' }
   methods: [POST]
-removeAulaExp:
+removeAluno:
   path: /aluno/{id_aluno}
   defaults: {_controller : 'Crossfit\Controllers\AlunoController::removeAluno' }
   methods: [DELETE]
 
-  # Rotas para o controller de Relatório de Aluno
+# Rotas para o controller de Contrato
+contrato:
+  path: /contrato/{id_aluno}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::carregaContrato' }
+  methods: [GET]
+cadContrato:
+  path: /contrato/{id_aluno}/{id_contrato}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::carregaCadContrato' }
+  methods: [GET]
+novoContrato:
+  path: /contrato/{id_aluno}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::salvaContrato' }
+  methods: [POST]
+atualizaContrato:
+  path: /contrato/{id_aluno}/{id_contrato}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::atualizaContrato' }
+  methods: [POST]
+removeContrato:
+  path: /contrato/{id_aluno}/{id_contrato}
+  defaults: {_controller : 'Crossfit\Controllers\ContratoController::removeContrato' }
+  methods: [DELETE]
+
+# Rotas para o controller de Relatório de Aluno
 relaluno:
-  path: /relaluno/
+  path: /relaluno
   defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::carregaRelAluno' }
   methods:  [GET]
+pesquisaRelAluno:
+  path: /relaluno
+  defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::pesquisaRelAluno' }
+  methods:  [POST]
+
+  # Rotas para o controller de SERVIÇO
+servico:
+  path: /servico
+  defaults: {_controller : 'Crossfit\Controllers\ServicoController::carregaServico' }
+  methods: [GET]
+cadServico:
+  path: /servico/{id_servico}
+  defaults: {_controller : 'Crossfit\Controllers\ServicoController::carregaCadServico' }
+  methods: [GET]
+novoServico:
+  path: /servico
+  defaults: {_controller : 'Crossfit\Controllers\ServicoController::salvaServico' }
+  methods: [POST]
+atualizaServico:
+  path: /servico/{id_servico}
+  defaults: {_controller : 'Crossfit\Controllers\ServicoController::atualizaServico' }
+  methods: [POST]
+removeServico:
+  path: /servico/{id_servico}
+  defaults: {_controller : 'Crossfit\Controllers\ServicoController::removeServico' }
+  methods: [DELETE]

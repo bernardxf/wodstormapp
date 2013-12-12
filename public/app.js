@@ -43,9 +43,21 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/cad_aluno/:aluno?', {
 		templateUrl: 'views/cad_aluno.html',
 		controller: 'AlunoController'
+	}).when('/contrato/:aluno', {
+		templateUrl: 'views/contrato.html',
+		controller: 'ContratoController'
+	}).when('/cad_contrato/:aluno/:contrato?', {
+		templateUrl: 'views/cad_contrato.html',
+		controller: 'ContratoController'
 	}).when('/relaluno', {
 		templateUrl: 'views/relaluno.html',
 		controller: 'RelAlunoController'
+	}).when('/servico', {
+		templateUrl: 'views/servico.html',
+		controller: 'ServicoController'
+	}).when('/cad_servico/:servico?', {
+		templateUrl: 'views/cad_servico.html',
+		controller: 'ServicoController'
 	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);
@@ -87,9 +99,17 @@ crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
-	return $resource('/api/relaluno');
+	return $resource('/api/relaluno', {}, {pesquisa: {method: 'POST'}});
 }]);
 
 crossfitApp.factory('AlunoResource', ['$resource', function ($resource) {
 	return $resource('/api/aluno/:id_aluno',{id_aluno:'@id_aluno'});
+}]);
+
+crossfitApp.factory('ContratoResource', ['$resource', function ($resource) {
+	return $resource('/api/contrato/:id_aluno/:id_contrato',{id_aluno:'@id_aluno', id_contrato:'@id_contrato'});
+}]);
+
+crossfitApp.factory('ServicoResource', ['$resource', function ($resource) {
+	return $resource('/api/servico/:id_servico',{id_servico:'@id_servico'});
 }]);

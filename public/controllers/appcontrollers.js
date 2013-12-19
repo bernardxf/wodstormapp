@@ -340,3 +340,53 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 		});
 	};
 }]);
+
+AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', function ($scope, RelAulaResource) {
+	$scope.relaulaDataset = null;
+	$scope.relAulaResponseDataset = null;
+	
+	$scope.pesquisaRelAula = function(){
+		var pesquisa = $scope.relaulaDataset;
+		RelAulaResource.pesquisa(pesquisa,function(response){
+			$scope.relAulaResponseDataset = response.data;
+			// $scope.loadChart();
+		});	
+	};
+
+	$scope.loadChart = function(){
+		var dataValues = $scope.processData("num_presentes");
+		var dataValuesExc = $scope.processData("excedente");
+		var labelValues = $scope.processLabel("data");
+		var lineChartData = {
+			element: 'bar-chart',
+			data: [
+				{ y: '2006', p: 100, e: 90 },
+				{ y: '2007', p: 75,  e: 65 },
+				{ y: '2008', p: 50,  e: 40 },
+				{ y: '2009', p: 75,  e: 65 },
+				{ y: '2010', p: 50,  e: 40 },
+				{ y: '2011', p: 75,  e: 65 }
+			],
+			xkey: 'y',
+			ykeys: ['p', 'e'],
+			labels: ['Presentes', 'Excedentes'],
+			barColors: ['#444','#e5412d']
+		}
+		var myLine = new Morris.Bar(lineChartData);
+	};
+	$scope.processData = function(key){
+		var values = new Array();
+		angular.forEach($scope.relAulaResponseDataset, function(item){
+			values.push(parseInt(item[key]));
+		});
+		return values;
+	};
+	$scope.processLabel = function(key){
+		var values = new Array();
+		angular.forEach($scope.relAulaResponseDataset, function(item){
+			values.push(item[key]);
+		});
+		return values;	
+	}
+
+}]);

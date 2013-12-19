@@ -2771,7 +2771,7 @@ table.dataTable th:active {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3f3f3f', endColorstr='#ff222222', GradientType=0);
   width: 100%;
-  height: 77px;
+  height: 135px;
   border-bottom: 1px solid #000;
   position: relative;
   z-index: 15;
@@ -2951,7 +2951,7 @@ table.dataTable th:active {
   border-top: 1px solid #4A4A4A;
   border-bottom: 1px solid #858585;
   position: relative;
-  top: 5px;
+  top: -17px;
 }
 #main-nav > li {
   list-style-type: none;

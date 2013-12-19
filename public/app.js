@@ -58,6 +58,9 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/cad_servico/:servico?', {
 		templateUrl: 'views/cad_servico.html',
 		controller: 'ServicoController'
+	}).when('/relaula', {
+		templateUrl: 'views/relaula.html',
+		controller: 'RelAulaController'
 	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);
@@ -112,4 +115,8 @@ crossfitApp.factory('ContratoResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('ServicoResource', ['$resource', function ($resource) {
 	return $resource('/api/servico/:id_servico',{id_servico:'@id_servico'});
+}]);
+
+crossfitApp.factory('RelAulaResource', ['$resource', function ($resource) {
+	return $resource('/api/relaula', {}, {pesquisa: {method: 'POST'}});
 }]);

@@ -13,6 +13,16 @@ class Aluno
 		return $resultado;
 	}
 
+	public static function retornaTodosFiltradoPorNome($nome)
+	{
+		$sql = "select aluno.id_aluno as id_aluno, aluno.nome as nome, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim from aluno 
+				join contrato on contrato.id_aluno = aluno.id_aluno
+				join plano on contrato.id_plano = plano.id_plano
+				where aluno.nome like ? and aluno.id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAll($sql, array($nome.'%', 1));
+		return $resultado;	
+	}
+
 	public static function retornaSelecionado($id_aluno)
 	{
 		$sql = "select * from aluno where id_aluno = ? and id_organizacao = ?";

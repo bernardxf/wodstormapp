@@ -8,11 +8,16 @@ use Crossfit\App;
 
 class AlunoController
 {
-	public static function carregaAluno()
+	public static function carregaAluno(Request $request)
 	{
 		$response = new Response();
+		$nome = $request->query->get('nome');
 
-		$resultado = Aluno::retornaTodos();
+		if($nome){
+			$resultado = Aluno::retornaTodosFiltradoPorNome($nome);
+		} else {
+			$resultado = Aluno::retornaTodos();	
+		}
 
 		$response->setData($resultado);
 

@@ -340,3 +340,79 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 		});
 	};
 }]);
+
+AppControllers.controller('PresencaController', ['$scope','$routeParams', '$location', 'PresencaResource', 'AlunoResource', function ($scope, $routeParams, $location, PresencaResource, AlunoResource) {
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth()+1;
+	var day = today.getDate();
+	var hour = today.getHours();
+	var minutes = (today.getMinutes()<10?'0':'') + today.getMinutes();
+	$scope.pesquisaAulaDataset = {data:year+'-'+month+'-'+day};
+	$scope.aulaDataset = null;
+	$scope.cadPresencaDataset = {data:year+'-'+month+'-'+day, horario: hour+':'+minutes, presentes: new Array()};
+	$scope.cadPesquisaAluno = null;
+	$scope.cadAlunoDataset = null;
+
+	$scope.pesquisaAulas = function(){
+		var pesquisaAulaDataset = $scope.pesquisaAulaDataset;
+		PresencaResource.get(pesquisaAulaDataset, function(response){
+			$scope.aulaDataset = response.data;
+		});
+	};
+
+	$scope.carregaCadPresenca = function(){
+		PresencaResource.get({id_aula: $routeParams.aula}, function(response){	
+			if(!angular.isArray(response.data)){
+				$scope.cadPresencaDataset = response.data.aula;	
+				$scope.cadPresencaDataset.presentes = response.data.presenca;
+			}
+		});
+	};
+
+	$scope.presquisaAluno = function(){
+		AlunoResource.get($scope.cadPesquisaAluno, function(response){
+			$scope.cadAlunoDataset = response.data;
+		});
+	};
+
+	$scope.adicionaAlunoPresente = function(aluno){
+		var jaPresente = $scope.cadPresencaDataset.presentes.filter(function(item){
+			if(item.id_aluno === aluno.id_aluno){
+				return true
+			}
+			return false;
+		});
+
+		if(jaPresente.length === 0){
+			aluno.senha = $scope.cadPresencaDataset.presentes.length+1;
+			$scope.cadPresencaDataset.presentes.push(aluno);
+		}
+	};
+
+	$scope.removeAlunoPresente = function(aluno){
+		var index = $scope.cadPresencaDataset.presentes.indexOf(aluno);
+		$scope.cadPresencaDataset.presentes.splice(index,1);
+
+		$scope.cadPresencaDataset.presentes.forEach(function(item, key){
+			item.senha = key+1;
+		});
+	};
+
+	$scope.salvaPresenca = function(){
+		var presenca = $scope.cadPresencaDataset;
+		PresencaResource.save(presenca, function(response){
+			$location.path('/presenca');
+		});
+	};
+
+	$scope.cancelaEdicaoPresenca = function(){
+		$location.path('/presenca');
+	};
+
+	$scope.deletaPresenca = function(presenca){
+		PresencaResource.remove({id_aula : presenca.id_aula}, function(response){
+			$scope.pesquisaAulas();
+		});
+	};
+}]);

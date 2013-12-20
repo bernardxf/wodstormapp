@@ -180,6 +180,28 @@ pesquisaRelAluno:
   defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::pesquisaRelAluno' }
   methods:  [POST]
 
+# Rotas para o controller de Presenca
+presenca:
+  path: /presenca
+  defaults: { _controller: 'Crossfit\Controllers\PresencaController::retornaAula' }
+  methods:  [GET]
+cadPresenca:
+  path: /presenca/{id_aula}
+  defaults: { _controller: 'Crossfit\Controllers\PresencaController::retornaCadPresenca' }
+  methods:  [GET]
+novaPresenca:
+  path: /presenca
+  defaults: { _controller: 'Crossfit\Controllers\PresencaController::salvaPresenca' }
+  methods:  [POST]
+atualizaPresenca:
+  path: /presenca/{id_aula}
+  defaults: { _controller: 'Crossfit\Controllers\PresencaController::atualizaPresenca' }
+  methods:  [POST]
+removePresenca:
+  path: /presenca/{id_aula}
+  defaults: { _controller: 'Crossfit\Controllers\PresencaController::removePresenca' }
+  methods:  [DELETE]
+
   # Rotas para o controller de SERVIÇO
 servico:
   path: /servico

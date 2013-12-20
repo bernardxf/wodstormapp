@@ -1,7 +1,7 @@
 <?php
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
-use JDesrosiers\Silex\Provider\CorsServiceProvider;
+// use JDesrosiers\Silex\Provider\CorsServiceProvider;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
@@ -25,11 +25,11 @@ $app['routes'] = $app->extend('routes', function (RouteCollection $routes, Appli
     return $routes;
 });
 
-$app->register(new CorsServiceProvider(), array(
-    "cors.allowOrigin" => "http://localhost",
-    "cors.allowMethods" => "GET,POST,PUT,DELETE"
-));
-$app->after($app["cors"]);
+// $app->register(new CorsServiceProvider(), array(
+//     "cors.allowOrigin" => "http://localhost",
+//     "cors.allowMethods" => "GET,POST,PUT,DELETE"
+// ));
+// $app->after($app["cors"]);
 
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app['session']->start();

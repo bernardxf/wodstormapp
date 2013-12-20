@@ -64,6 +64,9 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/cad_presenca/:aula?', {
 		templateUrl: 'views/cad_presenca.html',
 		controller: 'PresencaController'
+	}).when('/relaula', {
+		templateUrl: 'views/relaula.html',
+		controller: 'RelAulaController'
 	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);
@@ -126,4 +129,8 @@ crossfitApp.factory('PresencaResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('AulaResource', ['$resource', function ($resource) {
 	return $resource('/api/aula/:id_aula',{id_aula:'@id_aula'});
+}]);
+
+crossfitApp.factory('RelAulaResource', ['$resource', function ($resource) {
+	return $resource('/api/relaula', {}, {pesquisa: {method: 'POST'}});
 }]);

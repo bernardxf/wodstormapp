@@ -21,16 +21,8 @@ body {
   left: 50%;
   z-index: 100;
   width: 100px;
-  height: 100px;
+  height: 95px;
   margin-left: -50px;
-  background-color: #e5412d;
-  border-top-right-radius: 100px;
-  border-top-left-radius: 100px;
-  border-bottom-right-radius: 100px;
-  border-bottom-left-radius: 100px;
-}
-#login-container #logo:hover {
-  background-color: #dd301b;
 }
 #login-container #signup-btn {
   padding-top: 15px;

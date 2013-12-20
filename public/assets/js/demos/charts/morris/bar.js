@@ -4,7 +4,7 @@ $(function () {
 	
 	bar ();
 
-	$(window).resize (App.debounce (bar, 325));
+	$(window).resize (bar, 325);
 
 });
 
@@ -24,6 +24,6 @@ function bar () {
 		xkey: 'y',
 		ykeys: ['a', 'b', 'c'],
 		labels: ['Series A', 'Series B', 'Series C'],
-		barColors: App.chartColors
+		barColors: ['#e5412d', '#f0ad4e', '#444', '#888','#555','#999','#bbb','#ccc','#eee']
 	});
 }

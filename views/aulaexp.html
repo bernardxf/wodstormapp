@@ -38,7 +38,7 @@
 								<tbody>
 									<tr ng-repeat="item in aulaexpDataset | filter:aulaexpFilter">
 										<td>{{item.nome}}</td>
-										<td>{{item.data_aula}}</td>
+										<td>{{item.data_aula | date:'dd/MM/yyyy'}}</td>
 										<td>{{item.telefone}}</td>
 										<td>{{item.email}}</td>
 										<td>{{item.confirmado}}</td>

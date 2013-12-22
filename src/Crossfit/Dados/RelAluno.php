@@ -16,9 +16,15 @@ class RelAluno
 				where aula.data between ? and ?
 				and aluno.id_aluno = ?";
 
-		$resultado = Conexao::get()->fetchAssoc($sql, array($data_ini, $data_fim, $id_aluno));
+		$aluno = Conexao::get()->fetchAssoc($sql, array($data_ini, $data_fim, $id_aluno));
 
-		return $resultado;
+		$sql = "select aula.data as data, aula.horario as horario from aula 
+				join alunos_aula on aula.id_aula = alunos_aula.id_aula
+				where aula.data between ? and ? and alunos_aula.id_aluno = ? and aula.id_organizacao = ?";
+
+		$aulas = Conexao::get()->fetchAll($sql, array($data_ini, $data_fim, $id_aluno, App::getSession()->get('organizacao')));
+
+		return array('aluno' => $aluno, 'aulas' => $aulas);
 
 	}
 

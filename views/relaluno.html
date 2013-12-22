@@ -59,9 +59,25 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>{{relAlunoResponseDataset.aluno}}</td>
-										<td>{{relAlunoResponseDataset.plano}}</td>
-										<td>{{relAlunoResponseDataset.num_presencas}}</td>
+										<td>{{relAlunoResponseDataset.aluno.aluno}}</td>
+										<td>{{relAlunoResponseDataset.aluno.plano}}</td>
+										<td>{{relAlunoResponseDataset.aluno.num_presencas}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div> <!-- /.table-responsive -->
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
+								<thead>
+									<tr>
+										<th>Data</th>
+										<th>Horario</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in relAlunoResponseDataset.aulas">
+										<td>{{item.data | date:'dd/MM/yyyy'}}</td>
+										<td>{{item.horario}}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -72,3 +88,4 @@
 		</div> <!-- /.row -->
 	</div> <!-- /#content-container -->			
 </div> <!-- #content -->
+

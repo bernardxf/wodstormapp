@@ -420,12 +420,13 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', function ($scope, RelAulaResource) {
 	$scope.relaulaDataset = null;
 	$scope.relAulaResponseDataset = null;
+	$scope.chart = null;
 	
 	$scope.pesquisaRelAula = function(){
 		var pesquisa = $scope.relaulaDataset;
 		RelAulaResource.pesquisa(pesquisa,function(response){
 			$scope.relAulaResponseDataset = response.data;
-			// $scope.loadChart();
+			$scope.loadChart();
 		});	
 	};
 
@@ -435,20 +436,14 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 		var labelValues = $scope.processLabel("data");
 		var lineChartData = {
 			element: 'bar-chart',
-			data: [
-				{ y: '2006', p: 100, e: 90 },
-				{ y: '2007', p: 75,  e: 65 },
-				{ y: '2008', p: 50,  e: 40 },
-				{ y: '2009', p: 75,  e: 65 },
-				{ y: '2010', p: 50,  e: 40 },
-				{ y: '2011', p: 75,  e: 65 }
-			],
-			xkey: 'y',
-			ykeys: ['p', 'e'],
+			data: $scope.relAulaResponseDataset,
+			xkey: 'data',
+			ykeys: ['num_presentes', 'excedentes'],
 			labels: ['Presentes', 'Excedentes'],
-			barColors: ['#444','#e5412d']
+			barColors: ['#444','#e5412d'],
+			stacked: true
 		}
-		var myLine = new Morris.Bar(lineChartData);
+		$scope.chart = new Morris.Bar(lineChartData);
 	};
 	$scope.processData = function(key){
 		var values = new Array();
@@ -465,3 +460,4 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 		return values;	
 	}
 }]);
+

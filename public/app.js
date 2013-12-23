@@ -1,4 +1,4 @@
-var crossfitApp = angular.module('crossfitApp', ['ngRoute', 'ui.select2','AppControllers','AppDirectives', 'AppServices', 'ngResource']);
+var crossfitApp = angular.module('crossfitApp', ['ngRoute', 'ui.select2','AppControllers','AppDirectives', 'AppFilters', 'AppServices', 'ngResource']);
 
 crossfitApp.config(['$routeProvider',function($routeProvider){
 	$routeProvider.when('/', {

@@ -40,8 +40,8 @@
 								<tr ng-repeat="item in contratoDataset | filter:contratoFilter">
 									<td>{{item.data_inicio | date:'dd/MM/yyyy'}}</td>
 									<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
-									<td>{{item.horario_economico}}</td>
-									<td>{{item.status}}</td>
+									<td>{{item.horario_economico | SimNaoTranslate}}</td>
+									<td>{{item.status | StatusTranslate}}</td>
 									<td>
 										<a href="#/cad_contrato/{{aluno}}/{{item.id_contrato}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
 										<a class="btn btn-sm btn-danger" ng-click="deletaContrato(item);"><i class="fa fa-eraser"></i></a>

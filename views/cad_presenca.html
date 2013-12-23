@@ -37,7 +37,7 @@
 									<tr ng-repeat="item in cadAlunoDataset | orderBy:'nome'">
 										<td>{{item.nome}}</td>
 										<td>{{item.plano}}</td>
-										<td>{{item.status}}</td>
+										<td>{{item.status | StatusTranslate}}</td>
 										<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
 										<td>
 											<a class="btn btn-sm btn-success" ng-click="adicionaAlunoPresente(item);"><i class="fa fa-toggle-right"></i></a>

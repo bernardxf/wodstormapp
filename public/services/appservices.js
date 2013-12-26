@@ -9,6 +9,9 @@ AppServices.factory('loginService', ['LoginResource', 'MessageService', '$rootSc
 						$rootScope.logged = true;
 						$rootScope.loggedUserData = response.data;
 						$location.path('/dashboard');
+
+						var storage = {usuario:loginDataset.usuario, organizacao: loginDataset.organizacao};
+						localStorage.setItem('wodStormLogin', JSON.stringify(storage));
 					} else {
 						MessageService.processMessages(response.messages);
 					}

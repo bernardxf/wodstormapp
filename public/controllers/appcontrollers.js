@@ -1,6 +1,11 @@
 var AppControllers = angular.module('AppControllers', []);
 
 AppControllers.controller('LoginController', ['$scope', 'loginService', function ($scope, loginService) {
+	var loginStorage = JSON.parse(localStorage.getItem('wodStormLogin'));
+	if(loginStorage){
+		$scope.loginDataset = {usuario:loginStorage.usuario, organizacao:loginStorage.organizacao};
+	}
+
 	$scope.login = function(){
 		loginService.login($scope.loginDataset);
 	}

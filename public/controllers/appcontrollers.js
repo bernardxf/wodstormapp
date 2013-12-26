@@ -48,9 +48,11 @@ AppControllers.controller('PlanoController', ['$scope','$routeParams', '$locatio
 	};
 
 	$scope.deletaPlano = function(plano){
-		PlanoResource.remove({id_plano: plano.id_plano}, function(response){
-			$scope.carregaPlano();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			PlanoResource.remove({id_plano: plano.id_plano}, function(response){
+				$scope.carregaPlano();
+			});			
+		}
 	};
 
 }]);
@@ -84,9 +86,11 @@ AppControllers.controller('FormaPagamentoController', ['$scope', '$routeParams',
 	};
 
 	$scope.deletaFormaPagamento = function(formapagamento){
-		FormaPagamentoResource.remove({id_forma_pagamento: formapagamento.id_forma_pagamento}, function(response){
-			$scope.carregaFormaPagamento();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			FormaPagamentoResource.remove({id_forma_pagamento: formapagamento.id_forma_pagamento}, function(response){
+				$scope.carregaFormaPagamento();
+			});
+		}
 	};
 }]);
 
@@ -119,9 +123,11 @@ AppControllers.controller('DescontoController', ['$scope','$routeParams', '$loca
 	};
 
 	$scope.deletaDesconto = function(desconto){
-		DescontoResource.remove({id_desconto : desconto.id_desconto}, function(response){
-			$scope.carregaDesconto();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			DescontoResource.remove({id_desconto : desconto.id_desconto}, function(response){
+				$scope.carregaDesconto();
+			});
+		}
 	};
 }]);
 
@@ -159,9 +165,11 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 	};
 
 	$scope.deletaEstacionamento = function(estacionamento){
-		EstacionamentoResource.remove({id_estacionamento : estacionamento.id_estacionamento}, function(response){
-			$scope.carregaEstacionamento();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			EstacionamentoResource.remove({id_estacionamento : estacionamento.id_estacionamento}, function(response){
+				$scope.carregaEstacionamento();
+			});
+		}
 	};
 }]);
 
@@ -194,9 +202,11 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 	};
 
 	$scope.deletaAulaExp = function(aulaexp){
-		AulaExpResource.remove({id_aulaexp: aulaexp.id_aulaexp}, function(response){
-			$scope.carregaAulaExp();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			AulaExpResource.remove({id_aulaexp: aulaexp.id_aulaexp}, function(response){
+				$scope.carregaAulaExp();
+			});
+		}
 	};
 }]);
 
@@ -250,9 +260,11 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', '$locat
 	};
 
 	$scope.deletaAluno = function(aluno){
-		AlunoResource.remove({id_aluno : aluno.id_aluno}, function(){
-			$scope.carregaAluno();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			AlunoResource.remove({id_aluno : aluno.id_aluno}, function(){
+				$scope.carregaAluno();
+			});
+		}
 	};
 
 }]);
@@ -295,9 +307,11 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	};
 
 	$scope.deletaContrato = function(contrato){
-		ContratoResource.remove({id_aluno : contrato.id_aluno, id_contrato : contrato.id_contrato}, function(){
-			$scope.carregaContrato();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			ContratoResource.remove({id_aluno : contrato.id_aluno, id_contrato : contrato.id_contrato}, function(){
+				$scope.carregaContrato();
+			});
+		}
 	};
 
 }]);
@@ -335,9 +349,11 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 	};
 
 	$scope.deletaServico = function(servico){
-		ServicoResource.remove({id_servico : servico.id_servico}, function(response){
-			$scope.carregaServico();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			ServicoResource.remove({id_servico : servico.id_servico}, function(response){
+				$scope.carregaServico();
+			});
+		}
 	};
 }]);
 
@@ -411,9 +427,11 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 	};
 
 	$scope.deletaPresenca = function(presenca){
-		PresencaResource.remove({id_aula : presenca.id_aula}, function(response){
-			$scope.pesquisaAulas();
-		});
+		if(confirm('Realmente deseja apagar?')){
+			PresencaResource.remove({id_aula : presenca.id_aula}, function(response){
+				$scope.pesquisaAulas();
+			});
+		}
 	};
 }]);
 

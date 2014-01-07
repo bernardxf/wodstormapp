@@ -365,8 +365,8 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 AppControllers.controller('PresencaController', ['$scope','$routeParams', '$location', 'PresencaResource', 'AlunoResource', function ($scope, $routeParams, $location, PresencaResource, AlunoResource) {
 	var today = new Date();
 	var year = today.getFullYear();
-	var month = today.getMonth()+1;
-	var day = today.getDate();
+	var month = today.getMonth()<9?''+today.getMonth()+1:today.getMonth()+1;
+	var day = (today.getDate()<10?'0':'') + today.getDate();
 	var hour = today.getHours();
 	var minutes = (today.getMinutes()<10?'0':'') + today.getMinutes();
 	$scope.pesquisaAulaDataset = {data:year+'-'+month+'-'+day};

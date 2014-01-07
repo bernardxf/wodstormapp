@@ -64,7 +64,9 @@ class Aluno
 
 	public static function retornaTrancados()
 	{
-		$sql = "select nome, aluno_status FROM aluno WHERE aluno_status = 'T' ORDER BY nome ASC";
+		$sql = "select nome, contrato.status FROM aluno 
+				JOIN contrato on aluno.id_aluno = contrato.id_aluno
+				WHERE contrato.status= 'T' ORDER BY nome ASC";
 		$resultado = Conexao::get()->fetchAll($sql);
 		return $resultado;
 	}

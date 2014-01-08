@@ -33,15 +33,9 @@ class AulaExpController
 	public static function salvaAulaExp(Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
+		$aulaexpDataset = json_decode($request->getContent(), true);
 
 		$aulaexpDataset = [
-			'nome' => $dataset->nome,
-			'data_aula' => $dataset->data_aula,
-			'telefone' => $dataset->telefone,
-			'email' => $dataset->email,
-			'confirmado' => $dataset->confirmado,
-			'presente' => $dataset->presente,
 			'id_organizacao' => App::getSession()->get('organizacao')
 		];
 
@@ -53,16 +47,7 @@ class AulaExpController
 	public static function atualizaAulaExp($id_aulaexp, Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
-
-		$aulaexpDataset = [
-			'nome' => $dataset->nome,
-			'data_aula' => $dataset->data_aula,
-			'telefone' => $dataset->telefone,
-			'email' => $dataset->email,
-			'confirmado' => $dataset->confirmado,
-			'presente' => $dataset->presente
-		];		
+		$aulaexpDataset = json_decode($request->getContent(), true);
 
 		$resultado = AulaExp::atualizaAulaExp($aulaexpDataset, $id_aulaexp);
 		

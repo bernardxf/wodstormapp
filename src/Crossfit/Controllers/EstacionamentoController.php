@@ -37,20 +37,11 @@ class EstacionamentoController
 	public static function salvaEstacionamento(Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
+		$estacionamentoDataset = json_decode($request->getContent(), true);
 
-		$estacionamentoDataset = array(
-			'id_aluno_fk' => $dataset->id_aluno_fk,
-			'modelo' => $dataset->modelo,
-			'cor' => $dataset->cor,
-			'placa' => $dataset->placa,
-			'valor' => $dataset->valor,
-			'plano_ini' => $dataset->plano_ini,
-			'plano_fim' => $dataset->plano_fim,
-			'estacionamento_status' => $dataset->status,
-			'observacao' => $dataset->observacao,
+		$estacionamentoDataset = [
 			'id_organizacao' => App::getSession()->get('organizacao')
-			);
+		];	
 
 		$resultado = Estacionamento::salvaEstacionamento($estacionamentoDataset);
 
@@ -60,19 +51,7 @@ class EstacionamentoController
 	public static function atualizaEstacionamento($id_estacionamento, Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
-
-		$estacionamentoDataset = array(
-			'id_aluno_fk' => $dataset->id_aluno_fk,
-			'modelo' => $dataset->modelo,
-			'cor' => $dataset->cor,
-			'placa' => $dataset->placa,
-			'valor' => $dataset->valor,
-			'plano_ini' => $dataset->plano_ini,
-			'plano_fim' => $dataset->plano_fim,
-			'estacionamento_status' => $dataset->status,
-			'observacao' => $dataset->observacao,
-			);
+		$estacionamentoDataset = json_decode($request->getContent(), true);
 
 		$resultado = Estacionamento::atualizaEstacionamento($estacionamentoDataset, $id_estacionamento);
 

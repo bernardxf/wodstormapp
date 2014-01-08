@@ -38,13 +38,9 @@ class ServicoController
 	{
 		$response = new Response();
 		
-		$dataset = json_decode($request->getContent());
+		$servicoDataset = json_decode($request->getContent(),true);
 
 		$servicoDataset = [
-			'tipo' => $dataset->tipo,
-			'valor' => $dataset->valor,
-			'descricao' => $dataset->descricao,
-			'id_aluno' => $dataset->id_aluno,
 			'id_organizacao' => App::getSession()->get('organizacao')
 		];
 
@@ -57,14 +53,7 @@ class ServicoController
 	{
 		$response = new Response();
 		
-		$dataset = json_decode($request->getContent());
-
-		$servicoDataset = [
-			'tipo' => $dataset->tipo,
-			'valor' => $dataset->valor,
-			'descricao' => $dataset->descricao,
-			'id_aluno' => $dataset->id_aluno
-		];		
+		$servicoDataset = json_decode($request->getContent(), true);
 
 		Servico::atualizaServico($servicoDataset, $id_servico);
 		

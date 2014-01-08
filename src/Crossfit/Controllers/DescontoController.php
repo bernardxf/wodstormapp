@@ -33,11 +33,9 @@ class DescontoController
 	public static function salvaDesconto(Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
+		$descontoDataset = json_decode($request->getContent(), true);
 
 		$descontoDataset = [
-			'nome' => $dataset->nome,
-			'porc_desc' => $dataset->porc_desc,
 			'id_organizacao' => App::getSession()->get('organizacao')
 		];
 
@@ -49,12 +47,7 @@ class DescontoController
 	public static function atualizaDesconto($id_desconto, Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
-
-		$descontoDataset = [
-			'nome' => $dataset->nome,
-			'porc_desc' => $dataset->porc_desc
-		];
+		$descontoDataset = json_decode($request->getContent(), true);
 
 		Desconto::atualizaDesconto($descontoDataset, $id_desconto);		
 

@@ -20,7 +20,7 @@ class ContratoController
 		$desconto = Desconto::retornaTodosSimples();
 		$formaPagamento = FormaPagamento::retornaTodosSimples();
 
-		$data = ["contrato" => $contrato, "selectPlano" => $plano, "selectDesconto" => $desconto, "selectFormaPagamento" => $formaPagamento];
+		$data = array("contrato" => $contrato, "selectPlano" => $plano, "selectDesconto" => $desconto, "selectFormaPagamento" => $formaPagamento);
 
 		$response->setData($data);
 
@@ -36,7 +36,7 @@ class ContratoController
 		$desconto = Desconto::retornaTodosSimples();
 		$formaPagamento = FormaPagamento::retornaTodosSimples();
 
-		$data = ["contrato" => $contrato, "selectPlano" => $plano, "selectDesconto" => $desconto, "selectFormaPagamento" => $formaPagamento];
+		$data = array("contrato" => $contrato, "selectPlano" => $plano, "selectDesconto" => $desconto, "selectFormaPagamento" => $formaPagamento);
 
 		$response->setData($data);
 

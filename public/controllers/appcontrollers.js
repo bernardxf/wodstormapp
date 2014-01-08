@@ -327,7 +327,7 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 
 	$scope.carregaServico = function(){
 		ServicoResource.get({}, function(response){
-			$scope.servicoDataset = response.data;
+			$scope.servicoDataset = response.data.servico;
 		});
 	};
 

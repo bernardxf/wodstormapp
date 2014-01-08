@@ -33,10 +33,9 @@ class FormaPagamentoController
 	public static function salvaFormaPagamento(Request $request)
 	{
 		$response = new Response(); 
-		$dataset = json_decode($request->getContent());
+		$formapagamentoDataset = json_decode($request->getContent(), true);
 
 		$formapagamentoDataset = [
-			'nome' => $dataset->nome,
 			'id_organizacao' => App::getSession()->get('organizacao')
 		];
 
@@ -48,11 +47,7 @@ class FormaPagamentoController
 	public static function atualizaFormaPagamento($id_forma_pagamento, Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
-
-		$formapagamentoDataset = [
-			'nome' => $dataset->nome
-		];		
+		$dataset = json_decode($request->getContent(), true);
 
 		FormaPagamento::atualizaFormaPagamento($formapagamentoDataset, $id_forma_pagamento);
 		

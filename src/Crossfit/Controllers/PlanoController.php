@@ -34,12 +34,9 @@ class PlanoController
 	public static function salvaPlano(Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
+		$planoDataset = json_decode($request->getContent(), true);
 
 		$planoDataset = [
-			'nome' => $dataset->nome,
-			'tipo' => $dataset->tipo,
-			'valor' => $dataset->valor,
 			'id_organizacao' => App::getSession()->get('organizacao')
 		];
 
@@ -51,13 +48,7 @@ class PlanoController
 	public static function atualizaPlano($id_plano, Request $request)
 	{
 		$response = new Response();
-		$dataset = json_decode($request->getContent());
-
-		$planoDataset = [
-			'nome' => $dataset->nome,
-			'tipo' => $dataset->tipo,
-			'valor' => $dataset->valor
-		];		
+		$planoDataset = json_decode($request->getContent(), true);
 
 		Plano::atualizaPlano($planoDataset, $id_plano);
 		

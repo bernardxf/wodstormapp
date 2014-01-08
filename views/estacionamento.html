@@ -23,17 +23,15 @@
 							<thead>
 								<tr>
 									<th>Aluno</th>
-									<th>Modelo</th>
-									<th>Cor</th>
 									<th>Placa</th>
+									<th>Plano Fim</th>
 									<th>Valor</th>
 									<th>Ação</th>
 								</tr>
 								<tr>
 									<th><input class="form-control input-sm show" type="text" placeholder="Aluno" ng-model="estacionamentoFilter.aluno"></th>
-									<th><input class="form-control input-sm show" type="text" placeholder="Modelo" ng-model="estacionamentoFilter.modelo"></th>
-									<th><input class="form-control input-sm show" type="text" placeholder="Cor" ng-model="estacionamentoFilter.cor"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Placa" ng-model="estacionamentoFilter.placa"></th>
+									<th><input class="form-control input-sm show" type="text" placeholder="Plano Fim" ng-model="estacionamentoFilter.plano_fim"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Valor" ng-model="estacionamentoFilter.valor"></th>
 									<th></th>
 								</tr>
@@ -41,9 +39,8 @@
 							<tbody>
 								<tr ng-repeat="item in estacionamentoDataset | filter:estacionamentoFilter">
 									<td>{{item.aluno}}</td>
-									<td>{{item.modelo}}</td>
-									<td>{{item.cor}}</td>
 									<td>{{item.placa}}</td>
+									<td>{{item.plano_fim | date:'dd/MM/yyyy'}}</td>
 									<td>{{item.valor}}</td>
 									<td>
 										<a href="#/cad_estacionamento/{{item.id_estacionamento}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>

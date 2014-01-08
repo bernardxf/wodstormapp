@@ -42,7 +42,8 @@ class Estacionamento
 	{
 		$sql = "SELECT a.nome, plano_fim from estacionamento as e
 				JOIN aluno AS a ON e.id_aluno = a.id_aluno
-				WHERE a.aluno_status = 'A' AND to_days(e.plano_fim) - to_days(NOW()) <= 0 
+				JOIN contrato AS c
+				WHERE c.status = 'A' AND to_days(e.plano_fim) - to_days(NOW()) <= 0 
 				ORDER BY YEAR(e.plano_fim) ASC, MONTH(e.plano_fim) ASC, DAY(e.plano_fim) ASC";
 		$resultado = Conexao::get()->fetchAll($sql);
 		return $resultado;

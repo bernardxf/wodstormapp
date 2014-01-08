@@ -57,7 +57,10 @@ class Aluno
 
 	public static function retornaAniversariantes()
 	{
-		$sql = "select nome, data_nasc FROM aluno WHERE DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') ORDER BY data_nasc";
+		$sql = "SELECT aluno.nome, aluno.data_nasc 
+				FROM aluno AS aluno
+				JOIN contrato AS contrato ON contrato.id_aluno = aluno.id_aluno
+				WHERE contrato.status != 'I' AND DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') ORDER BY DAY(data_nasc) ASC";
 		$resultado = Conexao::get()->fetchAll($sql);
 		return $resultado;
 	}

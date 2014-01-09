@@ -25,9 +25,14 @@
 									<th>Nome</th>
 									<th>Ação</th>
 								</tr>
+								<tr>
+									<th><input class="form-control input-sm show" type="text" placeholder="Cód" ng-model="formapagamentoFilter.id_forma_pagamento"></th>
+									<th><input class="form-control input-sm show" type="text" placeholder="Nome" ng-model="formapagamentoFilter.nome"></th>
+									<th></th>
+								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="item in formapagamentoDataset">
+								<tr ng-repeat="item in formapagamentoDataset | filter:formapagamentoFilter">
 									<td>{{item.id_forma_pagamento}}</td>
 									<td>{{item.nome}}</td>
 									<td>

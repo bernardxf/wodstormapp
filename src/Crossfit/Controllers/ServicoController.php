@@ -40,9 +40,7 @@ class ServicoController
 		
 		$servicoDataset = json_decode($request->getContent(),true);
 
-		$servicoDataset = [
-			'id_organizacao' => App::getSession()->get('organizacao')
-		];
+		$servicoDataset['id_organizacao'] = App::getSession()->get('organizacao');
 
 		Servico::salvaServico($servicoDataset);		
 		

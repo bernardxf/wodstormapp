@@ -4,6 +4,7 @@ namespace Crossfit\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\AulaExp;
 use Crossfit\Util\Response;
+use Crossfit\App;
 use Silex\Application;
 
 class AulaExpController
@@ -35,9 +36,9 @@ class AulaExpController
 		$response = new Response();
 		$aulaexpDataset = json_decode($request->getContent(), true);
 
-		$aulaexpDataset = [
+		$aulaexpDataset = array(
 			'id_organizacao' => App::getSession()->get('organizacao')
-		];
+		);
 
 		AulaExp::salvaAulaExp($aulaexpDataset);		
 

@@ -110,12 +110,12 @@
 			
 		</div>
 		<div class="row">
-			<!--  Inicio grid vencimento estacionamento -->
+			<!--  Inicio grid vencimento estacionamento vencido -->
 			<div class="col-md-6">
 				<div class="portlet">
 
 					<div class="portlet-header">
-						<h3><i class="fa fa-table"></i>Vencimento Estacionamento</h3>
+						<h3><i class="fa fa-table"></i>Estacionamento Vencido</h3>
 					</div> <!-- /.portlet-header -->
 
 					<div class="portlet-content">						
@@ -130,30 +130,52 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="item in dashboardDataset.estacionamento">
+									<tr ng-repeat="item in dashboardDataset.estacionamentoVencido">
 										<td>{{item.nome}}</td>
 										<td>{{item.plano_fim | date:'dd/MM/yyyy'}}</td>
 									</tr>
 								</tbody>
 							</table>
 						</div> <!-- /.table-responsive -->
-
-
 					</div> <!-- /.portlet-content -->
-
 				</div> <!-- /.portlet -->
-
 			</div> <!-- /.col -->
-			<!--  Fim grid vencimento estacionamento -->
+			<!--  Fim grid vencimento estacionamento vencido -->
 
-			<!--  Inicio grid planos vencendo -->
+			<!--  Inicio grid vencimento estacionamento trancado -->
 			<div class="col-md-6">
 				<div class="portlet">
 
 					<div class="portlet-header">
+						<h3><i class="fa fa-table"></i>Estacionamento Trancado</h3>
+					</div> <!-- /.portlet-header -->
+					<div class="portlet-content">						
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
+								<thead>
+									<tr>
+										<th>Aluno</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in dashboardDataset.estacionamentoTrancado">
+										<td>{{item.nome}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div> <!-- /.table-responsive -->
+					</div> <!-- /.portlet-content -->
+				</div> <!-- /.portlet -->
+			</div> <!-- /.col -->
+			<!--  Fim grid vencimento estacionamento trancado -->
+		</div>
+		<div class="row">
+			<!--  Inicio grid planos vencendo -->
+			<div class="col-md-6">
+				<div class="portlet">
+					<div class="portlet-header">
 						<h3><i class="fa fa-table"></i>Alunos Trancados</h3>
 					</div> <!-- /.portlet-header -->
-
 					<div class="portlet-content">						
 						<div class="table-responsive">
 							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
@@ -173,7 +195,6 @@
 				</div> <!-- /.portlet -->
 			</div> <!-- /.col -->
 			<!--  Fim grid planos vencendo -->
-
 		</div> <!-- /.row -->
 	</div> <!-- /#content-container -->
 </div> <!-- #content -->

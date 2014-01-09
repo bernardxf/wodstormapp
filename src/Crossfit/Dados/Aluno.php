@@ -18,7 +18,7 @@ class Aluno
 		$sql = "select aluno.id_aluno as id_aluno, aluno.nome as nome, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim from aluno 
 				join contrato on contrato.id_aluno = aluno.id_aluno
 				join plano on contrato.id_plano = plano.id_plano
-				where aluno.nome like ? and aluno.id_organizacao = ?";
+				where aluno.nome like ? AND contrato.status != 'I' AND aluno.id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAll($sql, array($nome.'%', 1));
 		return $resultado;	
 	}
@@ -57,7 +57,10 @@ class Aluno
 
 	public static function retornaAniversariantes()
 	{
-		$sql = "select nome, data_nasc FROM aluno WHERE DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') ORDER BY data_nasc";
+		$sql = "SELECT aluno.nome, aluno.data_nasc 
+				FROM aluno AS aluno
+				JOIN contrato AS contrato ON contrato.id_aluno = aluno.id_aluno
+				WHERE contrato.status != 'I' AND DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') ORDER BY DAY(data_nasc) ASC";
 		$resultado = Conexao::get()->fetchAll($sql);
 		return $resultado;
 	}

@@ -17,9 +17,10 @@ class DashboardController
 		$aniversarios = Aluno::retornaAniversariantes();
 		$plano = Contrato::retornaVencimentoContrato();
 		$trancado = Aluno::retornaTrancados();
-		$estacionamento = Estacionamento::retornaVencimentoEstacionamento();
+		$estacionamentoVencido = Estacionamento::retornaEstacionamentoVencido();
+		$estacionamentoTrancado = Estacionamento::retornaEstacionamentoTrancado();
 
-		$response->setData(array('dashboard' => $dashboard, 'aniversarios' => $aniversarios, 'plano' => $plano, 'trancado' => $trancado, 'estacionamento' => $estacionamento));
+		$response->setData(array('dashboard' => $dashboard, 'aniversarios' => $aniversarios, 'plano' => $plano, 'trancado' => $trancado, 'estacionamentoVencido' => $estacionamentoVencido, 'estacionamentoTrancado' => $estacionamentoTrancado));
 
 		return $response->getAsJson();
 	}

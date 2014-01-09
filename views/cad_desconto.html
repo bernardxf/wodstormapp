@@ -1,34 +1,32 @@
 <div id="content" ng-init="carregaCadDesconto();">			
-
 	<div id="content-header">
 		<h1>Desconto</h1>
 	</div> <!-- #content-header -->	
-
 	<div id="content-container">
 		<div class="portlet">
-
 			<div class="portlet-header">
 				<h3><i class="fa fa-tasks"></i>Descontos</h3>
 			</div> <!-- /.portlet-header -->
-
 			<div class="portlet-content">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="form-group">
-							<label for="descontoNome">Nome</label>
-							<input type="text" id="descontoNome" class="form-control" ng-model="descontoDataset.nome">
-						</div>
-						<div class="form-group">
-							<label for="descontoPorcentual">Porcentual</label>
-							<div class="input-group">	
-								<input class="form-control" id="descontoPorcentual" type="text" ng-model="descontoDataset.porc_desc">
-								<span class="input-group-addon">%</span>	
+				<form class="form" name="form" novalidate>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label for="descontoNome">Nome *</label>
+								<input type="text" id="descontoNome" class="form-control" ng-model="descontoDataset.nome" required>
 							</div>
-						</div>
-						<button type="button" class="btn btn-success" ng-click="salvaDesconto();">Salvar</button>
-						<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoDesconto();">Cancelar</button>
-					</div> <!-- /.col -->
-				</div> <!-- /.row -->
+							<div class="form-group">
+								<label for="descontoPorcentual">Porcentual *</label>
+								<div class="input-group">	
+									<input class="form-control" id="descontoPorcentual" type="text" ng-model="descontoDataset.porc_desc" required>
+									<span class="input-group-addon">%</span>	
+								</div>
+							</div>
+							<button type="button" class="btn btn-success" ng-click="salvaDesconto();" ng-disabled="form.$invalid">Salvar</button>
+							<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoDesconto();">Cancelar</button>
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+				</form>
 			</div> <!-- /.portlet-content -->
 		</div> <!--/.portlet -->
 	</div> <!-- /#content-container -->			

@@ -1,74 +1,72 @@
 <div id="content" ng-init="carregaCadEstacionamento();">
-
 	<div id="content-header">
 		<h1>Estacionamento</h1>
 	</div> <!-- #content-header -->	
-
 	<div id="content-container">
 		<div class="portlet">
-
 			<div class="portlet-header">
 				<h3><i class="fa fa-tasks"></i>Estacionamento</h3>
 			</div> <!-- /.portlet-header -->
-
 			<div class="portlet-content">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="form-group">
-							<label for="estacionamentoAluno">Aluno</label>
-							<select id="estacionamentoAluno" class="form-control" ng-model="cadEstacionamentoDataset.id_aluno" ui-select2 data-placeholder="Selecione um aluno">
-								<option></option>
-								<option ng-repeat="aluno in selectAluno" value="{{aluno.id_aluno}}">{{aluno.nome}}</option>
-							</select>
+				<form class="form" name="form" novalidate>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label for="estacionamentoAluno">Aluno *</label>
+								<select id="estacionamentoAluno" class="form-control" ng-model="cadEstacionamentoDataset.id_aluno" ui-select2 data-placeholder="Selecione um aluno" required>
+									<option></option>
+									<option ng-repeat="aluno in selectAluno" value="{{aluno.id_aluno}}">{{aluno.nome}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="estacionamentoModelo">Modelo</label>
+								<input type="text" id="estacionamentoModelo" class="form-control" ng-model="cadEstacionamentoDataset.modelo">
+							</div>
+							<div class="form-group">
+								<label for="estacionamentoCor">Cor</label>
+								<input type="text" id="estacionamentoCor" class="form-control" ng-model="cadEstacionamentoDataset.cor">
+							</div>
+							<div class="form-group">
+								<label for="estacionamentoPlaca">Placa *</label>
+								<input type="text" id="estacionamentoPlaca" class="form-control" ng-model="cadEstacionamentoDataset.placa" required>
+							</div>
+							<div class="form-group">
+								<label for="estacionamentoValorTotal">Valor Total *</label>
+								<input type="text" id="estacionamentoValorTotal" class="form-control" ng-model="cadEstacionamentoDataset.valor" required>
+							</div>
+							<div class="form-group">
+								<label for="estacionamentoStatus">Status *</label>
+								<select id="estacionamentoStatus" class="form-control" ng-model="cadEstacionamentoDataset.estacionamento_status" required>
+									<option value="A">Ativo</option>
+									<option value="I">Inativo</option>
+									<option value="T">Trancado</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="estacionamentoPlanoIni">Plano Inicio *</label>
+								<input type="date" id="estacionamentoPlanoIni" class="form-control" ng-model="cadEstacionamentoDataset.plano_ini" required>
+							</div>
+							<div class="form-group">
+								<label for="estacionamentoPlanoFim">Plano Fim *</label>
+								<input type="date" id="estacionamentoPlanoFim" class="form-control" ng-model="cadEstacionamentoDataset.plano_fim" required>
+							</div>
+							<div class="form-group">
+								<label for="estacionamentoObservacao">Observação</label>
+								<textarea id="estacionamentoObservacao" cols="10" rows="9" class="form-control" ng-model="cadEstacionamentoDataset.observacao"></textarea>
+							</div>
 						</div>
 					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="estacionamentoModelo">Modelo</label>
-							<input type="text" id="estacionamentoModelo" class="form-control" ng-model="cadEstacionamentoDataset.modelo">
-						</div>
-						<div class="form-group">
-							<label for="estacionamentoCor">Cor</label>
-							<input type="text" id="estacionamentoCor" class="form-control" ng-model="cadEstacionamentoDataset.cor">
-						</div>
-						<div class="form-group">
-							<label for="estacionamentoPlaca">Placa</label>
-							<input type="text" id="estacionamentoPlaca" class="form-control" ng-model="cadEstacionamentoDataset.placa">
-						</div>
-						<div class="form-group">
-							<label for="estacionamentoValorTotal">Valor Total</label>
-							<input type="text" id="estacionamentoValorTotal" class="form-control" ng-model="cadEstacionamentoDataset.valor">
-						</div>
-						<div class="form-group">
-							<label for="estacionamentoStatus">Status</label>
-							<select id="estacionamentoStatus" class="form-control" ng-model="cadEstacionamentoDataset.status">
-								<option value="A">Ativo</option>
-								<option value="I">Inativo</option>
-								<option value="T">Trancado</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="estacionamentoPlanoIni">Plano Inicio</label>
-							<input type="date" id="estacionamentoPlanoIni" class="form-control" ng-model="cadEstacionamentoDataset.plano_ini">
-						</div>
-						<div class="form-group">
-							<label for="estacionamentoPlanoFim">Plano Fim</label>
-							<input type="date" id="estacionamentoPlanoFim" class="form-control" ng-model="cadEstacionamentoDataset.plano_fim">
-						</div>
-						<div class="form-group">
-							<label for="estacionamentoObservacao">Observação</label>
-							<textarea id="estacionamentoObservacao" cols="10" rows="9" class="form-control" ng-model="cadEstacionamentoDataset.observacao"></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<button type="button" class="btn btn-success" ng-click="salvaEstacionamento();">Salvar</button>
-						<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoEstacionamento();">Cancelar</button>
-					</div> <!-- /.col -->
-				</div> <!-- /.row -->
+					<div class="row">
+						<div class="col-sm-12">
+							<button type="button" class="btn btn-success" ng-click="salvaEstacionamento();" ng-disabled="form.$invalid">Salvar</button>
+							<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoEstacionamento();">Cancelar</button>
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+				</form>	
 			</div> <!-- /.portlet-content -->
 		</div> <!--/.portlet -->
 	</div> <!-- /#content-container -->			

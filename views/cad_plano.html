@@ -8,15 +8,16 @@
 				<h3><i class="fa fa-tasks"></i>Planos</h3>
 			</div> <!-- /.portlet-header -->
 			<div class="portlet-content">
+				<form class="form" name="form" novalidate>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="form-group">
-							<label for="text-input">Nome</label>
-							<input type="text" id="text-input" class="form-control" ng-model="planoDataset.nome">
+							<label for="text-input">Nome *</label>
+							<input type="text" id="text-input" class="form-control" ng-model="planoDataset.nome" required>
 						</div>
 						<div class="form-group">	
-							<label for="select-input">Tipo</label>
-							<select id="select-input" class="form-control" ng-model="planoDataset.tipo">
+							<label for="select-input">Tipo *</label>
+							<select id="select-input" class="form-control" ng-model="planoDataset.tipo" required>
 								<option value="1">Mensal</option>
 								<option value="2">Trimestral</option>
 								<option value="3">Semestral</option>
@@ -24,13 +25,13 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="planoValor">Valor</label>
+							<label for="planoValor">Valor *</label>
 							<div class="input-group">	
 								<span class="input-group-addon">R$</span>	
-								<input class="form-control" id="planoValor" type="text" ng-model="planoDataset.valor">
+								<input class="form-control" id="planoValor" type="text" ng-model="planoDataset.valor" required>
 							</div>
 						</div>
-						<button type="button" class="btn btn-success" ng-click="salvaPlano();">Salvar</button>
+						<button type="button" class="btn btn-success" ng-click="salvaPlano();" ng-disabled="form.$invalid">Salvar</button>
 						<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoPlano();">Cancelar</button>
 					</div> <!-- /.col -->
 				</div> <!-- /.row -->

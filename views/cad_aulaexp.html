@@ -8,42 +8,44 @@
 				<h3><i class="fa fa-tasks"></i>Aula Experimental</h3>
 			</div> <!-- /.portlet-header -->
 			<div class="portlet-content">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="form-group">
-							<label for="text-input">Nome</label>
-							<input type="text" id="text-input" class="form-control" ng-model="aulaexpDataset.nome">
-						</div>
-						<div class="form-group">	
-							<label for="data_aula">Data aula</label>
-							<input type="date" id="data_aula" class="form-control" ng-model="aulaexpDataset.data_aula">
-						</div>
-						<div class="form-group">	
-							<label for="telefone">Telefone</label>
-							<input type="text" id="telefone" class="form-control" ng-model="aulaexpDataset.telefone">
-						</div>
-						<div class="form-group">	
-							<label for="observacao">Observação</label>
-							<textarea cols="10" rows="9" id="observacao" class="form-control" ng-model="aulaexpDataset.observacao"></textarea>
-						</div>
-						<div class="form-group">	
-							<label for="confirmado">Confirmado</label>
-							<select id="confirmado" class="form-control" ng-model="aulaexpDataset.confirmado">
-								<option value="nao">Não</option>
-								<option value="sim">Sim</option>
-							</select>
-						</div>
-						<div class="form-group">	
-							<label for="presente">Presente</label>
-							<select id="presente" class="form-control" ng-model="aulaexpDataset.presente">
-								<option value="nao">Não</option>
-								<option value="sim">Sim</option>
-							</select>
-						</div>
-						<button type="button" class="btn btn-success" ng-click="salvaAulaExp();">Salvar</button>
-						<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoAulaExp();">Cancelar</button>
-					</div> <!-- /.col -->
-				</div> <!-- /.row -->
+				<form class="form" name="form" novalidate>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label for="text-input">Nome *</label>
+								<input type="text" id="text-input" class="form-control" ng-model="aulaexpDataset.nome" required>
+							</div>
+							<div class="form-group">	
+								<label for="data_aula">Data aula *</label>
+								<input type="date" id="data_aula" class="form-control" ng-model="aulaexpDataset.data_aula" required>
+							</div>
+							<div class="form-group">	
+								<label for="telefone">Telefone *</label>
+								<input type="text" id="telefone" class="form-control" ng-model="aulaexpDataset.telefone" required>
+							</div>
+							<div class="form-group">	
+								<label for="observacao">Observação</label>
+								<textarea cols="10" rows="9" id="observacao" class="form-control" ng-model="aulaexpDataset.observacao"></textarea>
+							</div>
+							<div class="form-group">	
+								<label for="confirmado">Confirmado</label>
+								<select id="confirmado" class="form-control" ng-model="aulaexpDataset.confirmado">
+									<option value="nao">Não</option>
+									<option value="sim">Sim</option>
+								</select>
+							</div>
+							<div class="form-group">	
+								<label for="presente">Presente</label>
+								<select id="presente" class="form-control" ng-model="aulaexpDataset.presente">
+									<option value="nao">Não</option>
+									<option value="sim">Sim</option>
+								</select>
+							</div>
+							<button type="button" class="btn btn-success" ng-click="salvaAulaExp();" ng-disabled="form.$invalid">Salvar</button>
+							<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoAulaExp();">Cancelar</button>
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+				</form>
 			</div> <!-- /.portlet-content -->
 		</div> <!--/.portlet -->
 	</div> <!-- /#content-container -->			

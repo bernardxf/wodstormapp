@@ -22,7 +22,7 @@
 										<th>Nome</th>
 										<th>Data Aula</th>
 										<th>Telefone</th>
-										<th>E-mail</th>
+										<th>Observação</th>
 										<th>Confirmado</th>
 										<th>Presente</th>
 										<th>Ação</th>
@@ -30,7 +30,7 @@
 									<th><input class="form-control input-sm show" type="text" placeholder="Nome" ng-model="aulaexpFilter.nome"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Data Aula" ng-model="aulaexpFilter.data_aula"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Telefone" ng-model="aulaexpFilter.telefone"></th>
-									<th><input class="form-control input-sm show" type="text" placeholder="E-mail" ng-model="aulaexpFilter.email"></th>
+									<th><input class="form-control input-sm show" type="text" placeholder="Observação" ng-model="aulaexpFilter.observacao"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Confirmado" ng-model="aulaexpFilter.confirmado"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Presente" ng-model="aulaexpFilter.presente"></th>
 									<th></th>
@@ -40,7 +40,7 @@
 										<td>{{item.nome}}</td>
 										<td>{{item.data_aula | date:'dd/MM/yyyy'}}</td>
 										<td>{{item.telefone}}</td>
-										<td>{{item.email}}</td>
+										<td>{{item.observacao}}</td>
 										<td>{{item.confirmado}}</td>
 										<td>{{item.presente}}</td>
 										<td>

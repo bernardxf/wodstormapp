@@ -3,11 +3,9 @@
 		<h1>Contrato</h1>
 	</div> <!-- #content-header -->	
 	<div id="content-container">		
-
 		<!--  Inicio grid contratos  -->
 		<div class="col-md-12">
 			<div class="portlet">
-
 				<div class="portlet-header">
 					<h3><i class="fa fa-table"></i>Contrato</h3>
 					<ul class="portlet-tools pull-right">
@@ -16,7 +14,6 @@
 						</li>
 					</ul>
 				</div> <!-- /.portlet-header -->
-
 				<div class="portlet-content">						
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
@@ -29,8 +26,8 @@
 									<th>Ações</th>
 								</tr>
 								<tr>
-									<th><input class="form-control input-sm show" type="text" placeholder="Data Inicial" ng-model="contratoFilter.data_inicio"></th>
-									<th><input class="form-control input-sm show" type="text" placeholder="Data Final" ng-model="contratoFilter.data_fim"></th>
+									<th><input class="form-control input-sm show" type="date" ng-model="contratoFilter.data_inicio"></th>
+									<th><input class="form-control input-sm show" type="date" ng-model="contratoFilter.data_fim"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Horario Economico" ng-model="contratoFilter.horario_economico"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Status" ng-model="contratoFilter.status"></th>
 									<th></th>

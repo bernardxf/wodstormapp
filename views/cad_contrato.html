@@ -12,69 +12,71 @@
 			</div> <!-- /.portlet-header -->
 
 			<div class="portlet-content">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="contratoDataIni">Data Inicial</label>
-							<input type="date" id="contratoDataIni" class="form-control" ng-model="cadContratoDataset.data_inicio">
+				<form class="form" name="form" novalidate>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="contratoDataIni">Data Inicial *</label>
+								<input type="date" id="contratoDataIni" class="form-control" ng-model="cadContratoDataset.data_inicio" required>
+							</div>
+							<div class="form-group">
+								<label for="contratoPlano">Plano *</label>
+								<select type="date" id="contratoPlano" class="form-control" ng-model="cadContratoDataset.id_plano" required>
+									<option ng-repeat="item in selectPlano" value="{{item.id_plano}}">{{item.nome}}</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="contratoFormaPagamento">Forma de Pagamento *</label>
+								<select type="date" id="contratoFormaPagamento" class="form-control" ng-model="cadContratoDataset.id_forma_pagamento" required>
+									<option ng-repeat="item in selectFormaPagamento" value="{{item.id_forma_pagamento}}">{{item.nome}}</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="contratoDesconto">Desconto *</label>
+								<select type="date" id="contratoDesconto" class="form-control" ng-model="cadContratoDataset.id_desconto" required>
+									<option ng-repeat="item in selectDesconto" value="{{item.id_desconto}}">{{item.nome}}</option>
+								</select>
+							</div>
 						</div>
-						<div class="form-group">
-							<label for="contratoPlano">Plano</label>
-							<select type="date" id="contratoPlano" class="form-control" ng-model="cadContratoDataset.id_plano">
-								<option ng-repeat="item in selectPlano" value="{{item.id_plano}}">{{item.nome}}</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="contratoFormaPagamento">Forma de Pagamento</label>
-							<select type="date" id="contratoFormaPagamento" class="form-control" ng-model="cadContratoDataset.id_forma_pagamento">
-								<option ng-repeat="item in selectFormaPagamento" value="{{item.id_forma_pagamento}}">{{item.nome}}</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="contratoDesconto">Desconto</label>
-							<select type="date" id="contratoDesconto" class="form-control" ng-model="cadContratoDataset.id_desconto">
-								<option ng-repeat="item in selectDesconto" value="{{item.id_desconto}}">{{item.nome}}</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="contratoDataFim">Data Final</label>
-							<input type="date" id="contratoDataFim" class="form-control" ng-model="cadContratoDataset.data_fim">
-						</div>
-						<div class="form-group">
-							<label for="contratoHorarioEconomico">Horario Economico</label>
-							<select type="date" id="contratoHorarioEconomico" class="form-control" ng-model="cadContratoDataset.horario_economico">
-								<option value="S">Sim</option>
-								<option value="N">Não</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="contratoStatus">Status</label>
-							<select type="date" id="contratoStatus" class="form-control" ng-model="cadContratoDataset.status">
-								<option value="A">Ativo</option>
-								<option value="I">Inativo</option>
-								<option value="F">Finalizado</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="contratoDiasTrancados">Dias Trancados</label>
-							<input type="number" id="contratoDiasTrancados" class="form-control" ng-model="cadContratoDataset.dias_trancados">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="form-group">
-							<label for="contratoObservacao">Observação</label>
-							<textarea type="date" cols="10" rows="9" id="contratoObservacao" class="form-control" ng-model="cadContratoDataset.observacao"></textarea>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="contratoDataFim">Data Final *</label>
+								<input type="date" id="contratoDataFim" class="form-control" ng-model="cadContratoDataset.data_fim" required>
+							</div>
+							<div class="form-group">
+								<label for="contratoHorarioEconomico">Horario Economico *</label>
+								<select type="date" id="contratoHorarioEconomico" class="form-control" ng-model="cadContratoDataset.horario_economico" required>
+									<option value="S">Sim</option>
+									<option value="N">Não</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="contratoStatus">Status *</label>
+								<select type="date" id="contratoStatus" class="form-control" ng-model="cadContratoDataset.status" required>
+									<option value="A">Ativo</option>
+									<option value="I">Inativo</option>
+									<option value="F">Finalizado</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="contratoDiasTrancados">Dias Trancados</label>
+								<input type="number" id="contratoDiasTrancados" class="form-control" ng-model="cadContratoDataset.dias_trancados">
+							</div>
 						</div>
 					</div>
-					<div class="col-sm-12">
-						<button type="button" class="btn btn-success" ng-click="salvaContrato();">Salvar</button>
-						<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoContrato();">Cancelar</button>
-					</div> <!-- /.col -->
-				</div> <!-- /.row -->
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label for="contratoObservacao">Observação</label>
+								<textarea type="date" cols="10" rows="9" id="contratoObservacao" class="form-control" ng-model="cadContratoDataset.observacao"></textarea>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<button type="button" class="btn btn-success" ng-click="salvaContrato();" ng-disabled="form.$invalid">Salvar</button>
+							<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoContrato();">Cancelar</button>
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+				</form>
 			</div> <!-- /.portlet-content -->
 		</div> <!--/.portlet -->
 	</div> <!-- /#content-container -->			

@@ -39,9 +39,7 @@ class EstacionamentoController
 		$response = new Response();
 		$estacionamentoDataset = json_decode($request->getContent(), true);
 
-		$estacionamentoDataset = array(
-			'id_organizacao' => App::getSession()->get('organizacao')
-		);	
+		$estacionamentoDataset['id_organizacao'] = App::getSession()->get('organizacao');
 
 		$resultado = Estacionamento::salvaEstacionamento($estacionamentoDataset);
 

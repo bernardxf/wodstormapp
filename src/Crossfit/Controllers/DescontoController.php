@@ -4,6 +4,7 @@ namespace Crossfit\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\Desconto;
 use Crossfit\Util\Response;
+use Crossfit\App;
 use Silex\Application;
 
 class DescontoController
@@ -35,9 +36,7 @@ class DescontoController
 		$response = new Response();
 		$descontoDataset = json_decode($request->getContent(), true);
 
-		$descontoDataset = [
-			'id_organizacao' => App::getSession()->get('organizacao')
-		];
+		$descontoDataset['id_organizacao'] = App::getSession()->get('organizacao');
 
 		Desconto::salvaDesconto($descontoDataset);		
 

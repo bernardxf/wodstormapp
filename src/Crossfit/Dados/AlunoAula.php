@@ -39,12 +39,12 @@ class AlunoAula
 
 	public static function salvaPresenca($presencaDataset)
 	{
-		$aulaDataset = [
+		$aulaDataset = array(
 			'data' => $presencaDataset->data,
 			'horario' => $presencaDataset->horario,
 			// 'excedente' => $presencaDataset->excedente,
 			'id_organizacao' => App::getSession()->get('organizacao')
-		];
+		);
 
 		Conexao::get()->insert('aula',$aulaDataset);
 
@@ -52,12 +52,12 @@ class AlunoAula
 
 		$presentes = $presencaDataset->presentes;
 		foreach ($presentes as $presente) {
-			$alunosAulaDataset = [
+			$alunosAulaDataset = array(
 				'id_aluno' => $presente->id_aluno,
 				'id_aula' => $result[0]['id_aula'],
 				'num_senha' => $presente->senha,
 				'id_organizacao' => App::getSession()->get('organizacao')
-			];
+			);
 
 			Conexao::get()->insert('alunos_aula', $alunosAulaDataset);
 		}
@@ -67,12 +67,12 @@ class AlunoAula
 
 	public static function atualizaPresenca($id_aula, $presencaDataset)
 	{
-		$aulaDataset = [
+		$aulaDataset = array(
 			'data' => $presencaDataset->data,
 			'horario' => $presencaDataset->horario,
 			'excedente' => $presencaDataset->excedente,
 			'id_organizacao' => App::getSession()->get('organizacao')
-		];
+		);
 
 		Conexao::get()->update('aula',$aulaDataset, array('id_aula' => $id_aula));		
 
@@ -80,12 +80,12 @@ class AlunoAula
 
 		$presentes = $presencaDataset->presentes;
 		foreach ($presentes as $presente) {
-			$alunosAulaDataset = [
+			$alunosAulaDataset = array(
 				'id_aluno' => $presente->id_aluno,
 				'id_aula' => $id_aula,
 				'num_senha' => $presente->senha,
 				'id_organizacao' => App::getSession()->get('organizacao')
-			];
+			);
 
 			Conexao::get()->insert('alunos_aula', $alunosAulaDataset);
 		}

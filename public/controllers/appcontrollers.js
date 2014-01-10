@@ -286,6 +286,7 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	};
 
 	$scope.carregaCadContrato = function(){
+		var aluno = $routeParams.aluno;
 		ContratoResource.get({id_aluno : $routeParams.aluno, id_contrato : $routeParams.contrato}, function(response){
 			$scope.selectPlano = response.data.selectPlano;
 			$scope.selectDesconto = response.data.selectDesconto;
@@ -294,6 +295,7 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 				if(!angular.isArray(response.data.contrato)){
 					$scope.cadContratoDataset = response.data.contrato;
 				}	
+				$scope.cadContratoDataset = {'id_aluno' : aluno};
 			});
 		});
 	};

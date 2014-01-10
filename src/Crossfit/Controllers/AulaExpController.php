@@ -36,9 +36,7 @@ class AulaExpController
 		$response = new Response();
 		$aulaexpDataset = json_decode($request->getContent(), true);
 
-		$aulaexpDataset = array(
-			'id_organizacao' => App::getSession()->get('organizacao')
-		);
+		$aulaexpDataset['id_organizacao'] = App::getSession()->get('organizacao');
 
 		AulaExp::salvaAulaExp($aulaexpDataset);		
 

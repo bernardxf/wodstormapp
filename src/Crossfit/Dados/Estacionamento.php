@@ -43,8 +43,9 @@ class Estacionamento
 		$sql = "SELECT a.nome, plano_fim from estacionamento as e
 				JOIN aluno AS a ON e.id_aluno = a.id_aluno
 				WHERE to_days(e.plano_fim) - to_days(NOW()) <= 0 
+				AND estacionamento.id_organizacao = ?
 				ORDER BY YEAR(e.plano_fim) ASC, MONTH(e.plano_fim) ASC, DAY(e.plano_fim) ASC";
-		$resultado = Conexao::get()->fetchAll($sql);
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
@@ -52,8 +53,9 @@ class Estacionamento
 	{
 		$sql = "SELECT a.nome from estacionamento as e
 				JOIN aluno AS a ON e.id_aluno = a.id_aluno
-				WHERE estacionamento_status = 'T'";
-		$resultado = Conexao::get()->fetchAll($sql);
+				WHERE estacionamento_status = 'T'
+				AND estacionamento.id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 }

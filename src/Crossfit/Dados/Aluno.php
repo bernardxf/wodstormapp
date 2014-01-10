@@ -60,8 +60,9 @@ class Aluno
 		$sql = "SELECT aluno.nome, aluno.data_nasc 
 				FROM aluno AS aluno
 				JOIN contrato AS contrato ON contrato.id_aluno = aluno.id_aluno
-				WHERE contrato.status != 'I' AND DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') ORDER BY DAY(data_nasc) ASC";
-		$resultado = Conexao::get()->fetchAll($sql);
+				WHERE contrato.status != 'I' AND DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') 
+				AND aluno.id_organizacao = ? ORDER BY DAY(data_nasc) ASC";
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
@@ -69,8 +70,8 @@ class Aluno
 	{
 		$sql = "select nome, contrato.status FROM aluno 
 				JOIN contrato on aluno.id_aluno = contrato.id_aluno
-				WHERE contrato.status= 'T' ORDER BY nome ASC";
-		$resultado = Conexao::get()->fetchAll($sql);
+				WHERE contrato.status= 'T' AND contrato.id_organizacao = ? ORDER BY nome ASC";
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 }

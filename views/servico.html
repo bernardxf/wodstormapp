@@ -21,6 +21,7 @@
 							<thead>
 								<tr>
 									<th>Aluno</th>
+									<th>Data</th>
 									<th>Tipo</th>
 									<th>Valor</th>
 									<th>Descrição</th>
@@ -28,6 +29,7 @@
 								</tr>
 								<tr>
 									<th><input class="form-control input-sm show" type="text" placeholder="Aluno" ng-model="planoFilter.aluno"></th>
+									<th><input class="form-control input-sm show" type="date" ng-model="planoFilter.data"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Tipo" ng-model="planoFilter.tipo"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Valor" ng-model="planoFilter.valor"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Descrição" ng-model="planoFilter.descricao"></th>
@@ -37,6 +39,7 @@
 							<tbody>
 								<tr ng-repeat="item in servicoDataset | filter:servicoFilter">
 									<td>{{item.aluno}}</td>
+									<td>{{item.data | date:'dd/MM/yyyy'}}</td>
 									<td>{{item.tipo}}</td>
 									<td>{{item.valor}}</td>
 									<td>{{item.descricao}}</td>

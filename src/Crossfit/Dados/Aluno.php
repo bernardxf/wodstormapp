@@ -20,7 +20,7 @@ class Aluno
 				join contrato on contrato.id_aluno = aluno.id_aluno
 				join plano on contrato.id_plano = plano.id_plano
 				where aluno.nome like ? AND contrato.status != 'I' AND aluno.id_organizacao = ?";
-		$resultado = Conexao::get()->fetchAll($sql, array($nome.'%', App::getSession()->get('organizacao')));
+		$resultado = Conexao::get()->fetchAll($sql, array('%'.$nome.'%', App::getSession()->get('organizacao')));
 		return $resultado;	
 	}
 

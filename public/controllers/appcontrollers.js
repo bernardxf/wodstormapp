@@ -369,11 +369,8 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 	var year = today.getFullYear();
 	var month = today.getMonth()<9?''+today.getMonth()+1:today.getMonth()+1;
 	var day = (today.getDate()<10?'0':'') + today.getDate();
-	var hour = today.getHours();
-	var minutes = (today.getMinutes()<10?'0':'') + today.getMinutes();
 	$scope.pesquisaAulaDataset = {data:year+'-'+month+'-'+day};
 	$scope.aulaDataset = null;
-	$scope.cadPresencaDataset = {data:year+'-'+month+'-'+day, horario: hour+':'+minutes, presentes: new Array()};
 	$scope.cadPesquisaAluno = null;
 	$scope.cadAlunoDataset = null;
 

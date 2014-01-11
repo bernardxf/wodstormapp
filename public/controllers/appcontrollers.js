@@ -445,10 +445,11 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 	$scope.chart = null;
 	
 	$scope.pesquisaRelAula = function(){
+		$('#bar-chart svg, .morris-hover').remove();
 		var pesquisa = $scope.relaulaDataset;
 		RelAulaResource.pesquisa(pesquisa,function(response){
 			$scope.relAulaResponseDataset = response.data;
-			$scope.loadChart();
+				$scope.loadChart();
 		});	
 	};
 

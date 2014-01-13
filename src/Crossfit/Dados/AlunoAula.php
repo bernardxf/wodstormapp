@@ -95,7 +95,6 @@ class AlunoAula
 
 	public static function removeAlunosAula($id_aula)
 	{
-		Conexao::get()->delete('alunos_aula', array('id_aula' => $id_aula, 'id_organizacao' => App::getSession()->get('organizacao')));
 		Conexao::get()->delete('aula', array('id_aula' => $id_aula, 'id_organizacao' => App::getSession()->get('organizacao')));
 
 		return true;

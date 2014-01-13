@@ -256,7 +256,7 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'Consul
 	$scope.salvaAluno = function(){
 		var aluno = $scope.cadAlunoDataset;
 		AlunoResource.save(aluno, function(response){
-			$scope.cadAlunoDataset = response.data;
+			$location.path('/cad_aluno/'+response.data.id_aluno);
 		});
 	};
 

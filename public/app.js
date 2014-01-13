@@ -134,3 +134,8 @@ crossfitApp.factory('AulaResource', ['$resource', function ($resource) {
 crossfitApp.factory('RelAulaResource', ['$resource', function ($resource) {
 	return $resource('/api/relaula', {}, {pesquisa: {method: 'POST'}});
 }]);
+
+//Servico para busca de cep
+crossfitApp.factory('ConsultaCepResource', ['$resource', function ($resource) {
+	return $resource('http://cep.correiocontrol.com.br/:cep.json',{cep:'@cep'});
+}]);

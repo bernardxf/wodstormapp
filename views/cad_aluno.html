@@ -73,7 +73,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="alunoCep">CEP *</label>
-								<input type="text" id="alunoCep" placeholder="99999-999" class="form-control" ng-model="cadAlunoDataset.cep" required>
+								<input type="text" id="alunoCep" placeholder="99999-999" class="form-control" ng-model="cadAlunoDataset.cep" ng-blur="consultaCep();" required>
 							</div>
 							<div class="form-group">
 								<label for="alunoLogradouro">Logradouro</label>

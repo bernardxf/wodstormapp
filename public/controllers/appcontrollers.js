@@ -235,7 +235,7 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 }]);
 
 
-AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', '$location', '$routeParams', function ($scope, AlunoResource, $location, $routeParams) {
+AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'ConsultaCepResource', '$location', '$routeParams', function ($scope, AlunoResource, ConsultaCepResource,$location, $routeParams) {
 	$scope.alunoDataset = null;
 	$scope.cadAlunoDataset = null;
 
@@ -270,6 +270,16 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', '$locat
 				$scope.carregaAluno();
 			});
 		}
+	};
+
+	$scope.consultaCep = function(){
+		var cep = $scope.cadAlunoDataset.cep;
+		ConsultaCepResource.get({cep:cep}, function(response){
+			$scope.cadAlunoDataset['bairro'] = response.bairro;
+			$scope.cadAlunoDataset['uf'] = response.uf;
+			$scope.cadAlunoDataset['cidade'] = response.localidade;
+			$scope.cadAlunoDataset['logradouro'] = response.logradouro;
+		});
 	};
 
 }]);

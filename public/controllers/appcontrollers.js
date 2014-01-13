@@ -304,8 +304,9 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 			$timeout(function(){
 				if(!angular.isArray(response.data.contrato)){
 					$scope.cadContratoDataset = response.data.contrato;
+				} else {
+					$scope.cadContratoDataset = {'id_aluno' : aluno};	
 				}	
-				$scope.cadContratoDataset = {'id_aluno' : aluno};
 			});
 		});
 	};

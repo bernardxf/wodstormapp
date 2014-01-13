@@ -33,8 +33,15 @@ class Aluno
 
 	public static function salvaAluno($alunoDataset)
 	{
-		$resultado = Conexao::get()->insert('aluno', $alunoDataset);
-		return $resultado;
+		Conexao::get()->insert('aluno', $alunoDataset);
+
+		$sql = "SELECT MAX(id_aluno) FROM aluno WHERE id_organizacao = ?";
+
+		$id_aluno = Conexao::get()->fetchColumn($sql, array(App::getSession()->get('organizacao')));
+
+		$alunoDataset['id_aluno'] = $id_aluno;
+
+		return $alunoDataset;
 	}
 
 	public static function atualizaAluno($id_aluno, $alunoDataset)

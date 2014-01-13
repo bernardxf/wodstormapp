@@ -43,6 +43,8 @@ class AlunoController
 
 		$resultado = Aluno::salvaAluno($dataset);
 
+		$response->setData($resultado);
+
 		return $response->getAsJson();
 	}
 

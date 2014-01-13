@@ -273,7 +273,7 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'Consul
 	};
 
 	$scope.consultaCep = function(){
-		var cep = $scope.cadAlunoDataset.cep;
+		var cep = $scope.cadAlunoDataset.cep.replace('-','');
 		ConsultaCepResource.get({cep:cep}, function(response){
 			$scope.cadAlunoDataset['bairro'] = response.bairro;
 			$scope.cadAlunoDataset['uf'] = response.uf;

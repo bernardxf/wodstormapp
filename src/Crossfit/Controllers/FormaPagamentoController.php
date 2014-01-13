@@ -35,7 +35,7 @@ class FormaPagamentoController
 		$response = new Response(); 
 		$formapagamentoDataset = json_decode($request->getContent(), true);
 
-		$formapagamentoDataset = ['id_organizacao'] = App::getSession()->get('organizacao');
+		$formapagamentoDataset['id_organizacao'] = App::getSession()->get('organizacao');
 
 		FormaPagamento::salvaFormaPagamento($formapagamentoDataset);		
 

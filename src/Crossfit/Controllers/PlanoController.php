@@ -36,9 +36,7 @@ class PlanoController
 		$response = new Response();
 		$planoDataset = json_decode($request->getContent(), true);
 
-		$planoDataset = [
-			'id_organizacao' => App::getSession()->get('organizacao')
-		];
+		$planoDataset['id_organizacao'] = App::getSession()->get('organizacao');
 
 		Plano::salvaPlano($planoDataset);		
 

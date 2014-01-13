@@ -383,6 +383,7 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 	$scope.aulaDataset = null;
 	$scope.cadPesquisaAluno = null;
 	$scope.cadAlunoDataset = null;
+	$scope.cadPresencaDataset = {data:year+'-'+month+'-'+day, presentes : new Array()};
 
 	$scope.pesquisaAulas = function(){
 		var pesquisaAulaDataset = $scope.pesquisaAulaDataset;

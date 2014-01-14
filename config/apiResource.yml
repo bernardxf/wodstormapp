@@ -225,11 +225,13 @@ removeServico:
   methods: [DELETE]
 
   # Rotas para o controller de Relatório de Aula
-# relaula:
-#   path: /relaula
-#   defaults: { _controller: 'Crossfit\Controllers\RelAulaController::carregaRelAula' }
-#   methods:  [GET]
 relaula:
   path: /relaula
   defaults: { _controller: 'Crossfit\Controllers\RelAulaController::pesquisaRelAula' }
+  methods:  [POST]
+
+   # Rotas para o controller de Relatório de Serviço
+relservico:
+  path: /relservico
+  defaults: { _controller: 'Crossfit\Controllers\RelServicoController::pesquisaRelServico' }
   methods:  [POST]

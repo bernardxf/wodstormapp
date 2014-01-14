@@ -67,6 +67,9 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/relaula', {
 		templateUrl: 'views/relaula.html',
 		controller: 'RelAulaController'
+	}).when('/relservico', {
+		templateUrl: 'views/relservico.html',
+		controller: 'RelServicoController'
 	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);
@@ -133,6 +136,10 @@ crossfitApp.factory('AulaResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('RelAulaResource', ['$resource', function ($resource) {
 	return $resource('/api/relaula', {}, {pesquisa: {method: 'POST'}});
+}]);
+
+crossfitApp.factory('RelServicoResource', ['$resource', function ($resource) {
+	return $resource('/api/relservico', {}, {pesquisa: {method: 'POST'}});
 }]);
 
 //Servico para busca de cep

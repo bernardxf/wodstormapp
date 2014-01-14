@@ -496,3 +496,46 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 	}
 }]);
 
+AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource', function ($scope, RelServicoResource) {
+	$scope.relservicoDataset = null;
+	$scope.relServicoResponseDataset = null;
+	$scope.chart = null;
+	
+	$scope.pesquisaRelServico = function(){
+		$('#bar-chart svg, .morris-hover').remove();
+		var pesquisa = $scope.relservicoDataset;
+		RelServicoResource.pesquisa(pesquisa,function(response){
+			$scope.relServicoResponseDataset = response.data;
+				$scope.loadChart();
+		});	
+	};
+
+	$scope.loadChart = function(){
+		var dataValues = $scope.processData("valor");
+		var labelValues = $scope.processLabel("data");
+		var lineChartData = {
+			element: 'bar-chart',
+			data: $scope.relServicoResponseDataset,
+			xkey: 'data',
+			ykeys: ['valor'],
+			labels: ['Valor'],
+			barColors: ['#444','#e5412d'],
+			stacked: true
+		}
+		$scope.chart = new Morris.Bar(lineChartData);
+	};
+	$scope.processData = function(key){
+		var values = new Array();
+		angular.forEach($scope.relServicoResponseDataset, function(item){
+			values.push(item[key]);
+		});
+		return values;
+	};
+	$scope.processLabel = function(key){
+		var values = new Array();
+		angular.forEach($scope.relServicoResponseDataset, function(item){
+			values.push(item[key]);
+		});
+		return values;	
+	}
+}]);

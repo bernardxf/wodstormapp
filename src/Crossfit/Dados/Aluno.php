@@ -23,7 +23,7 @@ class Aluno
 					select id_aluno from alunos_aula 
 					join aula on aula.id_aula = alunos_aula.id_aula
 					where aula.data = CURDATE() and alunos_aula.id_organizacao = ?
-				) and aluno.nome like ? AND contrato.status != 'I' AND aluno.id_organizacao = ?";
+				) and aluno.nome like ? AND contrato.status = 'A' AND aluno.id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), '%'.$nome.'%', App::getSession()->get('organizacao')));
 		return $resultado;	
 	}

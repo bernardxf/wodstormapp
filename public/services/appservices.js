@@ -30,7 +30,12 @@ AppServices.factory('MessageService', [function () {
 	return {
 		processMessages: function(messages){
 			angular.forEach(messages, function(message){
-				alert(message);	
+				$.howl ({
+					type: message.type //sucess, warning, danger, info
+					, title: message.title
+					, content: message.message
+					, lifetime: 4500
+				});
 			});
 		}
 	};

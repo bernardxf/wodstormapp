@@ -54,6 +54,8 @@
 									<tr>
 										<th>Aluno</th>
 										<th>Plano</th>
+										<th>Início Contrato</th>
+										<th>Fim Contrato</th>
 										<th>Num. Presenças</th>
 									</tr>
 								</thead>
@@ -61,6 +63,8 @@
 									<tr>
 										<td>{{relAlunoResponseDataset.aluno.aluno}}</td>
 										<td>{{relAlunoResponseDataset.aluno.plano}}</td>
+										<td>{{relAlunoResponseDataset.aluno.data_inicio | date:'dd/MM/yyyy'}}</td>
+										<td>{{relAlunoResponseDataset.aluno.data_fim | date:'dd/MM/yyyy'}}</td>
 										<td>{{relAlunoResponseDataset.aluno.num_presencas}}</td>
 									</tr>
 								</tbody>

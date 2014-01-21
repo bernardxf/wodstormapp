@@ -18,7 +18,7 @@ class RelAluno
 				and aluno.id_aluno = ?
 				group by contrato.id_contrato";
 
-		$aluno = Conexao::get()->fetchAssoc($sql, array($data_ini, $data_fim, $id_aluno));
+		$aluno = Conexao::get()->fetchAll($sql, array($data_ini, $data_fim, $id_aluno));
 
 		$sql = "select aula.data as data, aula.horario as horario from aula 
 				join alunos_aula on aula.id_aula = alunos_aula.id_aula

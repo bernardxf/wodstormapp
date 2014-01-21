@@ -60,12 +60,12 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>{{relAlunoResponseDataset.aluno.aluno}}</td>
-										<td>{{relAlunoResponseDataset.aluno.plano}}</td>
-										<td>{{relAlunoResponseDataset.aluno.data_inicio | date:'dd/MM/yyyy'}}</td>
-										<td>{{relAlunoResponseDataset.aluno.data_fim | date:'dd/MM/yyyy'}}</td>
-										<td>{{relAlunoResponseDataset.aluno.num_presencas}}</td>
+									<tr ng-repeat="item in relAlunoResponseDataset.aluno">
+										<td>{{item.aluno}}</td>
+										<td>{{item.plano}}</td>
+										<td>{{item.data_inicio | date:'dd/MM/yyyy'}}</td>
+										<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
+										<td>{{item.num_presencas}}</td>
 									</tr>
 								</tbody>
 							</table>

@@ -44,18 +44,19 @@ class Estacionamento
 				JOIN aluno AS a ON e.id_aluno = a.id_aluno
 				WHERE to_days(e.plano_fim) - to_days(NOW()) <= 0 
 				AND e.id_organizacao = ?
+				AND e.estacionamento_status = ?
 				ORDER BY YEAR(e.plano_fim) ASC, MONTH(e.plano_fim) ASC, DAY(e.plano_fim) ASC";
-		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), 'A'));
 		return $resultado;
 	}
 
 	public static function retornaEstacionamentoTrancado()
 	{
-		$sql = "SELECT a.nome from estacionamento as e
-				JOIN aluno AS a ON e.id_aluno = a.id_aluno
-				WHERE estacionamento_status = 'T'
-				AND e.id_organizacao = ?";
-		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+		$sql = "SELECT aluno.nome, estacionamento.placa from estacionamento
+				JOIN aluno ON estacionamento.id_aluno = aluno.id_aluno
+				WHERE estacionamento_status = ?
+				AND estacionamento.id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAll($sql, array('T',App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 }

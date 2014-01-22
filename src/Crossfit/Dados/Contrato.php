@@ -1,3 +1,4 @@
+
 <?php
 namespace Crossfit\Dados;
 
@@ -45,8 +46,9 @@ class Contrato
 				JOIN aluno on contrato.id_aluno = aluno.id_aluno
 				WHERE contrato.status = 'A' AND to_days(data_fim) - to_days(SYSDATE()) <= 7 
 				AND contrato.id_organizacao = ?
+				AND contrato.status = ?
 				ORDER BY YEAR(data_fim) ASC, MONTH(data_fim) ASC, DAY(data_fim) ASC";
-		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), 'A'));
 		return $resultado;
 	}
 }

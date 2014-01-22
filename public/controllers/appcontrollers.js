@@ -473,7 +473,7 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 			element: 'bar-chart',
 			data: $scope.relAulaResponseDataset,
 			xkey: 'data',
-			ykeys: ['num_presentes', 'excedentes'],
+			ykeys: ['num_presentes', 'excedente'],
 			labels: ['Presentes', 'Excedentes'],
 			barColors: ['#444','#e5412d'],
 			stacked: true

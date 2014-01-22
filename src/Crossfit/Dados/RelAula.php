@@ -8,7 +8,7 @@ class RelAula
 {
 	public static function retornaSelecionado($horario, $data_ini, $data_fim)
 	{
-		$sql = "select count(*) as num_presentes, a.data, a.excedente from alunos_aula as aa
+		$sql = "select count(*) as num_presentes, DATE_FORMAT(a.data, '%d/%m/%Y') as data, a.excedente from alunos_aula as aa
 				join aula a on aa.id_aula = a.id_aula 
 				where a.horario = ? 
 				and a.data between ? and ?

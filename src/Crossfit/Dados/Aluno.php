@@ -9,8 +9,9 @@ class Aluno
 	public static function retornaTodos()
 	{
 		$sql = "select * from aluno
-				where aluno.id_organizacao = ?";
-		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+				where status = ?
+				and id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAll($sql, array('A', App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
@@ -23,8 +24,8 @@ class Aluno
 					select id_aluno from alunos_aula 
 					join aula on aula.id_aula = alunos_aula.id_aula
 					where aula.data = CURDATE() and alunos_aula.id_organizacao = ?
-				) and aluno.nome like ? AND contrato.status = 'A' AND aluno.id_organizacao = ?";
-		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), '%'.$nome.'%', App::getSession()->get('organizacao')));
+				) and aluno.nome like ? AND aluno.status = ? AND contrato.status = 'A' AND aluno.id_organizacao = ?";
+		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), '%'.$nome.'%', 'A', App::getSession()->get('organizacao')));
 		return $resultado;	
 	}
 
@@ -56,7 +57,7 @@ class Aluno
 
 	public static function removeAluno($id_aluno)
 	{
-		$resultado = Conexao::get()->delete('aluno', array('id_aluno' => $id_aluno));
+		$resultado = Conexao::get()->update('aluno', array('status' => 'I'), array('id_aluno' => $id_aluno));
 		return $resultado;
 	}
 
@@ -72,9 +73,12 @@ class Aluno
 		$sql = "SELECT aluno.nome, aluno.data_nasc 
 				FROM aluno AS aluno
 				JOIN contrato AS contrato ON contrato.id_aluno = aluno.id_aluno
-				WHERE contrato.status != 'I' AND DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') 
-				AND aluno.id_organizacao = ? ORDER BY DAY(data_nasc) ASC";
-		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+				WHERE aluno.status = ? 
+				AND DATE_FORMAT(data_nasc, '%m') = DATE_FORMAT(SYSDATE(), '%m') 
+				AND aluno.id_organizacao = ? 
+				AND contrato.status = ?
+				ORDER BY DAY(data_nasc) ASC";
+		$resultado = Conexao::get()->fetchAll($sql, array('A', App::getSession()->get('organizacao'), 'A'));
 		return $resultado;
 	}
 
@@ -82,8 +86,11 @@ class Aluno
 	{
 		$sql = "select nome, contrato.status FROM aluno 
 				JOIN contrato on aluno.id_aluno = contrato.id_aluno
-				WHERE contrato.status= 'T' AND contrato.id_organizacao = ? ORDER BY nome ASC";
-		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+				WHERE contrato.status= ?
+				AND contrato.id_organizacao = ? 
+				AND aluno.status = ?
+				ORDER BY nome ASC";
+		$resultado = Conexao::get()->fetchAll($sql, array('T', App::getSession()->get('organizacao'), 'A'));
 		return $resultado;
 	}
 }

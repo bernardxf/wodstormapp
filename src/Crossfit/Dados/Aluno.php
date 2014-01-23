@@ -8,10 +8,12 @@ class Aluno
 {
 	public static function retornaTodos()
 	{
-		$sql = "select * from aluno
-				where status = ?
-				and id_organizacao = ?";
-		$resultado = Conexao::get()->fetchAll($sql, array('A', App::getSession()->get('organizacao')));
+		$sql = "select aluno.*, contrato.data_fim from aluno
+				left join contrato on contrato.id_aluno = aluno.id_aluno
+				where aluno.status = ?
+				and (contrato.status = ? or contrato.status is null)
+				and aluno.id_organizacao = ?;";
+		$resultado = Conexao::get()->fetchAll($sql, array('A', 'A', App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 

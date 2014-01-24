@@ -238,8 +238,18 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'ConsultaCepResource', '$location', '$routeParams', function ($scope, AlunoResource, ConsultaCepResource,$location, $routeParams) {
 	$scope.alunoDataset = null;
 	$scope.cadAlunoDataset = null;
+	$scope.alunoFilter = null;
+
+	$scope.$watch('alunoFilter', function(newValue){
+		if(newValue){
+			localStorage.setItem('wsAlunoFilter', JSON.stringify(newValue));	
+		}
+	}, true);
 
 	$scope.carregaAluno = function(){
+		var alunoFilter = localStorage.getItem('wsAlunoFilter') ? JSON.parse(localStorage.getItem('wsAlunoFilter')) : {};
+		$scope.alunoFilter = alunoFilter;
+
 		AlunoResource.get({}, function(response){
 			$scope.alunoDataset = response.data;
 		});

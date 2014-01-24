@@ -180,8 +180,18 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 
 AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$location', 'AulaExpResource', function($scope, $routeParams, $location, AulaExpResource){
 	$scope.aulaexpDataset = null;
-	
+	$scope.aulaexpFilter = null;
+
+	$scope.$watch('aulaexpFilter', function(newValue){
+		if(newValue){
+			localStorage.setItem('wsAulaExpFilter', JSON.stringify(newValue));	
+		}
+	}, true);
+
 	$scope.carregaAulaExp = function(){
+		var aulaexpFilter = localStorage.getItem('wsAulaExpFilter') ? JSON.parse(localStorage.getItem('wsAulaExpFilter')) : {};
+		$scope.aulaexpFilter = aulaexpFilter;
+
 		AulaExpResource.get({id_aulaexp : $routeParams.aulaexp},function(response){
 			$scope.aulaexpDataset = response.data;
 		});

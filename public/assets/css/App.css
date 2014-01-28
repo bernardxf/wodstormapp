@@ -3303,8 +3303,11 @@ ul.support-list li {
     margin-top: 3px;
     font-size: 14px;
   }
-  #site-logo {
-    top: 5px;
+  #site-logo {top: 5px;}
+  #site-logo img{
+    display: block;
+    height: 50px;
+    width: auto;
   }
   #footer .nav + .nav {
     margin-top: 1em;

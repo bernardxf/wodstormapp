@@ -23,7 +23,7 @@ class LoginController
 
 		if($resultado){
 			if($resultado['id_organizacao'] != $organizacao){
-				$response->addMessage('error', "Usuário não cadastrado para esta organização!");	
+				$response->addMessage('danger', "Erro ao tentar logar!", "Usuário não cadastrado para esta organização!");	
 				$response->setSuccess(false);
 			} else {
 				$app["session"]->set("usuario_logado", true);
@@ -33,7 +33,7 @@ class LoginController
 				$response->setData($resultado);
 			}
 		} else {
-			$response->addMessage('error', "Usuario '{$usuario}' ou senha incorreto!");
+			$response->addMessage('danger', 'Erro ao tentar logar!', "Usuario '{$usuario}' ou senha incorreto!");
 			$response->setSuccess(false);
 		}
 		

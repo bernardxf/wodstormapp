@@ -180,8 +180,18 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 
 AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$location', 'AulaExpResource', function($scope, $routeParams, $location, AulaExpResource){
 	$scope.aulaexpDataset = null;
-	
+	$scope.aulaexpFilter = null;
+
+	$scope.$watch('aulaexpFilter', function(newValue){
+		if(newValue){
+			localStorage.setItem('wsAulaExpFilter', JSON.stringify(newValue));	
+		}
+	}, true);
+
 	$scope.carregaAulaExp = function(){
+		var aulaexpFilter = localStorage.getItem('wsAulaExpFilter') ? JSON.parse(localStorage.getItem('wsAulaExpFilter')) : {};
+		$scope.aulaexpFilter = aulaexpFilter;
+
 		AulaExpResource.get({id_aulaexp : $routeParams.aulaexp},function(response){
 			$scope.aulaexpDataset = response.data;
 		});
@@ -238,8 +248,18 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'ConsultaCepResource', '$location', '$routeParams', function ($scope, AlunoResource, ConsultaCepResource,$location, $routeParams) {
 	$scope.alunoDataset = null;
 	$scope.cadAlunoDataset = null;
+	$scope.alunoFilter = null;
+
+	$scope.$watch('alunoFilter', function(newValue){
+		if(newValue){
+			localStorage.setItem('wsAlunoFilter', JSON.stringify(newValue));	
+		}
+	}, true);
 
 	$scope.carregaAluno = function(){
+		var alunoFilter = localStorage.getItem('wsAlunoFilter') ? JSON.parse(localStorage.getItem('wsAlunoFilter')) : {};
+		$scope.alunoFilter = alunoFilter;
+
 		AlunoResource.get({}, function(response){
 			$scope.alunoDataset = response.data;
 		});
@@ -473,7 +493,7 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 			element: 'bar-chart',
 			data: $scope.relAulaResponseDataset,
 			xkey: 'data',
-			ykeys: ['num_presentes', 'excedentes'],
+			ykeys: ['num_presentes', 'excedente'],
 			labels: ['Presentes', 'Excedentes'],
 			barColors: ['#444','#e5412d'],
 			stacked: true

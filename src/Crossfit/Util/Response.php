@@ -9,8 +9,8 @@ class Response
 	private $data;
 	private $success = true;
 
-	public function addMessage($type, $message){
-		$this->messages[$type][] = $message;
+	public function addMessage($type, $title, $message){
+		$this->messages[] = array("type" => $type, "title" => $title, "message" => $message);
 	}
 
 	public function setData($data){

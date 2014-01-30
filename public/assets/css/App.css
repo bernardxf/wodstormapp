@@ -13,6 +13,11 @@ p {
   margin-top: 0;
   font-family: 'Open Sans', 'trebuchet ms', arial, sans-serif;
 }
+hr.full{
+  clear: both;
+  float:left;
+  width: 100%;
+}
 ul.icons-list {
   padding: 0;
   margin: 0 0 10px;
@@ -1536,6 +1541,12 @@ label {
   font-weight: 600;
   border: 1px solid #3a3a3a;
 }
+.table-fin{width: 100%}
+  .table-fin tr {font-size: 24px}
+  .table-fin tr.saida,
+  .table-fin tr.entrada{ font-size: 18px}
+  .table-fin tr.saida{color: #c00}
+  .table-fin tr.entrada{color: #030}
 .feed-item {
   position: relative;
   padding: 0;

@@ -70,6 +70,18 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/relservico', {
 		templateUrl: 'views/relservico.html',
 		controller: 'RelServicoController'
+	}).when('/financeiro', {
+		templateUrl: 'views/financeiro.html',
+		controller: 'FinanceiroController'
+	}).when('/financeiro/cad_movimento/:movimento?', {
+		templateUrl: 'views/cad_fin_movimento.html',
+		controller: 'FinanceiroController'
+	}).when('/financeiro/categoria', {
+		templateUrl: 'views/fin_categoria.html',
+		controller: 'FinanceiroController'
+	}).when('/financeiro/cad_categoria/:categoria?', {
+		templateUrl: 'views/cad_fin_categoria.html',
+		controller: 'FinanceiroController'
 	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);
@@ -145,4 +157,8 @@ crossfitApp.factory('RelServicoResource', ['$resource', function ($resource) {
 //Servico para busca de cep
 crossfitApp.factory('ConsultaCepResource', ['$resource', function ($resource) {
 	return $resource('http://cep.correiocontrol.com.br/:cep.json',{cep:'@cep'});
+}]);
+
+crossfitApp.factory('FinanceiroResource', ['$resource', function ($resource) {
+	return $resource('/api/financeiro/:id_movimento/:id_categoria',{id_movimento:'@id_movimento', id_categoria:'@id_categoria'});
 }]);

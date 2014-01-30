@@ -559,3 +559,39 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 		return values;	
 	}
 }]);
+
+AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$location', 'FinanceiroResource', '$timeout', function ($scope, $routeParams, $location, FinanceiroResource, $timeout) {
+	$scope.financeiroDataset = null;
+
+	$scope.carregaFinanceiro = function(){
+	};
+
+	$scope.carregaFinCategoria = function(){
+	};
+
+	$scope.carregaCadFinMovimento = function(){
+	};
+
+	$scope.carregaCadFinCategoria = function(){
+	};
+
+	$scope.salvaFinMovimento = function(){
+	};
+
+	$scope.salvaFinCategoria = function(){
+	};
+
+	$scope.cancelaEdicaoMovimento = function(){
+		$location.path('/financeiro');
+	};
+
+	$scope.cancelaEdicaoCategoria = function(){
+		$location.path('/financeiro/categoria');
+	};
+
+	$scope.removeFinMovimento = function(){
+	};
+
+	$scope.removeFinCategoria = function(){
+	};
+}]);

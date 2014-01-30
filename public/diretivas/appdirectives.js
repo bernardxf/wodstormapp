@@ -47,3 +47,26 @@ AppDirectives.directive('wsData', ["$filter", function ($filter) {
 		}
 	};
 }]);
+
+
+AppDirectives.directive('wsStackedNav', [function () {
+	return {
+		restrict: 'A',
+		scope: {
+			stackedid : '@'
+		},
+		link: function (scope, iElement, iAttrs) {
+			iElement.on('click', function(){
+				var activeNode = angular.element(document.querySelector('.stacked-content > .active'));
+				var activeNav = angular.element(document.querySelector('.nav-stacked > .active'));
+				if(activeNode.attr('id') !== scope.stackedid){
+					activeNav.removeClass('active');
+					angular.element(this).addClass('active');
+					activeNode.removeClass('in active');
+					var node = angular.element(document.getElementById(scope.stackedid));
+					node.addClass('in active');
+				}
+			});
+		}
+	};
+}])

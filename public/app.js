@@ -70,6 +70,9 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/relservico', {
 		templateUrl: 'views/relservico.html',
 		controller: 'RelServicoController'
+	}).when('/perfil', {
+		templateUrl: 'views/perfil.html',
+		controller: 'RelServicoController'
 	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);

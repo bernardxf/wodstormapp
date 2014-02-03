@@ -398,7 +398,7 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 AppControllers.controller('PresencaController', ['$scope','$routeParams', '$location', 'PresencaResource', 'AlunoResource', function ($scope, $routeParams, $location, PresencaResource, AlunoResource) {
 	var today = new Date();
 	var year = today.getFullYear();
-	var month = today.getMonth()<9?''+today.getMonth()+1:today.getMonth()+1;
+	var month = today.getMonth()<9?"0"+(today.getMonth()+1):today.getMonth()+1;
 	var day = (today.getDate()<10?'0':'') + today.getDate();
 	$scope.pesquisaAulaDataset = {data:year+'-'+month+'-'+day};
 	$scope.aulaDataset = null;
@@ -558,6 +558,27 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 		});
 		return values;	
 	}
+}]);
+
+AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$location', 'PerfilResource', function ($scope, $routeParams, $location, PerfilResource) {
+	$scope.perfilDataset = null;
+
+	$scope.carregaPerfil = function(){
+		PerfilResource.get({}, function(response){
+			$scope.perfilDataset = response.data;
+		});
+	};
+
+	$scope.salvaPerfil = function(){
+		var perfil = $scope.perfilDataset;
+		PerfilResource.save(perfil, function(){
+			$location.path('/perfil');	
+		});
+	};
+
+	$scope.cancelaPerfil = function(){
+		$location.path('/perfil');
+	};
 }]);
 
 AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$location', 'FinanceiroResource', '$timeout', function ($scope, $routeParams, $location, FinanceiroResource, $timeout) {

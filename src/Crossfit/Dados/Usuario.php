@@ -18,4 +18,11 @@ class Usuario
 		$resultado = Conexao::get()->fetchAssoc($sql, array($id_usuario));
 		return $resultado;
 	}
+
+	public static function retornaUsuarioLogin($usuario, $senha, $organizacao)
+	{
+		$sql = 'select * from usuario where usuario = ? and senha = ? and id_organizacao = ?';
+		$resultado = Conexao::get()->fetchAssoc($sql, array($usuario, md5($senha), $organizacao));
+		return $resultado;
+	}
 }

@@ -1,4 +1,4 @@
-<div id="content">		
+<div id="content" ng-init="carregaPerfil();">		
 
 	<div id="content-header">
 		<h1>Configurações de Perfil</h1>
@@ -33,18 +33,18 @@
 				<div class="tab-content stacked-content">
 					<div class="tab-pane fade in active" id="profile-tab">
 
-						<form action="./page-settings.html" class="form-horizontal">
+						<form class="form-horizontal">
 							<div class="form-group">
 								<label class="col-md-3">Nome</label>
 								<div class="col-md-7">
-									<input type="text" name="nome" class="form-control"/>
+									<input type="text" name="nome" class="form-control" ng-model="perfilDataset.nome" required/>
 								</div> <!-- /.col -->
 							</div> <!-- /.form-group -->
 
 							<div class="form-group">
 								<label class="col-md-3">Usuário</label>
 								<div class="col-md-7">
-									<input type="text" name="usuario" class="form-control"/>
+									<input type="text" name="usuario" class="form-control" ng-model="perfilDataset.usuario" required/>
 								</div> <!-- /.col -->
 							</div> <!-- /.form-group -->
 
@@ -52,9 +52,7 @@
 
 							<div class="form-group">
 								<div class="col-md-7 col-md-push-3">
-								<button type="submit" class="btn btn-success">Salvar</button>
-									&nbsp;
-									<button type="reset" class="btn btn-danger">Cancelar</button>
+									<button class="btn btn-success" ng-disabled="form.$invalid" ng-click="salvaPerfil();">Salvar</button>
 								</div> <!-- /.col -->
 							</div> <!-- /.form-group -->
 
@@ -64,11 +62,11 @@
 					</div>
 					<div class="tab-pane fade" id="password-tab">
 
-						<form action="./page-settings.html" class="form-horizontal">
+						<form class="form-horizontal">
 							<div class="form-group">
 								<label class="col-md-3">Senha atual</label>
 								<div class="col-md-7">
-									<input type="password" name="senhaAtual" class="form-control" />
+									<input type="password" name="senhaAtual" class="form-control" ng-model="perfilDataset.senhaAtual"/>
 								</div> <!-- /.col -->
 							</div> <!-- /.form-group -->
 
@@ -77,14 +75,14 @@
 							<div class="form-group">
 								<label class="col-md-3">Nova senha</label>
 								<div class="col-md-7">
-									<input type="password" name="novaSenha1" class="form-control" />
+									<input type="password" name="novaSenha1" class="form-control" ng-model="perfilDataset.novaSenha"/>
 								</div> <!-- /.col -->
 							</div> <!-- /.form-group -->
 
 							<div class="form-group">
 								<label class="col-md-3">Confirmação de senha</label>
 								<div class="col-md-7">
-									<input type="password" name="novaSenha2" class="form-control" />
+									<input type="password" name="novaSenha2" class="form-control" ng-model="perfilDataset.confirmaSenha"/>
 								</div> <!-- /.col -->
 							</div> <!-- /.form-group -->
 
@@ -92,9 +90,7 @@
 
 							<div class="form-group">
 								<div class="col-md-7 col-md-push-3">
-									<button type="submit" class="btn btn-success">Salvar</button>
-									&nbsp;
-									<button type="reset" class="btn btn-danger">Cancelar</button>
+									<button class="btn btn-success" ng-click="salvaPerfil();">Salvar</button>
 								</div> <!-- /.col -->
 							</div> <!-- /.form-group -->
 

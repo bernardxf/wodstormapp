@@ -277,3 +277,13 @@ removeFinCategoria:
   path: /financeiro/categoria/{id_categoria}
   defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::removeFinCategoria' }
   methods: [DELETE]
+
+# Rota para o controller de usuario
+perfil:
+  path: /perfil
+  defaults: {_controller:'Crossfit\Controllers\UsuarioController::retornaUsuarioLogado'}
+  methods: [GET]
+atualizaUsuario:
+  path: /perfil
+  defaults: {_controller:'Crossfit\Controllers\UsuarioController::salvaUsuario'}
+  methods: [POST]

@@ -481,7 +481,7 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 		var pesquisa = $scope.relaulaDataset;
 		RelAulaResource.pesquisa(pesquisa,function(response){
 			$scope.relAulaResponseDataset = response.data;
-				$scope.loadChart();
+			$scope.loadChart();
 		});	
 	};
 
@@ -526,7 +526,7 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 		var pesquisa = $scope.relservicoDataset;
 		RelServicoResource.pesquisa(pesquisa,function(response){
 			$scope.relServicoResponseDataset = response.data;
-				$scope.loadChart();
+			$scope.loadChart();
 		});	
 	};
 
@@ -560,7 +560,7 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 	}
 }]);
 
-AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$location', 'PerfilResource', function ($scope, $routeParams, $location, PerfilResource) {
+AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$location', 'PerfilResource', 'MessageService', function ($scope, $routeParams, $location, PerfilResource, MessageService) {
 	$scope.perfilDataset = null;
 
 	$scope.carregaPerfil = function(){
@@ -571,9 +571,20 @@ AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$locat
 
 	$scope.salvaPerfil = function(){
 		var perfil = $scope.perfilDataset;
-		PerfilResource.save(perfil, function(){
-			$location.path('/perfil');	
-		});
+
+		if(perfil.senhaAtual){
+			if(perfil.novaSenha != perfil.confirmaSenha){
+				MessageService.processMessage(new Array({type: 'danger', title:'Erro ao alterar senha!', message:"Nova senha e sua confirmação devem possuir o mesmo valor."}))
+			} else {
+				PerfilResource.save(perfil, function(){
+					$location.path('/perfil');	
+				});
+			}
+		} else {
+			PerfilResource.save(perfil, function(){
+				$location.path('/perfil');	
+			});
+		}
 	};
 
 	$scope.cancelaPerfil = function(){

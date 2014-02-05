@@ -18,22 +18,16 @@ class LoginController
 
 		$response = new Response();
 		
-		$sql = 'select * from usuario where usuario = ? and senha = ?';
-		$resultado = Conexao::get()->fetchAssoc($sql, array($usuario, md5($senha)));
+		$usuario = Usuario::retornaUsuarioLogin($usuario, $senha, $organizacao);
 
-		if($resultado){
-			if($resultado['id_organizacao'] != $organizacao){
-				$response->addMessage('danger', "Erro ao tentar logar!", "Usuário não cadastrado para esta organização!");	
-				$response->setSuccess(false);
-			} else {
-				$app["session"]->set("usuario_logado", true);
-            	$app["session"]->set("usuario", $usuario);
-            	$app["session"]->set("organizacao", $organizacao);
+		if($usuario){
+			$app["session"]->set("usuario_logado", true);
+			$app["session"]->set("usuario", $usuario);
+			$app["session"]->set("organizacao", $organizacao);
 
-				$response->setData($resultado);
-			}
+			$response->setData($resultado);
 		} else {
-			$response->addMessage('danger', 'Erro ao tentar logar!', "Usuario '{$usuario}' ou senha incorreto!");
+			$response->addMessage('danger', "Erro ao tentar logar!", "Dados incorretos ou usuário não cadastrado");	
 			$response->setSuccess(false);
 		}
 		

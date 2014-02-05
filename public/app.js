@@ -72,7 +72,7 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 		controller: 'RelServicoController'
 	}).when('/perfil', {
 		templateUrl: 'views/perfil.html',
-		controller: 'RelServicoController'
+		controller: 'PerfilController'
 	}).when('/financeiro', {
 		templateUrl: 'views/financeiro.html',
 		controller: 'FinanceiroController'
@@ -155,6 +155,10 @@ crossfitApp.factory('RelAulaResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('RelServicoResource', ['$resource', function ($resource) {
 	return $resource('/api/relservico', {}, {pesquisa: {method: 'POST'}});
+}]);
+
+crossfitApp.factory('PerfilResource', ['$resource', function ($resource) {
+	return $resource('/api/perfil/:id_usuario', {id_usuario: '@id_usuario'});
 }]);
 
 //Servico para busca de cep

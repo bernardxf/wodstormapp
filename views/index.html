@@ -15,17 +15,29 @@
 	<link rel="stylesheet" href="public/assets/css/select2.css" type="text/css" />	
 	<link rel="stylesheet" href="public/assets/css/App.css" type="text/css" />
 	<link rel="stylesheet" href="public/assets/css/custom.css" type="text/css" />
+
+	<script src="public/built.js"></script>
+	<script src="public/services/appservices.js"></script>
+	<script src="public/controllers/appcontrollers.js"></script>
+	<script src="public/diretivas/appdirectives.js"></script>
+	<script src="public/filters/appfilters.js"></script>
+	<script src="public/app.js"></script>
+
+	<script src="public/assets/js/libs/raphael-2.1.2.min.js"></script>
+	<script src="public/assets/js/plugins/morris/morris.min.js"></script>
+	<script src="public/assets/js/plugins/howl/howl.js"></script>
+
 </head>
 <body ng-switch on="$root.logged">
 
 	<div id="wrapper" ng-switch-when="true">
 		<header id="header">
 
-		<h1 id="site-logo">
-			<a href="#/dashboard">
-				<img src="public/assets/img/logos/logo.png" alt="WodStorm" />
-			</a>
-		</h1>	
+			<h1 id="site-logo">
+				<a href="#/dashboard">
+					<img src="public/assets/img/logos/logo.png" alt="WodStorm" />
+				</a>
+			</h1>	
 
 <!-- 		<a href="javascript:;" data-toggle="collapse" data-target=".top-bar-collapse" id="top-bar-toggle" class="navbar-toggle collapsed">
 			<i class="fa fa-cog"></i>
@@ -60,29 +72,29 @@
 		    	</ul>
 		    </li>
 		</ul>
- -->
-	</nav> <!-- /#top-bar -->
-	<div id="sidebar-wrapper" class="collapse sidebar-collapse">
-		<nav id="sidebar">		
-			<ul id="main-nav" class="open-active" ws-menu>			
-				<li class="active">				
-					<a href="#/dashboard"><i class="fa fa-dashboard"></i>Dashboard</a>				
-				</li>
-				<li class="">
-					<a href="#/aluno"><i class="fa fa-user"></i>Aluno</a>				
-				</li>
-				<li class="">				
-					<a href="#/aulaexp"><i class="fa fa-list-alt"></i>Aula Experimental</a>				
-				</li>
-				<li class="">				
-					<a href="#/estacionamento"><i class="fa fa-truck"></i>Estacionamento</a>				
-				</li>
-				<li class="">				
-					<a href="#/servico"><i class="fa fa-book"></i>Serviços</a>				
-				</li>
-				<li class="">				
-					<a href="#/presenca"><i class="fa fa-check-square-o"></i>Presença</a>				
-				</li>
+	-->
+</nav> <!-- /#top-bar -->
+<div id="sidebar-wrapper" class="collapse sidebar-collapse">
+	<nav id="sidebar">		
+		<ul id="main-nav" class="open-active" ws-menu>			
+			<li class="active">				
+				<a href="#/dashboard"><i class="fa fa-dashboard"></i>Dashboard</a>				
+			</li>
+			<li class="">
+				<a href="#/aluno"><i class="fa fa-user"></i>Aluno</a>				
+			</li>
+			<li class="">				
+				<a href="#/aulaexp"><i class="fa fa-list-alt"></i>Aula Experimental</a>				
+			</li>
+			<li class="">				
+				<a href="#/estacionamento"><i class="fa fa-truck"></i>Estacionamento</a>				
+			</li>
+			<li class="">				
+				<a href="#/servico"><i class="fa fa-book"></i>Serviços</a>				
+			</li>
+			<li class="">				
+				<a href="#/presenca"><i class="fa fa-check-square-o"></i>Presença</a>				
+			</li>
 				<!-- <li class="">
 					<a href="#/financeiro"><i class="fa fa-money"></i>Financeiro</a>				
 				</li> -->
@@ -132,18 +144,5 @@
 <div id="wrapper" ng-switch-default>
 	<div ng-view></div>
 </div>
-
-
-<script src="public/built.js"></script>
-<script src="public/services/appservices.js"></script>
-<script src="public/controllers/appcontrollers.js"></script>
-<script src="public/diretivas/appdirectives.js"></script>
-<script src="public/filters/appfilters.js"></script>
-<script src="public/app.js"></script>
-
-<script src="public/assets/js/libs/raphael-2.1.2.min.js"></script>
-<script src="public/assets/js/plugins/morris/morris.min.js"></script>
-<script src="public/assets/js/plugins/howl/howl.js"></script>
-
 </body>
 </html>

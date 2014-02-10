@@ -35,6 +35,13 @@ class UsuarioController
 			);
 
 			$resultado = Usuario::atualizaUsuario($id_usuario, $usuarioDataset);
+			if($resultado) {
+				$usuario = Usuario::retornaSelecionado($id_usuario);
+
+				App::getSession()->set('usuario', $usuario);
+
+				$response->setData($usuario);
+			}
 			return $response->getAsJson();
 		}
 

@@ -566,7 +566,7 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 	}
 }]);
 
-AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$location', 'PerfilResource', 'MessageService', function ($scope, $routeParams, $location, PerfilResource, MessageService) {
+AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootScope','$location', 'PerfilResource', 'MessageService', function ($scope, $routeParams, $rootScope, $location, PerfilResource, MessageService) {
 	$scope.perfilDataset = null;
 
 	$scope.carregaPerfil = function(){
@@ -577,7 +577,11 @@ AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$locat
 
 	$scope.salvaPerfil = function(){
 		var perfil = $scope.perfilDataset;
-		PerfilResource.save(perfil, function(){
+		PerfilResource.save(perfil, function(response){
+			if(response){
+				$rootScope.loggedUserData = response.data;
+			}
+
 			$location.path('/perfil');	
 			MessageService.processMessages(new Array({type: 'success', title:'Atualização concluida', message:"Alteração de perfil concluida."}));
 		});

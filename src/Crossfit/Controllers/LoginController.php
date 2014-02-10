@@ -25,7 +25,7 @@ class LoginController
 			$app["session"]->set("usuario", $usuario);
 			$app["session"]->set("organizacao", $organizacao);
 
-			$response->setData($resultado);
+			$response->setData($usuario);
 		} else {
 			$response->addMessage('danger', "Erro ao tentar logar!", "Dados incorretos ou usuário não cadastrado");	
 			$response->setSuccess(false);

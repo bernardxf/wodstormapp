@@ -3,9 +3,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 require 'bootstrap.php';
 
-$app->match('/', function() use ($app){
-    return $app["twig"]->render("index.html");
-});	
+// $app->match('/', function() use ($app){
+//     return $app["twig"]->render("index.html");
+// });	
 // $app->get('/', function(){
 // 	$resposta = array('valor1' => 'teste1', 'valor2' => 'teste2');
 //     return new Response(json_encode($resposta), 200, array('Access-Control-Allow-Origin' => '*', 'Content-Type' => 'application/json'));

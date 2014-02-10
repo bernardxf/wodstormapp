@@ -69,4 +69,33 @@ AppDirectives.directive('wsStackedNav', [function () {
 			});
 		}
 	};
+}]);
+
+AppDirectives.directive('wsNavUsuario', [function () {
+	return {
+		restrict: 'A',
+		templateUrl: 'views/partials/ws_nav_usuario.html',
+		link: function (scope, iElement, iAttrs) {
+			var dropdown = angular.element('.dropdown > .dropdown-toggle');
+			dropdown.on('click', function(){
+				dropdown.parent().toggleClass('open');
+			});
+
+			var dropdownMenuItens = angular.element('.dropdown-menu .dropdown-menu-item');
+			dropdownMenuItens.on('click', function(){
+				dropdown.parent().removeClass('open');
+				angular.element('#main-nav .active').removeClass('active');
+			});
+		}
+	};
+}]);
+
+AppDirectives.directive('wsSidebarMenu', [function () {
+	return {
+		restrict: 'A',
+		templateUrl: 'views/partials/ws_sidebar_menu.html',
+		link: function (scope, iElement, iAttrs) {
+			
+		}
+	};
 }])

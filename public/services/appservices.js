@@ -20,8 +20,10 @@ AppServices.factory('loginService', ['LoginResource', 'MessageService', '$rootSc
 
 		},
 		logout : function(){
-			$rootScope.loggedUser = null;
-			$location.path('/');
+			LoginResource.logout({}, function(response){
+				$rootScope.loggedUser = null;
+				$location.path('/');
+			});		
 		}
 	};
 }]);

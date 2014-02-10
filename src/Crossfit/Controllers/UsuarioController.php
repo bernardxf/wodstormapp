@@ -18,8 +18,40 @@ class UsuarioController
 		return $response->getAsJson();
 	}
 
-	public function salvaUsuario(request $request)
+	public function atualizaUsuario(request $request, $id_usuario)
 	{
+		$response = new Response();
 
+		$dataset = json_decode($request->getContent(), true);
+
+		$changePassword = $request->query->get('changePassword');
+
+		if($changePassword){
+			return $this->atualizaSenha($id_usuario, $dataset);
+		} else {
+			$usuarioDataset = array(
+				'nome' => $dataset['nome'],
+				'usuario' => $dataset['usuario']
+			);
+
+			$resultado = Usuario::atualizaUsuario($id_usuario, $usuarioDataset);
+			return $response->getAsJson();
+		}
+
+	}
+
+	public function atualizaSenha($id_usuario, $dataset)
+	{
+		$response = new Response();
+
+		$usuario = Usuario::retornaSelecionado($id_usuario);
+
+		if($usuario['senha'] == md5($dataset['senhaAtual'])) {
+			$resultado = Usuario::atualizaSenha($id_usuario, $dataset['novaSenha']);	
+			return $response->getAsJson();
+		} else {
+			$response->addMessage('danger', 'Erro ao atualizar senha', 'Nova senha deve ser igual a senha de confirmação.');
+			return $response->getAsJson();
+		}
 	}
 }

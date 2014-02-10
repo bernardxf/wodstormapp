@@ -1,5 +1,11 @@
 var AppControllers = angular.module('AppControllers', []);
 
+AppControllers.controller('MainController', ['$scope', 'loginService', function ($scope, loginService) {
+	$scope.logout = function(){
+		logginService.logout();
+	};
+}]);
+
 AppControllers.controller('LoginController', ['$scope', 'loginService', function ($scope, loginService) {
 	var loginStorage = JSON.parse(localStorage.getItem('wodStormLogin'));
 	if(loginStorage){
@@ -571,20 +577,25 @@ AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$locat
 
 	$scope.salvaPerfil = function(){
 		var perfil = $scope.perfilDataset;
+		PerfilResource.save(perfil, function(){
+			$location.path('/perfil');	
+			MessageService.processMessages(new Array({type: 'success', title:'Atualização concluida', message:"Alteração de perfil concluida."}));
+		});
+	};
+
+	$scope.atualizaSenha = function(){
+		var perfil = $scope.perfilDataset;
 
 		if(perfil.senhaAtual){
 			if(perfil.novaSenha != perfil.confirmaSenha){
-				MessageService.processMessage(new Array({type: 'danger', title:'Erro ao alterar senha!', message:"Nova senha e sua confirmação devem possuir o mesmo valor."}))
+				MessageService.processMessages(new Array({type: 'danger', title:'Erro ao alterar senha!', message:"Nova senha e sua confirmação devem possuir o mesmo valor."}))
 			} else {
-				PerfilResource.save(perfil, function(){
+				PerfilResource.atualizaSenha(perfil, function(){
 					$location.path('/perfil');	
+					MessageService.processMessages(new Array({type: 'success', title:'Atualização concluida', message:"Alteração de senha concluida."}));
 				});
 			}
-		} else {
-			PerfilResource.save(perfil, function(){
-				$location.path('/perfil');	
-			});
-		}
+		}	
 	};
 
 	$scope.cancelaPerfil = function(){

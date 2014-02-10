@@ -25,4 +25,16 @@ class Usuario
 		$resultado = Conexao::get()->fetchAssoc($sql, array($usuario, md5($senha), $organizacao));
 		return $resultado;
 	}
+
+	public static function atualizaUsuario($id_usuario, $usuarioDataset)
+	{
+		$resultado = Conexao::get()->update('usuario', $usuarioDataset, array('id_usuario' => $id_usuario));
+		return $resultado;
+	}
+
+	public static function atualizaSenha($id_usuario, $novaSenha)
+	{
+		$resultado = Conexao::get()->update('usuario', array('senha' => md5($novaSenha)), array('id_usuario' => $id_usuario));
+		return $resultado;
+	}
 }

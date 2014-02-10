@@ -1,6 +1,6 @@
 var AppServices = angular.module('AppServices', []);
 
-AppServices.factory('loginService', ['LoginResource', 'MessageService', '$rootScope', '$location', function (LoginResource, MessageService, $rootScope, $location) {
+AppServices.factory('loginService', ['LoginResource', 'LogoutResource', 'MessageService', '$rootScope', '$location', function (LoginResource, LogoutResource, MessageService, $rootScope, $location) {
 	return {
 		login : function(loginDataset){
 			LoginResource.login(loginDataset, function(response){
@@ -20,9 +20,9 @@ AppServices.factory('loginService', ['LoginResource', 'MessageService', '$rootSc
 
 		},
 		logout : function(){
-			LoginResource.logout({}, function(response){
-				$rootScope.loggedUser = null;
-				$location.path('/');
+			$rootScope.logged = false;
+			LogoutResource.logout({}, function(response){
+				
 			});		
 		}
 	};

@@ -1,11 +1,5 @@
 var AppControllers = angular.module('AppControllers', []);
 
-AppControllers.controller('MainController', ['$scope', 'loginService', function ($scope, loginService) {
-	$scope.logout = function(){
-		logginService.logout();
-	};
-}]);
-
 AppControllers.controller('LoginController', ['$scope', 'loginService', function ($scope, loginService) {
 	var loginStorage = JSON.parse(localStorage.getItem('wodStormLogin'));
 	if(loginStorage){
@@ -16,6 +10,15 @@ AppControllers.controller('LoginController', ['$scope', 'loginService', function
 		loginService.login($scope.loginDataset);
 	}
 }]);
+
+AppControllers.controller('LogoutController', ['$scope', 'loginService', function ($scope, loginService) {
+
+	// $scope.logout = function(){
+		loginService.logout();
+	// };
+	
+}]);
+
 
 AppControllers.controller('DashboardController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
 	$scope.dashboardDataset = null;

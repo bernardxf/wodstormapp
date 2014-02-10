@@ -40,6 +40,6 @@ class LoginController
 
 		$app['session']->invalidate();
 
-		return array();
+		return $response->getAsJson();
 	}
 }	

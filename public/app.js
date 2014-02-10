@@ -85,13 +85,16 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/financeiro/cad_categoria/:categoria?', {
 		templateUrl: 'views/cad_fin_categoria.html',
 		controller: 'FinanceiroController'
+	}).when('/logout', {
+		templateUrl: 'views/logout.html',
+		controller: 'LogoutController'
 	}).otherwise({ redirectTo: '/404', templateUrl: 'views/page404.html', controller: 'Page404Controller' });
 
 }]);
 
 crossfitApp.run(function($rootScope, $location){
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
-		if ($rootScope.logged == null) {
+		if ($rootScope.logged == false) {
 			$location.path('/');
 		}
 	});
@@ -99,6 +102,10 @@ crossfitApp.run(function($rootScope, $location){
 
 crossfitApp.factory('LoginResource', ['$resource', function ($resource) {
 	return $resource('/api/login',{},{login: {method: 'POST'}});
+}]);
+
+crossfitApp.factory('LogoutResource', ['$resource', function ($resource) {
+	return $resource('/api/logout',{},{logout: {method: 'POST'}});
 }]);
 
 crossfitApp.factory('DashboardResource', ['$resource', function ($resource) {

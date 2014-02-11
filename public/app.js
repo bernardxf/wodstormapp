@@ -94,7 +94,7 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 
 crossfitApp.run(function($rootScope, $location){
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
-		if ($rootScope.logged == false) {
+		if ($rootScope.logged == false || $rootScope.logged == null) {
 			$location.path('/');
 		}
 	});

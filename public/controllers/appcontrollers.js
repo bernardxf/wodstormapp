@@ -193,6 +193,11 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 
 	$scope.$watch('aulaexpFilter', function(newValue){
 		if(newValue){
+			angular.forEach(newValue, function(item, key){
+				if(item == ''){
+					delete newValue[key];
+				}
+			});
 			localStorage.setItem('wsAulaExpFilter', JSON.stringify(newValue));	
 		}
 	}, true);

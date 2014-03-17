@@ -39,6 +39,67 @@ class Contrato
 		return $resultado;
 	}
 
+	public static function retornaRelatorioMensalContratos($dataInicio, $dataFim)
+	{
+		$sql = "SELECT (
+					SELECT count(1)
+					  FROM contrato 
+					  WHERE status = ?
+						AND data_inicio <= ?
+						AND contrato.id_organizacao = ?
+					) as ativo,
+					(
+						SELECT count(1)
+						  FROM contrato 
+						  WHERE status = ?
+							AND data_fim between ? AND ?
+							AND contrato.id_organizacao = ?
+							AND not exists (
+								SELECT 1
+								  FROM contrato cont
+								  WHERE cont.id_aluno = contrato.id_aluno
+									AND status = ?
+									AND cont.id_organizacao = ?
+						  	)
+					) as finalizado,
+					(
+						SELECT count(1) 
+						FROM contrato 
+						WHERE status = ?
+						AND contrato.id_organizacao = ?
+						  AND data_inicio between ? AND ?
+						  AND exists (
+						    SELECT 1
+						      FROM contrato cont
+							  WHERE cont.id_aluno = contrato.id_aluno
+						        AND status = ?
+						        AND data_fim < ?
+								AND cont.id_organizacao = ?
+						  )
+					) as renovado,
+					(
+						SELECT count(1) 
+						FROM contrato 
+						WHERE status = ?
+						AND contrato.id_organizacao = ?
+						  AND data_inicio between ? AND ?
+						  AND not exists (
+						    SELECT 1
+						      FROM contrato cont
+							  WHERE cont.id_aluno = contrato.id_aluno
+								AND status in (?, ?)
+								AND cont.id_organizacao = ?
+						  )
+					) as novos
+					FROM dual";
+		$idOrganizacao = App::getSession()->get('organizacao');
+		$resultado = Conexao::get()->fetchAll($sql, array(
+			'A', $dataFim, $idOrganizacao, 'F', $dataInicio, $dataFim, $idOrganizacao, 'A', $idOrganizacao, 'A', $idOrganizacao, $dataInicio, $dataFim, 'F',
+			$dataInicio, $idOrganizacao, 'A', $idOrganizacao, $dataInicio, $dataFim, 'F', 'I', $idOrganizacao
+		));
+		return $resultado;
+	}
+
 	public static function retornaVencimentoContrato()
 	{
 		$sql = "SELECT aluno.nome as nome, data_fim FROM contrato 

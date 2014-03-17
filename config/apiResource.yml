@@ -230,6 +230,12 @@ relaula:
   defaults: { _controller: 'Crossfit\Controllers\RelAulaController::pesquisaRelAula' }
   methods:  [POST]
 
+  # Rotas para o controller de Relatório de Metrica de contrato
+relmetricacontrato:
+  path: /relmetricacontrato
+  defaults: { _controller: 'Crossfit\Controllers\RelMetricaContratoController::relatorioMensalContratos' }
+  methods:  [POST]
+
    # Rotas para o controller de Relatório de Serviço
 relservico:
   path: /relservico

@@ -485,6 +485,21 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 	};
 }]);
 
+
+AppControllers.controller('RelMetricaContratoController', ['$scope', 'RelMetricaContratoResource',function ($scope, RelMetricaContratoResource) {
+	$scope.relMetricaContratoDataset = null;
+	$scope.relMetricaContratoResponseDataset = null;
+	$scope.chart = null;
+	$scope.pesquisaRelMetricaContrato = function(){
+		$('#bar-chart svg, .morris-hover').remove();
+		var pesquisa = $scope.relMetricaContratoDataset;
+		RelMetricaContratoResource.pesquisa(pesquisa,function(response){
+			$scope.relMetricaContratoResponseDataset = response.data;
+			console.log($scope.relMetricaContratoResponseDataset);
+		});	
+	};
+}]);
+
 AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', function ($scope, RelAulaResource) {
 	$scope.relaulaDataset = null;
 	$scope.relAulaResponseDataset = null;

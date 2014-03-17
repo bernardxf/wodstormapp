@@ -55,6 +55,9 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/servico', {
 		templateUrl: 'views/servico.html',
 		controller: 'ServicoController'
+	}).when('/relmetricacontrato', {
+		templateUrl: 'views/relmetricacontrato.html',
+		controller: 'RelMetricaContratoController'
 	}).when('/cad_servico/:servico?', {
 		templateUrl: 'views/cad_servico.html',
 		controller: 'ServicoController'
@@ -175,4 +178,8 @@ crossfitApp.factory('ConsultaCepResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('FinanceiroResource', ['$resource', function ($resource) {
 	return $resource('/api/financeiro/:id_movimento/:id_categoria',{id_movimento:'@id_movimento', id_categoria:'@id_categoria'});
+}]);
+
+crossfitApp.factory('RelMetricaContratoResource', ['$resource', function ($resource) {
+	return $resource('/api/relmetricacontrato', {}, {pesquisa: {method: 'POST'}});
 }]);

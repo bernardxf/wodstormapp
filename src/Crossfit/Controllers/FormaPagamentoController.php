@@ -4,6 +4,7 @@ namespace Crossfit\Controllers;
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\FormaPagamento;
 use Crossfit\Util\Response;
+use Crossfit\App;
 use Silex\Application;
 
 class FormaPagamentoController

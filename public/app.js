@@ -52,6 +52,9 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/relaluno', {
 		templateUrl: 'views/relaluno.html',
 		controller: 'RelAlunoController'
+	}).when('/relAniversariantes', {
+		templateUrl: 'views/relatorio-template.html',
+		controller: 'RelatorioController'
 	}).when('/servico', {
 		templateUrl: 'views/servico.html',
 		controller: 'ServicoController'

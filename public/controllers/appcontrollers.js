@@ -256,6 +256,7 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 			$scope.relAlunoResponseDataset = response.data;
 		});	
 	};
+
 }]);
 
 
@@ -664,4 +665,14 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 
 	$scope.removeFinCategoria = function(){
 	};
+}]);
+
+AppControllers.controller('RelatorioController', ['$scope', 'RelatorioController', function ($scope, RelatorioController) {
+	$scope.relatorioDataset = null;
+	$scope.loadDadosRelatorio = function(){
+		RelatorioController.get({}, function(response){
+			$scope.relatorioDataset = response.data;
+			console.log($scope.relatorioDataset);
+		});
+	}
 }]);

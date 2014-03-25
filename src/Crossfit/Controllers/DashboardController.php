@@ -19,9 +19,40 @@ class DashboardController
 		$trancado = Aluno::retornaTrancados();
 		$estacionamentoVencido = Estacionamento::retornaEstacionamentoVencido();
 		$estacionamentoTrancado = Estacionamento::retornaEstacionamentoTrancado();
-
-		$response->setData(array('dashboard' => $dashboard, 'aniversarios' => $aniversarios, 'plano' => $plano, 'trancado' => $trancado, 'estacionamentoVencido' => $estacionamentoVencido, 'estacionamentoTrancado' => $estacionamentoTrancado));
+		$response->setData(array(
+			'dashboard' => $dashboard, 
+			'aniversarios' => $aniversarios, 
+			'plano' => $plano, 
+			'trancado' => $trancado, 
+			'estacionamentoVencido' => $estacionamentoVencido, 
+			'estacionamentoTrancado' => $estacionamentoTrancado
+		));
 
 		return $response->getAsJson();
 	}
+
+	public static function carregaRelatorioAniversariantes() 
+	{
+		$response = new Response();
+
+		$data = new \DateTime();
+		$aniversariantes = Aluno::retornaAniversariantes();
+		$relatorio = array (
+			"titulo"           => "aniversariantes do Mês de {$data->format('F')} de {$data->format('Y')}",
+			"logo-cliente"     => "logo-cliente",
+			"logo-wodstormapp" => "logo-wodstormapp",
+			"nome"             => "",
+			"versao"           => "",
+			"dataCriacao"      => "",
+			"colunas"          => array(
+				"nome"      => "Nome",
+				"data_nasc" => "Data"
+			),
+			"dados"            => $aniversariantes,
+		);
+
+		$response->setData(array("relatorio" => $relatorio));
+		return $response->getAsJson();
+	}
+
 }

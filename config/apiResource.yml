@@ -15,6 +15,11 @@ dashboard:
   defaults: { _controller: 'Crossfit\Controllers\DashboardController::carregaDashboard' }
   methods:  [GET]
 
+relAniversariantes:
+  path: /relAniversariantes
+  defaults: { _controller: 'Crossfit\Controllers\DashboardController::carregaRelatorioAniversariantes' }
+  methods:  [GET]
+
 # Rotas para o controller de PLANO
 plano:
   path: /plano

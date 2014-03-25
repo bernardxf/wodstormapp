@@ -14,6 +14,9 @@ AppFilters.filter('StatusTranslate', function(){
 			case 'F':
 				statusAsString = 'Finalizado';
 				break;
+			case 'T':
+				statusAsString = 'Trancado';
+				break;
 		}
 
 		return statusAsString;

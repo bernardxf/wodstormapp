@@ -107,71 +107,71 @@ crossfitApp.run(function($rootScope, $location){
 });
 
 crossfitApp.factory('LoginResource', ['$resource', function ($resource) {
-	return $resource('/api/login',{},{login: {method: 'POST'}});
+	return $resource('api/login',{},{login: {method: 'POST'}});
 }]);
 
 crossfitApp.factory('LogoutResource', ['$resource', function ($resource) {
-	return $resource('/api/logout',{},{logout: {method: 'POST'}});
+	return $resource('api/logout',{},{logout: {method: 'POST'}});
 }]);
 
 crossfitApp.factory('DashboardResource', ['$resource', function ($resource) {
-	return $resource('/api/dashboard');
+	return $resource('api/dashboard');
 }]);
 
 crossfitApp.factory('PlanoResource', ['$resource', function ($resource) {
-	return $resource('/api/plano/:id_plano',{id_plano:'@id_plano'});
+	return $resource('api/plano/:id_plano',{id_plano:'@id_plano'});
 }]);
 
 crossfitApp.factory('FormaPagamentoResource', ['$resource', function ($resource) {
-	return $resource('/api/formapagamento/:id_forma_pagamento',{id_forma_pagamento:'@id_forma_pagamento'});
+	return $resource('api/formapagamento/:id_forma_pagamento',{id_forma_pagamento:'@id_forma_pagamento'});
 }]);
 
 crossfitApp.factory('DescontoResource', ['$resource', function ($resource) {
-	return $resource('/api/desconto/:id_desconto',{id_desconto:'@id_desconto'});
+	return $resource('api/desconto/:id_desconto',{id_desconto:'@id_desconto'});
 }]);
 
 crossfitApp.factory('EstacionamentoResource', ['$resource', function ($resource) {
-	return $resource('/api/estacionamento/:id_estacionamento',{id_estacionamento:'@id_estacionamento'});
+	return $resource('api/estacionamento/:id_estacionamento',{id_estacionamento:'@id_estacionamento'});
 }]);
 
 crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
-	return $resource('/api/aulaexp/:id_aulaexp',{id_aulaexp:'@id_aulaexp'});
+	return $resource('api/aulaexp/:id_aulaexp',{id_aulaexp:'@id_aulaexp'});
 }]);
 
 crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
-	return $resource('/api/relaluno', {}, {pesquisa: {method: 'POST'}});
+	return $resource('api/relaluno', {}, {pesquisa: {method: 'POST'}});
 }]);
 
 crossfitApp.factory('AlunoResource', ['$resource', function ($resource) {
-	return $resource('/api/aluno/:id_aluno',{id_aluno:'@id_aluno'});
+	return $resource('api/aluno/:id_aluno',{id_aluno:'@id_aluno'});
 }]);
 
 crossfitApp.factory('ContratoResource', ['$resource', function ($resource) {
-	return $resource('/api/contrato/:id_aluno/:id_contrato',{id_aluno:'@id_aluno', id_contrato:'@id_contrato'});
+	return $resource('api/contrato/:id_aluno/:id_contrato',{id_aluno:'@id_aluno', id_contrato:'@id_contrato'});
 }]);
 
 crossfitApp.factory('ServicoResource', ['$resource', function ($resource) {
-	return $resource('/api/servico/:id_servico',{id_servico:'@id_servico'});
+	return $resource('api/servico/:id_servico',{id_servico:'@id_servico'});
 }]);
 
 crossfitApp.factory('PresencaResource', ['$resource', function ($resource) {
-	return $resource('/api/presenca/:id_aula',{id_aula:'@id_aula'});
+	return $resource('api/presenca/:id_aula',{id_aula:'@id_aula'});
 }]);
 
 crossfitApp.factory('AulaResource', ['$resource', function ($resource) {
-	return $resource('/api/aula/:id_aula',{id_aula:'@id_aula'});
+	return $resource('api/aula/:id_aula',{id_aula:'@id_aula'});
 }]);
 
 crossfitApp.factory('RelAulaResource', ['$resource', function ($resource) {
-	return $resource('/api/relaula', {}, {pesquisa: {method: 'POST'}});
+	return $resource('api/relaula', {}, {pesquisa: {method: 'POST'}});
 }]);
 
 crossfitApp.factory('RelServicoResource', ['$resource', function ($resource) {
-	return $resource('/api/relservico', {}, {pesquisa: {method: 'POST'}});
+	return $resource('api/relservico', {}, {pesquisa: {method: 'POST'}});
 }]);
 
 crossfitApp.factory('PerfilResource', ['$resource', function ($resource) {
-	return $resource('/api/perfil/:id_usuario', {id_usuario: '@id_usuario'}, {atualizaSenha: { method: 'POST', params: {changePassword: true}}});
+	return $resource('api/perfil/:id_usuario', {id_usuario: '@id_usuario'}, {atualizaSenha: { method: 'POST', params: {changePassword: true}}});
 }]);
 
 //Servico para busca de cep
@@ -180,9 +180,9 @@ crossfitApp.factory('ConsultaCepResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('FinanceiroResource', ['$resource', function ($resource) {
-	return $resource('/api/financeiro/:id_movimento/:id_categoria',{id_movimento:'@id_movimento', id_categoria:'@id_categoria'});
+	return $resource('api/financeiro/:id_movimento/:id_categoria',{id_movimento:'@id_movimento', id_categoria:'@id_categoria'});
 }]);
 
 crossfitApp.factory('RelMetricaContratoResource', ['$resource', function ($resource) {
-	return $resource('/api/relmetricacontrato', {}, {pesquisa: {method: 'POST'}});
+	return $resource('api/relmetricacontrato', {}, {pesquisa: {method: 'POST'}});
 }]);

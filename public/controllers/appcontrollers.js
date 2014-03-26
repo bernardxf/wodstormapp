@@ -667,17 +667,12 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 	};
 }]);
 
-AppControllers.controller('RelatorioController', ['$scope', 'RelatorioController', 'DashboardResource', function ($scope, RelatorioController, DashboardResource) {
-	$scope.relatorioDataset = null;
-	$scope.loadDadosRelatorio = function(){
-		RelatorioController.get({}, function(response){
-			$scope.relatorio = response.data.relatorio;
-		});
-	};
+AppControllers.controller('RelatorioController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
 	
 	$scope.loadRelAniversariantes = function(){
 		DashboardResource.relAniversariantes({}, function(response){
 			$scope.relatorio = response.data.relatorio;
+			console.log(response);	
 		});
 	};
 }]);

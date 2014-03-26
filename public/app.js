@@ -98,10 +98,17 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 
 }]);
 
-crossfitApp.run(function($rootScope, $location){
+crossfitApp.run(function($rootScope, $location, LoginResource){
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
 		if ($rootScope.logged == false || $rootScope.logged == null) {
-			$location.path('/');
+			LoginResource.get({}, function(response){
+				if(response.data){
+					$rootScope.logged = true;
+					$rootScope.loggedUserData = response.data;
+				} else {
+					$location.path('/');		
+				}
+			});
 		}
 	});
 });

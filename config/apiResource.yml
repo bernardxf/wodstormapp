@@ -3,6 +3,10 @@ login:
   path: /login
   defaults: { _controller: 'Crossfit\Controllers\LoginController::login' }
   methods:  [POST]
+logado:
+  path: /login
+  defaults: { _controller:'Crossfit\Controllers\UsuarioController::retornaUsuarioLogado' }
+  methods:  [GET]
 
 logout:
   path: /logout

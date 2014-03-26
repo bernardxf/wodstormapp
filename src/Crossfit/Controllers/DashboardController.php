@@ -39,8 +39,8 @@ class DashboardController
 		$aniversariantes = Aluno::retornaAniversariantes();
 		$relatorio = array (
 			"titulo"           => "aniversariantes do Mês de {$data->format('F')} de {$data->format('Y')}",
-			"logo-cliente"     => "logo-cliente",
-			"logo-wodstormapp" => "logo-wodstormapp",
+			"logo_cliente"     => "logo-cliente",
+			"logo_wodstormapp" => "logo-wodstormapp",
 			"nome"             => "",
 			"versao"           => "",
 			"dataCriacao"      => "",

@@ -26,7 +26,12 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 		DashboardResource.get({}, function(response){
 			$scope.dashboardDataset = response.data;
 		});
-	}
+	};
+	$scope.carregaRelAniversariantes = function(){
+		DashboardResource.relAniversariantes({}, function(response){
+			console.log(response);
+		});
+	};
 }]);
 
 AppControllers.controller('Page404Controller', ['$scope', '$rootScope', function($scope, $rootScope){

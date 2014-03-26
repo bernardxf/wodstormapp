@@ -115,7 +115,7 @@ crossfitApp.factory('LogoutResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('DashboardResource', ['$resource', function ($resource) {
-	return $resource('api/dashboard');
+	return $resource('api/dashboard', {}, {relAniversariantes : {method: 'GET', url : 'api/relAniversariantes'}});
 }]);
 
 crossfitApp.factory('PlanoResource', ['$resource', function ($resource) {

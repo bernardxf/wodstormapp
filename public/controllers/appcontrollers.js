@@ -29,7 +29,7 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 	};
 	$scope.carregaRelAniversariantes = function(){
 		DashboardResource.relAniversariantes({}, function(response){
-			console.log(response);
+			$scope.relatorio = response.data.relatorio;
 		});
 	};
 }]);
@@ -676,8 +676,7 @@ AppControllers.controller('RelatorioController', ['$scope', 'RelatorioController
 	$scope.relatorioDataset = null;
 	$scope.loadDadosRelatorio = function(){
 		RelatorioController.get({}, function(response){
-			$scope.relatorioDataset = response.data;
-			console.log($scope.relatorioDataset);
+			$scope.relatorio = response.data.relatorio;
 		});
 	}
 }]);

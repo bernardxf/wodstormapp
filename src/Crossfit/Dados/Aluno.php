@@ -73,7 +73,7 @@ class Aluno
 
 	public static function retornaAniversariantes()
 	{
-		$sql = "SELECT aluno.nome, aluno.data_nasc 
+		$sql = "SELECT aluno.nome, DATE_FORMAT(aluno.data_nasc, '%d/%m') data_nasc -- aluno.data_nasc
 				FROM aluno AS aluno
 				JOIN contrato AS contrato ON contrato.id_aluno = aluno.id_aluno
 				WHERE aluno.status = ? 

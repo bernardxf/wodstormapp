@@ -1,56 +1,74 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang='pt-BR' ng-init="loadRelAniversariantes();">
-	<!--
+	
 	Esboco de formato normal de relatorio para impressao. Esta versao preve somente a utilizacao de dados planos,
 	provenientes de somente um dataset.
-	-->
+	
 	<head>
 		<title>{{relatorio.titulo}}</title>
 	</head>
 	<body>
 		<div class="container">
-			<div class="header">
-				<div class="logo">
-					<!--Verificar se as logos devem estar abaixo do objeto de relatorio.-->
-					<!--Verificar se é interessante fixar no corpo do template um caminho padrao, como resources. -->
-					<div class="logo-cliente">
-						<img src="{{relatorio.logo_cliente}}"> 
-					</div>
-					<div class="logo-wodstormapp">
-						<img src="{{relatorio.logo_wodstormapp}}">
-					</div>
-				</div>
-				<div class="report-title">
-					<h1>{{relatorio.titulo}}</h1>
-				</div>
-				<div class="report-details">
-					<div class="nome-relatorio">{{relatorio.nome}}</div>
-					<div class="versao">{{relatorio.versao}}</div>
-					<div class="data-criacao">{{relatorio.dataCriacao}}</div>
-				</div>
-			</div>
-			<div class="body">
-				<table>
-					<thead>
-						<tr ng-repeat="coluna in relatorio.colunas">
-							<th>{{coluna}}</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="row in relatorio.dados">
-							<td ng-repeat="coluna in relatorio.colunas">row.coluna</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td>Total : {{relatorio.dados.length}} linhas</td>
-						</tr>
-					</tfoot>
-				</table>
-			</div>
-			<div class="footer">
+			<div class="header"> -->
 				
+	<!-- </body>
+	</html> -->
+
+	<div id="content" ng-init="carregaAluno();">		
+		<div id="content-header">
+			<h1>Relatorio Aluno</h1>
+		</div> <!-- #content-header -->	
+		<div id="content-container">		
+
+			<!--  Inicio grid alunos  -->
+			<div class="col-md-12">
+			<div class="portlet">
+
+					<div class="logo" ng-init="loadRelAniversariantes();">
+						<div class="logo-wodstormapp" style="float: left">
+							<img src="{{relatorio.logo_wodstormapp}}">
+						</div>
+						<div class="logo-cliente"  style="float: right">
+							<img src="{{relatorio.logo_cliente}}"> 
+						</div>
+					</div>
+					<div class="report-title">
+						<h1>{{relatorio.titulo}}</h1>
+					</div>
+					<div class="report-details">
+						<div class="nome-relatorio">{{relatorio.nome}}</div>
+						<div class="versao">{{relatorio.versao}}</div>
+						<div class="data-criacao">{{relatorio.dataCriacao}}</div>
+					</div>
+				</div>
+				<div class="body">
+					<table>
+						<thead>
+							<tr>
+								<th ng-repeat="coluna in relatorio.colunas">{{coluna}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="row in relatorio.dados">
+								<td ng-repeat="coluna in row">{{coluna}}</td>
+								<!-- <td ng-repeat="coluna in relatorio.colunas">{{row.coluna}}</td> -->
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td>Total : {{relatorio.dados.length}} linhas</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div class="footer">
+
+				</div>
 			</div>
-		</div>
-	</body>
-</html>
+		</div> <!-- /.portlet -->
+	</div> <!-- /.col -->
+	<!--  Fim grid alunos  -->
+
+
+</div> <!-- /#content-container -->			
+</div> <!-- #content -->

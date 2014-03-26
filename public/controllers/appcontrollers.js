@@ -27,11 +27,6 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 			$scope.dashboardDataset = response.data;
 		});
 	};
-	$scope.carregaRelAniversariantes = function(){
-		DashboardResource.relAniversariantes({}, function(response){
-			$scope.relatorio = response.data.relatorio;
-		});
-	};
 }]);
 
 AppControllers.controller('Page404Controller', ['$scope', '$rootScope', function($scope, $rootScope){
@@ -672,11 +667,17 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 	};
 }]);
 
-AppControllers.controller('RelatorioController', ['$scope', 'RelatorioController', function ($scope, RelatorioController) {
+AppControllers.controller('RelatorioController', ['$scope', 'RelatorioController', 'DashboardResource', function ($scope, RelatorioController, DashboardResource) {
 	$scope.relatorioDataset = null;
 	$scope.loadDadosRelatorio = function(){
 		RelatorioController.get({}, function(response){
 			$scope.relatorio = response.data.relatorio;
 		});
-	}
+	};
+	
+	$scope.loadRelAniversariantes = function(){
+		DashboardResource.relAniversariantes({}, function(response){
+			$scope.relatorio = response.data.relatorio;
+		});
+	};
 }]);

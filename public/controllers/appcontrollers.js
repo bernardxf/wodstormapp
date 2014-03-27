@@ -6,6 +6,8 @@ AppControllers.controller('LoginController', ['$scope', 'loginService', function
 		$scope.loginDataset = {usuario:loginStorage.usuario, organizacao:loginStorage.organizacao};
 	}
 
+	$scope.teste = false;
+
 	$scope.login = function(){
 		loginService.login($scope.loginDataset);
 	}

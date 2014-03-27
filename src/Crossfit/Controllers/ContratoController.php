@@ -50,6 +50,12 @@ class ContratoController
 		$dataset['id_organizacao'] = App::getSession()->get('organizacao');
 
 		$resultado = Contrato::salvaContrato($dataset);
+		
+		// Se o novo contrato for salvo com sucesso, todos os contratos anteriores deste aluno deverão ser
+		// colocados como encerrados, com data de fim para a data inicial do novo contrato criado.
+		if ($resultado) {
+			Contrato::finalizaContratosAnteriores($dataset);
+		}
 
 		return $response->getAsJson();
 	}

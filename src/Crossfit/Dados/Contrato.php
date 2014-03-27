@@ -27,6 +27,26 @@ class Contrato
 		return $resultado;
 	}
 
+	public static function finalizaContratosAnteriores($contratoDataset) 
+	{
+		$idAluno = $contratoDataset["id_aluno"];
+		$inicioNovoContrato = $contratoDataset["data_inicio"];
+		$idOrganizacao = App::getSession()->get('organizacao');
+
+		$sql = "SELECT max(id_contrato) FROM contrato WHERE id_aluno = ? AND id_organizacao = ?";
+        $idNovoContrato = Conexao::get()->fetchColumn($sql, array($idAluno, $idOrganizacao));
+
+		$sql = "UPDATE contrato
+		          SET status     = 'F',
+		            data_fim     = ?
+		          WHERE id_aluno = ?
+		            AND status   = 'A'
+		            AND id_organizacao = ?
+		            AND id_contrato != ?";
+		$params = array($inicioNovoContrato, $idAluno, $idOrganizacao, $idNovoContrato);
+		return Conexao::get()->executeUpdate($sql, $params);
+	}
+
 	public static function atualizaContrato($id_contrato, $contratoDataset)
 	{
 		$resultado = Conexao::get()->update('contrato', $contratoDataset, array('id_contrato' => $id_contrato));

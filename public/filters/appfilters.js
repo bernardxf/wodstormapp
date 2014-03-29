@@ -41,3 +41,10 @@ AppFilters.filter('SimNaoTranslate', function(){
 
 	};
 });
+
+AppFilters.filter("startFrom", function() {
+	return function(input, start) {
+		start = +start;
+		return input ? input.slice(start) : null;
+	}
+})

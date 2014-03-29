@@ -24,6 +24,18 @@ AppControllers.controller('LogoutController', ['$scope', 'loginService', functio
 
 AppControllers.controller('DashboardController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
 	$scope.dashboardDataset = null;
+	
+	$scope.tamanhoPagina = 10;
+	$scope.paginaAtual = 0;
+
+	$scope.anterior = function() {
+		$scope.paginaAtual--;
+	}
+
+	$scope.proxima = function() {
+		$scope.paginaAtual++;
+	}
+
 	$scope.loadDashboard = function(){
 		DashboardResource.get({}, function(response){
 			$scope.dashboardDataset = response.data;

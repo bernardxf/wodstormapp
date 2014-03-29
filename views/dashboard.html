@@ -67,12 +67,14 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="item in dashboardDataset.aniversarios">
+									<tr ng-repeat="item in dashboardDataset.aniversarios | startFrom:paginaAtual*tamanhoPagina | limitTo:tamanhoPagina">
 										<td>{{item.nome}}</td>
-										<td>{{item.data_nasc | date:'dd/MM/yyyy'}}</td>
+										<td>{{item.data_nasc | date:'dd/MM'}}</td>
 									</tr>
 								</tbody>
 							</table>
+							<button ng-click="anterior()">anterior</button>
+							<button ng-click="proxima()">próxima</button>
 						</div> <!-- /.table-responsive -->
 
 

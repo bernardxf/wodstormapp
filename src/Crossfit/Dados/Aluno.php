@@ -20,7 +20,7 @@ class Aluno
 
 	public static function retornaTodosFiltradoPorNome($nome)
 	{
-		$sql = "select aluno.id_aluno as id_aluno, aluno.nome as nome, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim from aluno 
+		$sql = "select aluno.id_aluno as id_aluno, aluno.nome as nome, aluno.observacao as observacao, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim from aluno 
 				join contrato on contrato.id_aluno = aluno.id_aluno
 				join plano on contrato.id_plano = plano.id_plano
 				where aluno.id_aluno NOT IN (

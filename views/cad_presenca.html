@@ -38,7 +38,13 @@
 									</thead>
 									<tbody>
 										<tr ng-repeat="item in cadAlunoDataset | orderBy:'nome'">
-											<td>{{item.nome}}</td>
+											<td>
+												{{item.nome}} 
+												<a class="info-modal" ng-click='toggleModal()'><i class="fa fa-info-circle"></i></a>
+												<modal-dialog show='modalShown'>
+												  {{item.observacao}}
+												</modal-dialog>
+											</td>
 											<td>{{item.plano}}</td>
 											<td>{{item.status | StatusTranslate}}</td>
 											<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>

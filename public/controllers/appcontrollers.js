@@ -690,3 +690,10 @@ AppControllers.controller('RelatorioController', ['$scope', 'DashboardResource',
 		});
 	};
 }]);
+
+AppControllers.controller('ModalController', ['$scope', function ($scope) {
+	$scope.modalShown = true;
+  	$scope.toggleModal = function() {
+    	$scope.modalShown = !$scope.modalShown;
+  	};
+}]);

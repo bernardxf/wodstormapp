@@ -367,6 +367,6 @@ var Nav = function () {
 }();
 
 
-$(function () {
+$(document).ready(function () {
 	App.init ();
 });

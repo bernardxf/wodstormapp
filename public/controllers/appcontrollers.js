@@ -1,4 +1,4 @@
-var AppControllers = angular.module('AppControllers', []);
+var AppControllers = angular.module('AppControllers', ['ui.bootstrap']);
 
 AppControllers.controller('LoginController', ['$scope', 'loginService', function ($scope, loginService) {
 	var loginStorage = JSON.parse(localStorage.getItem('wodStormLogin'));
@@ -424,7 +424,7 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 	};
 }]);
 
-AppControllers.controller('PresencaController', ['$scope','$routeParams', '$location', 'PresencaResource', 'AlunoResource', function ($scope, $routeParams, $location, PresencaResource, AlunoResource) {
+AppControllers.controller('PresencaController', ['$scope','$routeParams', '$location', '$modal', 'PresencaResource', 'AlunoResource', function ($scope, $routeParams, $location, $modal, PresencaResource, AlunoResource) {
 	var today = new Date();
 	var year = today.getFullYear();
 	var month = today.getMonth()<9?"0"+(today.getMonth()+1):today.getMonth()+1;
@@ -497,6 +497,22 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 				$scope.pesquisaAulas();
 			});
 		}
+	};
+
+	$scope.modalObservacaoAluno = function(aluno){
+		var modalInstance = $modal.open({
+			templateUrl: "views/partials/ws_modal.html",
+			controller: 'ModalController',
+			backdrop: false, // removendo o backdrop porque ainda falta definir uma maneira de adicionar os templates do angular-ui-bootstrap
+			resolve: {
+				items: function(){
+					return {
+						title: 'Observações do aluno',
+						text: aluno.observacao	
+					}				
+				}
+			}
+		});
 	};
 }]);
 
@@ -691,9 +707,11 @@ AppControllers.controller('RelatorioController', ['$scope', 'DashboardResource',
 	};
 }]);
 
-AppControllers.controller('ModalController', ['$scope', function ($scope) {
-	$scope.modalShown = true;
-  	$scope.toggleModal = function() {
-    	$scope.modalShown = !$scope.modalShown;
-  	};
+AppControllers.controller('ModalController', ['$scope', '$modalInstance','items', function ($scope, $modalInstance, items) {
+	$scope.modalDataset = items;
+
+	$scope.ok = function () {
+		$modalInstance.close();
+	};
+
 }]);

@@ -40,10 +40,7 @@
 										<tr ng-repeat="item in cadAlunoDataset | orderBy:'nome'">
 											<td>
 												{{item.nome}} 
-												<a class="info-modal" ng-click='toggleModal()'><i class="fa fa-info-circle"></i></a>
-												<modal-dialog show='modalShown'>
-												  {{item.observacao}}
-												</modal-dialog>
+												<a ng-show="item.observacao" class="info-modal" ng-click='modalObservacaoAluno(item)'><i class="fa fa-info-circle"></i></a>
 											</td>
 											<td>{{item.plano}}</td>
 											<td>{{item.status | StatusTranslate}}</td>

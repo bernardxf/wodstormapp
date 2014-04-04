@@ -41,7 +41,7 @@
 			</div> <!-- /.col-md-3 -->
 		</div>
 		<div class="row">
-
+			<ws-grid grid-data="{{dataAniversariantes}}" show-input-items-per-page="true" titulo="{{tituloAniversariantes}}" columns="{{columnsAniversariantes}}"></ws-grid>
 			<!--  Inicio grid aniversario -->
 			<div class="col-md-6">
 				<div class="portlet">
@@ -67,7 +67,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="item in dashboardDataset.aniversarios | startFrom:paginaAtual*tamanhoPagina | limitTo:tamanhoPagina">
+									<tr ng-repeat="item in dashboardDataset.aniversarios">
 										<td>{{item.nome}}</td>
 										<td>{{item.data_nasc | date:'dd/MM'}}</td>
 									</tr>

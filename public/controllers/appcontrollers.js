@@ -28,18 +28,25 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 	$scope.tamanhoPagina = 10;
 	$scope.paginaAtual = 0;
 
-	$scope.anterior = function() {
-		$scope.paginaAtual--;
-	}
-
-	$scope.proxima = function() {
-		$scope.paginaAtual++;
-	}
-
 	$scope.loadDashboard = function(){
 		DashboardResource.get({}, function(response){
 			$scope.dashboardDataset = response.data;
+			$scope.dataAniversariantes = $scope.dashboardDataset.aniversarios; 
 		});
+
+		$scope.tituloAniversariantes = "Aniversariantes do Mês";
+		$scope.columnsAniversariantes = [
+			{
+				name: "nome",
+				label: "Nome",
+				order: "1"
+			},
+			{
+				name: "data_nasc",
+				label: "Data",
+				order: "2"
+			}
+		];
 	};
 }]);
 

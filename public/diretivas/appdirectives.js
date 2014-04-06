@@ -121,3 +121,20 @@ AppDirectives.directive('modalDialog', function() {
 	    templateUrl: 'views/partials/ws_modal.html'
   };
 });
+
+AppDirectives.directive('wsGrid', [
+    function() {
+        return {
+            restrict: "EA",
+            templateUrl: "views/partials/ws_grid.html",
+            link: function(scope, element, attrs) {
+            	scope.titulo                = attrs.titulo;
+            	scope.buttons               = attrs.buttons;
+            	scope.gridData              = /*attrs.dataGrid; //*/[{"nome":"Ana Carolina Sette da Silveira","data_nasc":"01/04"},{"nome":"Jose Henrique Diniz Junior","data_nasc":"01/04"},{"nome":"Rafaella Salviano Fernandes","data_nasc":"01/04"},{"nome":"Ranveer Kunal","data_nasc":"01/04"},{"nome":"Daniel Silva Marques Vilela","data_nasc":"02/04"},{"nome":"Gabriella Cristina Silva Vilela","data_nasc":"02/04"},{"nome":"Leandro Lopes Morais","data_nasc":"04/04"},{"nome":"Natália Nery Soares","data_nasc":"07/04"},{"nome":"Luiz Flavio Oliveira Bini","data_nasc":"11/04"},{"nome":"Ângela Cordeiro Tupynambá","data_nasc":"12/04"},{"nome":"Paulo Cézar Klausing de Oliveira","data_nasc":"12/04"},{"nome":"Francisco Drummond Junior","data_nasc":"13/04"},{"nome":"Simone Eulália Costa Ferraz","data_nasc":"14/04"},{"nome":"Linda Léticia Thereza Luciano Lavalle Romano Cruz Ferber","data_nasc":"17/04"},{"nome":"Flavio Lucio Silva de Jesus","data_nasc":"17/04"},{"nome":"Thiago Maldonado Martins","data_nasc":"20/04"},{"nome":"Anderson Diniz Peixoto","data_nasc":"21/04"},{"nome":"Ana Elisa Souza Jorge","data_nasc":"21/04"},{"nome":"Thadeu Viana Madeira","data_nasc":"21/04"},{"nome":"Carolina Souza Jorge","data_nasc":"21/04"},{"nome":"Marina dos Santos Camargo","data_nasc":"22/04"},{"nome":"Raul Felipe Borelli","data_nasc":"22/04"},{"nome":"Andre Mariani Prado","data_nasc":"23/04"},{"nome":"Rodrigo Silva Guedes","data_nasc":"23/04"},{"nome":"Cristiano Ullmann Lambertucci","data_nasc":"25/04"},{"nome":"Robson Tiago Domingues","data_nasc":"26/04"},{"nome":"Rafael Costa de Souza","data_nasc":"27/04"},{"nome":"Hellen Greco","data_nasc":"28/04"},{"nome":"Alexander Sousa Sol","data_nasc":"28/04"},{"nome":"Matheus Testa Saab","data_nasc":"28/04"},{"nome":"Cristina Pinheiro de Lima","data_nasc":"28/04"},{"nome":"Fernanda Mara Alves Linhares","data_nasc":"30/04"}];
+            	scope.currentPage           = 1;
+            	scope.itemsPerPage          = 5;
+            	scope.showInputItemsPerPage = attrs.showInputItemsPerPage;
+            	scope.columns               = JSON.parse(attrs.columns);
+            }
+        };
+    }]);

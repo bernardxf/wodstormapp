@@ -1,0 +1,26 @@
+{
+  "name": "wodstormapp",
+  "version": "0.0.1",
+  "description": "WodstormApp ===================",
+  "main": "index.php",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jlmachado/wodstormapp.git"
+  },
+  "author": "jotadepaula",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jlmachado/wodstormapp/issues"
+  },
+  "homepage": "https://github.com/jlmachado/wodstormapp",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-concat": "~0.4.0"
+  }
+}

@@ -11,7 +11,7 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 
 $loader = require 'vendor/autoload.php';
 $loader->add('Crossfit', __DIR__ . '/src');
-$config = parse_ini_file(__DIR__ . '/config/config.default.ini', true);
+$config = parse_ini_file(__DIR__ . '/config/config.ini', true);
 
 $app = new Application();
 $app['debug'] = true;

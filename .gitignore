@@ -1,6 +1,8 @@
 /public/components
 node_modules
 /vendor
+/node_modules
 composer.lock
 composer.phar
 config.ini
+.idea/

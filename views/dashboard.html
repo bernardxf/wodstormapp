@@ -41,169 +41,28 @@
 			</div> <!-- /.col-md-3 -->
 		</div>
 		<div class="row">
-			<ws-grid grid-data="{{dataAniversariantes}}" show-input-items-per-page="true" titulo="{{tituloAniversariantes}}" columns="{{columnsAniversariantes}}"></ws-grid>
 			<!--  Inicio grid aniversario -->
-			<div class="col-md-6">
-				<div class="portlet">
-
-					<div class="portlet-header">
-						<h3><i class="fa fa-table"></i>Aniversariantes do Mês</h3>
-						<ul class="portlet-tools pull-right">
-							<li>
-								<a href="#/relAniversariantes" target="_blank" class="btn btn-sm btn-success">Imprimir Lista</a>
-							</li>
-						</ul>
-					</div> <!-- /.portlet-header -->
-
-					<div class="portlet-content">						
-
-						<div class="table-responsive">
-
-							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
-								<thead>
-									<tr>
-										<th>Aluno</th>
-										<th>Data</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="item in dashboardDataset.aniversarios">
-										<td>{{item.nome}}</td>
-										<td>{{item.data_nasc | date:'dd/MM'}}</td>
-									</tr>
-								</tbody>
-							</table>
-							<button ng-click="anterior()">anterior</button>
-							<button ng-click="proxima()">próxima</button>
-						</div> <!-- /.table-responsive -->
-
-
-					</div> <!-- /.portlet-content -->
-
-				</div> <!-- /.portlet -->
-
-			</div> <!-- /.col -->
+			<ws-grid grid-data="dashboardDataset.aniversarios" show-input-items-per-page="true" titulo="tituloAniversariantes" columns="columnsAniversariantes"></ws-grid>
 			<!--  Fim grid aniversario -->
 
 			<!--  Inicio grid planos vencendo -->
-			<div class="col-md-6">
-				<div class="portlet">
-
-					<div class="portlet-header">
-						<h3><i class="fa fa-table"></i>Planos Vencendo</h3>
-					</div> <!-- /.portlet-header -->
-
-					<div class="portlet-content">						
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
-								<thead>
-									<tr>
-										<th>Aluno</th>
-										<th>Data</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="item in dashboardDataset.plano">
-										<td>{{item.nome}}</td>
-										<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div> <!-- /.table-responsive -->
-					</div> <!-- /.portlet-content -->
-				</div> <!-- /.portlet -->
-			</div> <!-- /.col -->
+			<ws-grid grid-data="dashboardDataset.plano" show-input-items-per-page="true" titulo="tituloPlanosVencendo" columns="columnsPlanosVencendo"></ws-grid>
 			<!--  Fim grid planos vencendo -->
 			
 		</div>
 		<div class="row">
 			<!--  Inicio grid vencimento estacionamento vencido -->
-			<div class="col-md-6">
-				<div class="portlet">
-
-					<div class="portlet-header">
-						<h3><i class="fa fa-table"></i>Estacionamento Vencido</h3>
-					</div> <!-- /.portlet-header -->
-
-					<div class="portlet-content">						
-
-						<div class="table-responsive">
-
-							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
-								<thead>
-									<tr>
-										<th>Aluno</th>
-										<th>Data</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="item in dashboardDataset.estacionamentoVencido">
-										<td>{{item.nome}}</td>
-										<td>{{item.plano_fim | date:'dd/MM/yyyy'}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div> <!-- /.table-responsive -->
-					</div> <!-- /.portlet-content -->
-				</div> <!-- /.portlet -->
-			</div> <!-- /.col -->
+			<ws-grid grid-data="dashboardDataset.estacionamentoVencido" show-input-items-per-page="true" titulo="tituloEstacionamentoVencido" columns="columnsEstacionamentoVencido"></ws-grid>
 			<!--  Fim grid vencimento estacionamento vencido -->
 
 			<!--  Inicio grid vencimento estacionamento trancado -->
-			<div class="col-md-6">
-				<div class="portlet">
-
-					<div class="portlet-header">
-						<h3><i class="fa fa-table"></i>Estacionamento Trancado</h3>
-					</div> <!-- /.portlet-header -->
-					<div class="portlet-content">						
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
-								<thead>
-									<tr>
-										<th>Aluno</th>
-										<th>Placa</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="item in dashboardDataset.estacionamentoTrancado">
-										<td>{{item.nome}}</td>
-										<td>{{item.placa}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div> <!-- /.table-responsive -->
-					</div> <!-- /.portlet-content -->
-				</div> <!-- /.portlet -->
-			</div> <!-- /.col -->
+			<ws-grid grid-data="dashboardDataset.estacionamentoTrancado" show-input-items-per-page="true" titulo="tituloEstacionamentoTrancado" columns="columnsEstacionamentoTrancado"></ws-grid>
 			<!--  Fim grid vencimento estacionamento trancado -->
 		</div>
 		<div class="row">
-			<!--  Inicio grid planos vencendo -->
-			<div class="col-md-6">
-				<div class="portlet">
-					<div class="portlet-header">
-						<h3><i class="fa fa-table"></i>Alunos Trancados</h3>
-					</div> <!-- /.portlet-header -->
-					<div class="portlet-content">						
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
-								<thead>
-									<tr>
-										<th>Aluno</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="item in dashboardDataset.trancado">
-										<td>{{item.nome}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div> <!-- /.table-responsive -->
-					</div> <!-- /.portlet-content -->
-				</div> <!-- /.portlet -->
-			</div> <!-- /.col -->
-			<!--  Fim grid planos vencendo -->
+			<!--  Inicio grid planos trancado -->
+			<ws-grid grid-data="dashboardDataset.trancado" show-input-items-per-page="true" titulo="tituloPlanosTrancados" columns="columnsPlanosTrancados"></ws-grid>
+			<!--  Fim grid planos trancado -->
 		</div> <!-- /.row -->
 	</div> <!-- /#content-container -->
 </div> <!-- #content -->

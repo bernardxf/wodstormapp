@@ -21,22 +21,8 @@
                             <td ng-repeat="column in columns | orderBy: column.order">{{row[column.name]}}</td>
                         </tr>
                     </tbody>
-                    <!-- <thead>
-                        <tr>
-                            <th>Aluno</th>
-                            <th>Data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="row in gridData | startFrom: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage">
-                            <td>{{row.nome}}    </td>
-                            <td>{{row.data_nasc | date:'dd/MM'}}</td>
-                        </tr>
-                    </tbody> -->
                 </table>
-                <pagination total-items="gridData.length" page="currentPage" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
-                <br>
-                <input type="text" ng-show="showInputItemsPerPage" ng-model="itemsPerPage"></input>
+                <pagination total-items="gridData.length" page="currentPage" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="maxSize"></pagination>
             </div>
         </div>
     </div>

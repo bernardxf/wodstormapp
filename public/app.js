@@ -105,6 +105,9 @@ crossfitApp.run(function($rootScope, $location, LoginResource){
 				if(response.data){
 					$rootScope.logged = true;
 					$rootScope.loggedUserData = response.data;
+					if(next.originalPath == '/') {
+						$location.path('/dashboard');			
+					}
 				} else {
 					$location.path('/');		
 				}

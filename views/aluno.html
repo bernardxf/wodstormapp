@@ -37,7 +37,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="item in alunoDataset | filter:alunoFilter">
+								<tr ng-repeat="item in alunoDataset | filter:alunoFilter | startFrom: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage">
 									<td>{{item.nome}}</td>
 									<td>{{item.email}}</td>
 									<td>{{item.tel_celular}}</td>
@@ -49,12 +49,12 @@
 								</tr>
 							</tbody>
 						</table>
+						<pagination total-items="alunoDataset.length" page="currentPage" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="maxSize"></pagination>
 					</div> <!-- /.table-responsive -->
 				</div> <!-- /.portlet-content -->
 			</div> <!-- /.portlet -->
 		</div> <!-- /.col -->
 		<!--  Fim grid alunos  -->
-
 
 	</div> <!-- /#content-container -->			
 </div> <!-- #content -->

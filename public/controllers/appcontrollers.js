@@ -15,38 +15,46 @@ AppControllers.controller('LoginController', ['$scope', 'loginService', function
 
 AppControllers.controller('LogoutController', ['$scope', 'loginService', function ($scope, loginService) {
 
-	// $scope.logout = function(){
-		loginService.logout();
-	// };
-	
+	loginService.logout();	
+
 }]);
 
 
 AppControllers.controller('DashboardController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
 	$scope.dashboardDataset = null;
-	
-	$scope.tamanhoPagina = 10;
-	$scope.paginaAtual = 0;
+	$scope.tituloAniversariantes = "Aniversariantes do Mês";
+	$scope.columnsAniversariantes = [
+		{name: "nome", label: "Nome", order: "1"},
+		{name: "data_nasc", label: "Data", order: "2"}
+	];
+
+	$scope.tituloPlanosVencendo = "Planos Vencendo";
+	$scope.columnsPlanosVencendo = [
+		{name: "nome", label: "Nome", order: "1"},
+		{name: "data_fim", label: "Data", order: "2"}
+	];
+
+	$scope.tituloEstacionamentoVencido = "Estacionamento Vencido";
+	$scope.columnsEstacionamentoVencido = [
+		{name: "nome", label: "Nome", order: "1"},
+		{name: "data_fim", label: "Data", order: "2"}
+	];
+
+	$scope.tituloEstacionamentoTrancado = "Estacionamento Trancado";
+	$scope.columnsEstacionamentoTrancado = [
+		{name: "nome", label: "Nome", order: "1"},
+		{name: "placa", label: "Placa", order: "2"}
+	];
+
+	$scope.tituloPlanosTrancados = "Planos Trancado";
+	$scope.columnsPlanosTrancados = [
+		{name: "nome", label: "Nome", order: "1"}
+	];
 
 	$scope.loadDashboard = function(){
 		DashboardResource.get({}, function(response){
 			$scope.dashboardDataset = response.data;
-			$scope.dataAniversariantes = $scope.dashboardDataset.aniversarios; 
 		});
-
-		$scope.tituloAniversariantes = "Aniversariantes do Mês";
-		$scope.columnsAniversariantes = [
-			{
-				name: "nome",
-				label: "Nome",
-				order: "1"
-			},
-			{
-				name: "data_nasc",
-				label: "Data",
-				order: "2"
-			}
-		];
 	};
 }]);
 
@@ -285,6 +293,22 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'Consul
 	$scope.alunoDataset = null;
 	$scope.cadAlunoDataset = null;
 	$scope.alunoFilter = null;
+
+	$scope.tituloAluno = "Alunos";
+	$scope.columnsAluno = [
+		{name: "nome", label: "Nome", order: "1"},
+		{name: "email", label: "Email", order: "2"},
+		{name: "tel_celular", label: "Celular", order: "3"},
+		{name: "data_fim", label: "Fim Contrato", order: "4"}
+	];
+
+	$scope.titulo                = $scope.tituloAluno;
+	$scope.gridData              = $scope.alunoDataset;
+	$scope.currentPage           = 1;
+	$scope.itemsPerPage          = 10;
+	$scope.showInputItemsPerPage = false;
+	$scope.maxSize               = 10;
+	$scope.columns               = $scope.columnsAluno;
 
 	$scope.$watch('alunoFilter', function(newValue){
 		if(newValue){

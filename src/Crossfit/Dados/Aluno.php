@@ -20,22 +20,22 @@ class Aluno
 
 	public static function retornaTodosFiltradoPorNome($nome)
 	{
-		$sql = "SELECT aluno.id_aluno as id_aluno, aluno.nome as nome, aluno.observacao as observacao, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim,
+		$sql = "SELECT a.id_aluno as id_aluno, a.nome as nome, a.observacao as observacao, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim,
 				(
 					SELECT count(1) from alunos_aula
 					JOIN aula on aula.id_aula = alunos_aula.id_aula
-					WHERE id_aluno = 491
+					WHERE id_aluno = a.id_aluno
 					AND DATE_FORMAT(aula.data,'%m/%Y') = DATE_FORMAT(sysdate(),'%m/%Y')
 					AND alunos_aula.id_organizacao = 1
 				) as total_aulas
-				FROM aluno 
-				JOIN contrato on contrato.id_aluno = aluno.id_aluno
+				FROM aluno as a
+				JOIN contrato on contrato.id_aluno = a.id_aluno
 				JOIN plano on contrato.id_plano = plano.id_plano
-				WHERE aluno.id_aluno NOT IN (
+				WHERE a.id_aluno NOT IN (
 					SELECT id_aluno FROM alunos_aula 
 					JOIN aula on aula.id_aula = alunos_aula.id_aula
 					WHERE aula.data = CURDATE() and alunos_aula.id_organizacao = ?
-				) AND aluno.nome LIKE ? AND aluno.status = ? AND contrato.status = ? AND aluno.id_organizacao = ?";
+				) AND a.nome LIKE ? AND a.status = ? AND contrato.status = ? AND a.id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), '%'.$nome.'%', 'A', 'A',App::getSession()->get('organizacao')));
 		return $resultado;	
 	}

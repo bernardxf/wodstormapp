@@ -100,7 +100,7 @@ class Contrato
 					AND cont.data_fim < ?
 					AND cont.id_organizacao = ?
 					)";
-		$renovado = Conexao::get()->fetchAll($sql, array('A', $idOrganizacao, $dataInicio, $dataFim, 'F', $dataInicio, $idOrganizacao));
+		$renovado = Conexao::get()->fetchAll($sql, array('A', $idOrganizacao, $dataInicio, $dataFim, 'F', $dataFim, $idOrganizacao));
 
 		$sql = "SELECT contrato.id_contrato, aluno.id_aluno, aluno.nome
 				FROM contrato
@@ -127,21 +127,6 @@ class Contrato
 
 		$resultado = compact('ativoPeriodo','finalizado','renovado','novos','ativos');
 		return $resultado;
-	}
-
-	public static function retornaAlunosAtivos($dataInicio, $dataFim)
-	{
-		
-	}
-
-	public static function retornaAlunosFinalizados($dataInicio, $dataFim)
-	{
-
-	}
-
-	public static function retornaAlunosAtivosPeriodo($dataInicio, $dataFim)
-	{
-
 	}
 
 	public static function retornaVencimentoContrato()

@@ -33,6 +33,7 @@
 											<th>Plano</th>
 											<th>Status</th>
 											<th>Plano Fim</th>
+											<th>Presenças Mes Atual</th>
 											<th>Presente</th>
 										</tr>
 									</thead>
@@ -45,6 +46,7 @@
 											<td>{{item.plano}}</td>
 											<td>{{item.status | StatusTranslate}}</td>
 											<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
+											<td>{{item.total_aulas}}</td>
 											<td>
 												<a class="btn btn-sm btn-success" ng-click="adicionaAlunoPresente(item);"><i class="fa fa-toggle-right"></i></a>
 											</td>

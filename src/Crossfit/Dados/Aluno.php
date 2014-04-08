@@ -20,14 +20,22 @@ class Aluno
 
 	public static function retornaTodosFiltradoPorNome($nome)
 	{
-		$sql = "select aluno.id_aluno as id_aluno, aluno.nome as nome, aluno.observacao as observacao, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim from aluno 
-				join contrato on contrato.id_aluno = aluno.id_aluno
-				join plano on contrato.id_plano = plano.id_plano
-				where aluno.id_aluno NOT IN (
-					select id_aluno from alunos_aula 
-					join aula on aula.id_aula = alunos_aula.id_aula
-					where aula.data = CURDATE() and alunos_aula.id_organizacao = ?
-				) and aluno.nome like ? AND aluno.status = ? AND contrato.status = ? AND aluno.id_organizacao = ?";
+		$sql = "SELECT aluno.id_aluno as id_aluno, aluno.nome as nome, aluno.observacao as observacao, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim,
+				(
+					SELECT count(1) from alunos_aula
+					JOIN aula on aula.id_aula = alunos_aula.id_aula
+					WHERE id_aluno = 491
+					AND DATE_FORMAT(aula.data,'%m/%Y') = DATE_FORMAT(sysdate(),'%m/%Y')
+					AND alunos_aula.id_organizacao = 1
+				) as total_aulas
+				FROM aluno 
+				JOIN contrato on contrato.id_aluno = aluno.id_aluno
+				JOIN plano on contrato.id_plano = plano.id_plano
+				WHERE aluno.id_aluno NOT IN (
+					SELECT id_aluno FROM alunos_aula 
+					JOIN aula on aula.id_aula = alunos_aula.id_aula
+					WHERE aula.data = CURDATE() and alunos_aula.id_organizacao = ?
+				) AND aluno.nome LIKE ? AND aluno.status = ? AND contrato.status = ? AND aluno.id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), '%'.$nome.'%', 'A', 'A',App::getSession()->get('organizacao')));
 		return $resultado;	
 	}

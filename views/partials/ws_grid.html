@@ -18,7 +18,10 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="row in gridData | startFrom: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage">
-                            <td ng-repeat="column in columns | orderBy: column.order">{{row[column.name]}}</td>
+                            <td ng-repeat="column in columns | orderBy: column.order" ng-switch on="column.tipo">
+                                <div ng-switch-when="text">{{row[column.name]}}</div>
+                                <div ng-switch-when="date">{{row[column.name] | date:'dd/MM/yyyy'}}</div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

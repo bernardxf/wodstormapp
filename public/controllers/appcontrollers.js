@@ -24,31 +24,31 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 	$scope.dashboardDataset = null;
 	$scope.tituloAniversariantes = "Aniversariantes do Mês";
 	$scope.columnsAniversariantes = [
-		{name: "nome", label: "Nome", order: "1"},
-		{name: "data_nasc", label: "Data", order: "2"}
+		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+		{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
 	];
 
 	$scope.tituloPlanosVencendo = "Planos Vencendo";
 	$scope.columnsPlanosVencendo = [
-		{name: "nome", label: "Nome", order: "1"},
-		{name: "data_fim", label: "Data", order: "2"}
+		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+		{name: "data_fim", label: "Data", order: "2", tipo: 'date'}
 	];
 
 	$scope.tituloEstacionamentoVencido = "Estacionamento Vencido";
 	$scope.columnsEstacionamentoVencido = [
-		{name: "nome", label: "Nome", order: "1"},
-		{name: "data_fim", label: "Data", order: "2"}
+		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+		{name: "plano_fim", label: "Data", order: "2", tipo: 'date'}
 	];
 
 	$scope.tituloEstacionamentoTrancado = "Estacionamento Trancado";
 	$scope.columnsEstacionamentoTrancado = [
-		{name: "nome", label: "Nome", order: "1"},
-		{name: "placa", label: "Placa", order: "2"}
+		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+		{name: "placa", label: "Placa", order: "2", tipo: 'text'}
 	];
 
 	$scope.tituloPlanosTrancados = "Planos Trancado";
 	$scope.columnsPlanosTrancados = [
-		{name: "nome", label: "Nome", order: "1"}
+		{name: "nome", label: "Nome", order: "1", tipo: 'text'}
 	];
 
 	$scope.loadDashboard = function(){

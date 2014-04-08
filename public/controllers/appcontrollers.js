@@ -551,14 +551,44 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 AppControllers.controller('RelMetricaContratoController', ['$scope', 'RelMetricaContratoResource',function ($scope, RelMetricaContratoResource) {
 	$scope.relMetricaContratoDataset = null;
 	$scope.relMetricaContratoResponseDataset = null;
-	$scope.chart = null;
+	$scope.alunosMetricaSelecionada = null;
+
+	$scope.currentPage           = 1;
+	$scope.itemsPerPage          = 10;
+	$scope.showInputItemsPerPage = false;
+	$scope.maxSize               = 10;
+
 	$scope.pesquisaRelMetricaContrato = function(){
-		$('#bar-chart svg, .morris-hover').remove();
+		$scope.currentPage = 1;
 		var pesquisa = $scope.relMetricaContratoDataset;
 		RelMetricaContratoResource.pesquisa(pesquisa,function(response){
-			$scope.relMetricaContratoResponseDataset = response.data;
-			console.log($scope.relMetricaContratoResponseDataset);
+			$scope.relMetricaContratoResponseDataset = [response.data];
+			$scope.alunosMetricaSelecionada = null;
 		});	
+	};
+
+	$scope.buscaAlunosPorStatus = function(tipo){
+		$scope.currentPage = 1;
+		switch(tipo){
+			case 'P':
+				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].ativoPeriodo;
+				break;
+			case 'F':
+				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].finalizado;
+				break;
+			case 'R':
+				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].renovado;
+				break;
+			case 'N':
+				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].novo;
+				break;
+			case 'A':
+				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].ativo;
+				break;
+			case 'default':
+				$scope.alunosMetricaSelecionada = null;
+				break;
+		}
 	};
 }]);
 

@@ -3,10 +3,10 @@
 select (
 select count(1)
   from contrato 
-  where status = 'A'
-	and data_inicio <= '2014-03-30'
+  where data_inicio <= '2014-01-30'
+	and data_fim >= '2014-01-30'
 	and contrato.id_organizacao = 1
-) as ativo,
+) as ativo_periodo,
 (
 
 select count(1)
@@ -50,5 +50,11 @@ and contrato.id_organizacao = 1
 		and status in ('F', 'I')
 		and cont.id_organizacao = 1
   )
-) as novos
+) as novos,
+(
+select count(1)
+from contrato 
+where status = 'A'
+and id_organizacao = 1
+) as ativos
 from dual;

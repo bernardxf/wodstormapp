@@ -43,21 +43,42 @@
 							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
 								<thead>
 									<tr>
-										<th>Total Ativo</th>
+										<th>Ativos Periodo</th> 
 										<th>Finalizados</th>
 										<th>Renovados</th>
 										<th>Novos</th>
+										<th>Total Ativos</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="item in relMetricaContratoResponseDataset">
-										<td>{{item.ativo}}</td>
-										<td>{{item.finalizado}}</td>
-										<td>{{item.renovado}}</td>
-										<td>{{item.novos}}</td>
+										<td>{{item.ativoPeriodo.length}}<a class="info-modal" ng-click='buscaAlunosPorStatus("P")'><i class="fa fa-info-circle"></i></a></td>
+										<td>{{item.finalizado.length}}<a class="info-modal" ng-click='buscaAlunosPorStatus("F")'><i class="fa fa-info-circle"></i></a></td>
+										<td>{{item.renovado.length}}<a class="info-modal" ng-click='buscaAlunosPorStatus("R")'><i class="fa fa-info-circle"></i></a></td>
+										<td>{{item.novos.length}}<a class="info-modal" ng-click='buscaAlunosPorStatus("N")'><i class="fa fa-info-circle"></i></a></td>
+										<td>{{item.ativos.length}}<a class="info-modal" ng-click='buscaAlunosPorStatus("A")'><i class="fa fa-info-circle"></i></a></td>
 									</tr>
 								</tbody>
 							</table>
+						</div> <!-- /.table-responsive -->
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
+								<thead>
+									<tr>
+										<th>Nome</th> 
+										<th>Ação</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in alunosMetricaSelecionada | orderBy:'nome'| startFrom: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage" >
+										<td>{{item.nome}}</td>
+										<td>
+											<a href="#/cad_aluno/{{item.id_aluno}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<pagination total-items="alunosMetricaSelecionada.length" page="currentPage" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="maxSize"></pagination>
 						</div> <!-- /.table-responsive -->
 					</div> <!-- /.portlet-content -->
 				</div> <!--/.portlet -->

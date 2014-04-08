@@ -61,63 +61,87 @@ class Contrato
 
 	public static function retornaRelatorioMensalContratos($dataInicio, $dataFim)
 	{
-		$sql = "SELECT (
-					SELECT count(1)
-					  FROM contrato 
-					  WHERE status = ?
-						AND data_inicio <= ?
-						AND contrato.id_organizacao = ?
-					) as ativo,
-					(
-						SELECT count(1)
-						  FROM contrato 
-						  WHERE status = ?
-							AND data_fim between ? AND ?
-							AND contrato.id_organizacao = ?
-							AND not exists (
-								SELECT 1
-								  FROM contrato cont
-								  WHERE cont.id_aluno = contrato.id_aluno
-									AND status = ?
-									AND cont.id_organizacao = ?
-						  	)
-					) as finalizado,
-					(
-						SELECT count(1) 
-						FROM contrato 
-						WHERE status = ?
-						AND contrato.id_organizacao = ?
-						  AND data_inicio between ? AND ?
-						  AND exists (
-						    SELECT 1
-						      FROM contrato cont
-							  WHERE cont.id_aluno = contrato.id_aluno
-						        AND status = ?
-						        AND data_fim < ?
-								AND cont.id_organizacao = ?
-						  )
-					) as renovado,
-					(
-						SELECT count(1) 
-						FROM contrato 
-						WHERE status = ?
-						AND contrato.id_organizacao = ?
-						  AND data_inicio between ? AND ?
-						  AND not exists (
-						    SELECT 1
-						      FROM contrato cont
-							  WHERE cont.id_aluno = contrato.id_aluno
-								AND status in (?, ?)
-								AND cont.id_organizacao = ?
-						  )
-					) as novos
-					FROM dual";
 		$idOrganizacao = App::getSession()->get('organizacao');
-		$resultado = Conexao::get()->fetchAll($sql, array(
-			'A', $dataFim, $idOrganizacao, 'F', $dataInicio, $dataFim, $idOrganizacao, 'A', $idOrganizacao, 'A', $idOrganizacao, $dataInicio, $dataFim, 'F',
-			$dataInicio, $idOrganizacao, 'A', $idOrganizacao, $dataInicio, $dataFim, 'F', 'I', $idOrganizacao
-		));
+
+		$sql = "SELECT contrato.id_contrato, aluno.id_aluno, aluno.nome
+				FROM contrato
+				JOIN aluno on aluno.id_aluno = contrato.id_aluno
+				WHERE contrato.data_inicio <= ?
+				AND contrato.data_fim >= ?
+				AND contrato.id_organizacao = ?";
+		$ativoPeriodo = Conexao::get()->fetchAll($sql, array($dataFim, $dataFim, $idOrganizacao));
+
+		$sql = "SELECT contrato.id_contrato, aluno.id_aluno, aluno.nome
+				FROM contrato
+				JOIN aluno on aluno.id_aluno = contrato.id_aluno
+				WHERE contrato.status = ?
+				AND contrato.data_fim between ? AND ?
+				AND contrato.id_organizacao = ?
+				AND not exists (
+					SELECT 1
+					FROM contrato cont
+					WHERE cont.id_aluno = contrato.id_aluno
+					AND cont.status = ?
+					AND cont.id_organizacao = ?)";
+		$finalizado = Conexao::get()->fetchAll($sql, array('F', $dataInicio, $dataFim, $idOrganizacao, 'A', $idOrganizacao));
+
+		
+		$sql = "SELECT contrato.id_contrato, aluno.id_aluno, aluno.nome
+				FROM contrato
+				JOIN aluno on aluno.id_aluno = contrato.id_aluno
+				WHERE contrato.status = ?
+				AND contrato.id_organizacao = ?
+				AND contrato.data_inicio between ? AND ?
+				AND exists (
+					SELECT 1
+					FROM contrato cont
+					WHERE cont.id_aluno = contrato.id_aluno
+					AND cont.status = ?
+					AND cont.data_fim < ?
+					AND cont.id_organizacao = ?
+					)";
+		$renovado = Conexao::get()->fetchAll($sql, array('A', $idOrganizacao, $dataInicio, $dataFim, 'F', $dataInicio, $idOrganizacao));
+
+		$sql = "SELECT contrato.id_contrato, aluno.id_aluno, aluno.nome
+				FROM contrato
+				JOIN aluno on aluno.id_aluno = contrato.id_aluno
+				WHERE contrato.status = ?
+				AND contrato.id_organizacao = ?
+				AND contrato.data_inicio between ? AND ?
+				AND not exists (
+					SELECT 1
+					FROM contrato cont
+					WHERE cont.id_aluno = contrato.id_aluno
+					AND cont.status in (?, ?)
+					AND cont.id_organizacao = ?
+					)";
+		$novos = Conexao::get()->fetchAll($sql, array('A', $idOrganizacao, $dataInicio, $dataFim, 'F', 'I', $idOrganizacao));
+
+		$sql = "SELECT contrato.id_contrato, aluno.id_aluno, aluno.nome
+				FROM contrato
+				JOIN aluno on aluno.id_aluno = contrato.id_aluno
+ 				WHERE contrato.status = ?
+ 				AND contrato.id_organizacao = ?";
+ 		$ativos = Conexao::get()->fetchAll($sql, array('A', $idOrganizacao));
+
+
+		$resultado = compact('ativoPeriodo','finalizado','renovado','novos','ativos');
 		return $resultado;
+	}
+
+	public static function retornaAlunosAtivos($dataInicio, $dataFim)
+	{
+		
+	}
+
+	public static function retornaAlunosFinalizados($dataInicio, $dataFim)
+	{
+
+	}
+
+	public static function retornaAlunosAtivosPeriodo($dataInicio, $dataFim)
+	{
+
 	}
 
 	public static function retornaVencimentoContrato()

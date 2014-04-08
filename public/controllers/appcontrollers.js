@@ -580,10 +580,10 @@ AppControllers.controller('RelMetricaContratoController', ['$scope', 'RelMetrica
 				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].renovado;
 				break;
 			case 'N':
-				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].novo;
+				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].novos;
 				break;
 			case 'A':
-				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].ativo;
+				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].ativos;
 				break;
 			case 'default':
 				$scope.alunosMetricaSelecionada = null;

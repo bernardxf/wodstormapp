@@ -41,7 +41,7 @@
 										<tr ng-repeat="item in cadAlunoDataset | orderBy:'nome'">
 											<td>
 												{{item.nome}} 
-												<a ng-show="item.observacao" class="info-modal" ng-click='modalObservacaoAluno(item)'><i class="fa fa-info-circle"></i></a>
+												<a ng-show="item.observacao_presenca" class="info-modal" ng-click='modalObservacaoAluno(item)'><i class="fa fa-info-circle"></i></a>
 											</td>
 											<td>{{item.plano}}</td>
 											<td>{{item.status | StatusTranslate}}</td>

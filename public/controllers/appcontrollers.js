@@ -534,12 +534,12 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 		var modalInstance = $modal.open({
 			templateUrl: "views/partials/ws_modal.html",
 			controller: 'ModalController',
-			backdrop: false, // removendo o backdrop porque ainda falta definir uma maneira de adicionar os templates do angular-ui-bootstrap
+			backdrop: true, // removendo o backdrop porque ainda falta definir uma maneira de adicionar os templates do angular-ui-bootstrap
 			resolve: {
 				items: function(){
 					return {
 						title: 'Observações do aluno',
-						text: aluno.observacao	
+						text: aluno.observacao_presenca
 					}				
 				}
 			}

@@ -20,7 +20,7 @@ class Aluno
 
 	public static function retornaTodosFiltradoPorNome($nome)
 	{
-		$sql = "SELECT a.id_aluno as id_aluno, a.nome as nome, a.observacao as observacao, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim,
+		$sql = "SELECT a.id_aluno as id_aluno, a.nome as nome, a.observacao_presenca as observacao_presenca, plano.nome as plano, contrato.status as status, contrato.data_fim as data_fim,
 				(
 					SELECT count(1) from alunos_aula
 					JOIN aula on aula.id_aula = alunos_aula.id_aula

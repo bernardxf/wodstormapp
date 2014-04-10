@@ -97,7 +97,7 @@ class Contrato
 					FROM contrato cont
 					WHERE cont.id_aluno = contrato.id_aluno
 					AND cont.status = ?
-					AND cont.data_fim < ?
+					AND cont.data_fim <= ?
 					AND cont.id_organizacao = ?
 					)";
 		$renovado = Conexao::get()->fetchAll($sql, array('A', $idOrganizacao, $dataInicio, $dataFim, 'F', $dataFim, $idOrganizacao));

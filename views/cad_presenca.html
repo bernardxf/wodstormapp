@@ -31,7 +31,6 @@
 										<tr>
 											<th>Nome</th>
 											<th>Plano</th>
-											<th>Status</th>
 											<th>Plano Fim</th>
 											<th>Presenças Mes Atual</th>
 											<th>Presente</th>
@@ -44,7 +43,6 @@
 												<a ng-show="item.observacao_presenca" class="info-modal" ng-click='modalObservacaoAluno(item)'><i class="fa fa-info-circle"></i></a>
 											</td>
 											<td>{{item.plano}}</td>
-											<td>{{item.status | StatusTranslate}}</td>
 											<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
 											<td>{{item.total_aulas}}</td>
 											<td>

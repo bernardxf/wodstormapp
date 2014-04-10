@@ -1,0 +1,1 @@
+alter table aluno add column observacao_presenca varchar(200) after observacao;

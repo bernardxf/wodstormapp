@@ -3,8 +3,8 @@
         <div class="portlet-header">
             <h3><i class="fa fa-table"></i>{{titulo}}</h3>
             <ul ng-show="buttons.length > 0" class="portlet-tools pull-right">
-                <li nr-repeat="button in buttons">
-                    <a ng-href="{{button.route}}" class="btn btn-sm">{{button.label}}</a>
+                <li ng-repeat="button in buttons">
+                    <a ng-href="{{button.route}}" target="_blank" class="btn btn-sm">{{button.label}}</a>
                 </li>
             </ul>
         </div>

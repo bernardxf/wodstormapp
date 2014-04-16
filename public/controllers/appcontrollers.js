@@ -27,6 +27,12 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
 		{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
 	];
+	$scope.botoesAniversariantes = [
+		{
+			label: "Imprimir",
+			route: "#/relAniversariantes"  
+		}
+	];
 
 	$scope.tituloPlanosVencendo = "Planos Vencendo";
 	$scope.columnsPlanosVencendo = [

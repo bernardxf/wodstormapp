@@ -13,7 +13,8 @@ class Aluno
 					ORDER BY data_fim DESC 
 					limit 1) as data_fim 
 				FROM aluno 
-				WHERE aluno.status != ? AND id_organizacao = ?";
+				WHERE aluno.status != ? AND id_organizacao = ?
+				ORDER BY aluno.nome";
 		$resultado = Conexao::get()->fetchAll($sql, array('I', App::getSession()->get('organizacao')));
 		return $resultado;
 	}
@@ -35,7 +36,8 @@ class Aluno
 					SELECT id_aluno FROM alunos_aula 
 					JOIN aula on aula.id_aula = alunos_aula.id_aula
 					WHERE aula.data = CURDATE() and alunos_aula.id_organizacao = ?
-				) AND a.nome LIKE ? AND a.status = ? AND contrato.status = ? AND a.id_organizacao = ?";
+				) AND a.nome LIKE ? AND a.status = ? AND contrato.status = ? AND a.id_organizacao = ?
+				ORDER BY a.nome";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), '%'.$nome.'%', 'A', 'A',App::getSession()->get('organizacao')));
 		return $resultado;	
 	}

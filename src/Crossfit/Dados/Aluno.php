@@ -8,7 +8,7 @@ class Aluno
 {
 	public static function retornaTodos()
 	{
-		$sql = "SELECT aluno.*, (SELECT data_fim FROM contrato 
+		$sql = "SELECT aluno.id_aluno, aluno.nome, aluno.email, aluno.tel_celular, (SELECT data_fim FROM contrato 
 					WHERE id_aluno = aluno.id_aluno
 					ORDER BY data_fim DESC 
 					limit 1) as data_fim 

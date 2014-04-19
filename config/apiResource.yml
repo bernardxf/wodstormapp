@@ -16,7 +16,7 @@ logout:
 # Rota utilizada pelo controle de acesso.
 controleAcesso:
   path: /controleAcesso
-  defaults: {_controller: 'Crossfit\Controllers\ControleAcessoO::getRegras'}
+  defaults: {_controller: 'Crossfit\Controllers\ControleAcessoController::getRegras'}
   methods: [GET]
 
 # Rotas para o controller de DASHBOARD

@@ -4,7 +4,7 @@ namespace Crossfit\Controllers;
 use Crossfit\Dados\ControleAcesso;
 use Crossfit\Util\Response;
 
-class ControleAcessoO
+class ControleAcessoController
 {
 
 	public static function getRegras() 

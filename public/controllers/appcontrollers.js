@@ -1,5 +1,28 @@
 var AppControllers = angular.module('AppControllers', ['ui.bootstrap']);
 
+// Este controller pode ser redefinido, caso a estrategia de utilizacao do controle de acesso (proposito deste) seja
+// alterada.
+AppControllers.controller("menuCtrl", ["$scope", "controleAcessoResource", function($scope, controleAcessoResource) {
+	controleAcessoResource.get({}, function(response){
+		$scope.itensControleAcesso = response.data;
+	});
+
+	$scope.verificaPermissaoAcesso = function (componente) {
+		if ($scope.itensControleAcesso) {
+			var regra = $scope.itensControleAcesso.filter(function(item) {
+				if (item.componente == componente) {
+					return item;
+				}
+			});
+
+			// Permissao = 2 significa permissao de execucao.
+			return regra[0].permissao == 2;
+		}
+
+		return null;
+	}
+}]);
+
 AppControllers.controller('LoginController', ['$scope', 'loginService', function ($scope, loginService) {
 	var loginStorage = JSON.parse(localStorage.getItem('wodStormLogin'));
 	if(loginStorage){

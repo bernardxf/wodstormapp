@@ -7,7 +7,7 @@ use Crossfit\App;
 class ControleAcesso
 {
 
-	public static function getRegrasControleAcesso()
+	public static function getRegras()
 	{
 		$sql = "select *
 		          from controle_acesso
@@ -21,8 +21,8 @@ class ControleAcesso
 
 		$id_organizacao = App::getSession()->get("organizacao");
 		$id_usuario     = App::getSession()->get("usuario")["id_usuario"];
-die;
-		$resultado = Conexao::get()->fetchAll($sql, array($id_organizacao, $id_grupoUsuario));
+
+		$resultado = Conexao::get()->fetchAll($sql, array($id_organizacao, $id_usuario, $id_organizacao));
 		return $resultado;
 	}
 

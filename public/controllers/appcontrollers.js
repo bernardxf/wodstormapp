@@ -51,10 +51,10 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 		{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
 	];
 	$scope.botoesAniversariantes = [
-		{
-			label: "Imprimir",
-			route: "#/relAniversariantes"  
-		}
+		// {
+		// 	label: "Imprimir",
+		// 	route: "#/relAniversariantes"  
+		// }
 	];
 
 	$scope.tituloPlanosVencendo = "Planos Vencendo";

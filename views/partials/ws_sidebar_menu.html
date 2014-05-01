@@ -1,39 +1,39 @@
-<nav id="sidebar">		
+<nav id="sidebar" ng-controller="menuCtrl">
 	<ul id="main-nav" class="open-active" ws-menu>			
-		<li class="active">				
+		<li class="active" ng-show="verificaPermissaoAcesso('menu/dashboard')">
 			<a href="#/dashboard"><i class="fa fa-dashboard"></i>Dashboard</a>				
 		</li>
-		<li class="">
+		<li class=""  ng-show="verificaPermissaoAcesso('menu/aluno')">
 			<a href="#/aluno"><i class="fa fa-user"></i>Aluno</a>				
 		</li>
-		<li class="">				
-			<a href="#/aulaexp"><i class="fa fa-list-alt"></i>Aula Experimental</a>				
+		<li class="" ng-show="verificaPermissaoAcesso('menu/aulaexp')">
+			<a href="#/aulaexp"><i class="fa fa-list-alt"></i>Aula Experimental</a>
 		</li>
-		<li class="">				
-			<a href="#/estacionamento"><i class="fa fa-truck"></i>Estacionamento</a>				
+		<li class="" ng-show="verificaPermissaoAcesso('menu/estacionamento')">
+			<a href="#/estacionamento"><i class="fa fa-truck"></i>Estacionamento</a>
 		</li>
-		<li class="">				
-			<a href="#/servico"><i class="fa fa-book"></i>Serviços</a>				
+		<li class="" ng-show="verificaPermissaoAcesso('menu/servico')">
+			<a href="#/servico"><i class="fa fa-book"></i>Serviços</a>
 		</li>
-		<li class="">				
-			<a href="#/presenca"><i class="fa fa-check-square-o"></i>Presença</a>				
+		<li class="" ng-show="verificaPermissaoAcesso('menu/presenca')">
+			<a href="#/presenca"><i class="fa fa-check-square-o"></i>Presença</a>
 		</li>
-		<li class="">
-			<a href="#/financeiro"><i class="fa fa-money"></i>Financeiro</a>				
-		</li>
+		<!-- <li class="">
+			<a href="#/financeiro"><i class="fa fa-money"></i>Financeiro</a>
+		</li> -->
 		<li class="dropdown">
-			<a href="javascript:;"><i class="fa fa-bar-chart-o"></i>Relatórios<span class="caret"></span></a>				
+			<a href="javascript:;"><i class="fa fa-bar-chart-o"></i>Relatórios<span class="caret"></span></a>
 			<ul class="sub-nav">
-				<li>
+				<li ng-show="verificaPermissaoAcesso('menu/relatorio/relaluno')">
 					<a href="#/relaluno"><i class="fa fa-bar-chart-o"></i>Aluno</a>
 				</li>
-				<li>
+				<li ng-show="verificaPermissaoAcesso('menu/relatorio/relmetricacontrato')">
 					<a href="#/relmetricacontrato"><i class="fa fa-bar-chart-o"></i>Metrica de Contrato</a>
 				</li>
-				<li>
+				<li ng-show="verificaPermissaoAcesso('menu/relatorio/relaula')">
 					<a href="#/relaula"><i class="fa fa-bar-chart-o	"></i>Aula</a>
 				</li>
-				<li>
+				<li ng-show="verificaPermissaoAcesso('menu/relatorio/relservico')">
 					<a href="#/relservico"><i class="fa fa-bar-chart-o	"></i>Serviço</a>
 				</li>
 			</ul>						
@@ -41,13 +41,13 @@
 		<li class="dropdown">
 			<a href="javascript:;"><i class="fa fa-cog"></i>Configuração<span class="caret"></span></a>
 			<ul class="sub-nav">
-				<li>
+				<li ng-show="verificaPermissaoAcesso('menu/configuracoes/desconto')">
 					<a href="#/desconto"><i class="fa fa-cog"></i>Desconto</a>
 				</li>
-				<li>
+				<li ng-show="verificaPermissaoAcesso('menu/configuracoes/formapagamento')">
 					<a href="#/formapagamento"><i class="fa fa-cog"></i>Formas de pagamento</a>
 				</li>	
-				<li>
+				<li ng-show="verificaPermissaoAcesso('menu/configuracoes/plano')">
 					<a href="#/plano"><i class="fa fa-cog"></i>Planos</a>
 				</li>			
 			</ul>	

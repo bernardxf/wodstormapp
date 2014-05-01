@@ -184,6 +184,10 @@ crossfitApp.factory('PerfilResource', ['$resource', function ($resource) {
 	return $resource('api/perfil/:id_usuario', {id_usuario: '@id_usuario'}, {atualizaSenha: { method: 'POST', params: {changePassword: true}}});
 }]);
 
+crossfitApp.factory("controleAcessoResource", ["$resource", function($resource) {
+	return $resource('api/controleAcesso');
+}]);
+
 //Servico para busca de cep
 crossfitApp.factory('ConsultaCepResource', ['$resource', function ($resource) {
 	return $resource('http://cep.correiocontrol.com.br/:cep.json',{cep:'@cep'});

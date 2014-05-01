@@ -13,6 +13,12 @@ logout:
   defaults: { _controller: 'Crossfit\Controllers\LoginController::logout' }
   methods:  [POST]
 
+# Rota utilizada pelo controle de acesso.
+controleAcesso:
+  path: /controleAcesso
+  defaults: {_controller: 'Crossfit\Controllers\ControleAcessoController::getRegras'}
+  methods: [GET]
+
 # Rotas para o controller de DASHBOARD
 dashboard:
   path: /dashboard

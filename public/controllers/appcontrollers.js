@@ -458,7 +458,7 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 			var ano = dtFimAtual.getFullYear(),
 				mes = month[dtFimAtual.getMonth()],				
 				dia = dtFimAtual.getDate();			
-			contrato.data_fim = ano+"-"+mes+"-"+"0"+dia;
+			contrato.data_fim = ano+"-"+mes+"-"+dia;
 	}
 
 	$scope.cancelaEdicaoContrato = function(){

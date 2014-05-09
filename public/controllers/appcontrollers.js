@@ -1,5 +1,28 @@
 var AppControllers = angular.module('AppControllers', ['ui.bootstrap']);
 
+// Este controller pode ser redefinido, caso a estrategia de utilizacao do controle de acesso (proposito deste) seja
+// alterada.
+AppControllers.controller("menuCtrl", ["$scope", "controleAcessoResource", function($scope, controleAcessoResource) {
+	controleAcessoResource.get({}, function(response){
+		$scope.itensControleAcesso = response.data;
+	});
+
+	$scope.verificaPermissaoAcesso = function (componente) {
+		if ($scope.itensControleAcesso) {
+			var regra = $scope.itensControleAcesso.filter(function(item) {
+				if (item.componente == componente) {
+					return item;
+				}
+			});
+
+			// Permissao = 2 significa permissao de execucao.
+			return regra[0].permissao == 2;
+		}
+
+		return null;
+	}
+}]);
+
 AppControllers.controller('LoginController', ['$scope', 'loginService', function ($scope, loginService) {
 	var loginStorage = JSON.parse(localStorage.getItem('wodStormLogin'));
 	if(loginStorage){
@@ -26,6 +49,12 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 	$scope.columnsAniversariantes = [
 		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
 		{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
+	];
+	$scope.botoesAniversariantes = [
+		// {
+		// 	label: "Imprimir",
+		// 	route: "#/relAniversariantes"  
+		// }
 	];
 
 	$scope.tituloPlanosVencendo = "Planos Vencendo";
@@ -394,10 +423,43 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	$scope.salvaContrato = function(){
 		var contrato = $scope.cadContratoDataset;
 		contrato.id_aluno = $routeParams.aluno;
+        if(contrato.data_fim_computada == undefined){
+            contrato.data_fim_computada = contrato.data_fim;
+        }
 		ContratoResource.save(contrato, function(response){
 			$location.path('/contrato/'+contrato.id_aluno);
 		});
 	};
+
+	$scope.atualizaVencimentoContrato = function(){
+		var contrato = $scope.cadContratoDataset,		
+			dtFimComputada = new Date (contrato.data_fim_computada.split("-").join()),
+			qtdDiasTrancados = parseInt(contrato.dias_trancado),
+			month = [],
+			dtFimAtual = new Date(contrato.data_fim_computada.split("-").join());		
+		    
+			if(qtdDiasTrancados == null){
+				qtdDiasTrancados = 0;				
+			}
+			month[0]= "01";
+			month[1]= "02";
+			month[2]= "03";
+			month[3]= "04";
+			month[4]= "05";
+			month[5]= "06";
+			month[6]= "07";
+			month[7]= "08";
+			month[8]= "09";
+			month[9]= "10";
+			month[10]="11";
+			month[11]= "12";
+
+			dtFimAtual.setDate(dtFimComputada.getDate()+qtdDiasTrancados);						
+			var ano = dtFimAtual.getFullYear(),
+				mes = month[dtFimAtual.getMonth()],				
+				dia = dtFimAtual.getDate();			
+			contrato.data_fim = ano+"-"+mes+"-"+"0"+dia;
+	}
 
 	$scope.cancelaEdicaoContrato = function(){
 		var contrato = $scope.cadContratoDataset;

@@ -423,10 +423,43 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	$scope.salvaContrato = function(){
 		var contrato = $scope.cadContratoDataset;
 		contrato.id_aluno = $routeParams.aluno;
+        if(contrato.data_fim_computada == undefined){
+            contrato.data_fim_computada = contrato.data_fim;
+        }
 		ContratoResource.save(contrato, function(response){
 			$location.path('/contrato/'+contrato.id_aluno);
 		});
 	};
+
+	$scope.atualizaVencimentoContrato = function(){
+		var contrato = $scope.cadContratoDataset,		
+			dtFimComputada = new Date (contrato.data_fim_computada.split("-").join()),
+			qtdDiasTrancados = parseInt(contrato.dias_trancado),
+			month = [],
+			dtFimAtual = new Date(contrato.data_fim_computada.split("-").join());		
+		    
+			if(qtdDiasTrancados == null){
+				qtdDiasTrancados = 0;				
+			}
+			month[0]= "01";
+			month[1]= "02";
+			month[2]= "03";
+			month[3]= "04";
+			month[4]= "05";
+			month[5]= "06";
+			month[6]= "07";
+			month[7]= "08";
+			month[8]= "09";
+			month[9]= "10";
+			month[10]="11";
+			month[11]= "12";
+
+			dtFimAtual.setDate(dtFimComputada.getDate()+qtdDiasTrancados);						
+			var ano = dtFimAtual.getFullYear(),
+				mes = month[dtFimAtual.getMonth()],				
+				dia = dtFimAtual.getDate();			
+			contrato.data_fim = ano+"-"+mes+"-"+dia;
+	}
 
 	$scope.cancelaEdicaoContrato = function(){
 		var contrato = $scope.cadContratoDataset;

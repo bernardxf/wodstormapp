@@ -1,0 +1,35 @@
+table{
+  width: 100%;
+}
+
+div.report-title {
+  text-align: right;
+}
+
+div.logo-wodstormapp {
+  width: 40%;
+  float: left;
+  padding-bottom: 12px;
+}
+
+th {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #616161;
+  color: #222222;
+}
+
+td {
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+td.totalizador {
+  background-color: #cccccc;
+}
+
+tr:nth-child(2n+1) {
+  background-color: #eeeeee;
+}

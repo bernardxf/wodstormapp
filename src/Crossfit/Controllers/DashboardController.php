@@ -37,10 +37,16 @@ class DashboardController
 
 		$data = new \DateTime();
 		$aniversariantes = Aluno::retornaAniversariantes();
+
+		// Tradução dos nomes dos meses para português.
+		setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
+		date_default_timezone_set('America/Sao_Paulo');
+		$date = $data->format("Y-m-d");
+		$date = strftime("Aniversariantes do Mês de %B de %Y", strtotime( $date ));
+
 		$relatorio = array (
-			"titulo"           => "aniversariantes do Mês de {$data->format('F')} de {$data->format('Y')}",
-			"logo_cliente"     => "public/assets/img/logos/logo-login.png",
-			"logo_wodstormapp" => "http://cdn.wordimpress.com/assets/icon-grunt.png",
+			"titulo"           => $date,
+			"logo_wodstormapp" => "public/assets/img/logos/logo-login.png",
 			"nome"             => "",
 			"versao"           => "",
 			"dataCriacao"      => "",

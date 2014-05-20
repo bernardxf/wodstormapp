@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `heroku_80396c65d43601a` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `heroku_80396c65d43601a`;
+-- CREATE DATABASE  IF NOT EXISTS `heroku_80396c65d43601a` /*!40100 DEFAULT CHARACTER SET utf8 */;
+-- USE `heroku_80396c65d43601a`;
 -- MySQL dump 10.13  Distrib 5.5.35, for debian-linux-gnu (x86_64)
 --
 -- Host: us-cdbr-east-04.cleardb.com    Database: heroku_80396c65d43601a

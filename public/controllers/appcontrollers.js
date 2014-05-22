@@ -434,11 +434,11 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	$scope.atualizaVencimentoContrato = function(){
 		var contrato = $scope.cadContratoDataset,		
 			dtFimComputada = new Date (contrato.data_fim_computada.split("-").join()),
-			qtdDiasTrancados = parseInt(contrato.dias_trancado),
+			qtdDiasTrancados = contrato.dias_trancado,
 			month = [],
 			dtFimAtual = new Date(contrato.data_fim_computada.split("-").join());		
 		    
-			if(qtdDiasTrancados == null){
+			if(qtdDiasTrancados === undefined || qtdDiasTrancados === "" || qtdDiasTrancados === null){
 				qtdDiasTrancados = 0;				
 			}
 			month[0]= "01";
@@ -454,10 +454,11 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 			month[10]="11";
 			month[11]= "12";
 
-			dtFimAtual.setDate(dtFimComputada.getDate()+qtdDiasTrancados);						
+			dtFimAtual.setDate(dtFimComputada.getDate()+parseInt(qtdDiasTrancados));
 			var ano = dtFimAtual.getFullYear(),
 				mes = month[dtFimAtual.getMonth()],				
-				dia = dtFimAtual.getDate();			
+				dia = dtFimAtual.getDate().toString();
+        if(dia.length == 1) dia = "0"+dia;
 			contrato.data_fim = ano+"-"+mes+"-"+dia;
 	}
 

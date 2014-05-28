@@ -31,7 +31,7 @@
 <body ng-switch on="$root.logged">
 
 	<div id="wrapper" ng-switch-when="true">
-		<header id="header">
+		<header id="header" ng-show="headerIsVisible">
 
 			<h1 id="site-logo">
 				<a href="#/dashboard">

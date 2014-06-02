@@ -366,6 +366,12 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'Consul
 
 	$scope.salvaAluno = function(){
 		var aluno = $scope.cadAlunoDataset;
+		data_nasc = aluno.data_nasc;
+		if (data_nasc instanceof Date) {
+			data_nasc = data_nasc.getFullYear() + "-" + ("00"+(data_nasc.getMonth()+1)).substr(-2) + "-" + data_nasc.getDate();
+		}
+
+		aluno.data_nasc = data_nasc;
 		AlunoResource.save(aluno, function(response){
 			$location.path('/cad_aluno/'+response.data.id_aluno);
 		});

@@ -2,7 +2,9 @@ var AppControllers = angular.module('AppControllers', ['ui.bootstrap']);
 
 // Este controller pode ser redefinido, caso a estrategia de utilizacao do controle de acesso (proposito deste) seja
 // alterada.
-AppControllers.controller("menuCtrl", ["$scope", "controleAcessoResource", function ($scope, controleAcessoResource) {
+AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoResource", function ($scope, $rootScope, controleAcessoResource) {
+	$rootScope.sideBarIsVisible = true;
+	$rootScope.headerIsVisible  = true;
 	controleAcessoResource.get({}, function(response){
 		$scope.itensControleAcesso = response.data;
 	});
@@ -364,6 +366,12 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'Consul
 
 	$scope.salvaAluno = function(){
 		var aluno = $scope.cadAlunoDataset;
+		data_nasc = aluno.data_nasc;
+		if (data_nasc instanceof Date) {
+			data_nasc = data_nasc.getFullYear() + "-" + ("00"+(data_nasc.getMonth()+1)).substr(-2) + "-" + data_nasc.getDate();
+		}
+
+		aluno.data_nasc = data_nasc;
 		AlunoResource.save(aluno, function(response){
 			$location.path('/cad_aluno/'+response.data.id_aluno);
 		});
@@ -913,8 +921,10 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 	};
 }]);
 
-AppControllers.controller('RelatorioController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
-	
+AppControllers.controller('RelatorioController', ['$scope', '$rootScope', 'DashboardResource', function ($scope, $rootScope, DashboardResource) {
+	$rootScope.sideBarIsVisible = false;
+	$rootScope.headerIsVisible  = false;
+
 	$scope.loadRelAniversariantes = function(){
 		DashboardResource.relAniversariantes({}, function(response){
 			$scope.relatorio = response.data.relatorio;

@@ -1,6 +1,6 @@
 -- CRIACAO DA TABELA DE PERMISSAO DE ACESSO (DEFINE AS PERMISSOES QUE CADA GRUPO DE USUARIOS DE CADA ORGANIZACAO POSSUI)
 -- PARA OS ITENS DE CONTROLE_ACESSO (ATÉ O MOMENTO, OS MENUS).
-CREATE TABLE IF NOT EXISTS `wodstorm`.`permissao_acesso` (
+CREATE TABLE IF NOT EXISTS `permissao_acesso` (
   `id_permissao_acesso` INT NOT NULL AUTO_INCREMENT,
   `id_controle_acesso` INT NOT NULL,
   `permissao` INT(11) NOT NULL,
@@ -12,17 +12,17 @@ CREATE TABLE IF NOT EXISTS `wodstorm`.`permissao_acesso` (
   INDEX `fk_permissao_acesso_grupo_usuario1_idx` (`id_grupo_usuario` ASC),
   CONSTRAINT `fk_permissao_acesso_controle_acesso1`
     FOREIGN KEY (`id_controle_acesso`)
-    REFERENCES `wodstorm`.`controle_acesso` (`id_controle_acesso`)
+    REFERENCES `controle_acesso` (`id_controle_acesso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_permissao_acesso_organizacao1`
     FOREIGN KEY (`id_organizacao`)
-    REFERENCES `wodstorm`.`organizacao` (`id_organizacao`)
+    REFERENCES `organizacao` (`id_organizacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_permissao_acesso_grupo_usuario1`
     FOREIGN KEY (`id_grupo_usuario`)
-    REFERENCES `wodstorm`.`grupo_usuario` (`id_grupo_usuario`)
+    REFERENCES `grupo_usuario` (`id_grupo_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

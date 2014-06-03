@@ -40,7 +40,6 @@ class AlunoController
 		$response = new Response();
 		$dataset = json_decode($request->getContent(), true);
 		$dataset['id_organizacao'] = App::getSession()->get('organizacao');
-
 		$resultado = Aluno::salvaAluno($dataset);
 
 		$response->setData($resultado);

@@ -1,7 +1,7 @@
 alter table aluno add column observacao_presenca varchar(200) after observacao;
 
 -- CRIACAO DA ESTRUTURA DE CONTROLE DE ACESSO.
-CREATE  TABLE IF NOT EXISTS `wodstorm`.`grupo_usuario` (
+CREATE  TABLE IF NOT EXISTS `grupo_usuario` (
   `id_grupo_usuario` INT(11) NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(45) NULL ,
   `id_organizacao` INT(11) NOT NULL ,
@@ -9,12 +9,12 @@ CREATE  TABLE IF NOT EXISTS `wodstorm`.`grupo_usuario` (
   INDEX `fk_grupo_usuario_organizacao1_idx` (`id_organizacao` ASC) ,
   CONSTRAINT `fk_grupo_usuario_organizacao1`
     FOREIGN KEY (`id_organizacao` )
-    REFERENCES `wodstorm`.`organizacao` (`id_organizacao` )
+    REFERENCES `organizacao` (`id_organizacao` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE  TABLE IF NOT EXISTS `wodstorm`.`controle_acesso` (
+CREATE  TABLE IF NOT EXISTS `controle_acesso` (
   `id_controle_acesso` INT NOT NULL AUTO_INCREMENT ,
   `componente` VARCHAR(150) NULL ,
   `tipo_componente` CHAR(1) NULL ,
@@ -26,12 +26,12 @@ CREATE  TABLE IF NOT EXISTS `wodstorm`.`controle_acesso` (
   INDEX `fk_controle_acesso_organizacao1_idx` (`id_organizacao` ASC) ,
   CONSTRAINT `fk_controle_acesso_grupo_usuario1`
     FOREIGN KEY (`id_grupo_usuario` )
-    REFERENCES `wodstorm`.`grupo_usuario` (`id_grupo_usuario` )
+    REFERENCES `grupo_usuario` (`id_grupo_usuario` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_controle_acesso_organizacao1`
     FOREIGN KEY (`id_organizacao` )
-    REFERENCES `wodstorm`.`organizacao` (`id_organizacao` )
+    REFERENCES `organizacao` (`id_organizacao` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

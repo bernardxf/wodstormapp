@@ -10,66 +10,37 @@
 					<h3><i class="fa fa-money"></i>Financeiro</h3>
 					<ul class="portlet-tools pull-right">
 						<li>
-							<a href="#/financeiro/categoria" class="btn btn-sm btn-success">Categoria</a>
-						</li>
-						<li>
 							<a href="#/financeiro/cad_movimento" class="btn btn-sm btn-success">Novo Movimento</a>
 						</li>
 					</ul>
 				</div> <!-- /.portlet-header -->
 				<div class="portlet-content">	
-					<div class="pull-left">
+					<div class="col-md-12">
 						<div class="btn-group">
 						    <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
-						      Ano
+						      {{filtroFinanceiro.ano}}
 						      <span class="caret"></span>
 						    </button>
 						    <ul class="dropdown-menu">
-						      <li><a href="javascript:;">2012</a></li>
-						      <li><a href="javascript:;">2013</a></li>
-						      <li><a href="javascript:;">2014</a></li>
+						      <li ng-repeat="ano in listaAnos"><a ng-click="filtrarAno(ano.ano)">{{ano.ano}}</a></li>
 						    </ul>
 					  	</div>
 						  
 					  	&nbsp; &nbsp; &nbsp;
 
-						<div class="btn-group" data-toggle="buttons">
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option1"> Janeiro
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option2"> Fevereiro
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Março
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Abril
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Maio
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Junho
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Julho
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Agosto
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Setembro
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Outubro
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Novembro
-						  	</label>
-						  	<label class="btn btn-sm btn-default">
-						    	<input type="radio" name="options" id="option3"> Dezembro
-						  	</label>
+					  	<div class="btn-group" data-toggle="buttons">
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 1}" ng-click="filtrarMes(1)">Janeiro</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 2}" ng-click="filtrarMes(2)">Fevereiro</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 3}" ng-click="filtrarMes(3)">Março</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 4}" ng-click="filtrarMes(4)">Abril</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 5}" ng-click="filtrarMes(5)">Maio</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 6}" ng-click="filtrarMes(6)">Junho</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 7}" ng-click="filtrarMes(7)">Julho</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 8}" ng-click="filtrarMes(8)">Agosto</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 9}" ng-click="filtrarMes(9)">Setembro</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 10}" ng-click="filtrarMes(10)">Outubro</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 11}" ng-click="filtrarMes(11)">Novembro</button>
+				  			<button type="button" class="btn btn-default" ng-class="{'btn-info':filtroFinanceiro.mes == 12}" ng-click="filtrarMes(12)">Dezembro</button>
 						</div>
 					</div>
 					<hr class="full">
@@ -83,15 +54,15 @@
 									<tbody>
 										<tr class="entrada">
 											<td>Entradas</td>
-											<td align="right">R$ 360</td>
+											<td align="right">{{ entradasPeriodo(financeiroFiltrado) | currency:'R$'}}</td>
 										</tr>
 										<tr class="saida">
 											<td>Saídas</td>
-											<td align="right">R$ 200</td>
+											<td align="right">{{ saidasPeriodo(financeiroFiltrado) | currency:'R$'}}</td>
 										</tr>
 										<tr>
 											<td>Resutlado</td>
-											<td align="right">R$ 160</td>
+											<td align="right">{{ resultadoPeriodo(financeiroFiltrado) | currency:'R$'}}</td>
 										</tr>
 									</tbody>
 								</table>
@@ -109,15 +80,15 @@
 									<tbody>
 										<tr class="entrada">
 											<td>Entradas</td>
-											<td align="right">R$ 2000</td>
+											<td align="right">{{ entradasPeriodo(financeiroDataset) | currency:'R$'}}</td>
 										</tr>
 										<tr class="saida">
 											<td>Saídas</td>
-											<td align="right">R$ 1000</td>
+											<td align="right">{{ saidasPeriodo(financeiroDataset) | currency:'R$'}}</td>
 										</tr>
 										<tr>
 											<td>Resutlado</td>
-											<td align="right">R$ 1000</td>
+											<td align="right">{{ resultadoPeriodo(financeiroDataset) | currency:'R$'}}</td>
 										</tr>
 									</tbody>
 								</table>
@@ -151,46 +122,14 @@
 											</tr>
 										</thead>
 										<tbody>
-											<!-- <tr ng-repeat="item in financeiroDataset | filter:financeiroFilter">
-												<td>{{item.data}}</td>
+											<tr ng-repeat="item in financeiroFiltrado | filter:financeiroFilter">
+												<td>{{item.data | date:'dd/MM/yyyy'}}</td>
 												<td>{{item.descricao}}</td>
-												<td>{{item.categoria}}</td>
-												<td>{{item.valor}}</td>
+												<td ng-repeat="categoria in listaCategorias | filter:{id_agrupador:item.id_agrupador}:true">{{categoria.nome}}</td>
+												<td>{{item.tipo | TipoFinanceiroTranslate}}</td>
+												<td>{{item.valor | currency:'R$'}}</td>
 												<td>
-													<a href="#/financeiro/cad_movimento/{{item.id_movimento}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
-													<a class="btn btn-sm btn-danger" ng-click="removeFinMovimento(item);"><i class="fa fa-eraser"></i></a>
-												</td>
-											</tr> -->
-											<tr>
-												<td>05/01/2014</td>
-												<td>Conta</td>
-												<td>GVT</td>
-												<td>Despesa</td>
-												<td>-200,00</td>
-												<td>
-													<a href="#/financeiro/cad_movimento/{{item.id_movimento}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
-													<a class="btn btn-sm btn-danger" ng-click="removeFinMovimento(item);"><i class="fa fa-eraser"></i></a>
-												</td>
-											</tr>
-											<tr>
-												<td>15/01/2014</td>
-												<td>2 Speed Rope</td>
-												<td>Equipamento</td>
-												<td>Receita</td>
-												<td>120,00</td>
-												<td>
-													<a href="#/financeiro/cad_movimento/{{item.id_movimento}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
-													<a class="btn btn-sm btn-danger" ng-click="removeFinMovimento(item);"><i class="fa fa-eraser"></i></a>
-												</td>
-											</tr>
-											<tr>
-												<td>20/01/2014</td>
-												<td>3 Camisas Crossfit Games</td>
-												<td>Roupa</td>
-												<td>Receita</td>
-												<td>240,00</td>
-												<td>
-													<a href="#/financeiro/cad_movimento/{{item.id_movimento}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
+													<a href="#/financeiro/cad_movimento/{{item.id_financeiro}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
 													<a class="btn btn-sm btn-danger" ng-click="removeFinMovimento(item);"><i class="fa fa-eraser"></i></a>
 												</td>
 											</tr>

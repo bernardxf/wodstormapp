@@ -262,42 +262,31 @@ financeiro:
   path: /financeiro
   defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::carregaFinanceiro' }
   methods: [GET]
-finCategoria:
-  path: /financeiro/categoria
-  defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::carregaFinCategoria' }
-  methods: [GET]
 cadFinMovimento:
-  path: /financeiro/movimento/{id_movimento}
+  path: /financeiro/{id_financeiro}
   defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::carregaCadFinMovimento' }
   methods: [GET]
-cadFinCategoria:
-  path: /financeiro/categoria/{id_categoria}
-  defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::carregaCadFinCategoria' }
-  methods: [GET]
 novoFinMovimento:
-  path: /financeiro/movimento
+  path: /financeiro
   defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::salvaFinMovimento' }
   methods: [POST]
-novoFinCategoria:
-  path: /financeiro/categoria
-  defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::salvaFinCategoria' }
-  methods: [POST]
 atualizaFinMovimento:
-  path: /financeiro/movimento/{id_movimento}
+  path: /financeiro/{id_financeiro}
   defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::atualizaFinMovimento' }
   methods: [POST]
-atualizaFinCategoria:
-  path: /financeiro/categoria/{id_categoria}
-  defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::atualizaFinCategoria' }
-  methods: [POST]
 removeFinMovimento:
-  path: /financeiro/movimento/{id_movimento}
+  path: /financeiro/{id_financeiro}
   defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::removeFinMovimento' }
   methods: [DELETE]
-removeFinCategoria:
-  path: /financeiro/categoria/{id_categoria}
-  defaults: {_controller : 'Crossfit\Controllers\FinanceiroController::removeFinCategoria' }
-  methods: [DELETE]
+
+agrupador:
+  path: /agrupador
+  defaults: {_controller : 'Crossfit\Controllers\AgrupadorFinanceiroController::retornaTodos' }
+  methods: [GET]
+salvaAgrupador:
+  path: /agrupador
+  defaults: {_controller : 'Crossfit\Controllers\AgrupadorFinanceiroController::salvaAgrupador' }
+  methods: [POST]
 
 # Rota para o controller de usuario
 perfil:

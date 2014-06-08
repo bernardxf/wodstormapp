@@ -229,6 +229,23 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 
 	$scope.salvaEstacionamento = function(){
 		var estacionamento = $scope.cadEstacionamentoDataset;
+
+		planoInicio = estacionamento.plano_ini;
+
+		if (planoInicio instanceof Date) {
+		  planoInicio = planoInicio.getFullYear() + "-" + ("00"+(planoInicio.getMonth()+1)).substr(-2) + "-" + planoInicio.getDate();
+		}
+
+		estacionamento.plano_ini = planoInicio;
+
+		planoFim = estacionamento.plano_fim;
+
+		if (planoFim instanceof Date) {
+		  planoFim = planoFim.getFullYear() + "-" + ("00"+(planoFim.getMonth()+1)).substr(-2) + "-" + planoFim.getDate();
+		}
+
+		estacionamento.plano_fim = planoFim;
+
 		EstacionamentoResource.save(estacionamento, function(response){
 			$location.path('/estacionamento');
 		});
@@ -281,6 +298,14 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 
 	$scope.salvaAulaExp = function(){
 		var aulaexp = $scope.aulaexpDataset;
+		data_aula = aulaexp.data_aula;
+
+		if (data_aula instanceof Date) {
+		  data_aula = data_aula.getFullYear() + "-" + ("00"+(data_aula.getMonth()+1)).substr(-2) + "-" + data_aula.getDate();
+		}
+
+		aulaexp.data_aula = data_aula;
+
 		AulaExpResource.save(aulaexp, function(response){
 			$location.path('/aulaexp');
 		});
@@ -508,6 +533,15 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 
 	$scope.salvaServico = function(){
 		var servico = $scope.servicoDataset;
+
+		data = servico.data;
+
+		if (data instanceof Date) {
+		  data = data.getFullYear() + "-" + ("00"+(data.getMonth()+1)).substr(-2) + "-" + data.getDate();
+		}
+
+		servico.data = data;
+		
 		ServicoResource.save(servico, function(response){
 			$location.path('/servico');
 		});

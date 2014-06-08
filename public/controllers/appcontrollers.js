@@ -49,37 +49,37 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 	$scope.dashboardDataset = null;
 	$scope.tituloAniversariantes = "Aniversariantes do Mês";
 	$scope.columnsAniversariantes = [
-		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
-		{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
+	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+	{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
 	];
 	$scope.botoesAniversariantes = [
-		{
-			label: "Imprimir",
-			route: "#/relAniversariantes"  
-		}
+	{
+		label: "Imprimir",
+		route: "#/relAniversariantes"  
+	}
 	];
 
 	$scope.tituloPlanosVencendo = "Planos Vencendo";
 	$scope.columnsPlanosVencendo = [
-		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
-		{name: "data_fim", label: "Data", order: "2", tipo: 'date'}
+	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+	{name: "data_fim", label: "Data", order: "2", tipo: 'date'}
 	];
 
 	$scope.tituloEstacionamentoVencido = "Estacionamento Vencido";
 	$scope.columnsEstacionamentoVencido = [
-		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
-		{name: "plano_fim", label: "Data", order: "2", tipo: 'date'}
+	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+	{name: "plano_fim", label: "Data", order: "2", tipo: 'date'}
 	];
 
 	$scope.tituloEstacionamentoTrancado = "Estacionamento Trancado";
 	$scope.columnsEstacionamentoTrancado = [
-		{name: "nome", label: "Nome", order: "1", tipo: 'text'},
-		{name: "placa", label: "Placa", order: "2", tipo: 'text'}
+	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+	{name: "placa", label: "Placa", order: "2", tipo: 'text'}
 	];
 
 	$scope.tituloPlanosTrancados = "Planos Trancado";
 	$scope.columnsPlanosTrancados = [
-		{name: "nome", label: "Nome", order: "1", tipo: 'text'}
+	{name: "nome", label: "Nome", order: "1", tipo: 'text'}
 	];
 
 	$scope.loadDashboard = function(){
@@ -233,7 +233,7 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 		planoInicio = estacionamento.plano_ini;
 
 		if (planoInicio instanceof Date) {
-		  planoInicio = planoInicio.getFullYear() + "-" + ("00"+(planoInicio.getMonth()+1)).substr(-2) + "-" + planoInicio.getDate();
+			planoInicio = planoInicio.getFullYear() + "-" + ("00"+(planoInicio.getMonth()+1)).substr(-2) + "-" + planoInicio.getDate();
 		}
 
 		estacionamento.plano_ini = planoInicio;
@@ -241,7 +241,7 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 		planoFim = estacionamento.plano_fim;
 
 		if (planoFim instanceof Date) {
-		  planoFim = planoFim.getFullYear() + "-" + ("00"+(planoFim.getMonth()+1)).substr(-2) + "-" + planoFim.getDate();
+			planoFim = planoFim.getFullYear() + "-" + ("00"+(planoFim.getMonth()+1)).substr(-2) + "-" + planoFim.getDate();
 		}
 
 		estacionamento.plano_fim = planoFim;
@@ -301,7 +301,7 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 		data_aula = aulaexp.data_aula;
 
 		if (data_aula instanceof Date) {
-		  data_aula = data_aula.getFullYear() + "-" + ("00"+(data_aula.getMonth()+1)).substr(-2) + "-" + data_aula.getDate();
+			data_aula = data_aula.getFullYear() + "-" + ("00"+(data_aula.getMonth()+1)).substr(-2) + "-" + data_aula.getDate();
 		}
 
 		aulaexp.data_aula = data_aula;
@@ -456,9 +456,17 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	$scope.salvaContrato = function(){
 		var contrato = $scope.cadContratoDataset;
 		contrato.id_aluno = $routeParams.aluno;
-        if(contrato.data_fim_computada == undefined){
-            contrato.data_fim_computada = contrato.data_fim;
-        }
+		if(contrato.data_fim_computada == undefined){
+			contrato.data_fim_computada = contrato.data_fim;
+		}
+
+		data_fim_computada = contrato.data_fim_computada;
+		if (data_fim_computada instanceof Date) {
+		  data_fim_computada = data_fim_computada.getFullYear() + "-" + ("00"+(data_fim_computada.getMonth()+1)).substr(-2) + "-" + data_fim_computada.getDate();
+		}
+
+		contrato.data_fim_computada = data_fim_computada;
+
 		ContratoResource.save(contrato, function(response){
 			$location.path('/contrato/'+contrato.id_aluno);
 		});
@@ -466,33 +474,33 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 
 	$scope.atualizaVencimentoContrato = function(){
 		var contrato = $scope.cadContratoDataset,		
-			dtFimComputada = new Date (contrato.data_fim_computada.split("-").join()),
-			qtdDiasTrancados = contrato.dias_trancado,
-			month = [],
-			dtFimAtual = new Date(contrato.data_fim_computada.split("-").join());		
-		    
-			if(qtdDiasTrancados === undefined || qtdDiasTrancados === "" || qtdDiasTrancados === null){
-				qtdDiasTrancados = 0;				
-			}
-			month[0]= "01";
-			month[1]= "02";
-			month[2]= "03";
-			month[3]= "04";
-			month[4]= "05";
-			month[5]= "06";
-			month[6]= "07";
-			month[7]= "08";
-			month[8]= "09";
-			month[9]= "10";
-			month[10]="11";
-			month[11]= "12";
+		dtFimComputada = new Date (contrato.data_fim_computada.split("-").join()),
+		qtdDiasTrancados = contrato.dias_trancado,
+		month = [],
+		dtFimAtual = new Date(contrato.data_fim_computada.split("-").join());		
 
-			dtFimAtual.setDate(dtFimComputada.getDate()+parseInt(qtdDiasTrancados));
-			var ano = dtFimAtual.getFullYear(),
-				mes = month[dtFimAtual.getMonth()],				
-				dia = dtFimAtual.getDate().toString();
-        if(dia.length == 1) dia = "0"+dia;
-			contrato.data_fim = ano+"-"+mes+"-"+dia;
+		if(qtdDiasTrancados === undefined || qtdDiasTrancados === "" || qtdDiasTrancados === null){
+			qtdDiasTrancados = 0;				
+		}
+		month[0]= "01";
+		month[1]= "02";
+		month[2]= "03";
+		month[3]= "04";
+		month[4]= "05";
+		month[5]= "06";
+		month[6]= "07";
+		month[7]= "08";
+		month[8]= "09";
+		month[9]= "10";
+		month[10]="11";
+		month[11]= "12";
+
+		dtFimAtual.setDate(dtFimComputada.getDate()+parseInt(qtdDiasTrancados));
+		var ano = dtFimAtual.getFullYear(),
+		mes = month[dtFimAtual.getMonth()],				
+		dia = dtFimAtual.getDate().toString();
+		if(dia.length == 1) dia = "0"+dia;
+		contrato.data_fim = ano+"-"+mes+"-"+dia;
 	}
 
 	$scope.cancelaEdicaoContrato = function(){
@@ -537,7 +545,7 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 		data = servico.data;
 
 		if (data instanceof Date) {
-		  data = data.getFullYear() + "-" + ("00"+(data.getMonth()+1)).substr(-2) + "-" + data.getDate();
+			data = data.getFullYear() + "-" + ("00"+(data.getMonth()+1)).substr(-2) + "-" + data.getDate();
 		}
 
 		servico.data = data;
@@ -676,23 +684,23 @@ AppControllers.controller('RelMetricaContratoController', ['$scope', 'RelMetrica
 		$scope.currentPage = 1;
 		switch(tipo){
 			case 'P':
-				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].ativoPeriodo;
-				break;
+			$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].ativoPeriodo;
+			break;
 			case 'F':
-				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].finalizado;
-				break;
+			$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].finalizado;
+			break;
 			case 'R':
-				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].renovado;
-				break;
+			$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].renovado;
+			break;
 			case 'N':
-				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].novos;
-				break;
+			$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].novos;
+			break;
 			case 'A':
-				$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].ativos;
-				break;
+			$scope.alunosMetricaSelecionada = $scope.relMetricaContratoResponseDataset[0].ativos;
+			break;
 			case 'default':
-				$scope.alunosMetricaSelecionada = null;
-				break;
+			$scope.alunosMetricaSelecionada = null;
+			break;
 		}
 	};
 }]);

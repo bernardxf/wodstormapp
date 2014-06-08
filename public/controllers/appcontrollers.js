@@ -2,7 +2,7 @@ var AppControllers = angular.module('AppControllers', ['ui.bootstrap']);
 
 // Este controller pode ser redefinido, caso a estrategia de utilizacao do controle de acesso (proposito deste) seja
 // alterada.
-AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoResource", function($scope, $rootScope, controleAcessoResource) {
+AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoResource", function ($scope, $rootScope, controleAcessoResource) {
 	$rootScope.sideBarIsVisible = true;
 	$rootScope.headerIsVisible  = true;
 	controleAcessoResource.get({}, function(response){
@@ -827,39 +827,131 @@ AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootS
 	};
 }]);
 
-AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$location', 'FinanceiroResource', '$timeout', function ($scope, $routeParams, $location, FinanceiroResource, $timeout) {
+AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$location', 'FinanceiroResource', '$timeout', '$modal', 'AgrupadorResource', function ($scope, $routeParams, $location, FinanceiroResource, $timeout, $modal, AgrupadorResource) {
 	$scope.financeiroDataset = null;
+	$scope.financeiroFiltrado = null;
+	$scope.cadFinanceiroDataset = null;
+	$scope.listaCategorias = null;
+	$scope.listaAnos = null;
 
+	var now = new Date();
+	$scope.filtroFinanceiro = {
+		ano: now.getFullYear(),
+		mes: null
+	};
+	
 	$scope.carregaFinanceiro = function(){
+		FinanceiroResource.get({ano: $scope.filtroFinanceiro.ano}, function(response){
+			$scope.financeiroDataset = response.data.dadosFinanceiro;
+			$scope.financeiroFiltrado = response.data.dadosFinanceiro;
+			$scope.listaCategorias = response.data.categorias;
+			$scope.listaAnos = response.data.anos;
+			$scope.filtrarMes(now.getMonth() + 1);
+		});
 	};
 
-	$scope.carregaFinCategoria = function(){
+	$scope.filtrarAno = function(ano){
+		$scope.filtroFinanceiro.ano = ano;
+		$scope.carregaFinanceiro();
+	};
+
+	$scope.filtrarMes = function(mes){
+		$scope.filtroFinanceiro.mes = mes;	
+		$scope.financeiroFiltrado = $scope.financeiroDataset.filter(function(item){
+			var data = new Date(item.data);
+			return (data.getMonth() + 1) == mes;
+		});
 	};
 
 	$scope.carregaCadFinMovimento = function(){
-	};
-
-	$scope.carregaCadFinCategoria = function(){
+		var id_financeiro = $routeParams.financeiro;
+		FinanceiroResource.get({id_financeiro: id_financeiro}, function(response){
+			$scope.listaCategorias = response.data.categorias;
+			$timeout(function(){
+				if(!angular.isArray(response.data.dadosFinanceiro)) {
+					$scope.cadFinanceiroDataset = response.data.dadosFinanceiro;	
+				}	
+			});
+		});
 	};
 
 	$scope.salvaFinMovimento = function(){
-	};
-
-	$scope.salvaFinCategoria = function(){
+		var movimento = $scope.cadFinanceiroDataset;
+		FinanceiroResource.save(movimento, function(response){
+			$location.path('/financeiro');
+		});	
 	};
 
 	$scope.cancelaEdicaoMovimento = function(){
 		$location.path('/financeiro');
 	};
 
-	$scope.cancelaEdicaoCategoria = function(){
-		$location.path('/financeiro/categoria');
+	$scope.removeFinMovimento = function(movimento){
+		if(confirm('Realmente deseja apagar?')){
+			FinanceiroResource.remove({id_movimento : movimento.id_financeiro}, function(response){
+				$scope.carregaFinanceiro();
+			});
+		}
 	};
 
-	$scope.removeFinMovimento = function(){
+	$scope.entradasPeriodo = function(dataset){
+		if(!dataset) return 0;
+		var entradas = dataset.filter(function(item){
+			return item.tipo == 'R';
+		});
+
+		var valorTotal = 0;
+		angular.forEach(entradas, function(entrada){
+			valorTotal = parseFloat(valorTotal) + parseFloat(entrada.valor);
+		});
+		return valorTotal;
 	};
 
-	$scope.removeFinCategoria = function(){
+	$scope.saidasPeriodo = function(dataset){
+		if(!dataset) return 0;
+		var saidas = dataset.filter(function(item){
+			return item.tipo == 'D';
+		});
+
+		var valorTotal = 0;
+		angular.forEach(saidas, function(saida){
+			valorTotal = parseFloat(valorTotal) + parseFloat(saida.valor);
+		});
+		return valorTotal;
+	};
+
+	$scope.resultadoPeriodo = function(dataset){
+		var valorTotal = 0;
+		angular.forEach(dataset, function(financeiro){
+			if(financeiro.tipo == 'R') {
+				valorTotal = parseFloat(valorTotal) + parseFloat(financeiro.valor);
+			} else {
+				valorTotal = parseFloat(valorTotal) - parseFloat(financeiro.valor);
+			}
+			
+		});
+		return valorTotal;
+	};
+
+	$scope.modalNovoAgrupador = function(){
+		var modalInstance = $modal.open({
+			templateUrl: "views/partials/ws_modal_agrupador_financeiro.html",
+			controller: 'ModalAgrupadorController',
+			backdrop: true, // removendo o backdrop porque ainda falta definir uma maneira de adicionar os templates do angular-ui-bootstrap
+			resolve: {
+				items: function(){
+					return {
+						
+					}				
+				}
+			}
+		});
+
+		modalInstance.result.then(function(){
+			AgrupadorResource.get({}, function(response){
+				$scope.listaCategorias = response.data.categorias;
+			});
+		});
 	};
 }]);
 
@@ -877,6 +969,24 @@ AppControllers.controller('RelatorioController', ['$scope', '$rootScope', 'Dashb
 
 AppControllers.controller('ModalController', ['$scope', '$modalInstance','items', function ($scope, $modalInstance, items) {
 	$scope.modalDataset = items;
+
+	$scope.ok = function () {
+		$modalInstance.close();
+	};
+
+}]);
+
+AppControllers.controller('ModalAgrupadorController', ['$scope', '$modalInstance','items', 'AgrupadorResource', function ($scope, $modalInstance, items, AgrupadorResource) {
+	$scope.agrupadorDataset = {nome:null};
+
+	$scope.salvaAgrupador = function(){
+		var agrupadorDataset = $scope.agrupadorDataset;
+		if(agrupadorDataset.nome) {
+			AgrupadorResource.save(agrupadorDataset, function(response){
+				$modalInstance.close();	
+			});	
+		}
+	};
 
 	$scope.ok = function () {
 		$modalInstance.close();

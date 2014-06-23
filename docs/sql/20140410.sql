@@ -1,4 +1,4 @@
-alter table aluno add column observacao_presenca varchar(200) after observacao;
+-- alter table aluno add column observacao_presenca varchar(200) after observacao;
 
 -- CRIACAO DA ESTRUTURA DE CONTROLE DE ACESSO.
 CREATE  TABLE IF NOT EXISTS `grupo_usuario` (
@@ -37,12 +37,12 @@ CREATE  TABLE IF NOT EXISTS `controle_acesso` (
 ENGINE = InnoDB;
 
 alter table usuario add (id_grupo_usuario int(11));
-alter table usuario add CONSTRAINT 'fk_grupo_usuario_usuario' FOREIGN KEY (id_grupo_usuario) REFERENCES grupo_usuario(id_grupo_usuario);
-
-update usuario set id_grupo_usuario = 1 where id_usuario = 4;
+alter table usuario add CONSTRAINT `fk_grupo_usuario_usuario` FOREIGN KEY (`id_grupo_usuario`) REFERENCES grupo_usuario(`id_grupo_usuario`);
 
 insert into grupo_usuario (id_grupo_usuario, nome, id_organizacao) values (1, 'Administradores', 1);
 insert into grupo_usuario (id_grupo_usuario, nome, id_organizacao) values (2, 'Recepcionistas', 1);
+
+update usuario set id_grupo_usuario = 1 where id_usuario = 4;
 
 insert into controle_acesso (componente, tipo_componente, permissao, id_grupo_usuario, id_organizacao) values ('menu/dashboard', 'M', 2, 1, 1);
 insert into controle_acesso (componente, tipo_componente, permissao, id_grupo_usuario, id_organizacao) values ('menu/aluno', 'M', 2, 1, 1);

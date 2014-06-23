@@ -18,7 +18,7 @@ AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoRe
 			});
 
 			// Permissao = 2 significa permissao de execucao.
-			return regra[0].permissao == 2;
+			if(regra.length) return regra[0].permissao == 2;
 		}
 
 		return null;

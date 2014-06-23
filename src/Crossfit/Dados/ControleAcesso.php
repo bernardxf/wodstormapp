@@ -31,7 +31,8 @@ class ControleAcesso
 							)";
 
 		$id_organizacao = App::getSession()->get("organizacao");
-		$id_usuario     = App::getSession()->get("usuario")["id_usuario"];
+		$usuario = App::getSession()->get("usuario");
+		$id_usuario = $usuario["id_usuario"];
 
 		$resultado = Conexao::get()->fetchAll($sql, array($id_organizacao, $id_usuario, $id_organizacao));
 		return $resultado;

@@ -5,7 +5,6 @@ AppServices.factory('loginService', ['LoginResource', 'LogoutResource', 'Message
 		login : function(loginDataset){
 			LoginResource.login(loginDataset, function(response){
 				if(response){
-					console.log(response);
 					if(response.success){
 						$rootScope.logged = true;
 						$rootScope.loggedUserData = response.data;

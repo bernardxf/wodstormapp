@@ -896,7 +896,7 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 
 	$scope.removeFinMovimento = function(movimento){
 		if(confirm('Realmente deseja apagar?')){
-			FinanceiroResource.remove({id_movimento : movimento.id_financeiro}, function(response){
+			FinanceiroResource.remove({id_financeiro : movimento.id_financeiro}, function(response){
 				$scope.carregaFinanceiro();
 			});
 		}

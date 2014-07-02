@@ -133,7 +133,8 @@ class Contrato
 	{
 		$sql = "SELECT aluno.nome as nome, data_fim FROM contrato 
 				JOIN aluno on contrato.id_aluno = aluno.id_aluno
-				WHERE contrato.status = 'A' AND to_days(data_fim) - to_days(SYSDATE()) <= 7 
+				WHERE aluno.status = 'A'
+				AND contrato.status = 'A' AND to_days(data_fim) - to_days(SYSDATE()) <= 7 
 				AND contrato.id_organizacao = ?
 				ORDER BY YEAR(data_fim) ASC, MONTH(data_fim) ASC, DAY(data_fim) ASC";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));

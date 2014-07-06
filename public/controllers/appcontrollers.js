@@ -864,9 +864,9 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 	};
 
 	$scope.filtrarMes = function(mes){
-		$scope.filtroFinanceiro.mes = mes;	
+		$scope.filtroFinanceiro.mes = mes;
 		$scope.financeiroFiltrado = $scope.financeiroDataset.filter(function(item){
-			var data = new Date(item.data);
+			var data = new Date(item.data + " 00:00:00");
 			return (data.getMonth() + 1) == mes;
 		});
 	};

@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `wodstorm` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `wodstorm`;
 -- MySQL dump 10.13  Distrib 5.5.35, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: wodstorm

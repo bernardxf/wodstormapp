@@ -79,6 +79,12 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/perfil', {
 		templateUrl: 'views/perfil.html',
 		controller: 'PerfilController'
+	}).when('/usuario', {
+		templateUrl: 'views/usuario.html',
+		controller: 'CadastroUsuarioController'
+	}).when('/cad_usuario/:usuario?', {
+		templateUrl: 'views/cad_usuario.html',
+		controller: 'CadastroUsuarioController'
 	}).when('/financeiro', {
 		templateUrl: 'views/financeiro.html',
 		controller: 'FinanceiroController'
@@ -176,6 +182,10 @@ crossfitApp.factory('RelServicoResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('PerfilResource', ['$resource', function ($resource) {
 	return $resource('api/perfil/:id_usuario', {id_usuario: '@id_usuario'}, {atualizaSenha: { method: 'POST', params: {changePassword: true}}});
+}]);
+
+crossfitApp.factory('UsuarioResource', ['$resource', function ($resource) {
+	return $resource('api/usuario/:id_usuario',{id_usuario:'@id_usuario'});
 }]);
 
 crossfitApp.factory("controleAcessoResource", ["$resource", function($resource) {

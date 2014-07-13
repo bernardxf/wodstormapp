@@ -145,3 +145,24 @@ AppDirectives.directive('wsGrid', [
             }
         };
     }]);
+
+AppDirectives.directive('wsVerificaSenha', [
+    function() {
+        return {
+            restrict: "A",
+            require: "ngModel",
+			      scope: {
+			        senha: '='
+			      },
+            link: function(scope, element, attrs, controller) {
+            	controller.$parsers.unshift(function(confirmacaoSenha) {
+            		var senha = scope.senha
+            		if (senha != null && senha != confirmacaoSenha) {
+          				controller.$setValidity("wsVerificaSenha", false);
+            		} else {
+            			controller.$setValidity("wsVerificaSenha", true);
+            		}
+            	});
+            }
+        };
+    }]);

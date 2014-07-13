@@ -23,15 +23,17 @@
               </div>
             </div>
             <div class="col-sm-12">
-              <div class="form-group">
-                <label for="senha">Senha</label>
+              <div class="form-group" ng-class="{'has-error': form.confirmacao_senha.$error.wsVerificaSenha}">
+                <label for="senha" class="control-label">Senha</label>
                 <input type="password" id="senha" class="form-control" ng-model="usuario.senha">
+                <span ng-show="form.confirmacao_senha.$error.wsVerificaSenha" class="control-label">As senhas digitadas não coincidem</span>
               </div>
             </div>
             <div class="col-sm-12">
-              <div class="form-group">
-                <label for="confirmacao_senha">Confirmar Senha</label>
-                <input type="password" id="confirmacao_senha" class="form-control" ng-model="usuario.confirmacaoSenha">
+              <div class="form-group" ng-class="{'has-error': form.confirmacao_senha.$error.wsVerificaSenha}">
+                <label for="confirmacao_senha" class="control-label">Confirmar Senha</label>
+                <input type="password" id="confirmacao_senha" name="confirmacao_senha" class="form-control" ng-model="usuario.confirmacaoSenha" ws-verifica-senha senha="usuario.senha">
+                <span ng-show="form.confirmacao_senha.$error.wsVerificaSenha" class="control-label">As senhas digitadas não coincidem</span>
               </div>
             </div>
           </div>

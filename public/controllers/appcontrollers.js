@@ -454,22 +454,23 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	};
 
 	$scope.salvaContrato = function(){
-		var contrato = $scope.cadContratoDataset;
-		contrato.id_aluno = $routeParams.aluno;
-		if(contrato.data_fim_computada == undefined){
-			contrato.data_fim_computada = contrato.data_fim;
-		}
+		console.log($scope.cadContratoDataset.data_inicio);
+		// var contrato = $scope.cadContratoDataset;
+		// contrato.id_aluno = $routeParams.aluno;
+		// if(contrato.data_fim_computada == undefined){
+		// 	contrato.data_fim_computada = contrato.data_fim;
+		// }
 
-		data_fim_computada = contrato.data_fim_computada;
-		if (data_fim_computada instanceof Date) {
-		  data_fim_computada = data_fim_computada.getFullYear() + "-" + ("00"+(data_fim_computada.getMonth()+1)).substr(-2) + "-" + data_fim_computada.getDate();
-		}
+		// data_fim_computada = contrato.data_fim_computada;
+		// if (data_fim_computada instanceof Date) {
+		//   data_fim_computada = data_fim_computada.getFullYear() + "-" + ("00"+(data_fim_computada.getMonth()+1)).substr(-2) + "-" + data_fim_computada.getDate();
+		// }
 
-		contrato.data_fim_computada = data_fim_computada;
+		// contrato.data_fim_computada = data_fim_computada;
 
-		ContratoResource.save(contrato, function(response){
-			$location.path('/contrato/'+contrato.id_aluno);
-		});
+		// ContratoResource.save(contrato, function(response){
+		// 	$location.path('/contrato/'+contrato.id_aluno);
+		// });
 	};
 
 	$scope.atualizaVencimentoContrato = function(){

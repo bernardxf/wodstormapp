@@ -146,6 +146,45 @@ AppDirectives.directive('wsGrid', [
         };
     }]);
 
+AppDirectives.directive('wsDatepicker', [
+    function() {
+        return {
+            restrict: "A",
+            require: "ngModel",
+            link: function(scope, element, attrs, controller) {
+            	element.datepicker({
+            		format: "dd/mm/yyyy",
+                todayBtn: true,
+                language: "pt-BR",
+                autoclose: true
+            	});
+
+              element.change(function() {
+                controller.$setViewValue(element.val());
+
+                var partes = element.val().split("/");
+                controller.$modelValue = partes[2] + "-" + partes[1] + "-" + partes[0];
+                console.log(controller);
+                // controller.$viewValue = element.val();
+                // controller.$modelValue = element.val();
+              });
+
+              controller.$parsers.unshift(function(viewValue) {
+                console.log("view value: " + viewValue);
+              });
+
+              controller.$formatters.unshift(function(modelValue) {
+                if (/\d{4}\-\d{2}\-\d{2}/.test(modelValue)) {
+                  console.log("model value: " + modelValue);
+                  var partes = modelValue.split("-");
+                  return partes[2] + "/" + partes[1] + "/" + partes[0];
+                }
+              });
+
+            }
+        };
+    }]);
+
 AppDirectives.directive('wsVerificaSenha', [
     function() {
         return {
@@ -155,14 +194,23 @@ AppDirectives.directive('wsVerificaSenha', [
 			        senha: '='
 			      },
             link: function(scope, element, attrs, controller) {
+
+            	scope.$watch("senha", function(senha) {
+            		checaValidadeSenhas(senha, scope.confirmacaoSenha);
+            	});
+
             	controller.$parsers.unshift(function(confirmacaoSenha) {
-            		var senha = scope.senha
+            		checaValidadeSenhas(scope.senha, confirmacaoSenha);
+            	});
+
+            	checaValidadeSenhas = function(senha, confirmacaoSenha) {
+            		console.log(senha + "    " + confirmacaoSenha);
             		if (senha != null && senha != confirmacaoSenha) {
           				controller.$setValidity("wsVerificaSenha", false);
             		} else {
             			controller.$setValidity("wsVerificaSenha", true);
             		}
-            	});
+            	};
             }
         };
     }]);

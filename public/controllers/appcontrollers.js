@@ -5,7 +5,7 @@ var AppControllers = angular.module('AppControllers', ['ui.bootstrap']);
 AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoResource", function ($scope, $rootScope, controleAcessoResource) {
 	$rootScope.sideBarIsVisible = true;
 	$rootScope.headerIsVisible  = true;
-	controleAcessoResource.get({}, function(response){
+	controleAcessoResource.get({}, function(response){	
 		$scope.itensControleAcesso = response.data;
 	});
 

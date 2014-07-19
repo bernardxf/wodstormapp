@@ -22,14 +22,10 @@
 							</div>
 						</div>
 						<div class="col-sm-6">
-							<!-- <div class="form-group">
-								<label for="alunoDataNasc">Data Nascimento *</label>
-								<input type="date" id="alunoDataNasc" class="form-control" ng-model="cadAlunoDataset.data_nasc" required>
-							</div> -->
 
 							<div class="form-group">
 					      <label for="alunoDataNasc">Data Nascimento *</label>
-					      <input type="date" class="form-control" ng-model="cadAlunoDataset.data_nasc" ng-required="true" id="alunoDataNasc"/>
+					      <input id="data_nasc" type="text" ng-datepicker ng-options="datepickerOptions" ng-model="cadAlunoDataset.data_nasc" ng-required="true">
 					    </div>
 
 							<div class="form-group">

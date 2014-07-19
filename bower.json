@@ -19,6 +19,7 @@
     "angular-route": "~1.2.11",
     "angular-ui-bootstrap": "0.10.0",
     "jquery": "*",
-    "angular-ui-select2": "*"
+    "angular-ui-select2": "*",
+    "angular-bootstrap-datepicker": "~0.3.1"
   }
 }

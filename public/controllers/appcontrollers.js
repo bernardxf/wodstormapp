@@ -18,7 +18,7 @@ AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoRe
 			});
 
 			// Permissao = 2 significa permissao de execucao.
-			if(regra.length) return regra[0].permissao == 2;
+			if(regra.length) return regra[0].permissao == 2;x
 		}
 
 		return null;
@@ -509,7 +509,10 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 		month = [],
 		dtFimAtual = new Date(contrato.data_fim_computada.split("-").join());
 
-        if(qtdDiasTrancados === undefined || qtdDiasTrancados === "" || qtdDiasTrancados === null){
+        if(qtdDiasTrancados === ""){
+            qtdDiasTrancados = 0;
+        }
+        if(qtdDiasTrancados === undefined || qtdDiasTrancados === null){
             qtdDiasTrancados = diasDecorridos(contrato.data_fim_computada,dtFimAtual);
         }
 

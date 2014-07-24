@@ -18,7 +18,7 @@ AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoRe
 			});
 
 			// Permissao = 2 significa permissao de execucao.
-			if(regra.length) return regra[0].permissao == 2;x
+			if(regra.length) return regra[0].permissao == 2;
 		}
 
 		return null;
@@ -456,7 +456,7 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	$scope.salvaContrato = function(){
 		var contrato = $scope.cadContratoDataset;
 		contrato.id_aluno = $routeParams.aluno;
-		if(contrato.data_fim_computada == undefined){
+		if(contrato.data_fim_computada == undefined || contrato.dias_trancado === null){
 			contrato.data_fim_computada = contrato.data_fim;
 		}
 

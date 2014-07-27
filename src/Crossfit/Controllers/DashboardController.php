@@ -42,7 +42,7 @@ class DashboardController
 		setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
 		date_default_timezone_set('America/Sao_Paulo');
 		$date = $data->format("Y-m-d");
-		$date = strftime("Aniversariantes do Mês de %B de %Y", strtotime( $date ));
+		$date = strftime("Aniversariantes de %B", strtotime( $date ));
 
 		$relatorio = array (
 			"titulo"           => $date,

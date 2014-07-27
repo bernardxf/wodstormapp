@@ -5,3 +5,8 @@
 .text-center {
   color: #FFF;
 }
+.btn-imprimir {
+    font-size: 19px;
+    padding: 0px !important;
+    color: #555;
+}

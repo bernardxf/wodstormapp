@@ -47,7 +47,7 @@ AppControllers.controller('LogoutController', ['$scope', 'loginService', functio
 
 AppControllers.controller('DashboardController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
 	$scope.dashboardDataset = null;
-	$scope.tituloAniversariantes = "Aniversariantes do Mês";
+	//$scope.tituloAniversariantes = "Aniversariantes do Mês";
 	$scope.columnsAniversariantes = [
 	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
 	{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
@@ -55,7 +55,7 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 	$scope.botoesAniversariantes = [
 	{
 		label: "Imprimir",
-		route: "#/relAniversariantes"  
+		route: "#/relAniversariantes"
 	}
 	];
 
@@ -705,6 +705,41 @@ AppControllers.controller('RelMetricaContratoController', ['$scope', 'RelMetrica
 	};
 }]);
 
+AppControllers.controller('RelPresencaController', ['$scope', 'RelPresencaResource',function ($scope, RelPresencaResource) {
+	$scope.relPresencaDataset = null;
+	$scope.relPresencaResponseDataset = null;
+	$scope.alunosPresencaSelecionada = null;
+
+	$scope.currentPage           = 1;
+	$scope.itemsPerPage          = 10;
+	$scope.showInputItemsPerPage = false;
+	$scope.maxSize               = 10;
+
+	$scope.pesquisaRelPresenca = function(){
+		$scope.currentPage = 1;
+		var pesquisa = $scope.relPresencaDataset;
+		RelPresencaResource.pesquisa(pesquisa,function(response){
+			$scope.relPresencaResponseDataset = response.data;
+			$scope.alunosPresencaSelecionada = null;
+		});	
+	};
+
+	$scope.buscaAlunosPorPresenca = function(tipo){
+		$scope.currentPage = 1;
+		switch(tipo){
+			case 'P':
+			$scope.alunosPresencaSelecionada = $scope.relPresencaResponseDataset[0].presentes;
+			break;
+			case 'A':
+			$scope.alunosPresencaSelecionada = $scope.relPresencaResponseDataset[0].ausentes;
+			break;
+			case 'default':
+			$scope.alunosPresencaSelecionada = null;
+			break;
+		}
+	};
+}]);
+
 AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', function ($scope, RelAulaResource) {
 	$scope.relaulaDataset = null;
 	$scope.relAulaResponseDataset = null;
@@ -970,7 +1005,7 @@ AppControllers.controller('RelatorioController', ['$scope', '$rootScope', 'Dashb
 	$scope.loadRelAniversariantes = function(){
 		DashboardResource.relAniversariantes({}, function(response){
 			$scope.relatorio = response.data.relatorio;
-			console.log($scope.relatorio);	
+			window.print();
 		});
 	};
 }]);

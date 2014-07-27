@@ -297,3 +297,9 @@ atualizaUsuario:
   path: /perfil/{id_usuario}
   defaults: {_controller:'Crossfit\Controllers\UsuarioController::atualizaUsuario'}
   methods: [POST]
+  
+# Rotas para o controller de Relatório de Presença
+relpresenca:
+  path: /relpresenca
+  defaults: { _controller: 'Crossfit\Controllers\RelPresencaController::pesquisaRelPresenca' }
+  methods:  [POST]

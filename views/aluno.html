@@ -26,6 +26,7 @@
 									<th>E-mail</th>
 									<th>Celular</th>
 									<th>Fim Contrato</th>
+                                    <th>Status</th>
 									<th>Ação</th>
 								</tr>
 								<tr>
@@ -33,6 +34,7 @@
 									<th><input class="form-control input-sm show" type="text" placeholder="E-mail" ng-model="alunoFilter.email"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="Celular" ng-model="alunoFilter.celular"></th>
 									<th><input class="form-control input-sm show" type="date" placeholder="Fim Contrato" ng-model="alunoFilter.data_fim"></th>
+                                    <th><input class="form-control input-sm show" type="text" placeholder="Status" ng-model="alunoFilter.status"></th>
 									<th></th>
 								</tr>
 							</thead>
@@ -42,6 +44,7 @@
 									<td>{{item.email}}</td>
 									<td>{{item.tel_celular}}</td>
 									<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{item.status | StatusTranslate}}</td>
 									<td>
 										<a href="#/cad_aluno/{{item.id_aluno}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
 										<a class="btn btn-sm btn-danger" ng-click="deletaAluno(item);"><i class="fa fa-eraser"></i></a>

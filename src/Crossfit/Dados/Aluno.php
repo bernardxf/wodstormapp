@@ -8,13 +8,18 @@ class Aluno
 {
 	public static function retornaTodos()
 	{
-		$sql = "SELECT aluno.id_aluno, aluno.nome, aluno.email, aluno.tel_celular, (SELECT data_fim FROM contrato 
-					WHERE id_aluno = aluno.id_aluno
-					ORDER BY data_fim DESC 
-					limit 1) as data_fim 
-				FROM aluno 
-				WHERE aluno.status != ? AND id_organizacao = ?
-				ORDER BY aluno.nome";
+//		$sql = "SELECT aluno.id_aluno, aluno.nome, aluno.email, aluno.tel_celular, (SELECT data_fim FROM contrato 
+//					WHERE id_aluno = aluno.id_aluno
+//					ORDER BY data_fim DESC 
+//					limit 1) as data_fim 
+//				FROM aluno 
+//				WHERE aluno.status != ? AND id_organizacao = ?
+//				ORDER BY aluno.nome";
+        $sql = "SELECT aluno.id_aluno, aluno.nome, aluno.email, aluno.tel_celular, contrato.data_fim, contrato.status 
+                FROM aluno
+                JOIN contrato ON contrato.id_aluno = aluno.id_aluno  
+                WHERE contrato.status != 'I' AND aluno.id_organizacao = 1
+                ORDER BY aluno.nome";
 		$resultado = Conexao::get()->fetchAll($sql, array('I', App::getSession()->get('organizacao')));
 		return $resultado;
 	}

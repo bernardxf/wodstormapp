@@ -1030,6 +1030,15 @@
 			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 			today: "Today",
 			clear: "Clear"
+
+			// days: ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado", "Domingo"],
+			// daysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Domingo"],
+			// daysMin: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Domingo"],
+			// months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+			// monthsShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+			// today: "Hoje",
+			// clear: "Limpar"
+
 		}
 	};
 

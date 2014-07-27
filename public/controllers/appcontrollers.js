@@ -5,7 +5,7 @@ var AppControllers = angular.module('AppControllers', ['ui.bootstrap']);
 AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoResource", function ($scope, $rootScope, controleAcessoResource) {
 	$rootScope.sideBarIsVisible = true;
 	$rootScope.headerIsVisible  = true;
-	controleAcessoResource.get({}, function(response){
+	controleAcessoResource.get({}, function(response){	
 		$scope.itensControleAcesso = response.data;
 	});
 
@@ -454,22 +454,23 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 	};
 
 	$scope.salvaContrato = function(){
-		var contrato = $scope.cadContratoDataset;
-		contrato.id_aluno = $routeParams.aluno;
-		if(contrato.data_fim_computada == undefined){
-			contrato.data_fim_computada = contrato.data_fim;
-		}
+		console.log($scope.cadContratoDataset.data_inicio);
+		// var contrato = $scope.cadContratoDataset;
+		// contrato.id_aluno = $routeParams.aluno;
+		// if(contrato.data_fim_computada == undefined){
+		// 	contrato.data_fim_computada = contrato.data_fim;
+		// }
 
-		data_fim_computada = contrato.data_fim_computada;
-		if (data_fim_computada instanceof Date) {
-		  data_fim_computada = data_fim_computada.getFullYear() + "-" + ("00"+(data_fim_computada.getMonth()+1)).substr(-2) + "-" + data_fim_computada.getDate();
-		}
+		// data_fim_computada = contrato.data_fim_computada;
+		// if (data_fim_computada instanceof Date) {
+		//   data_fim_computada = data_fim_computada.getFullYear() + "-" + ("00"+(data_fim_computada.getMonth()+1)).substr(-2) + "-" + data_fim_computada.getDate();
+		// }
 
-		contrato.data_fim_computada = data_fim_computada;
+		// contrato.data_fim_computada = data_fim_computada;
 
-		ContratoResource.save(contrato, function(response){
-			$location.path('/contrato/'+contrato.id_aluno);
-		});
+		// ContratoResource.save(contrato, function(response){
+		// 	$location.path('/contrato/'+contrato.id_aluno);
+		// });
 	};
 
 	$scope.atualizaVencimentoContrato = function(){
@@ -868,6 +869,44 @@ AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootS
 	$scope.cancelaPerfil = function(){
 		$location.path('/perfil');
 	};
+}]);
+
+AppControllers.controller('CadastroUsuarioController', ['$scope', '$location', '$routeParams', 'UsuarioResource', function($scope, $location, $routeParams, UsuarioResource) {
+	$scope.usuarioFilter = {}
+	$scope.currentPage   = 1;
+	$scope.itemsPerPage  = 10;
+
+	$scope.cancelaEdicaoUsuario = function() {
+		$location.path("/usuario");
+	};
+
+	$scope.salvarUsuario = function() {
+		UsuarioResource.save($scope.usuario, function(response){
+			$location.path('/usuario');
+		});
+	};
+
+	$scope.carregaCadUsuario = function() {
+		UsuarioResource.get({id_usuario : $routeParams.usuario}, function(response){
+			if(!angular.isArray(response.data)){
+				$scope.usuario = response.data;
+			}
+		});
+	};
+
+	$scope.deletaUsuario = function(usuario) {
+		if(confirm('Realmente deseja apagar?')){
+			UsuarioResource.remove({id_usuario : usuario.id_usuario}, function(){
+				$scope.carregaUsuarios();
+			});
+		}
+	}
+
+	$scope.carregaUsuarios = function() {
+		UsuarioResource.get(function(result) {
+			$scope.usuarios = result.data;
+		});
+	}
 }]);
 
 AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$location', 'FinanceiroResource', '$timeout', '$modal', 'AgrupadorResource', function ($scope, $routeParams, $location, FinanceiroResource, $timeout, $modal, AgrupadorResource) {

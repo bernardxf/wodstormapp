@@ -42,7 +42,7 @@
 							<div class="form-group">
 								<label class="col-md-3">Data Aula *</label>
 								<div class="col-md-7">
-									<input type="date" class="form-control" ng-model="aulaexpDataset.data_aula" ng-required="true" id="data_aula"/>
+									<input id="data_aula" type="text" ng-datepicker ng-options="datepickerOptions" ng-model="aulaexpDataset.data_aula">
 								</div>
 							</div>
 							
@@ -50,105 +50,105 @@
 					      <label class="col-md-3">Data Aula *</label>
 					      <input class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="aulaexpDataset.data_aula" show-weeks="false" 
 					        ng-required="true" id="data_aula" close-text="Fechar" readonly />
-					    </div> -->
+					      </div> -->
 
-							<div class="form-group">
-								<label class="col-md-3">E-mail *</label>
-								<div class="col-md-7">
-									<input type="email" id="email" class="form-control" ng-model="aulaexpDataset.email" required>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-							<div class="form-group">
-								<label class="col-md-3">Telefone *</label>
-								<div class="col-md-7">
-									<input type="text" id="telefone" class="form-control" ng-model="aulaexpDataset.telefone" required>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-							<div class="form-group">
-								<label class="col-md-3">CPF</label>
-								<div class="col-md-7">
-									<input type="text" id="cfp" class="form-control" ng-model="aulaexpDataset.cpf" required>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-							<div class="form-group">
-								<label class="col-md-3">Como ficou cohecendo a academia?</label>
-								<div class="col-md-7">
-									<input type="text" id="conhcendo" class="form-control" ng-model="aulaexpDataset.conhecendo" required>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-							<div class="form-group">
-								<label class="col-md-3">Já tem alguma experiência com o crossfit?</label>
-								<div class="col-md-7">
-									<select id="exp_crossfit" class="form-control" ng-model="aulaexpDataset.exp_crossfit" required>
-										<option value="S">Sim</option>
-										<option value="N">Não</option>
-									</select>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-							<div class="form-group">
-								<label class="col-md-3">Observação</label>
-								<div class="col-md-7">
-									<textarea cols="10" rows="9" id="observacao" class="form-control" ng-model="aulaexpDataset.observacao"></textarea>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-							<div class="form-group">
-								<label class="col-md-3">Confirmado</label>
-								<div class="col-md-7">
-									<select id="confirmado" class="form-control" ng-model="aulaexpDataset.confirmado">
-										<option value="Não">Não</option>
-										<option value="Sim">Sim</option>
-									</select>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-						</div>
-						<div class="tab-pane fade" id="presenca-tab">
-							<div class="form-group">
-								<label class="col-md-3">Presente</label>
-								<div class="col-md-7">
-									<select id="presente" class="form-control" ng-model="aulaexpDataset.presente">
-										<option value="Não">Não</option>
-										<option value="Sim">Sim</option>
-									</select>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-						</div>
-						<div class="tab-pane fade" id="pos-tab">
-							<div class="form-group">
-								<label class="col-md-3">O que achou da aula experimental?</label>
-								<div class="col-md-7">
-									<label class="radio-inline">
-										<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="pessimo">Péssimo
-									</label>
-									<label class="radio-inline">
-										<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="ruim">Ruim
-									</label>
-									<label class="radio-inline">
-										<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="regular">Regular
-									</label>
-									<label class="radio-inline">
-										<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="bom">Bom
-									</label>
-									<label class="radio-inline">
-										<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="otimo">Ótimo
-									</label>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-							<div class="form-group">
-								<label class="col-md-3">Pretende começar a praticar Crossfit?</label>
-								<div class="col-md-7">
-									<select id="praticar" class="form-control" ng-model="aulaexpDataset.praticar">
-										<option value="I">Indeciso</option>
-										<option value="N">Não</option>
-										<option value="S">Sim</option>
-									</select>
-								</div> <!-- /.col -->
-							</div> <!-- /.form-group -->
-						</div>
+					      <div class="form-group">
+					      	<label class="col-md-3">E-mail *</label>
+					      	<div class="col-md-7">
+					      		<input type="email" id="email" class="form-control" ng-model="aulaexpDataset.email" required>
+					      	</div> <!-- /.col -->
+					      </div> <!-- /.form-group -->
+					      <div class="form-group">
+					      	<label class="col-md-3">Telefone *</label>
+					      	<div class="col-md-7">
+					      		<input type="text" id="telefone" class="form-control" ng-model="aulaexpDataset.telefone" required>
+					      	</div> <!-- /.col -->
+					      </div> <!-- /.form-group -->
+					      <div class="form-group">
+					      	<label class="col-md-3">CPF</label>
+					      	<div class="col-md-7">
+					      		<input type="text" id="cfp" class="form-control" ng-model="aulaexpDataset.cpf" required>
+					      	</div> <!-- /.col -->
+					      </div> <!-- /.form-group -->
+					      <div class="form-group">
+					      	<label class="col-md-3">Como ficou cohecendo a academia?</label>
+					      	<div class="col-md-7">
+					      		<input type="text" id="conhcendo" class="form-control" ng-model="aulaexpDataset.conhecendo" required>
+					      	</div> <!-- /.col -->
+					      </div> <!-- /.form-group -->
+					      <div class="form-group">
+					      	<label class="col-md-3">Já tem alguma experiência com o crossfit?</label>
+					      	<div class="col-md-7">
+					      		<select id="exp_crossfit" class="form-control" ng-model="aulaexpDataset.exp_crossfit" required>
+					      			<option value="S">Sim</option>
+					      			<option value="N">Não</option>
+					      		</select>
+					      	</div> <!-- /.col -->
+					      </div> <!-- /.form-group -->
+					      <div class="form-group">
+					      	<label class="col-md-3">Observação</label>
+					      	<div class="col-md-7">
+					      		<textarea cols="10" rows="9" id="observacao" class="form-control" ng-model="aulaexpDataset.observacao"></textarea>
+					      	</div> <!-- /.col -->
+					      </div> <!-- /.form-group -->
+					      <div class="form-group">
+					      	<label class="col-md-3">Confirmado</label>
+					      	<div class="col-md-7">
+					      		<select id="confirmado" class="form-control" ng-model="aulaexpDataset.confirmado">
+					      			<option value="Não">Não</option>
+					      			<option value="Sim">Sim</option>
+					      		</select>
+					      	</div> <!-- /.col -->
+					      </div> <!-- /.form-group -->
+					    </div>
+					    <div class="tab-pane fade" id="presenca-tab">
+					    	<div class="form-group">
+					    		<label class="col-md-3">Presente</label>
+					    		<div class="col-md-7">
+					    			<select id="presente" class="form-control" ng-model="aulaexpDataset.presente">
+					    				<option value="Não">Não</option>
+					    				<option value="Sim">Sim</option>
+					    			</select>
+					    		</div> <!-- /.col -->
+					    	</div> <!-- /.form-group -->
+					    </div>
+					    <div class="tab-pane fade" id="pos-tab">
+					    	<div class="form-group">
+					    		<label class="col-md-3">O que achou da aula experimental?</label>
+					    		<div class="col-md-7">
+					    			<label class="radio-inline">
+					    				<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="pessimo">Péssimo
+					    			</label>
+					    			<label class="radio-inline">
+					    				<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="ruim">Ruim
+					    			</label>
+					    			<label class="radio-inline">
+					    				<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="regular">Regular
+					    			</label>
+					    			<label class="radio-inline">
+					    				<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="bom">Bom
+					    			</label>
+					    			<label class="radio-inline">
+					    				<input type="radio" id="nota_aula" ng-model="aulaexpDataset.nota_aula" value="otimo">Ótimo
+					    			</label>
+					    		</div> <!-- /.col -->
+					    	</div> <!-- /.form-group -->
+					    	<div class="form-group">
+					    		<label class="col-md-3">Pretende começar a praticar Crossfit?</label>
+					    		<div class="col-md-7">
+					    			<select id="praticar" class="form-control" ng-model="aulaexpDataset.praticar">
+					    				<option value="I">Indeciso</option>
+					    				<option value="N">Não</option>
+					    				<option value="S">Sim</option>
+					    			</select>
+					    		</div> <!-- /.col -->
+					    	</div> <!-- /.form-group -->
+					    </div>
+					  </div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 
-		
+	

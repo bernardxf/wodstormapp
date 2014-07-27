@@ -1,4 +1,4 @@
-var crossfitApp = angular.module('crossfitApp', ['ngRoute', 'ui.select2','AppControllers','AppDirectives', 'AppFilters', 'AppServices', 'ngResource']);
+var crossfitApp = angular.module('crossfitApp', ['ngRoute', 'ui.select2','ng-bootstrap-datepicker','AppControllers','AppDirectives', 'AppFilters', 'AppServices', 'ngResource']);
 
 crossfitApp.config(['$routeProvider',function($routeProvider){
 	$routeProvider.when('/', {
@@ -82,6 +82,12 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/perfil', {
 		templateUrl: 'views/perfil.html',
 		controller: 'PerfilController'
+	}).when('/usuario', {
+		templateUrl: 'views/usuario.html',
+		controller: 'CadastroUsuarioController'
+	}).when('/cad_usuario/:usuario?', {
+		templateUrl: 'views/cad_usuario.html',
+		controller: 'CadastroUsuarioController'
 	}).when('/financeiro', {
 		templateUrl: 'views/financeiro.html',
 		controller: 'FinanceiroController'
@@ -96,6 +102,15 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 }]);
 
 crossfitApp.run(function($rootScope, $location, LoginResource){
+
+	$rootScope.datepickerOptions = {
+		format: 'dd/mm/yyyy',
+		// format: 'yyyy-mm-dd',
+		language: 'pt-BR',
+		autoclose: true,
+    weekStart: 0
+	}
+
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
 		if ($rootScope.logged == false || $rootScope.logged == null) {
 			LoginResource.get({}, function(response){
@@ -179,6 +194,10 @@ crossfitApp.factory('RelServicoResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('PerfilResource', ['$resource', function ($resource) {
 	return $resource('api/perfil/:id_usuario', {id_usuario: '@id_usuario'}, {atualizaSenha: { method: 'POST', params: {changePassword: true}}});
+}]);
+
+crossfitApp.factory('UsuarioResource', ['$resource', function ($resource) {
+	return $resource('api/usuario/:id_usuario',{id_usuario:'@id_usuario'});
 }]);
 
 crossfitApp.factory("controleAcessoResource", ["$resource", function($resource) {

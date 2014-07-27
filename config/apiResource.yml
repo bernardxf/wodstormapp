@@ -297,8 +297,28 @@ atualizaUsuario:
   path: /perfil/{id_usuario}
   defaults: {_controller:'Crossfit\Controllers\UsuarioController::atualizaUsuario'}
   methods: [POST]
-  
-# Rotas para o controller de Relatório de Presença
+usuario:
+  path: /usuario
+  defaults: {_controller: 'Crossfit\Controllers\UsuarioController::carregaUsuarios'}
+  methods: [GET]
+cadUsuario:
+  path: /usuario/{id_usuario}
+  defaults: {_controller : 'Crossfit\Controllers\UsuarioController::carregaCadUsuario' }
+  methods: [GET]
+novoUsuario:
+  path: /usuario
+  defaults: {_controller : 'Crossfit\Controllers\UsuarioController::salvaUsuario' }
+  methods: [POST]
+atualizaUsuario:
+  path: /usuario/{id_usuario}
+  defaults: {_controller : 'Crossfit\Controllers\UsuarioController::atualizaUsuario' }
+  methods: [POST]
+removeUsuario:
+  path: /usuario/{id_usuario}
+  defaults: {_controller : 'Crossfit\Controllers\UsuarioController::removeUsuario' }
+  methods: [DELETE]
+
+# Rota para o relatorio de presenca
 relpresenca:
   path: /relpresenca
   defaults: { _controller: 'Crossfit\Controllers\RelPresencaController::pesquisaRelPresenca' }

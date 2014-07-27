@@ -18,21 +18,55 @@ class UsuarioController
 		return $response->getAsJson();
 	}
 
+	public function carregaUsuarios(Request $request) 
+	{
+		$response = new Response();
+		$usuarios = \Crossfit\Dados\Usuario::retornaTodos(App::getSession()->get('organizacao'));
+		$response->setData($usuarios);
+		return $response->getAsJson();
+	}
+
+	public static function carregaCadUsuario($id_usuario)
+	{
+		$response = new Response();
+		$resultado = \Crossfit\Dados\Usuario::retornaSelecionado($id_usuario);
+		$response->setData($resultado);
+		return $response->getAsJson();
+	}
+
+	public static function salvaUsuario(Request $request)
+	{
+		$response = new Response();
+		$dataset = json_decode($request->getContent(), true);
+		$dataset['id_organizacao'] = App::getSession()->get('organizacao');
+
+		if (isset($dataset["senha"])) {
+			$dataset["senha"] = md5($dataset["senha"]);
+		}
+
+		$resultado = Usuario::salvaUsuario($dataset);
+		$response->setData($resultado);
+		return $response->getAsJson();
+	}
+
 	public function atualizaUsuario(request $request, $id_usuario)
 	{
 		$response = new Response();
-
 		$dataset = json_decode($request->getContent(), true);
-
 		$changePassword = $request->query->get('changePassword');
-
 		if($changePassword){
 			return $this->atualizaSenha($id_usuario, $dataset);
 		} else {
 			$usuarioDataset = array(
 				'nome' => $dataset['nome'],
-				'usuario' => $dataset['usuario']
+				'usuario' => $dataset['usuario'],
 			);
+
+			if (isset($dataset["senha"]) && isset($dataset["confirmacaoSenha"])) {
+				unset($dataset["confirmacaoSenha"]);
+				$usuarioDataset["senha"] = md5($dataset["senha"]);
+			}
+
 
 			$resultado = Usuario::atualizaUsuario($id_usuario, $usuarioDataset);
 			if($resultado) {
@@ -60,5 +94,12 @@ class UsuarioController
 			$response->addMessage('danger', 'Erro ao atualizar senha', 'Nova senha deve ser igual a senha de confirmação.');
 			return $response->getAsJson();
 		}
+	}
+
+	public static function removeUsuario($id_usuario)
+	{
+		$response = new Response();
+		$resultado = Usuario::removeUsuario($id_usuario);
+		return $response->getAsJson();
 	}
 }

@@ -204,7 +204,6 @@ AppDirectives.directive('wsVerificaSenha', [
             	});
 
             	checaValidadeSenhas = function(senha, confirmacaoSenha) {
-            		console.log(senha + "    " + confirmacaoSenha);
             		if (senha != null && senha != confirmacaoSenha) {
           				controller.$setValidity("wsVerificaSenha", false);
             		} else {

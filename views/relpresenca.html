@@ -48,9 +48,9 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="item in relPresencaResponseDataset">
-										<td>{{item.presentes}}<a class="info-modal" ng-click='buscaAlunosPorPresenca("P")'><i class="fa fa-info-circle"></i></a></td>
-										<td>{{item.ausentes}}<a class="info-modal" ng-click='buscaAlunosPorPresenca("A")'><i class="fa fa-info-circle"></i></a></td>
+									<tr>
+										<td>{{relPresencaResponseDataset.presentes.length}}<a class="info-modal" ng-click='buscaAlunosPorPresenca("P")'><i class="fa fa-info-circle"></i></a></td>
+										<td>{{relPresencaResponseDataset.ausentes.length}}<a class="info-modal" ng-click='buscaAlunosPorPresenca("A")'><i class="fa fa-info-circle"></i></a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -73,7 +73,7 @@
 								</tbody>
 							</table>
 							<pagination total-items="alunosPresencaSelecionada.length" page="currentPage" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="maxSize"></pagination>
-						</div> <!-- /.table-responsive -->
+						</div>
 					</div> <!-- /.portlet-content -->
 				</div> <!--/.portlet -->
 			</div> <!-- /.col -->

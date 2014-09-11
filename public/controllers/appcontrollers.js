@@ -729,10 +729,10 @@ AppControllers.controller('RelPresencaController', ['$scope', 'RelPresencaResour
 		$scope.currentPage = 1;
 		switch(tipo){
 			case 'P':
-			$scope.alunosPresencaSelecionada = $scope.relPresencaResponseDataset[0].presentes;
+			$scope.alunosPresencaSelecionada = $scope.relPresencaResponseDataset.presentes;
 			break;
 			case 'A':
-			$scope.alunosPresencaSelecionada = $scope.relPresencaResponseDataset[0].ausentes;
+			$scope.alunosPresencaSelecionada = $scope.relPresencaResponseDataset.ausentes;
 			break;
 			case 'default':
 			$scope.alunosPresencaSelecionada = null;

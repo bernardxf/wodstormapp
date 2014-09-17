@@ -19,6 +19,7 @@
 							<div class="form-group">
 					      <label for="contratoDataIni">Data Inicial *</label>
 					      <input id="data_inicio" type="text" ng-datepicker ng-options="datepickerOptions" ng-model="cadContratoDataset.data_inicio" ng-required="true">
+
 					    </div>
 
 							<div class="form-group">
@@ -62,7 +63,7 @@
 							</div>
 							<div class="form-group">
 								<label for="contratoDiasTrancados">Dias Trancados</label>
-								<input type="number" id="contratoDiasTrancados" class="form-control" ng-change="atualizaVencimentoContrato();" ng-model="cadContratoDataset.dias_trancado">
+								<input type="text" id="contratoDiasTrancados" ng-model="cadContratoDataset.dias_trancado" class="form-control" ng-change="atualizaVencimentoContrato();" >
 							</div>
 						</div>
 					</div>

@@ -1,6 +1,7 @@
 <?php
 namespace Crossfit\Controllers;
 
+use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\Dashboard;
 use Crossfit\Dados\Aluno;
 use Crossfit\Dados\Contrato;
@@ -58,6 +59,17 @@ class DashboardController
 		);
 
 		$response->setData(array("relatorio" => $relatorio));
+		return $response->getAsJson();
+	}
+
+	public static function carregaAlunosDashboard(Request $request) 
+	{
+		$response = new Response();
+		$tipo = $request->query->get('tipo');
+
+		$alunos = Dashboard::retornaAlunosPorTipo($tipo);
+		$response->setData(array('alunos' => $alunos));
+
 		return $response->getAsJson();
 	}
 

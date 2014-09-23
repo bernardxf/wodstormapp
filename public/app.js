@@ -137,7 +137,10 @@ crossfitApp.factory('LogoutResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('DashboardResource', ['$resource', function ($resource) {
-	return $resource('api/dashboard', {}, {relAniversariantes : {method: 'GET', url : 'api/relAniversariantes'}});
+	return $resource('api/dashboard', {}, {
+		relAniversariantes : {method: 'GET', url : 'api/relAniversariantes'},
+		alunos : {method: 'GET', url : 'api/dashboard/alunos'}
+	});
 }]);
 
 crossfitApp.factory('PlanoResource', ['$resource', function ($resource) {

@@ -132,7 +132,8 @@ AppDirectives.directive('wsGrid', [
             	buttons: '=',
             	gridData: '=',
             	columns: '=',
-            	showInputItemsPerPage: '='
+            	showInputItemsPerPage: '=',
+            	gridColumnsSize: '='
             },
             link: function(scope, element, attrs) {
             	scope.titulo                = scope.titulo;
@@ -142,6 +143,7 @@ AppDirectives.directive('wsGrid', [
             	scope.itemsPerPage          = 10;
             	scope.showInputItemsPerPage = scope.showInputItemsPerPage;
             	scope.maxSize               = 10;
+            	scope.gridSize				= scope.gridColumnsSize ? scope.gridColumnsSize : 6;
             }
         };
     }]);

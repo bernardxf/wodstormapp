@@ -47,7 +47,7 @@ AppControllers.controller('LogoutController', ['$scope', 'loginService', functio
 
 AppControllers.controller('DashboardController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
 	$scope.dashboardDataset = null;
-	//$scope.tituloAniversariantes = "Aniversariantes do Mês";
+	$scope.tituloAniversariantes = "Aniversariantes do Mês";
 	$scope.columnsAniversariantes = [
 	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
 	{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
@@ -86,6 +86,20 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 		DashboardResource.get({}, function(response){
 			$scope.dashboardDataset = response.data;
 		});
+	};
+
+	$scope.alunosDashboardDataset = null;
+	$scope.currentPage = 1;
+	$scope.itemsPerPage = 10;
+	$scope.maxSize = 10;
+	$scope.buscarAlunosDashboard = function(tipo){
+		DashboardResource.alunos({tipo:tipo}, function(response){
+			$scope.alunosDashboardDataset = response.data.alunos;
+		});
+	};
+
+	$scope.fecharAlunosDashboard = function(){
+		$scope.alunosDashboardDataset = null;
 	};
 }]);
 
@@ -862,7 +876,7 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 	}
 }]);
 
-AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootScope','$location', 'PerfilResource', 'MessageService', function ($scope, $routeParams, $rootScope, $location, PerfilResource, MessageService) {
+AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootScope','$location', 'frce', 'MessageService', function ($scope, $routeParams, $rootScope, $location, PerfilResource, MessageService) {
 	$scope.perfilDataset = null;
 
 	$scope.carregaPerfil = function(){

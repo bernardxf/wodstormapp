@@ -4,43 +4,99 @@
 	</div> <!-- #content-header -->	
 	<div id="content-container">
 		<div class="row">
-			<div class="col-md-4 col-sm-6">
-				<a href="javascript:;" class="dashboard-stat tertiary">
-					<div class="visual">
-						<i class="fa fa-star"></i>
-					</div> <!-- /.visual -->
-					<div class="details">
-						<span class="content">Alunos Ativos</span>
-						<span class="value">{{dashboardDataset.dashboard.ativo}}</span>
-					</div> <!-- /.details -->
-				</a> <!-- /.dashboard-stat -->
-			</div> <!-- /.col-md-3 -->
-            
-            <div class="col-md-4 col-sm-6">
-				<a href="javascript:;" class="dashboard-stat secondary">
-					<div class="visual">
-						<i class="fa fa-star"></i>
-					</div> <!-- /.visual -->
-					<div class="details">
-						<span class="content">Alunos Trancados</span>
-						<span class="value">{{dashboardDataset.dashboard.trancado}}</span>
-					</div> <!-- /.details -->
-				</a> <!-- /.dashboard-stat -->
-			</div> <!-- /.col-md-3 -->
-            
-			<div class="col-md-4 col-sm-6">
-				<a href="javascript:;" class="dashboard-stat primary">
-					<div class="visual">
-						<i class="fa fa-star"></i>
-					</div> <!-- /.visual -->
-					<div class="details">
-						<span class="content">Alunos Finalizados</span>
-						<span class="value">{{dashboardDataset.dashboard.finalizado}}</span>
-					</div> <!-- /.details -->
-				</a> <!-- /.dashboard-stat -->
-			</div> <!-- /.col-md-3 -->
-            
+			<div class="col-md-12">
+				<div class="portlet">
+					<div class="portlet-header">
+						<h3><i class="fa fa-table"></i>{{titulo}}</h3>
+						<ul ng-show="buttons.length > 0" class="portlet-tools pull-right">
+							<li ng-repeat="button in buttons">
+								<a ng-href="{{button.route}}" target="_blank" class="btn btn-sm btn-imprimir" title="Imprimir"><i class="fa fa-print"></i></a>
+							</li>
+						</ul>
+					</div>
+					<div class="portlet-content">    
+						<div class="row">
+							<div class="col-md-3">
+								<a href="javascript:;" class="dashboard-stat default" ng-click="buscarAlunosDashboard('A');">
+									<div class="visual">
+										<i class="fa fa-star"></i>
+									</div> <!-- /.visual -->
+									<div class="details">
+										<span class="content">Alunos Ativos</span>
+										<span class="value">{{dashboardDataset.dashboard.ativo}}</span>
+									</div> <!-- /.details -->
+								</a> <!-- /.dashboard-stat -->
+							</div> <!-- /.col-md-3 -->
+
+							<div class="col-md-3">
+								<a href="javascript:;" class="dashboard-stat tertiary" ng-click="buscarAlunosDashboard('I');">
+									<div class="visual">
+										<i class="fa fa-star"></i>
+									</div> <!-- /.visual -->
+									<div class="details">
+										<span class="content">Alunos Inativos</span>
+										<span class="value">{{dashboardDataset.dashboard.inativo}}</span>
+									</div> <!-- /.details -->
+								</a> <!-- /.dashboard-stat -->
+							</div> <!-- /.col-md-3 -->
+
+							<div class="col-md-3">
+								<a href="javascript:;" class="dashboard-stat secondary" ng-click="buscarAlunosDashboard('T');">
+									<div class="visual">
+										<i class="fa fa-star"></i>
+									</div> <!-- /.visual -->
+									<div class="details">
+										<span class="content">Alunos Trancados</span>
+										<span class="value">{{dashboardDataset.dashboard.trancado}}</span>
+									</div> <!-- /.details -->
+								</a> <!-- /.dashboard-stat -->
+							</div> <!-- /.col-md-3 -->
+
+							<div class="col-md-3">
+								<a href="javascript:;" class="dashboard-stat primary" ng-click="buscarAlunosDashboard('F');">
+									<div class="visual">
+										<i class="fa fa-star"></i>
+									</div> <!-- /.visual -->
+									<div class="details">
+										<span class="content">Alunos Finalizados</span>
+										<span class="value">{{dashboardDataset.dashboard.finalizado}}</span>
+									</div> <!-- /.details -->
+								</a> <!-- /.dashboard-stat -->
+							</div> <!-- /.col-md-3 -->
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-responsive" ng-if="alunosDashboardDataset">
+									<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
+										<thead>
+											<tr>
+												<th>Aluno</th>
+												<th>
+													Ação
+													<a class="btn btn-sm btn-danger pull-right" ng-click="fecharAlunosDashboard();">
+														<i class="fa fa-times"></i>
+													</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="item in alunosDashboardDataset | startFrom: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage">
+												<td>{{item.nome}}</td>
+												<td>
+													<a href="#/cad_aluno/{{item.id_aluno}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<pagination total-items="alunosDashboardDataset.length" page="currentPage" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="maxSize"></pagination>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
 		<div class="row">
 			<!--  Inicio grid aniversario -->
 			<ws-grid grid-data="dashboardDataset.aniversarios" show-input-items-per-page="true" titulo="tituloAniversariantes" columns="columnsAniversariantes" buttons="botoesAniversariantes"></ws-grid>

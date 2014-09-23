@@ -24,6 +24,10 @@ dashboard:
   path: /dashboard
   defaults: { _controller: 'Crossfit\Controllers\DashboardController::carregaDashboard' }
   methods:  [GET]
+dashboardAlunos:
+  path: /dashboard/alunos
+  defaults: { _controller: 'Crossfit\Controllers\DashboardController::carregaAlunosDashboard' }
+  methods:  [GET]
 
 relAniversariantes:
   path: /relAniversariantes

@@ -11,32 +11,27 @@
 				<form class="form" name="form" novalidate>
 					<div class="row">
 						<div class="col-sm-6">
-							<!-- <div class="form-group">
-								<label for="contratoDataIni">Data Inicial *</label>
-								<input type="date" id="contratoDataIni" class="form-control" ng-model="cadContratoDataset.data_inicio" required>
-							</div> -->
 
 							<div class="form-group">
-					      <label for="contratoDataIni">Data Inicial *</label>
-					      <input id="data_inicio" type="text" ng-datepicker ng-options="datepickerOptions" ng-model="cadContratoDataset.data_inicio" ng-required="true">
-
-					    </div>
+								<label for="contratoDataIni">Data Inicial *</label>
+								<input id="data_inicio" type="text" ws-data class="form-control" ng-model="cadContratoDataset.data_inicio" ng-required="true">
+							</div>
 
 							<div class="form-group">
 								<label for="contratoPlano">Plano *</label>
-								<select type="date" id="contratoPlano" class="form-control" ng-model="cadContratoDataset.id_plano" required>
+								<select ws-data type="text" id="contratoPlano" class="form-control" ng-model="cadContratoDataset.id_plano" required>
 									<option ng-repeat="item in selectPlano" value="{{item.id_plano}}">{{item.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="contratoFormaPagamento">Forma de Pagamento *</label>
-								<select type="date" id="contratoFormaPagamento" class="form-control" ng-model="cadContratoDataset.id_forma_pagamento" required>
+								<select ws-data type="text" id="contratoFormaPagamento" class="form-control" ng-model="cadContratoDataset.id_forma_pagamento" required>
 									<option ng-repeat="item in selectFormaPagamento" value="{{item.id_forma_pagamento}}">{{item.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="contratoDesconto">Desconto *</label>
-								<select type="date" id="contratoDesconto" class="form-control" ng-model="cadContratoDataset.id_desconto" required>
+								<select id="contratoDesconto" class="form-control" ng-model="cadContratoDataset.id_desconto" required>
 									<option ng-repeat="item in selectDesconto" value="{{item.id_desconto}}">{{item.nome}}</option>
 								</select>
 							</div>
@@ -44,18 +39,18 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 					      <label for="contratoDataFim">Data Final *</label>
-					      <input id="data_fim" type="text" ng-datepicker ng-options="datepickerOptions" ng-model="cadContratoDataset.data_fim" ng-required="true">
+					      <input id="data_fim" type="text" ws-data class="form-control" ng-model="cadContratoDataset.data_fim" ng-required="true">
 					    </div>
 							<div class="form-group">
 								<label for="contratoHorarioEconomico">Horario Economico *</label>
-								<select type="date" id="contratoHorarioEconomico" class="form-control" ng-model="cadContratoDataset.horario_economico" required>
+								<select id="contratoHorarioEconomico" class="form-control" ng-model="cadContratoDataset.horario_economico" required>
 									<option value="S">Sim</option>
 									<option value="N">Não</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="contratoStatus">Status *</label>
-								<select type="date" id="contratoStatus" class="form-control" ng-model="cadContratoDataset.status" required>
+								<select id="contratoStatus" class="form-control" ng-model="cadContratoDataset.status" required>
 									<option value="A">Ativo</option>
 									<option value="F">Finalizado</option>
 									<option value="T">Trancado</option>

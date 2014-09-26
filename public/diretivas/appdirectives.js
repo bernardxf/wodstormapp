@@ -38,15 +38,26 @@ AppDirectives.directive('wsData', ["$filter", function ($filter) {
 			});
 
 			ctrl.$formatters.unshift(function(modelValue){
-				if(modelValue == '0000-00-00'){
+				if(modelValue == '0000-00-00' || modelValue == null){
 					return '';
 				} else {
-					$filter('date')(modelValue, 'dd/MM/yyyy');
+					return $filter('date')(modelValue, 'dd/MM/yyyy');
 				}
 			});
+			iElement.datepicker();
 		}
 	};
 }]);
+
+AppDirectives.directive('wsHora', [function(){
+	return {
+		restrict: 'A',
+		require: 'ngModel',
+		link: function(scope, iElement, iAttrs, ctrl){
+			iElement.mask('99:99', {});
+		}
+	}
+}])
 
 
 AppDirectives.directive('wsStackedNav', [function () {
@@ -144,45 +155,6 @@ AppDirectives.directive('wsGrid', [
             	scope.showInputItemsPerPage = scope.showInputItemsPerPage;
             	scope.maxSize               = 10;
             	scope.gridSize				= scope.gridColumnsSize ? scope.gridColumnsSize : 6;
-            }
-        };
-    }]);
-
-AppDirectives.directive('wsDatepicker', [
-    function() {
-        return {
-            restrict: "A",
-            require: "ngModel",
-            link: function(scope, element, attrs, controller) {
-            	element.datepicker({
-            		format: "dd/mm/yyyy",
-                todayBtn: true,
-                language: "pt-BR",
-                autoclose: true
-            	});
-
-              element.change(function() {
-                controller.$setViewValue(element.val());
-
-                var partes = element.val().split("/");
-                controller.$modelValue = partes[2] + "-" + partes[1] + "-" + partes[0];
-                console.log(controller);
-                // controller.$viewValue = element.val();
-                // controller.$modelValue = element.val();
-              });
-
-              controller.$parsers.unshift(function(viewValue) {
-                console.log("view value: " + viewValue);
-              });
-
-              controller.$formatters.unshift(function(modelValue) {
-                if (/\d{4}\-\d{2}\-\d{2}/.test(modelValue)) {
-                  console.log("model value: " + modelValue);
-                  var partes = modelValue.split("-");
-                  return partes[2] + "/" + partes[1] + "/" + partes[0];
-                }
-              });
-
             }
         };
     }]);

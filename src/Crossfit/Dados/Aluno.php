@@ -16,10 +16,14 @@ class Aluno
 //				WHERE aluno.status != ? AND id_organizacao = ?
 //				ORDER BY aluno.nome";
         $sql = "SELECT aluno.id_aluno, aluno.nome, aluno.email, aluno.tel_celular, contrato.data_fim, contrato.status 
-                FROM aluno
-                JOIN contrato ON contrato.id_aluno = aluno.id_aluno  
-                WHERE contrato.status != 'I' AND aluno.id_organizacao = 1
-                ORDER BY aluno.nome";
+				FROM aluno
+				join (select data_fim,status, id_aluno from contrato 
+					  where contrato.status != 'I'
+					  ORDER BY id_contrato DESC) as contrato ON contrato.id_aluno = aluno.id_aluno  
+				WHERE aluno.id_organizacao = 1
+				group by aluno.id_aluno
+				ORDER BY aluno.nome;
+				";
 		$resultado = Conexao::get()->fetchAll($sql, array('I', App::getSession()->get('organizacao')));
 		return $resultado;
 	}

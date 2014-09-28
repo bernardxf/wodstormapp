@@ -101,16 +101,7 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 
 }]);
 
-crossfitApp.run(function($rootScope, $location, LoginResource){
-
-	$rootScope.datepickerOptions = {
-		format: 'dd/mm/yyyy',
-		// format: 'yyyy-mm-dd',
-		language: 'pt-BR',
-		autoclose: true,
-    weekStart: 0
-	}
-
+crossfitApp.run(function($rootScope, $location, LoginResource, $templateCache){
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
 		if ($rootScope.logged == false || $rootScope.logged == null) {
 			LoginResource.get({}, function(response){
@@ -126,6 +117,9 @@ crossfitApp.run(function($rootScope, $location, LoginResource){
 			});
 		}
 	});
+	$rootScope.$on('$viewContentLoaded', function() {
+      $templateCache.removeAll();
+   });
 });
 
 crossfitApp.factory('LoginResource', ['$resource', function ($resource) {

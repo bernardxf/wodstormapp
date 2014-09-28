@@ -45,6 +45,7 @@ AppDirectives.directive('wsData', ["$filter", function ($filter) {
 				}
 			});
 			iElement.datepicker();
+			iElement.mask('99/99/9999',{});
 		}
 	};
 }]);

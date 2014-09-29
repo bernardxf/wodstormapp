@@ -480,9 +480,9 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 
 		// contrato.data_fim_computada = data_fim_computada;
 
-		// ContratoResource.save(contrato, function(response){
-		// 	$location.path('/contrato/'+contrato.id_aluno);
-		// });
+		ContratoResource.save(contrato, function(response){
+			$location.path('/contrato/'+contrato.id_aluno);
+		});
 	};
 
     function diasDecorridos(strDt1, dt2){

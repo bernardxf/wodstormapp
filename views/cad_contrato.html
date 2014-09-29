@@ -19,13 +19,13 @@
 
 							<div class="form-group">
 								<label for="contratoPlano">Plano *</label>
-								<select ws-data type="text" id="contratoPlano" class="form-control" ng-model="cadContratoDataset.id_plano" required>
+								<select type="text" id="contratoPlano" class="form-control" ng-model="cadContratoDataset.id_plano" required>
 									<option ng-repeat="item in selectPlano" value="{{item.id_plano}}">{{item.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="contratoFormaPagamento">Forma de Pagamento *</label>
-								<select ws-data type="text" id="contratoFormaPagamento" class="form-control" ng-model="cadContratoDataset.id_forma_pagamento" required>
+								<select type="text" id="contratoFormaPagamento" class="form-control" ng-model="cadContratoDataset.id_forma_pagamento" required>
 									<option ng-repeat="item in selectFormaPagamento" value="{{item.id_forma_pagamento}}">{{item.nome}}</option>
 								</select>
 							</div>

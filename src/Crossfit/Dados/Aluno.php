@@ -20,7 +20,7 @@ class Aluno
 				join (select data_fim,status, id_aluno from contrato
 					  ORDER BY id_contrato DESC) as contrato ON contrato.id_aluno = aluno.id_aluno  
 				WHERE aluno.id_organizacao = ?
-				and aluno.status = ?
+				and aluno.status != ?
 				group by aluno.id_aluno
 				ORDER BY aluno.nome;
 				";

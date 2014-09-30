@@ -9,13 +9,26 @@ class Dashboard
 	public static function retorna()
 	{
 		$sql = "select 
-                (select count(DISTINCT(id_aluno)) from contrato where id_organizacao = ? and status = 'A') as ativo,
-                (select count(DISTINCT(id_aluno)) from contrato where id_organizacao = ? and status = 'I') as inativo,
-                (select count(DISTINCT(id_aluno)) from contrato where id_organizacao = ? and status = 'T') as trancado,
+                (
+                    select count(DISTINCT(contrato.id_aluno)) from contrato 
+                    join aluno on aluno.id_aluno = contrato.id_aluno and aluno.status = 'A'
+                    where contrato.id_organizacao = ? and contrato.status = 'A'
+                ) as ativo,
+                (
+                    select count(DISTINCT(contrato.id_aluno)) from contrato 
+                    join aluno on aluno.id_aluno = contrato.id_aluno and aluno.status = 'A'
+                    where contrato.id_organizacao = ? and contrato.status = 'I'
+                ) as inativo,
+                (
+                    select count(DISTINCT(contrato.id_aluno)) from contrato 
+                    join aluno on aluno.id_aluno = contrato.id_aluno and aluno.status = 'A'
+                    where contrato.id_organizacao = ? and contrato.status = 'T'
+                ) as trancado,
                 (
                     select count(distinct(c.id_aluno)) from contrato as c
-                    where id_organizacao = ?
-                    and status = 'F'
+                    join aluno on aluno.id_aluno = c.id_aluno and aluno.status = 'A'
+                    where c.id_organizacao = ?
+                    and c.status = 'F'
                     and not exists (
                         select 1 from contrato where status in ('A', 'I', 'T') and contrato.id_aluno = c.id_aluno
                     )

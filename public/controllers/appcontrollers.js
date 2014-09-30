@@ -1086,11 +1086,11 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 AppControllers.controller('RelatorioController', ['$scope', '$rootScope', 'DashboardResource', function ($scope, $rootScope, DashboardResource) {
 	$rootScope.sideBarIsVisible = false;
 	$rootScope.headerIsVisible  = false;
+	$scope.relatorio = null;
 
 	$scope.loadRelAniversariantes = function(){
 		DashboardResource.relAniversariantes({}, function(response){
 			$scope.relatorio = response.data.relatorio;
-			window.print();
 		});
 	};
 }]);

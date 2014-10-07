@@ -37,7 +37,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="item in cadAlunoDataset | orderBy:'nome'" ng-class="{danger:item.presente}">
+										<tr ng-repeat="item in cadAlunoDataset | orderBy:'nome'" ng-class="{success:item.presente}">
 											<td>
 												{{item.nome}} 
 												<a ng-show="item.observacao_presenca" class="info-modal" ng-click='modalObservacaoAluno(item)'><i class="fa fa-info-circle"></i></a>

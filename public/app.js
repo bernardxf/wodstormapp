@@ -162,7 +162,9 @@ crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('AlunoResource', ['$resource', function ($resource) {
-	return $resource('api/aluno/:id_aluno',{id_aluno:'@id_aluno'});
+	return $resource('api/aluno/:id_aluno',{id_aluno:'@id_aluno'}, {
+		alunosPresenca : {method : 'GET', url: 'api/alunos/presenca', params: {nome:null, data: null}}
+	});
 }]);
 
 crossfitApp.factory('ContratoResource', ['$resource', function ($resource) {
@@ -190,7 +192,9 @@ crossfitApp.factory('RelServicoResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('PerfilResource', ['$resource', function ($resource) {
-	return $resource('api/perfil/:id_usuario', {id_usuario: '@id_usuario'}, {atualizaSenha: { method: 'POST', params: {changePassword: true}}});
+	return $resource('api/perfil/:id_usuario', {id_usuario: '@id_usuario'}, {
+		atualizaSenha: { method: 'POST', params: {changePassword: true}}
+	});
 }]);
 
 crossfitApp.factory('UsuarioResource', ['$resource', function ($resource) {

@@ -28,26 +28,29 @@ class Aluno
 		return $resultado;
 	}
 
-	public static function retornaTodosFiltradoPorNome($nome)
+	public static function retornaAlunosPresenca($nome, $data = null)
 	{
 		$sql = "SELECT a.id_aluno as id_aluno, a.nome as nome, a.observacao_presenca as observacao_presenca, plano.nome as plano, contrato.data_fim as data_fim,
 				(
 					SELECT count(1) from alunos_aula
 					JOIN aula on aula.id_aula = alunos_aula.id_aula
 					WHERE id_aluno = a.id_aluno
-					AND DATE_FORMAT(aula.data,'%m/%Y') = DATE_FORMAT(sysdate(),'%m/%Y')
-					AND alunos_aula.id_organizacao = 1
-				) as total_aulas
+					AND DATE_FORMAT(aula.data,'%m/%Y') = DATE_FORMAT(?,'%m/%Y')
+					AND alunos_aula.id_organizacao = ?
+				) as total_aulas,
+				(
+					select aula.horario from alunos_aula
+					join aula on aula.id_aula = alunos_aula.id_aula
+					where aula.data = ?
+					and id_aluno = a.id_aluno
+				) presente
 				FROM aluno as a
 				JOIN contrato on contrato.id_aluno = a.id_aluno
 				JOIN plano on contrato.id_plano = plano.id_plano
-				WHERE a.id_aluno NOT IN (
-					SELECT id_aluno FROM alunos_aula 
-					JOIN aula on aula.id_aula = alunos_aula.id_aula
-					WHERE aula.data = CURDATE() and alunos_aula.id_organizacao = ?
-				) AND a.nome LIKE ? AND a.status = ? AND contrato.status = ? AND a.id_organizacao = ?
+				WHERE a.nome LIKE ? AND a.status = ? AND contrato.status = ? AND a.id_organizacao = ?
 				ORDER BY a.nome";
-		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), '%'.$nome.'%', 'A', 'A',App::getSession()->get('organizacao')));
+		$id_organizacao = App::getSession()->get('organizacao');
+		$resultado = Conexao::get()->fetchAll($sql, array($data, $id_organizacao, $data, '%'.$nome.'%', 'A', 'A',$id_organizacao));
 		return $resultado;	
 	}
 

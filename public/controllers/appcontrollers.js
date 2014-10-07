@@ -615,14 +615,14 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 	};
 }]);
 
-AppControllers.controller('PresencaController', ['$scope','$routeParams', '$location', '$modal', 'PresencaResource', 'AlunoResource', function ($scope, $routeParams, $location, $modal, PresencaResource, AlunoResource) {
+AppControllers.controller('PresencaController', ['$scope','$routeParams', '$location', '$modal', 'PresencaResource', 'AlunoResource', 'MessageService', function ($scope, $routeParams, $location, $modal, PresencaResource, AlunoResource, MessageService) {
 	var today = new Date();
 	var year = today.getFullYear();
 	var month = today.getMonth()<9?"0"+(today.getMonth()+1):today.getMonth()+1;
 	var day = (today.getDate()<10?'0':'') + today.getDate();
 	$scope.pesquisaAulaDataset = {data:year+'-'+month+'-'+day};
 	$scope.aulaDataset = null;
-	$scope.cadPesquisaAluno = null;
+	$scope.cadPesquisaAluno = {nome: null};
 	$scope.cadAlunoDataset = null;
 	$scope.cadPresencaDataset = {data:year+'-'+month+'-'+day, presentes : new Array()};
 
@@ -643,9 +643,16 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 	};
 
 	$scope.presquisaAluno = function(){
-		AlunoResource.get($scope.cadPesquisaAluno, function(response){
-			$scope.cadAlunoDataset = response.data;
-		});
+		var data = $scope.cadPresencaDataset.data ? $scope.cadPresencaDataset.data : null;
+		if(data == null) {
+			MessageService.processMessages(new Array({type: 'warning', title:'Dados Requeridos', message:"Informe a data da presença antes de executar a busca de alunos."}));
+		} else if ($scope.cadPesquisaAluno.nome == null) {
+			MessageService.processMessages(new Array({type: 'warning', title:'Dados Requeridos', message:"Faça um filtro minimo de nome para executar a busca de alunos."}));
+		} else {
+			AlunoResource.alunosPresenca({nome: $scope.cadPesquisaAluno.nome, data: data}, function(response){
+				$scope.cadAlunoDataset = response.data;
+			});	
+		}
 	};
 
 	$scope.adicionaAlunoPresente = function(aluno){

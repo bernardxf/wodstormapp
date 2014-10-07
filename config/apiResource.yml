@@ -150,6 +150,10 @@ aluno:
   path: /aluno
   defaults: {_controller : 'Crossfit\Controllers\AlunoController::carregaAluno' }
   methods: [GET]
+alunoPresenca:
+  path: /alunos/presenca
+  defaults: {_controller : 'Crossfit\Controllers\AlunoController::carregaAlunosPresenca' }
+  methods: [GET]
 cadAluno:
   path: /aluno/{id_aluno}
   defaults: {_controller : 'Crossfit\Controllers\AlunoController::carregaCadAluno' }

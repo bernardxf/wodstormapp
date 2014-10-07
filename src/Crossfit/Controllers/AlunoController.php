@@ -11,16 +11,23 @@ class AlunoController
 	public static function carregaAluno(Request $request)
 	{
 		$response = new Response();
-		$nome = $request->query->get('nome');
-
-		if($nome){
-			$resultado = Aluno::retornaTodosFiltradoPorNome($nome);
-		} else {
-			$resultado = Aluno::retornaTodos();	
-		}
+		$resultado = Aluno::retornaTodos();	
 
 		$response->setData($resultado);
 
+		return $response->getAsJson();
+	}
+
+	public static function carregaAlunosPresenca(Request $request) 
+	{
+		$response = new Response();
+
+		$nome = $request->query->get('nome');
+		$data = $request->query->get('data');
+
+		$resultado = Aluno::retornaAlunosPresenca($nome, $data);
+
+		$response->setData($resultado);
 		return $response->getAsJson();
 	}
 

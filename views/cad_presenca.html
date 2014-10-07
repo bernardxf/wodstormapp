@@ -37,7 +37,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="item in cadAlunoDataset | orderBy:'nome'">
+										<tr ng-repeat="item in cadAlunoDataset | orderBy:'nome'" ng-class="{danger:item.presente}">
 											<td>
 												{{item.nome}} 
 												<a ng-show="item.observacao_presenca" class="info-modal" ng-click='modalObservacaoAluno(item)'><i class="fa fa-info-circle"></i></a>
@@ -45,8 +45,11 @@
 											<td>{{item.plano}}</td>
 											<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
 											<td>{{item.total_aulas}}</td>
-											<td>
+											<td ng-if="!item.presente">
 												<a class="btn btn-sm btn-success" ng-click="adicionaAlunoPresente(item);"><i class="fa fa-toggle-right"></i></a>
+											</td>
+											<td ng-if="item.presente">
+												Presente {{item.presente}}
 											</td>
 										</tr>
 									</tbody>

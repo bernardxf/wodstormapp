@@ -83,15 +83,15 @@ class Contrato
 					SELECT 1
 					FROM contrato cont
 					WHERE cont.id_aluno = contrato.id_aluno
-					AND cont.status = ?
+					AND cont.status in ('A', 'T') 
 					AND cont.id_organizacao = ?)";
-		$finalizado = Conexao::get()->fetchAll($sql, array('F', 'A', $dataInicio, $dataFim, $idOrganizacao, 'A', $idOrganizacao));
+		$finalizado = Conexao::get()->fetchAll($sql, array('F', $dataInicio, $dataFim, $idOrganizacao, 'A', $idOrganizacao));
 
 		
 		$sql = "SELECT contrato.id_contrato, aluno.id_aluno, aluno.nome
 				FROM contrato
 				JOIN aluno on aluno.id_aluno = contrato.id_aluno
-				WHERE contrato.status = ?
+				WHERE contrato.status in ('A', 'T')
 				AND aluno.status = ?
 				AND contrato.id_organizacao = ?
 				AND contrato.data_inicio between ? AND ?
@@ -103,7 +103,7 @@ class Contrato
 					AND cont.data_fim <= ?
 					AND cont.id_organizacao = ?
 					)";
-		$renovado = Conexao::get()->fetchAll($sql, array('A', 'A', $idOrganizacao, $dataInicio, $dataFim, 'F', $dataFim, $idOrganizacao));
+		$renovado = Conexao::get()->fetchAll($sql, array('A', $idOrganizacao, $dataInicio, $dataFim, 'F', $dataFim, $idOrganizacao));
 
 		$sql = "SELECT contrato.id_contrato, aluno.id_aluno, aluno.nome
 				FROM contrato

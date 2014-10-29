@@ -9,6 +9,8 @@ use Symfony\Component\Routing\RouteCollection;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 
+date_default_timezone_set('America/Sao_Paulo');    
+
 $loader = require 'vendor/autoload.php';
 $loader->add('Crossfit', __DIR__ . '/src');
 $config = parse_ini_file(__DIR__ . '/config/config.ini', true);

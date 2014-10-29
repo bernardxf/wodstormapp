@@ -17,14 +17,12 @@ class DashboardController
 		$dashboard = Dashboard::retorna();
 		$aniversarios = Aluno::retornaAniversariantes();
 		$plano = Contrato::retornaVencimentoContrato();
-		$trancado = Aluno::retornaTrancados();
 		$estacionamentoVencido = Estacionamento::retornaEstacionamentoVencido();
 		$estacionamentoTrancado = Estacionamento::retornaEstacionamentoTrancado();
 		$response->setData(array(
 			'dashboard' => $dashboard, 
 			'aniversarios' => $aniversarios, 
 			'plano' => $plano, 
-			'trancado' => $trancado, 
 			'estacionamentoVencido' => $estacionamentoVencido, 
 			'estacionamentoTrancado' => $estacionamentoTrancado
 		));

@@ -65,6 +65,16 @@ class ContratoController
 		$response = new Response();
 		$dataset = json_decode($request->getContent(), true);
 
+		$contratoAtual = Contrato::retornaSelecionado($id_contrato);
+
+
+		// Caso o status do contrato esteja sendo alterado de 'A' (Ativo) para 'F' (Finalizado)
+		// e sua data_fim seja maior que a data da alteração do estado a data_fim
+		// passa a ser a data da alteração
+		if($contratoAtual['status'] == 'A' && $dataset['status'] == 'F') {
+			if(date('Y-m-d') < $dataset['data_fim']) $dataset['data_fim'] = date('Y-m-d');	
+		}
+
 		$resultado = Contrato::atualizaContrato($id_contrato, $dataset);
 
 		return $response->getAsJson();	

@@ -8,16 +8,9 @@ class Aluno
 {
 	public static function retornaTodos()
 	{
-//		$sql = "SELECT aluno.id_aluno, aluno.nome, aluno.email, aluno.tel_celular, (SELECT data_fim FROM contrato 
-//					WHERE id_aluno = aluno.id_aluno
-//					ORDER BY data_fim DESC 
-//					limit 1) as data_fim 
-//				FROM aluno 
-//				WHERE aluno.status != ? AND id_organizacao = ?
-//				ORDER BY aluno.nome";
-        $sql = "SELECT aluno.id_aluno, aluno.nome, aluno.email, aluno.tel_celular, contrato.data_fim, contrato.status 
+        $sql = "SELECT aluno.id_aluno, aluno.nome, aluno.email, aluno.tel_celular, IFNULL(contrato.data_fim, '') as data_fim, IFNULL(contrato.status, '')  as status
 				FROM aluno
-				join (select data_fim,status, id_aluno from contrato
+				LEFT OUTER JOIN (select data_fim, id_aluno, status from contrato
 					  ORDER BY id_contrato DESC) as contrato ON contrato.id_aluno = aluno.id_aluno  
 				WHERE aluno.id_organizacao = ?
 				and aluno.status != ?

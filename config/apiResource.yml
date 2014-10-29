@@ -301,7 +301,7 @@ perfil:
   path: /perfil
   defaults: {_controller:'Crossfit\Controllers\UsuarioController::retornaUsuarioLogado'}
   methods: [GET]
-atualizaUsuario:
+atualizaPerfil:
   path: /perfil/{id_usuario}
   defaults: {_controller:'Crossfit\Controllers\UsuarioController::atualizaUsuario'}
   methods: [POST]

@@ -883,7 +883,7 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 	}
 }]);
 
-AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootScope','$location', 'frce', 'MessageService', function ($scope, $routeParams, $rootScope, $location, PerfilResource, MessageService) {
+AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootScope','$location', 'PerfilResource', 'MessageService', function ($scope, $routeParams, $rootScope, $location, PerfilResource, MessageService) {
 	$scope.perfilDataset = null;
 
 	$scope.carregaPerfil = function(){

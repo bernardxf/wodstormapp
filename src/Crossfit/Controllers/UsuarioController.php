@@ -86,7 +86,7 @@ class UsuarioController
 		$response = new Response();
 
 		$usuario = Usuario::retornaSelecionado($id_usuario);
-
+		
 		if($usuario['senha'] == md5($dataset['senhaAtual'])) {
 			$resultado = Usuario::atualizaSenha($id_usuario, $dataset['novaSenha']);	
 			return $response->getAsJson();

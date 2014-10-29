@@ -19,7 +19,7 @@ class Usuario
 
 	public static function retornaSelecionado($id_usuario)
 	{	
-		$sql = 'select id_usuario, nome, usuario, id_organizacao, id_grupo_usuario from usuario where id_usuario = ?';
+		$sql = 'select * from usuario where id_usuario = ?';
 		$resultado = Conexao::get()->fetchAssoc($sql, array($id_usuario));
 		return $resultado;
 	}

@@ -10,7 +10,7 @@
 			<div class="portlet-content">
 				<form class="form" name="form" novalidate>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label for="text-input">Nome *</label>
 							<input type="text" id="text-input" class="form-control" ng-model="planoDataset.nome" required>
@@ -24,12 +24,18 @@
 								<option value="4">Anual</option>
 							</select>
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label for="planoValor">Valor *</label>
 							<div class="input-group">	
 								<span class="input-group-addon">R$</span>	
 								<input class="form-control" id="planoValor" type="text" ng-model="planoDataset.valor" required>
 							</div>
+						</div>
+						<div class="form-group">
+							<label for="text-input">Aulas por periodo</label>
+							<input type="text" id="text-input" class="form-control" ng-model="planoDataset.dias_por_periodo">
 						</div>
 						<button type="button" class="btn btn-success" ng-click="salvaPlano();" ng-disabled="form.$invalid">Salvar</button>
 						<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoPlano();">Cancelar</button>

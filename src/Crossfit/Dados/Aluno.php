@@ -23,14 +23,16 @@ class Aluno
 
 	public static function retornaAlunosPresenca($nome, $data = null)
 	{
-		$sql = "SELECT a.id_aluno as id_aluno, a.nome as nome, a.observacao_presenca as observacao_presenca, plano.nome as plano, contrato.data_fim as data_fim,
+		$sql = "SELECT a.id_aluno as id_aluno, a.nome as nome, a.observacao_presenca as observacao_presenca, plano.nome as plano, contrato.data_fim as data_fim, plano.dias_por_periodo, 
 				(
-					SELECT count(1) from alunos_aula
-					JOIN aula on aula.id_aula = alunos_aula.id_aula
-					WHERE id_aluno = a.id_aluno
-					AND DATE_FORMAT(aula.data,'%m/%Y') = DATE_FORMAT(?,'%m/%Y')
-					AND alunos_aula.id_organizacao = ?
-				) as total_aulas,
+					-- select aluno.nome, count(1) as total_aulas_periodo, if(date_format(contrato.data_inicio, '%d') < date_format(curdate(), '%d'),CONCAT_WS('-',date_format(curdate(), '%Y-%m'), date_format(contrato.data_inicio, '%d')),CONCAT_WS('-',date_format(DATE_SUB(curdate(),INTERVAL 1 MONTH), '%Y-%m'), date_format(contrato.data_inicio, '%d'))) as periodo from alunos_aula
+					select count(1) from alunos_aula
+					join contrato on contrato.id_aluno = alunos_aula.id_aluno
+					join aula on aula.id_aula = alunos_aula.id_aula
+					where contrato.status = 'A'
+					and alunos_aula.id_aluno = a.id_aluno
+					and aula.data between if(date_format(contrato.data_inicio, '%d') < date_format(?, '%d'),CONCAT_WS('-',date_format(?, '%Y-%m'), date_format(contrato.data_inicio, '%d')),CONCAT_WS('-',date_format(DATE_SUB(?,INTERVAL 1 MONTH), '%Y-%m'), date_format(contrato.data_inicio, '%d'))) and ?
+				) as total_aulas_periodo,
 				(
 					select aula.horario from alunos_aula
 					join aula on aula.id_aula = alunos_aula.id_aula
@@ -43,7 +45,7 @@ class Aluno
 				WHERE a.nome LIKE ? AND a.status = ? AND contrato.status = ? AND a.id_organizacao = ?
 				ORDER BY a.nome";
 		$id_organizacao = App::getSession()->get('organizacao');
-		$resultado = Conexao::get()->fetchAll($sql, array($data, $id_organizacao, $data, '%'.$nome.'%', 'A', 'A',$id_organizacao));
+		$resultado = Conexao::get()->fetchAll($sql, array($data,$data,$data,$data,$data, '%'.$nome.'%', 'A', 'A',$id_organizacao));
 		return $resultado;	
 	}
 

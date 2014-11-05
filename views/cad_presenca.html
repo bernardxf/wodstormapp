@@ -31,8 +31,9 @@
 										<tr>
 											<th>Nome</th>
 											<th>Plano</th>
-											<th>Plano Fim</th>
-											<th>Presenças Mes Atual</th>
+											<th>Plano fim</th>
+											<th>Presenças periodo atual</th>
+											<th>Máx. aulas por periodo</th>
 											<th>Presente</th>
 										</tr>
 									</thead>
@@ -44,7 +45,8 @@
 											</td>
 											<td>{{item.plano}}</td>
 											<td>{{item.data_fim | date:'dd/MM/yyyy'}}</td>
-											<td>{{item.total_aulas}}</td>
+											<td>{{item.total_aulas_periodo}}</td>
+											<td>{{item.dias_por_periodo}}</td>
 											<td ng-if="!item.presente">
 												<a class="btn btn-sm btn-success" ng-click="adicionaAlunoPresente(item);"><i class="fa fa-toggle-right"></i></a>
 											</td>

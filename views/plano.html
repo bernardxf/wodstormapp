@@ -23,13 +23,11 @@
 							<thead>
 								<tr>
 									<th>Nome</th>
-									<th>Tipo</th>
 									<th>Valor</th>
 									<th>Ação</th>
 								</tr>
 								<tr>
 									<th><input class="form-control input-sm show" type="text" placeholder="Nome" ng-model="planoFilter.nome"></th>
-									<th><input class="form-control input-sm show" type="text" placeholder="Tipo" ng-model="planoFilter.tipo"></th>
 									<th><input class="form-control input-sm show" type="text" placeholder="valor" ng-model="planoFilter.valor"></th>
 									<th></th>
 								</tr>
@@ -37,8 +35,7 @@
 							<tbody>
 								<tr ng-repeat="item in planoDataset | filter:planoFilter">
 									<td>{{item.nome}}</td>
-									<td>{{item.tipo}}</td>
-									<td>{{item.valor}}</td>
+									<td>{{item.valor | currency:'R$'}}</td>
 									<td>
 										<a href="#/cad_plano/{{item.id_plano}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
 										<a class="btn btn-sm btn-danger" ng-click="deletaPlano(item);"><i class="fa fa-eraser"></i></a>

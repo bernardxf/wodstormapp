@@ -69,13 +69,13 @@ class ContratoController
 		$contratoAtual = Contrato::retornaSelecionado($id_contrato);
 
 		if($contratoAtual['status'] != $dataset['status']) {
-			$historicoDataset = [
+			$historicoDataset = array(
 				'id_contrato' => $dataset['id_contrato'],
 				'id_aluno' => $dataset['id_aluno'],
 				'data' => date('Y-m-d'),
 				'status_contrato' => $dataset['status'],
 				'id_organizacao' => App::getSession()->get('organizacao')
-			];	
+			);	
 
 			HistoricoContrato::salvar($historicoDataset);
 		}

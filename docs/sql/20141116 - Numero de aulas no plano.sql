@@ -1,0 +1,1 @@
+alter table plano add column dias_por_periodo int(2) default 0 after valor;

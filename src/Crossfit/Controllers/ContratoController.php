@@ -3,6 +3,7 @@ namespace Crossfit\Controllers;
 
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\Contrato;
+use Crossfit\Dados\HistoricoContrato;
 use Crossfit\Dados\Plano;
 use Crossfit\Dados\FormaPagamento;
 use Crossfit\Dados\Desconto;
@@ -67,6 +68,17 @@ class ContratoController
 
 		$contratoAtual = Contrato::retornaSelecionado($id_contrato);
 
+		if($contratoAtual['status'] != $dataset['status']) {
+			$historicoDataset = [
+				'id_contrato' => $dataset['id_contrato'],
+				'id_aluno' => $dataset['id_aluno'],
+				'data' => date('Y-m-d'),
+				'status_contrato' => $dataset['status'],
+				'id_organizacao' => App::getSession()->get('organizacao')
+			];	
+
+			HistoricoContrato::salvar($historicoDataset);
+		}
 
 		// Caso o status do contrato esteja sendo alterado de 'A' (Ativo) para 'F' (Finalizado)
 		// e sua data_fim seja maior que a data da alteração do estado a data_fim

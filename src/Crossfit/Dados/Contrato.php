@@ -24,6 +24,16 @@ class Contrato
 	public static function salvaContrato($contratoDataset)
 	{
 		$resultado = Conexao::get()->insert('contrato', $contratoDataset);
+
+		if($resultado) {
+			$sql = "SELECT MAX(id_contrato) FROM contrato WHERE id_organizacao = ? and id_aluno = ?";
+
+			$id_contrato = Conexao::get()->fetchColumn($sql, array(App::getSession()->get('organizacao'), $contratoDataset['id_aluno']));
+
+			$contratoDataset['id_contrato'] = $id_contrato;
+			$resultado = $contratoDataset;
+		}
+
 		return $resultado;
 	}
 

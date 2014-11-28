@@ -965,7 +965,9 @@ AppControllers.controller('CadastroUsuarioController', ['$scope', '$location', '
 AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$location', 'FinanceiroResource', '$timeout', '$modal', 'AgrupadorResource', function ($scope, $routeParams, $location, FinanceiroResource, $timeout, $modal, AgrupadorResource) {
 	$scope.financeiroDataset = null;
 	$scope.financeiroFiltrado = null;
-	$scope.cadFinanceiroDataset = null;
+	$scope.cadFinanceiroDataset = {
+		tipo: 'R'
+	};
 	$scope.listaCategorias = null;
 	$scope.listaAnos = null;
 

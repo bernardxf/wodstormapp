@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS `wodstorm`.`historico_contrato` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 insert into historico_contrato (data, status_contrato, id_aluno, id_contrato, id_organizacao) 
 	select contrato.data_inicio, 'A', contrato.id_aluno, contrato.id_contrato, contrato.id_organizacao from contrato 
 	join aluno on aluno.id_aluno = contrato.id_aluno 
@@ -47,4 +46,7 @@ insert into historico_contrato (data, status_contrato, id_aluno, id_contrato, id
 	join aluno on aluno.id_aluno = contrato.id_aluno 
 	where contrato.status = 'T' and aluno.status = 'A';
 
-
+insert into historico_contrato (data, status_contrato, id_aluno, id_contrato, id_organizacao) 
+	select curdate(), 'I', contrato.id_aluno, contrato.id_contrato, contrato.id_organizacao from contrato 
+	join aluno on aluno.id_aluno = contrato.id_aluno 
+	where contrato.status = 'I' and aluno.status = 'A';

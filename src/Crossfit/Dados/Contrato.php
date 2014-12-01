@@ -3,6 +3,7 @@ namespace Crossfit\Dados;
 
 use Crossfit\Conexao;
 use Crossfit\App;
+use Crossfit\Dados\HistoricoContrato;
 
 class Contrato
 {
@@ -43,18 +44,25 @@ class Contrato
 		$inicioNovoContrato = $contratoDataset["data_inicio"];
 		$idOrganizacao = App::getSession()->get('organizacao');
 
-		$sql = "SELECT max(id_contrato) FROM contrato WHERE id_aluno = ? AND id_organizacao = ?";
-        $idNovoContrato = Conexao::get()->fetchColumn($sql, array($idAluno, $idOrganizacao));
+        $sql = "SELECT * from contrato where id_aluno = ? and status = 'A'";
+        $contratoAtivo = Conexao::get()->fetchAssoc($sql, array($idAluno));
 
-		$sql = "UPDATE contrato
-		          SET status     = 'F',
-		            data_fim     = ?
-		          WHERE id_aluno = ?
-		            AND status   = 'A'
-		            AND id_organizacao = ?
-		            AND id_contrato != ?";
-		$params = array($inicioNovoContrato, $idAluno, $idOrganizacao, $idNovoContrato);
-		return Conexao::get()->executeUpdate($sql, $params);
+        if($contratoAtivo) {
+        	$contratoAtivo['status'] = 'F';
+        	$contratoAtivo['data_fim'] = $inicioNovoContrato;
+        	Conexao::get()->update('contrato', $contratoAtivo, array('id_contrato' => $contratoAtivo['id_contrato']));
+
+			$historicoDataset = array(
+				'id_contrato' => $contratoAtivo['id_contrato'],
+				'id_aluno' => $contratoAtivo['id_aluno'],
+				'data' => $inicioNovoContrato,
+				'status_contrato' => $contratoAtivo['status'],
+				'id_organizacao' => $idOrganizacao
+			);	
+
+			$resultado = HistoricoContrato::salvar($historicoDataset);
+        }
+		return true;
 	}
 
 	public static function atualizaContrato($id_contrato, $contratoDataset)

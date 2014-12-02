@@ -55,7 +55,7 @@ class ContratoController
 		if ($resultado) {
 			// Se o novo contrato for salvo com sucesso, todos os contratos anteriores deste aluno deverão ser
 			// colocados como encerrados, com data de fim para a data inicial do novo contrato criado.
-			Contrato::finalizaContratosAnteriores($dataset);
+			Contrato::finalizaContratosAnteriores($resultado);
 
 			// Cadastrando o contrato salvo no historico.
 			$historicoDataset = array(

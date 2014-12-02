@@ -44,8 +44,8 @@ class Contrato
 		$inicioNovoContrato = $contratoDataset["data_inicio"];
 		$idOrganizacao = App::getSession()->get('organizacao');
 
-        $sql = "SELECT * from contrato where id_aluno = ? and status = 'A'";
-        $contratoAtivo = Conexao::get()->fetchAssoc($sql, array($idAluno));
+        $sql = "SELECT * from contrato where id_aluno = ? and status = 'A' and id_contrato != ?";
+        $contratoAtivo = Conexao::get()->fetchAssoc($sql, array($idAluno, $contratoDataset['id_contrato']));
 
         if($contratoAtivo) {
         	$contratoAtivo['status'] = 'F';

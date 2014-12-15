@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Conexao;
 use Crossfit\Util\Response;
 use Crossfit\Dados\Usuario;
+use Crossfit\Dados\Organizacao;
 
 class LoginController
 {
@@ -18,16 +19,23 @@ class LoginController
 
 		$response = new Response();
 		
-		$usuario = Usuario::retornaUsuarioLogin($usuario, $senha, $organizacao);
+		$resultadoOrganizacao = Organizacao::verificaOrganizacao($organizacao);
 
-		if($usuario){
-			$app["session"]->set("usuario_logado", true);
-			$app["session"]->set("usuario", $usuario);
-			$app["session"]->set("organizacao", $organizacao);
+		if($resultadoOrganizacao) {
+			$usuario = Usuario::retornaUsuarioLogin($usuario, $senha, $organizacao);
 
-			$response->setData($usuario);
+			if($usuario){
+				$app["session"]->set("usuario_logado", true);
+				$app["session"]->set("usuario", $usuario);
+				$app["session"]->set("organizacao", $organizacao);
+
+				$response->setData($usuario);
+			} else {
+				$response->addMessage('danger', "Erro ao tentar logar!", "Dados incorretos ou usuário não cadastrado");	
+				$response->setSuccess(false);
+			}	
 		} else {
-			$response->addMessage('danger', "Erro ao tentar logar!", "Dados incorretos ou usuário não cadastrado");	
+			$response->addMessage('danger', "Erro ao tentar logar!", "Organização inexistente ou desativada.");	
 			$response->setSuccess(false);
 		}
 		

@@ -102,6 +102,7 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 }]);
 
 crossfitApp.run(function($rootScope, $location, LoginResource, $templateCache){
+	$rootScope.carregando = false;
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
 		if ($rootScope.logged == false || $rootScope.logged == null) {
 			LoginResource.get({}, function(response){

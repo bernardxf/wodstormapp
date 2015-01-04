@@ -1,6 +1,6 @@
-var AppServices = angular.module('AppServices', []);
+var AppServices = angular.module('AppServices', [])
 
-AppServices.factory('loginService', ['LoginResource', 'LogoutResource', 'MessageService', '$rootScope', '$location', function (LoginResource, LogoutResource, MessageService, $rootScope, $location) {
+.factory('loginService', ['LoginResource', 'LogoutResource', 'MessageService', '$rootScope', '$location', function (LoginResource, LogoutResource, MessageService, $rootScope, $location) {
 	return {
 		login : function(loginDataset){
 			LoginResource.login(loginDataset, function(response){
@@ -26,9 +26,8 @@ AppServices.factory('loginService', ['LoginResource', 'LogoutResource', 'Message
 			});		
 		}
 	};
-}]);
-
-AppServices.factory('MessageService', [function () {
+}])
+.factory('MessageService', [function () {
 	return {
 		processMessages: function(messages){
 			angular.forEach(messages, function(message){
@@ -41,4 +40,68 @@ AppServices.factory('MessageService', [function () {
 			});
 		}
 	};
+}])
+.factory('RESTService', ['$q', '$rootScope', function($q, $rootScope){
+	var RESTService = function(resource){
+		if(!resource) {
+			console.error('Undefined resource!');
+			return false;
+		}
+
+		$rootScope.carregando = false;
+
+		var restResource = resource,
+			restGetDeferred = $q.defer(),
+			restSaveDeferred = $q.defer(),
+			restRemoveDeferred = $q.defer();
+
+
+		var get = function(data){
+			$rootScope.carregando = true;
+			restResource.get(data, function(result){
+				$rootScope.carregando = false;
+				restGetDeferred.resolve(result);
+			});
+
+			return restGetDeferred.promise;
+		};
+
+		var save = function(data){	
+			if(data == null) {
+				console.error('Undefined data!');
+				return false;
+			}
+
+			$rootScope.carregando = true;
+			restResource.save(data, function(result){
+				$rootScope.carregando = false;
+				restSaveDeferred.resolve(result);
+			});
+
+			return restSaveDeferred.promise;
+		};
+
+		var remove = function(condition){
+			if(condition == null) {
+				console.error('Undefined condition!');
+				return false;
+			}
+
+			$rootScope.carregando = true;
+			restResource.remove(condition, function(){
+				$rootScope.carregando = false;
+				restRemoveDeferred.resolve();
+			});
+
+			return restRemoveDeferred.promise;
+		};
+
+		return {
+			get: get,
+			save: save,
+			remove: remove
+		}
+	};
+
+	return RESTService;
 }]);

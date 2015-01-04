@@ -51,16 +51,19 @@ var AppServices = angular.module('AppServices', [])
 		$rootScope.carregando = false;
 
 		var restResource = resource,
-			restGetDeferred = $q.defer(),
-			restSaveDeferred = $q.defer(),
-			restRemoveDeferred = $q.defer();
+			restGetDeferred,
+			restSaveDeferred,
+			restRemoveDeferred;
 
 
 		var get = function(data){
+			restGetDeferred = $q.defer();
+			
 			$rootScope.carregando = true;
-			restResource.get(data, function(result){
+
+			restResource.get(data, function(response){
 				$rootScope.carregando = false;
-				restGetDeferred.resolve(result);
+				restGetDeferred.resolve(response);
 			});
 
 			return restGetDeferred.promise;
@@ -72,10 +75,12 @@ var AppServices = angular.module('AppServices', [])
 				return false;
 			}
 
+			restSaveDeferred = $q.defer();
+
 			$rootScope.carregando = true;
-			restResource.save(data, function(result){
+			restResource.save(data, function(response){
 				$rootScope.carregando = false;
-				restSaveDeferred.resolve(result);
+				restSaveDeferred.resolve(response);
 			});
 
 			return restSaveDeferred.promise;
@@ -86,6 +91,8 @@ var AppServices = angular.module('AppServices', [])
 				console.error('Undefined condition!');
 				return false;
 			}
+
+			restRemoveDeferred = $q.defer();
 
 			$rootScope.carregando = true;
 			restResource.remove(condition, function(){

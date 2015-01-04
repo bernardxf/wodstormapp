@@ -265,6 +265,12 @@ relservico:
   defaults: { _controller: 'Crossfit\Controllers\RelServicoController::pesquisaRelServico' }
   methods:  [POST]
 
+# Rotas para o controller de Relatório de Alunos/Planos
+relservico:
+  path: /relalunosplano
+  defaults: { _controller: 'Crossfit\Controllers\RelAlunosPlanoController::alunosPorPlano' }
+  methods:  [GET]
+
 # Rotas para o controller do Financeiro
 financeiro:
   path: /financeiro

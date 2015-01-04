@@ -464,6 +464,17 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 
 }]);
 
+AppControllers.controller('RelAlunosPlanoController', ['$scope', 'RelAlunosPlanoResource', function($scope, RelAlunosPlanoResource){
+	$scope.relAlunosPlanoDataset = null;
+
+	$scope.carregaRelAlunosPlano = function(){
+		RelAlunosPlanoResource.get({}, function(response){
+			$scope.relAlunosPlanoDataset = response.data;
+		});
+	};
+
+}]);
+
 
 AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'ConsultaCepResource', '$location', '$routeParams', 'RESTService', function ($scope, AlunoResource, ConsultaCepResource,$location, $routeParams, RESTService) {
 	var rest = new RESTService(AlunoResource);

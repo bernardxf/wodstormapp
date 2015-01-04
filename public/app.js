@@ -52,6 +52,9 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/relaluno', {
 		templateUrl: 'views/relaluno.html',
 		controller: 'RelAlunoController'
+	}).when('/relalunosplano', {
+		templateUrl: 'views/relalunosplano.html',
+		controller: 'RelAlunosPlanoController'
 	}).when('/relAniversariantes', {
 		templateUrl: 'views/relatorio-template.html',
 		controller: 'RelatorioController'
@@ -160,6 +163,10 @@ crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
 	return $resource('api/relaluno', {}, {pesquisa: {method: 'POST'}});
+}]);
+
+crossfitApp.factory('RelAlunosPlanoResource', ['$resource', function ($resource) {
+	return $resource('api/relalunosplano', {});
 }]);
 
 crossfitApp.factory('AlunoResource', ['$resource', function ($resource) {

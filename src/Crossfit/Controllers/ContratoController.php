@@ -55,8 +55,10 @@ class ContratoController
 		if ($resultado) {
 			// Se o novo contrato for salvo com sucesso, todos os contratos anteriores deste aluno deverão ser
 			// colocados como encerrados, com data de fim para a data inicial do novo contrato criado.
-			Contrato::finalizaContratosAnteriores($resultado);
-
+			if($resultado['status'] == 'A') {
+				Contrato::finalizaContratosAnteriores($resultado);	
+			}
+			
 			// Cadastrando o contrato salvo no historico.
 			$historicoDataset = array(
 				'id_contrato' => $resultado['id_contrato'],
@@ -79,6 +81,12 @@ class ContratoController
 
 		$contratoAtual = Contrato::retornaSelecionado($id_contrato);
 
+		// Caso esteja alterando o contrato de inativo 'I' para ativo 'A'
+		// finaliza o contrato que estiver ativo
+		if($contratoAtual['status'] == 'I' && $dataset['status'] == 'A') {
+			Contrato::finalizaContratosAnteriores($dataset);
+		}
+
 		// Caso o status do contrato esteja sendo alterado de 'A' (Ativo) para 'F' (Finalizado)
 		// e sua data_fim seja maior que a data da alteração do estado a data_fim
 		// passa a ser a data da alteração
@@ -97,6 +105,7 @@ class ContratoController
 
 			HistoricoContrato::salvar($historicoDataset);
 		}
+
 
 		$resultado = Contrato::atualizaContrato($id_contrato, $dataset);
 

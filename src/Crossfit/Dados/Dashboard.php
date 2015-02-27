@@ -51,7 +51,7 @@ class Dashboard
                         order by aluno.nome";
                 break;
             case 'F':
-                $sql = "select aluno.id_aluno as id_aluno, aluno.nome from contrato as c
+                $sql = "select DISTINCT(aluno.id_aluno) as id_aluno, aluno.nome from contrato as c
                         join aluno on aluno.id_aluno = c.id_aluno and aluno.status = 'A'
                         where c.id_organizacao = ?
                         and c.status = ?

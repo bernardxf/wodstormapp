@@ -447,12 +447,15 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', function ($scope, RelAlunoResource) {
 	$scope.relalunoDataset = null;
 	$scope.relAlunoResponseDataset = null;
+	$scope.relAlunosBairroDataset = null;
 	$scope.selectAluno = null;
 	
 	$scope.carregaRelAluno = function(){
 		RelAlunoResource.get({},function(response){
 			$scope.selectAluno = response.data;	
 		});
+
+		$scope.relatorioAlunoBairro();
 	};
 
 	$scope.pesquisaRelAluno = function(){
@@ -461,6 +464,12 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 			$scope.relAlunoResponseDataset = response.data;
 		});	
 	};
+
+	$scope.relatorioAlunoBairro = function(){
+		RelAlunoResource.get({filtro: 'bairro'},function(response){
+			$scope.relAlunosBairroDataset = response.data;
+		});	
+	}
 
 }]);
 

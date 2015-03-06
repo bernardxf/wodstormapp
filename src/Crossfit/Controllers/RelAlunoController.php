@@ -9,16 +9,21 @@ use Crossfit\App;
 
 class RelAlunoController
 {
-    public static function carregaRelAluno()
+    public static function carregaRelAluno(Request $request)
     {
-        $response = new Response();
+        $filtro = $request->query->get('filtro');
 
-        $resultado = Aluno::retornaTodosSimples();
+        if($filtro) {
+            return self::relatorioCustomizavel($request, $filtro);
+        } else {
+            $response = new Response();
 
-        $response->setData($resultado);
+            $resultado = Aluno::retornaTodosSimples();
 
-        return $response->getAsJson();
+            $response->setData($resultado);
 
+            return $response->getAsJson();    
+        }
     }
 
     public static function pesquisaRelAluno(Request $request)
@@ -31,5 +36,26 @@ class RelAlunoController
         $response->setData($resultado);
 
         return $response->getAsJson();
+    }
+
+    public static function relatorioCustomizavel(Request $request, $filtro)
+    {
+        switch ($filtro){
+            case 'bairro':
+                return self::relatorioAlunoBairro($request);
+                break;
+        }
+    }
+
+    public static function relatorioAlunoBairro(Request $request)
+    {
+        $response = new Response();
+
+        $resultado = RelAluno::relatorioAlunoBairro();
+
+        $response->setData($resultado);
+
+        return $response->getAsJson();
+
     }
 }

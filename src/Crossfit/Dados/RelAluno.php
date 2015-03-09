@@ -32,7 +32,7 @@ class RelAluno
 
 	public static function relatorioAlunoBairro($colunaRelatorio)
 	{
-		$sql = "select count(DISTINCT(contrato.id_aluno)) as num_alunos, if(isnull(nullif(aluno.bairro, '')), 'Não informado', aluno.bairro) as bairro, round(count(DISTINCT(contrato.id_aluno)) / (
+		$sql = "select count(DISTINCT(contrato.id_aluno)) as num_alunos, aluno.bairro as bairro_real, if(isnull(nullif(aluno.bairro, '')), 'Não informado', aluno.bairro) as bairro, round(count(DISTINCT(contrato.id_aluno)) / (
 					select count(DISTINCT(c.id_aluno)) from contrato as c
 					join aluno  as a on a.id_aluno = c.id_aluno and a.status = 'A'
 					where c.id_organizacao = ? and c.status in ('A', 'T')
@@ -43,9 +43,16 @@ class RelAluno
 				group by aluno.bairro
 				order by aluno.bairro ASC;";
 
-		$resultadoFiltro = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), App::getSession()->get('organizacao')));
+		$bairros = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), App::getSession()->get('organizacao')));
 
-		return $resultadoFiltro;
+		$sql = "select DISTINCT(contrato.id_aluno) as id_aluno, aluno.nome, aluno.bairro  from contrato 
+				join aluno on aluno.id_aluno = contrato.id_aluno and aluno.status = 'A'
+				join plano on plano.id_plano = contrato.id_plano
+				where contrato.id_organizacao = ? and contrato.status in ('A','T')";
+
+		$alunos = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
+
+		return array('bairros' => $bairros, 'alunos' => $alunos);
 	}
 
 }

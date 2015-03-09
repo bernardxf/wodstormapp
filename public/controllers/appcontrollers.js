@@ -445,10 +445,16 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 }]);
 
 AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', function ($scope, RelAlunoResource) {
+	$scope.currentPage   = 1;
+	$scope.itemsPerPage  = 10;
+
 	$scope.relalunoDataset = null;
 	$scope.relAlunoResponseDataset = null;
 	$scope.relAlunosBairroDataset = null;
 	$scope.selectAluno = null;
+
+
+	$scope.alunoFilter = {bairro: null};
 	
 	$scope.carregaRelAluno = function(){
 		RelAlunoResource.get({},function(response){
@@ -469,17 +475,31 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 		RelAlunoResource.get({filtro: 'bairro'},function(response){
 			$scope.relAlunosBairroDataset = response.data;
 		});	
-	}
+	};
+
+	$scope.filtrarAluno = function(bairro){
+		$scope.alunoFilter = {bairro: bairro};
+	};
 
 }]);
 
 AppControllers.controller('RelAlunosPlanoController', ['$scope', 'RelAlunosPlanoResource', function($scope, RelAlunosPlanoResource){
+	$scope.currentPage   = 1;
+	$scope.itemsPerPage  = 10;
+
 	$scope.relAlunosPlanoDataset = null;
+
+	$scope.alunoFilter = {id_plano: null};
+
 
 	$scope.carregaRelAlunosPlano = function(){
 		RelAlunosPlanoResource.get({}, function(response){
 			$scope.relAlunosPlanoDataset = response.data;
 		});
+	};
+
+	$scope.filtrarAluno = function(id_plano){
+		$scope.alunoFilter = {id_plano: id_plano};
 	};
 
 }]);

@@ -13,16 +13,24 @@ class RelAlunosPlano
 					select count(DISTINCT(c.id_aluno)) from contrato as c
 					join aluno  as a on a.id_aluno = c.id_aluno and a.status = 'A'
 					where c.id_organizacao = ? and c.status in ('A', 'T')
-				) * 100, 2) as percentual  from contrato 
+				) * 100, 2) as percentual, plano.id_plano  from contrato 
 				join aluno on aluno.id_aluno = contrato.id_aluno and aluno.status = 'A'
 				join plano on plano.id_plano = contrato.id_plano
 				where contrato.id_organizacao = ? and contrato.status in ('A','T')
 				group by plano.id_plano
 				order by plano.tipo ASC, plano.nome ASC;";
 				
-		$resultado = Conexao::get()->fetchAll($sql, array($idOrganizacao, $idOrganizacao));
+		$planos = Conexao::get()->fetchAll($sql, array($idOrganizacao, $idOrganizacao));
 
-		return $resultado;
+		$sql =  "select DISTINCT(contrato.id_aluno) as id_aluno, aluno.nome, plano.id_plano  from contrato 
+				join aluno on aluno.id_aluno = contrato.id_aluno and aluno.status = 'A'
+				join plano on plano.id_plano = contrato.id_plano
+				where contrato.id_organizacao = ? and contrato.status in ('A','T')
+				order by aluno.nome";
+
+		$alunos = Conexao::get()->fetchAll($sql, array($idOrganizacao));
+
+		return array('planos' => $planos, 'alunos' => $alunos);
 
 	}
 

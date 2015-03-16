@@ -162,7 +162,10 @@ crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
-	return $resource('api/relaluno', {filtro: '@filtro'}, {pesquisa: {method: 'POST'}});
+	return $resource('api/relaluno', {filtro: '@filtro'}, {
+		pesquisa: {method: 'POST'}, 
+		idade: {method: 'POST', url: 'api/relaluno/idade', params: {data_ini: '@data_ini',data_fim: '@data_fim'}}
+	});
 }]);
 
 crossfitApp.factory('RelAlunosPlanoResource', ['$resource', function ($resource) {

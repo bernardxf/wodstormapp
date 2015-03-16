@@ -465,10 +465,15 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 	};
 
 	$scope.pesquisaRelAluno = function(){
-		var pesquisa = $scope.relalunoDataset;
-		RelAlunoResource.pesquisa(pesquisa,function(response){
+		RelAlunoResource.pesquisa($scope.relalunoDataset,function(response){
 			$scope.relAlunoResponseDataset = response.data;
 		});	
+	};
+
+	$scope.pesquisaRelAlunoIdade = function(){
+		RelAlunoResource.idade($scope.pesquisaAlunoIdade, function(response){
+			$scope.relAlunoIdadeResponseDataset = response.data;
+		});
 	};
 
 	$scope.relatorioAlunoBairro = function(){

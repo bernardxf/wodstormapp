@@ -202,6 +202,11 @@ pesquisaRelAluno:
   path: /relaluno
   defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::pesquisaRelAluno' }
   methods:  [POST]
+pesquisaRelAlunoIdade:
+  path: /relaluno/idade
+  defaults: { _controller: 'Crossfit\Controllers\RelAlunoController::pesquisaRelAlunoIdade' }
+  methods:  [POST]
+
 
 # Rotas para o controller de Presenca
 presenca:

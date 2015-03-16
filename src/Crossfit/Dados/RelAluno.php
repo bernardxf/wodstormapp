@@ -55,4 +55,24 @@ class RelAluno
 		return array('bairros' => $bairros, 'alunos' => $alunos);
 	}
 
+	public static function relatorioAlunoIdade($dataInicio, $dataFim)
+	{
+		$sql = "select aluno.id_aluno, aluno.nome as aluno, aluno.data_nasc, plano.nome as plano, plano.valor, desconto.porc_desc from aluno
+				join contrato on aluno.id_aluno = contrato.id_aluno and contrato.status = 'A'
+				join plano on plano.id_plano = contrato.id_plano
+				join desconto on desconto.id_desconto = contrato.id_desconto
+				where aluno.status = 'A'
+				and aluno.data_nasc between ? and ?
+				and aluno.id_organizacao = ?;";
+
+		$resultado = Conexao::get()->fetchAll($sql, array($dataInicio, $dataFim, App::getSession()->get('organizacao')));
+
+		return $resultado;
+	}
+
+
+
+
+
+
 }

@@ -58,4 +58,16 @@ class RelAlunoController
         return $response->getAsJson();
 
     }
+
+    public static function pesquisaRelAlunoIdade(Request $request)
+    {
+        $dadosPesquisa = json_decode($request->getContent());
+        $response = new Response();
+
+        $resultado = RelAluno::relatorioAlunoIdade($dadosPesquisa->data_ini, $dadosPesquisa->data_fim);
+
+        $response->setData($resultado);
+
+        return $response->getAsJson();
+    }
 }

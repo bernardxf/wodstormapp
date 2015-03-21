@@ -8,6 +8,9 @@ use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Routing\RouteCollection;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 date_default_timezone_set('America/Sao_Paulo');    
 
@@ -52,6 +55,16 @@ $app->register(new DoctrineServiceProvider(), array(
         )
     )
 );
+
+
+// Caso de erro 404 na rota, ele envia para a tela de barra
+$app->error(function (\Exception $e, $code) use($app){
+    if($code == 404) {
+        $subRequest = Request::create('/', 'GET');
+        return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+    }
+
+});
 
 \Crossfit\Conexao::init($app);
 \Crossfit\App::init($app);

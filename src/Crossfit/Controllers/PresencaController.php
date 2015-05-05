@@ -23,6 +23,15 @@ class PresencaController
 		return $response->getAsJson();
 	}
 
+	public static function retornaPresencaAtiva()
+	{
+		$response = new Response();
+		$resultado = AlunoAula::retornaPresencaAtiva();
+
+		$response->setData($resultado);
+		return $response->getAsJson();
+	}
+
 	public static function retornaCadPresenca($id_aula)
 	{
 		$response = new Response();
@@ -60,6 +69,24 @@ class PresencaController
 		$response = new Response();
 
 		$resultado = AlunoAula::removeAlunosAula($id_aula);
+
+		return $response->getAsJson();
+	}
+
+	public static function salvarPresencaSalao(Request $request)
+	{
+		$response = new Response();
+		$presencaDataset = json_decode($request->getContent());
+
+		return $response->getAsJson();
+	}
+
+	public static function salvarAlunoPresenteSalao($id_aula, Request $request)
+	{
+		$response = new Response();
+		$presenteDataset = json_decode($request->getContent());
+
+		AlunoAula::atualizaPresencaSalao($id_aula, $presenteDataset);
 
 		return $response->getAsJson();
 	}

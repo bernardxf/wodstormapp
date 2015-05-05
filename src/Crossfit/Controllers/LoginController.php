@@ -7,6 +7,7 @@ use Crossfit\Conexao;
 use Crossfit\Util\Response;
 use Crossfit\Dados\Usuario;
 use Crossfit\Dados\Organizacao;
+use Crossfit\Dados\Configuracao;
 
 class LoginController
 {
@@ -22,14 +23,16 @@ class LoginController
 		$resultadoOrganizacao = Organizacao::verificaOrganizacao($organizacao);
 
 		if($resultadoOrganizacao) {
+			$configOrganizacao = Configuracao::retornaConfiguracoesPorOrganizacao($organizacao);
 			$usuario = Usuario::retornaUsuarioLogin($usuario, $senha, $organizacao);
 
 			if($usuario){
 				$app["session"]->set("usuario_logado", true);
 				$app["session"]->set("usuario", $usuario);
 				$app["session"]->set("organizacao", $organizacao);
+				$app['session']->set("configuracoes", $configOrganizacao);
 
-				$response->setData($usuario);
+				$response->setData(array('usuario' => $usuario, 'configuracao' => $configOrganizacao));
 			} else {
 				$response->addMessage('danger', "Erro ao tentar logar!", "Dados incorretos ou usuário não cadastrado");	
 				$response->setSuccess(false);

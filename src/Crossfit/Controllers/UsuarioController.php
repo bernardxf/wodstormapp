@@ -3,6 +3,7 @@ namespace Crossfit\Controllers;
 
 use Symfony\Component\HttpFoundation\Request;
 use Crossfit\Dados\Usuario;
+use Crossfit\Dados\Configuracao;
 use Crossfit\Util\Response;
 use Crossfit\App;
 
@@ -13,7 +14,8 @@ class UsuarioController
 		$response = new Response();
 
 		$usuario = App::getSession()->get('usuario');
-		$response->setData($usuario);
+		$configuracao = App::getSession()->get('configuracoes');
+		$response->setData(array('usuario' => $usuario, 'configuracao' => $configuracao));
 
 		return $response->getAsJson();
 	}

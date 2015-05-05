@@ -1,6 +1,4 @@
 <?php
-use Symfony\Component\HttpFoundation\Response;
-
 require 'bootstrap.php';
 
 // $app->match('/', function() use ($app){

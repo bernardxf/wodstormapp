@@ -26,7 +26,8 @@ class Usuario
 
 	public static function retornaUsuarioLogin($usuario, $senha, $organizacao)
 	{
-		$sql = 'select * from usuario where usuario = ? and senha = ? and id_organizacao = ?';
+		$sql = 'SELECT id_usuario, nome, usuario, id_organizacao as organizacao, id_grupo_usuario as grupoUsuario from usuario 
+				where usuario = ? and senha = ? and id_organizacao = ?';
 		$resultado = Conexao::get()->fetchAssoc($sql, array($usuario, md5($senha), $organizacao));
 		return $resultado;
 	}

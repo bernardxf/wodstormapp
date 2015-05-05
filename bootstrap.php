@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
+
+use Crossfit\Util\Response as UtilResponse;
+
 date_default_timezone_set('America/Sao_Paulo');    
 
 $loader = require 'vendor/autoload.php';
@@ -22,6 +25,17 @@ $app = new Application();
 $app['debug'] = true;
 
 
+$app->before(function(Request $request) use($app){
+    $arrRotasLiberadas = array('app', 'login', 'logado', 'buscarLeaderboard');
+
+    if(!in_array($request->get('_route'), $arrRotasLiberadas) && !$app['session']->get('usuario_logado')) {
+        $response = new UtilResponse();
+        $response->addMessage('danger', 'Erro', 'Erro ao tentar acessar recurso!');
+        $response->setSuccess(false);
+        return $response->getAsJson();
+    }
+});
+
 $app['routes'] = $app->extend('routes', function (RouteCollection $routes, Application $app) {
     $loader     = new YamlFileLoader(new FileLocator(__DIR__ . '/config'));
     $collection = $loader->load('routes.yml');
@@ -29,12 +43,6 @@ $app['routes'] = $app->extend('routes', function (RouteCollection $routes, Appli
  
     return $routes;
 });
-
-// $app->register(new CorsServiceProvider(), array(
-//     "cors.allowOrigin" => "http://localhost",
-//     "cors.allowMethods" => "GET,POST,PUT,DELETE"
-// ));
-// $app->after($app["cors"]);
 
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app['session']->start();
@@ -63,7 +71,6 @@ $app->error(function (\Exception $e, $code) use($app){
         $subRequest = Request::create('/', 'GET');
         return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
     }
-
 });
 
 \Crossfit\Conexao::init($app);

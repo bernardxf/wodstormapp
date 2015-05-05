@@ -7,8 +7,9 @@ var AppServices = angular.module('AppServices', [])
 				if(response){
 					if(response.success){
 						$rootScope.logged = true;
-						$rootScope.loggedUserData = response.data;
-						$location.path('/dashboard');
+						$rootScope.loggedUserData = response.data.usuario;
+						if(parseInt($rootScope.loggedUserData.grupoUsuario) < 3) $location.path('/dashboard');			
+						else $location.path('/leaderboard');
 
 						var storage = {usuario:loginDataset.usuario, organizacao: loginDataset.organizacao};
 						localStorage.setItem('wodStormLogin', JSON.stringify(storage));

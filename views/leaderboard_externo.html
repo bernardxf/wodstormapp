@@ -1,0 +1,49 @@
+<header>
+	<h1 id="site-logo">
+		<a href="#/">
+			<img src="public/assets/img/logos/logo.png" alt="WodStorm" />
+		</a>
+	</h1>	
+</header>
+
+<div id="content" data-ng-init="buscarDadosLeaderboard();">		
+	<div id="content-header">
+		<h1>Leaderboard</h1>
+	</div> <!-- #content-header -->	
+	<div id="content-container">	
+		<!--  Inicio grid planos  -->
+		<div class="col-md-12">
+			<div class="portlet">
+				<div class="portlet-header">
+					<h3><i class="fa fa-table"></i>Resultados do dia {{buscaLeaderboardDataset.dataLeaderboard | date:'dd/MM/yyyy'}}</h3>
+				</div> <!-- /.portlet-header -->
+				<div class="portlet-content">						
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover table-highlight table-checkable" >
+							<thead>
+								<tr>
+									<th>Aluno</th>
+									<th>RX</th>
+									<th>Reps</th>
+									<th>Tempo</th>
+									<th>Observação</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in leaderboardDataset">
+									<td>{{item.aluno}}</td>
+									<td>
+										<i class="fa fa-check fa-fw" ng-show="item.rx == 1"></i>
+									</td>
+									<td>{{item.reps}}</td>
+									<td>{{item.tempo}}</td>
+									<td>{{item.observacao}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div> <!-- /.table-responsive -->
+				</div> <!-- /.portlet-content -->
+			</div> <!-- /.portlet -->
+		</div> <!-- /.col -->
+	</div> <!-- /#content-container -->			
+</div> <!-- #content -->

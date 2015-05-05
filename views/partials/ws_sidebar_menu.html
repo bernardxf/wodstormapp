@@ -21,7 +21,7 @@
 		<li class="" ng-show="verificaPermissaoAcesso('menu/financeiro')">
 			<a href="#/financeiro"><i class="fa fa-money"></i>Financeiro</a>
 		</li>
-		<li class="dropdown">
+		<li class="dropdown" data-ng-show="verificaPermissaoMenu(RECEPCAO);">
 			<a href="javascript:;"><i class="fa fa-bar-chart-o"></i>Relatórios<span class="caret"></span></a>
 			<ul class="sub-nav">
 				<li ng-show="verificaPermissaoAcesso('menu/relatorio/relaluno')">
@@ -44,7 +44,7 @@
 				</li>
 			</ul>						
 		</li>	
-		<li class="dropdown">
+		<li class="dropdown" data-ng-show="verificaPermissaoMenu(RECEPCAO);">
 			<a href="javascript:;"><i class="fa fa-cog"></i>Configuração<span class="caret"></span></a>
 			<ul class="sub-nav">
 				<li ng-show="verificaPermissaoAcesso('menu/configuracoes/desconto')">
@@ -57,6 +57,20 @@
 					<a href="#/plano"><i class="fa fa-cog"></i>Planos</a>
 				</li>			
 			</ul>	
+		</li>
+		<li class="dropdown" data-ng-show="verificaPermissaoMenu(ALUNO);">
+			<a href="javascript:;"><i class="fa fa-cog"></i>Leaderboard<span class="caret"></span></a>
+			<ul class="sub-nav">
+				<li>
+					<a href="#/leaderboard"><i class="fa fa-book"></i>Leaderboard do dia</a>		
+				</li>
+				<li data-ng-show="verificaPermissaoMenu(RECEPCAO);">
+					<a href="#/buscar_leaderboard"><i class="fa fa-book"></i>Leaderboards passados</a>		
+				</li>
+			</ul>
+		</li>
+		<li  data-ng-show="verificaPermissaoMenu(ALUNO);">
+			<a href="#/presenca_salao"><i class="fa fa-book"></i>Presença Salão</a>
 		</li>
 	</ul>
 </nav> <!-- #sidebar -->

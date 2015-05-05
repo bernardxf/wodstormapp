@@ -97,6 +97,21 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 	}).when('/financeiro/cad_movimento/:financeiro?', {
 		templateUrl: 'views/cad_fin_movimento.html',
 		controller: 'FinanceiroController'
+	}).when('/leaderboard', {
+		templateUrl: 'views/leaderboard.html',
+		controller: 'LeaderboardController'
+	}).when('/buscar_leaderboard', {
+		templateUrl: 'views/buscar_leaderboard.html',
+		controller: 'LeaderboardController'
+	}).when('/consultaLeaderboard/:dataLeaderboard/:organizacao', {
+		templateUrl: 'views/leaderboard_externo.html',
+		controller: 'LeaderboardExternoController'
+	}).when('/presenca_salao', {
+		templateUrl: 'views/presenca_salao.html',
+		controller: 'PresencaSalaoController'
+	}).when('/configuracao', {
+		templateUrl: 'views/configuracao.html',
+		controller: 'ConfiguracaoController'
 	}).when('/logout', {
 		templateUrl: 'views/logout.html',
 		controller: 'LogoutController'
@@ -104,26 +119,55 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 
 }]);
 
-crossfitApp.run(function($rootScope, $location, LoginResource, $templateCache){
+crossfitApp.run(function($rootScope, $location, LoginResource, $templateCache, $interval){
 	$rootScope.carregando = false;
+	$rootScope.timerLogado = null;
+	$rootScope.controleTimer = null;
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
-		if ($rootScope.logged == false || $rootScope.logged == null) {
+		if (($rootScope.logged == false || $rootScope.logged == null) && next.controller != 'LeaderboardExternoController') {
 			LoginResource.get({}, function(response){
-				if(response.data){
+				if(response.data.usuario){
 					$rootScope.logged = true;
-					$rootScope.loggedUserData = response.data;
+					$rootScope.loggedUserData = response.data.usuario;
+					$rootScope.sisConfig = response.data.configuracao;
 					if(next.originalPath == '/') {
-						$location.path('/dashboard');			
+						if(parseInt($rootScope.loggedUserData.grupoUsuario) < 3) $location.path('/dashboard');			
+						else $location.path('/leaderboard');
 					}
 				} else {
 					$location.path('/');		
 				}
 			});
+		} else {
+			// Removendo qualquer timer($interval) que esteja sendo executado dentro da aplicacao.
+			if($rootScope.controleTimer) {
+				$interval.cancel($rootScope.controleTimer);
+				$rootScope.controleTimer = null;
+			}
 		}
 	});
 	$rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
    });
+
+	// Timer verificando se a sessão ainda esta ativa e se o usuario continua logado.
+	if(!$rootScope.timerLogado) {
+		$rootScope.timerLogado = $interval(function() {
+			LoginResource.get({}, function(response){
+				if(!response.data) {
+					$location.path('/');
+					$rootScope.logged = false;
+					$rootScope.loggedUserData = null;
+					$rootScope.sisConfig = null;
+				}
+				else {
+					$rootScope.logged = true;
+					$rootScope.loggedUserData = response.data.usuario;
+					$rootScope.sisConfig = response.data.configuracao;
+				}
+			});
+		}, 1000*60*1);
+	}
 });
 
 crossfitApp.factory('LoginResource', ['$resource', function ($resource) {
@@ -187,7 +231,10 @@ crossfitApp.factory('ServicoResource', ['$resource', function ($resource) {
 }]);
 
 crossfitApp.factory('PresencaResource', ['$resource', function ($resource) {
-	return $resource('api/presenca/:id_aula',{id_aula:'@id_aula'});
+	return $resource('api/presenca/:id_aula',{id_aula:'@id_aula'}, {
+		presencaAtiva: {method: 'GET', url: 'api/presencaativa'},
+		presencaSalao: {method: 'POST', url: 'api/presenca/salao/:id_aula'}
+	});
 }]);
 
 crossfitApp.factory('AulaResource', ['$resource', function ($resource) {
@@ -236,3 +283,12 @@ crossfitApp.factory('RelMetricaContratoResource', ['$resource', function ($resou
 crossfitApp.factory('RelPresencaResource', ['$resource', function ($resource) {
 	return $resource('api/relpresenca', {}, {pesquisa: {method: 'POST'}});
 }]);
+
+crossfitApp.factory('LeaderboardResource', ['$resource', function ($resource) {
+	return $resource('api/leaderboard/:dataLeaderboard', {dataLeaderboard: '@dataLeaderboard', organizacao: '@organizacao'});
+}]);
+
+crossfitApp.factory('ConfiguracaoResource', ['$resource', function ($resource) {
+	return $resource('api/configuracao', {});
+}]);
+

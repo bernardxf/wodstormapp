@@ -3,6 +3,10 @@ var AppControllers = angular.module('AppControllers', ['ui.bootstrap']);
 // Este controller pode ser redefinido, caso a estrategia de utilizacao do controle de acesso (proposito deste) seja
 // alterada.
 AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoResource", function ($scope, $rootScope, controleAcessoResource) {
+	$scope.ADMIN = 1;
+	$scope.RECEPCAO = 2;
+	$scope.ALUNO = 3;
+
 	$rootScope.sideBarIsVisible = true;
 	$rootScope.headerIsVisible  = true;
 	controleAcessoResource.get({}, function(response){	
@@ -22,6 +26,12 @@ AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoRe
 		}
 
 		return null;
+	};
+
+	$scope.verificaPermissaoMenu = function(nivelPermissao){
+		if(!$rootScope.loggedUserData) return false;
+		if(nivelPermissao >= $rootScope.loggedUserData.grupoUsuario) return true
+		else return false;
 	}
 }]);
 
@@ -38,8 +48,9 @@ AppControllers.controller('LoginController', ['$scope', 'loginService', function
 	}
 }]);
 
-AppControllers.controller('LogoutController', ['$scope', 'loginService', function ($scope, loginService) {
-
+AppControllers.controller('LogoutController', ['$scope', 'loginService', '$interval', '$rootScope', function ($scope, loginService, $interval, $rootScope) {
+	$interval.cancel($rootScope.timerLogado);
+	$rootScope.timerLogado = null;
 	loginService.logout();	
 
 }]);
@@ -829,7 +840,7 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 	};
 }]);
 
-AppControllers.controller('PresencaController', ['$scope','$routeParams', '$location', '$modal', 'PresencaResource', 'AlunoResource', 'MessageService', 'RESTService', function ($scope, $routeParams, $location, $modal, PresencaResource, AlunoResource, MessageService, RESTService) {
+AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeParams', '$location', '$modal', '$interval', 'PresencaResource', 'AlunoResource', 'MessageService', 'RESTService', function ($scope, $rootScope, $routeParams, $location, $modal, $interval, PresencaResource, AlunoResource, MessageService, RESTService) {
 	var rest = new RESTService(PresencaResource);
 
 	var today = new Date();
@@ -842,31 +853,31 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 	$scope.cadAlunoDataset = null;
 	$scope.cadPresencaDataset = {data:year+'-'+month+'-'+day, presentes : new Array()};
 
+
 	$scope.pesquisaAulas = function(){
 		var pesquisaAulaDataset = $scope.pesquisaAulaDataset;
-		// PresencaResource.get(pesquisaAulaDataset, function(response){
-		// 	$scope.aulaDataset = response.data;
-		// });
-
 		rest.get(pesquisaAulaDataset).then(function(response){
 			$scope.aulaDataset = response.data;
 		});
 	};
 
 	$scope.carregaCadPresenca = function(){
-		// PresencaResource.get({id_aula: $routeParams.aula}, function(response){	
-		// 	if(!angular.isArray(response.data)){
-		// 		$scope.cadPresencaDataset = response.data.aula;	
-		// 		$scope.cadPresencaDataset.presentes = response.data.presenca;
-		// 	}
-		// });
-
 		rest.get({id_aula: $routeParams.aula}).then(function(response){
 			if(!angular.isArray(response.data)){
 				$scope.cadPresencaDataset = response.data.aula;	
 				$scope.cadPresencaDataset.presentes = response.data.presenca;
 			}
 		});
+
+		// Atualizando a lista dos presentes e da aula ativa a cada 15s.
+		$rootScope.controleTimer = $interval(function(){
+			PresencaResource.get({id_aula: $routeParams.aula}, function(response){
+				if(!angular.isArray(response.data)){
+					$scope.cadPresencaDataset = response.data.aula;	
+					$scope.cadPresencaDataset.presentes = response.data.presenca;
+				}
+			});
+		}, 1000*15);
 	};
 
 	$scope.presquisaAluno = function(){
@@ -891,8 +902,16 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 		});
 
 		if(jaPresente.length === 0){
-			aluno.senha = $scope.cadPresencaDataset.presentes.length+1;
-			$scope.cadPresencaDataset.presentes.push(aluno);
+
+			if($scope.cadPresencaDataset.presentes.length >= $rootScope.sisConfig.maxPresentes) {
+				if(confirm('Limite de presentes já atingido, deseja adicionar mesmo assim?')) {
+					aluno.senha = $scope.cadPresencaDataset.presentes.length+1;
+					$scope.cadPresencaDataset.presentes.push(aluno);
+				}
+			} else {
+				aluno.senha = $scope.cadPresencaDataset.presentes.length+1;
+				$scope.cadPresencaDataset.presentes.push(aluno);	
+			}
 		}
 	};
 
@@ -907,9 +926,6 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 
 	$scope.salvaPresenca = function(){
 		var presenca = $scope.cadPresencaDataset;
-		// PresencaResource.save(presenca, function(response){
-		// 	$location.path('/presenca');
-		// });
 
 		rest.save(presenca).then(function(response){
 			$location.path('/presenca');
@@ -922,9 +938,6 @@ AppControllers.controller('PresencaController', ['$scope','$routeParams', '$loca
 
 	$scope.deletaPresenca = function(presenca){
 		if(confirm('Realmente deseja apagar?')){
-			// PresencaResource.remove({id_aula : presenca.id_aula}, function(response){
-			// 	$scope.pesquisaAulas();
-			// });
 			rest.remove({id_aula : presenca.id_aula}).then(function(response){
 				var index = $scope.aulaDataset.indexOf(presenca);
 				delete($scope.aulaDataset[index]);
@@ -1123,7 +1136,7 @@ AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootS
 
 	$scope.carregaPerfil = function(){
 		PerfilResource.get({}, function(response){
-			$scope.perfilDataset = response.data;
+			$scope.perfilDataset = response.data.usuario;
 		});
 	};
 
@@ -1325,6 +1338,139 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 			});
 		});
 	};
+}]);
+
+AppControllers.controller('LeaderboardController', ['$scope', '$rootScope', 'LeaderboardResource', 'AlunoResource', function ($scope, $rootScope, LeaderboardResource, AlunoResource){
+	var today = new Date(),
+		year = today.getFullYear(),
+		month = today.getMonth()<9?"0"+(today.getMonth()+1):today.getMonth()+1,
+		day = (today.getDate()<10?'0':'') + today.getDate(),
+		hoje = year+'-'+month+'-'+day;
+
+	$scope.leaderboardDataset = null;
+	$scope.resultadoLeaderboardDataset = null;
+	$scope.selectAluno = null;
+	$scope.buscaLeaderboardDataset = {data: hoje};
+
+	$scope.iniciarTela = function() {
+		AlunoResource.get({simples: 1}, function(response){
+			$scope.selectAluno = response.data;
+		});
+		$scope.buscarResultados(hoje);
+	}
+
+	$scope.salvarResultado = function(){
+		LeaderboardResource.save($scope.resultadoLeaderboardDataset, function(response){
+			$scope.buscarResultados(hoje);
+			$scope.buscaLeaderboardDataset = {
+				id_aluno: null,
+				reps: null,
+				min: null,
+				sec: null
+			};
+		});
+	};
+
+	$scope.buscarResultados = function(data) {
+		LeaderboardResource.get({dataLeaderboard: data}, function(response){
+			$scope.leaderboardDataset = response.data;
+			$scope.leaderboardUrl = 'app.wodstorm.com.br/#/consultaLeaderboard/' + hoje + '/' + $rootScope.loggedUserData.organizacao;
+		});
+	};
+
+	$scope.buscarResultadosPassados = function() {
+		var data = $scope.buscaLeaderboardDataset.data;
+		if(data) {
+			$scope.buscarResultados(data);
+			$scope.leaderboardUrl = 'app.wodstorm.com.br/#/consultaLeaderboard/' + data + '/' + $rootScope.loggedUserData.id_organizacao;
+		}
+	};
+
+}]);
+
+AppControllers.controller('LeaderboardExternoController', ['$scope', '$routeParams', 'LeaderboardResource', function ($scope, $routeParams, LeaderboardResource){
+	$scope.buscaLeaderboardDataset = $routeParams;
+	$scope.buscarDadosLeaderboard = function() {
+		LeaderboardResource.get($routeParams, function(response){
+			$scope.leaderboardDataset = response.data;
+		});
+	};
+}]);
+
+AppControllers.controller('PresencaSalaoController', ['$scope', '$rootScope', 'AlunoResource', 'PresencaResource', 'MessageService',  '$interval', function ($scope, $rootScope, AlunoResource, PresencaResource, MessageService, $interval){
+	$scope.selectAluno = null;
+	$scope.idAulaAtiva = null;
+	$scope.presencaSalaoDataset = null;
+	$scope.presenteDataset = null;
+
+	$scope.iniciarTela = function() {
+		AlunoResource.get({simples: 1}, function(response){
+			$scope.selectAluno = response.data;
+		});
+		PresencaResource.presencaAtiva({}, function(response){
+			$scope.idAulaAtiva = response.data.aula;
+			$scope.presencaSalaoDataset = response.data.presentes;
+		});
+	}
+
+	$scope.adicioanarAlunoPresente = function(){
+		var jaPresente = $scope.presencaSalaoDataset.filter(function(item){
+			if(item.id_aluno === $scope.presenteDataset.id_aluno){
+				return true
+			}
+			return false;
+		});
+
+		if(jaPresente.length) {
+			MessageService.processMessages(new Array({type: 'danger', title:'Erro ao aplicar presença!', message:"Este aluno já está presente nesta lista."}))
+			return;
+		}
+
+		if($scope.presencaSalaoDataset.length >= $rootScope.sisConfig.maxPresentes) {
+			MessageService.processMessages(new Array({type: 'danger', title:'Erro ao aplicar presença!', message:"Limite de alunos da aula atingido, espere pela próxima aula."}))
+			return;
+		}
+
+		var senha = $scope.presencaSalaoDataset.length ? parseInt($scope.presencaSalaoDataset[$scope.presencaSalaoDataset.length - 1].senha) + 1 : 1;
+		$scope.presenteDataset['id_aula'] = $scope.idAulaAtiva;
+		$scope.presenteDataset['senha'] = senha;
+
+		PresencaResource.presencaSalao($scope.presenteDataset, function(response){
+			PresencaResource.presencaAtiva({}, function(response){
+				$scope.idAulaAtiva = response.data.aula;
+				$scope.presencaSalaoDataset = response.data.presentes;
+			});
+		});
+	};
+
+	// Atualizando a lista dos presentes e da aula ativa a cada 15s.
+	$rootScope.controleTimer = $interval(function(){
+		PresencaResource.presencaAtiva({}, function(response){
+			$scope.idAulaAtiva = response.data.aula;
+			$scope.presencaSalaoDataset = response.data.presentes;
+		});
+	}, 1000*15);
+}]);
+
+AppControllers.controller('ConfiguracaoController', ['$scope', 'ConfiguracaoResource', 'MessageService', 'RESTService', function ($scope, ConfiguracaoResource, MessageService, RESTService){
+	var rest = new RESTService(ConfiguracaoResource);
+
+	$scope.configuracaoDataset = null;
+
+	$scope.carregarConfiguracoes = function(){
+		rest.get({}).then(function(response){
+			$scope.configuracaoDataset = response.data;
+		});
+	};
+
+	$scope.salvarConfiguracao = function(){
+		rest.save($scope.configuracaoDataset).then(function(response){
+			if(!response.success) {
+				MessageService.processMessages(new Array({type: 'danger', title:'Erro ao salvar configurações', message:"Houve algum erro ao tentar salvar suas configurações, entre em contato com o administrador"}));
+			}
+			//$scope.configuracaoDataset = response.data;
+		});	
+	}
 }]);
 
 AppControllers.controller('RelatorioController', ['$scope', '$rootScope', 'DashboardResource', function ($scope, $rootScope, DashboardResource) {

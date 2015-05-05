@@ -229,6 +229,15 @@ removePresenca:
   path: /presenca/{id_aula}
   defaults: { _controller: 'Crossfit\Controllers\PresencaController::removePresenca' }
   methods:  [DELETE]
+presencaAtiva:
+  path: /presencaativa
+  defaults: { _controller: 'Crossfit\Controllers\PresencaController::retornaPresencaAtiva' }
+  methods:  [GET]
+addAlunoPresenteSalao:
+  path: /presenca/salao/{id_aula}
+  defaults: { _controller: 'Crossfit\Controllers\PresencaController::salvarAlunoPresenteSalao' }
+  methods:  [POST]
+
 
   # Rotas para o controller de SERVIÇO
 servico:
@@ -342,3 +351,29 @@ relpresenca:
   path: /relpresenca
   defaults: { _controller: 'Crossfit\Controllers\RelPresencaController::pesquisaRelPresenca' }
   methods:  [POST]
+
+# Rota para a área de leaderboard
+leaderboard:
+  path: /leaderboard
+  defaults: { _controller: 'Crossfit\Controllers\LeaderboardController::retornaTodos' }
+  methods:  [GET]
+buscarLeaderboard:
+  path: /leaderboard/{data}
+  defaults: { _controller: 'Crossfit\Controllers\LeaderboardController::retornaResultadosLeaderboard' }
+  methods:  [GET]
+salvarLeaderboard:
+  path: /leaderboard
+  defaults: { _controller: 'Crossfit\Controllers\LeaderboardController::salvarResultado' }
+  methods:  [POST]
+
+# Rota para a área de configuracao
+configuracao:
+  path: /configuracao
+  defaults: { _controller: 'Crossfit\Controllers\ConfiguracaoController::retornaConfiguracoesOrganizacao' }
+  methods:  [GET]
+salvarConfiguracao:
+  path: /configuracao
+  defaults: { _controller: 'Crossfit\Controllers\ConfiguracaoController::salvaConfiguracao' }
+  methods:  [POST]
+
+

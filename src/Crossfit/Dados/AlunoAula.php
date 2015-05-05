@@ -29,10 +29,10 @@ class AlunoAula
 
 	public static function retornaSelecionadoPorData($data)
 	{
-		$sql = 'select aula.id_aula as id_aula, aula.horario as horario, count(alunos_aula.id_aluno) as num_presentes, aula.excedente as num_excedentes from alunos_aula
-				join aula on aula.id_aula = alunos_aula.id_aula
+		$sql = 'select aula.id_aula as id_aula, aula.horario as horario, count(alunos_aula.id_aluno) as num_presentes, aula.excedente as num_excedentes from aula
+				left join alunos_aula on aula.id_aula = alunos_aula.id_aula 
 				where aula.data = ? and aula.id_organizacao = ?
-				group by aula.id_aula';
+				group by aula.id_aula;';
 		$resultado = Conexao::get()->fetchAll($sql, array($data, App::getSession()->get('organizacao')));
 		return $resultado;
 	}
@@ -98,5 +98,49 @@ class AlunoAula
 		Conexao::get()->delete('aula', array('id_aula' => $id_aula, 'id_organizacao' => App::getSession()->get('organizacao')));
 
 		return true;
+	}
+
+	public static function retornaPresencaAtiva()
+	{
+		$sql = "SELECT aluno.id_aluno as id_aluno, aluno.nome as nome, alunos_aula.num_senha as senha from aluno 
+				join alunos_aula on alunos_aula.id_aluno = aluno.id_aluno 
+				where alunos_aula.id_aula = ( 
+					SELECT a.id_aula from aula a 
+					where a.id_organizacao = ? and a.data = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') 
+					order by a.id_aula DESC 
+					limit 1 ) 
+				and alunos_aula.id_organizacao = ? order by alunos_aula.num_senha;";
+
+		$presentes = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao'), App::getSession()->get('organizacao')));
+
+		$sql = "SELECT a.id_aula from aula a 
+				where a.id_organizacao = ? and a.data = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') 
+				order by a.id_aula DESC 
+				limit 1";
+		$aula = Conexao::get()->fetchAssoc($sql, array(App::getSession()->get('organizacao')));
+
+		return array('aula' => (int) $aula['id_aula'], 'presentes' => $presentes);
+
+	}
+
+	public static function atualizaPresencaSalao($id_aula, $presente)
+	{
+		$sisConfig = App::getSession()->get('configuracoes');
+
+		$sql = 'SELECT count(1) as numPresentes from alunos_aula where id_aula = ?';
+		$resultado = Conexao::get()->fetchAssoc($sql, array($id_aula));
+		
+		if((int)$resultado['numPresentes'] < (int)$sisConfig['maxPresentes']) {
+			$alunosAulaDataset = array(
+				'id_aluno' => $presente->id_aluno,
+				'id_aula' => $id_aula,
+				'num_senha' => $presente->senha,
+				'id_organizacao' => App::getSession()->get('organizacao')
+			);
+
+			Conexao::get()->insert('alunos_aula', $alunosAulaDataset);	
+			return true;
+		}
+		return false;
 	}
 }

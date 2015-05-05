@@ -10,8 +10,11 @@ class AlunoController
 {
 	public static function carregaAluno(Request $request)
 	{
+		$simples = (bool) $request->query->get('simples');
+
 		$response = new Response();
-		$resultado = Aluno::retornaTodos();	
+		if($simples) $resultado = Aluno::retornaTodosSimples();
+		else $resultado = Aluno::retornaTodos();	
 
 		$response->setData($resultado);
 

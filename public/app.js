@@ -120,6 +120,8 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 }]);
 
 crossfitApp.run(function($rootScope, $location, LoginResource, $templateCache, $interval){
+	$rootScope.logged = false;
+	$rootScope.loggedUserData = null;
 	$rootScope.carregando = false;
 	$rootScope.timerLogado = null;
 	$rootScope.controleTimer = null;
@@ -145,29 +147,29 @@ crossfitApp.run(function($rootScope, $location, LoginResource, $templateCache, $
 				$rootScope.controleTimer = null;
 			}
 		}
+
+		// Timer verificando se a sessão ainda esta ativa e se o usuario continua logado.
+		if(!$rootScope.timerLogado && $rootScope.logged) {
+			$rootScope.timerLogado = $interval(function() {
+				LoginResource.get({}, function(response){
+					if(!response.data) {
+						$location.path('/');
+						$rootScope.logged = false;
+						$rootScope.loggedUserData = null;
+						$rootScope.sisConfig = null;
+					}
+					else {
+						$rootScope.logged = true;
+						$rootScope.loggedUserData = response.data.usuario;
+						$rootScope.sisConfig = response.data.configuracao;
+					}
+				});
+			}, 1000*60*5);
+		}
 	});
 	$rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
    });
-
-	// Timer verificando se a sessão ainda esta ativa e se o usuario continua logado.
-	if(!$rootScope.timerLogado) {
-		$rootScope.timerLogado = $interval(function() {
-			LoginResource.get({}, function(response){
-				if(!response.data) {
-					$location.path('/');
-					$rootScope.logged = false;
-					$rootScope.loggedUserData = null;
-					$rootScope.sisConfig = null;
-				}
-				else {
-					$rootScope.logged = true;
-					$rootScope.loggedUserData = response.data.usuario;
-					$rootScope.sisConfig = response.data.configuracao;
-				}
-			});
-		}, 1000*60*1);
-	}
 });
 
 crossfitApp.factory('LoginResource', ['$resource', function ($resource) {

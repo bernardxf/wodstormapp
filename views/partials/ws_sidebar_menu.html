@@ -58,18 +58,18 @@
 				</li>			
 			</ul>	
 		</li>
-		<li class="dropdown" data-ng-show="verificaPermissaoMenu(ALUNO);">
+		<li class="dropdown" data-ng-show="verificaPermissaoMenu(ALUNO,true);">
 			<a href="javascript:;"><i class="fa fa-cog"></i>Leaderboard<span class="caret"></span></a>
 			<ul class="sub-nav">
 				<li>
 					<a href="#/leaderboard"><i class="fa fa-book"></i>Leaderboard do dia</a>		
 				</li>
-				<li data-ng-show="verificaPermissaoMenu(RECEPCAO);">
+				<li data-ng-show="verificaPermissaoMenu(RECEPCAO,true);">
 					<a href="#/buscar_leaderboard"><i class="fa fa-book"></i>Leaderboards passados</a>		
 				</li>
 			</ul>
 		</li>
-		<li  data-ng-show="verificaPermissaoMenu(ALUNO);">
+		<li  data-ng-show="verificaPermissaoMenu(ALUNO,false);">
 			<a href="#/presenca_salao"><i class="fa fa-book"></i>Presença Salão</a>
 		</li>
 	</ul>

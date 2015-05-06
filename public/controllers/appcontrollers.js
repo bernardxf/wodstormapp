@@ -28,9 +28,10 @@ AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoRe
 		return null;
 	};
 
-	$scope.verificaPermissaoMenu = function(nivelPermissao){
+	$scope.verificaPermissaoMenu = function(nivelPermissao, extendida){
 		if(!$rootScope.loggedUserData) return false;
-		if(nivelPermissao >= $rootScope.loggedUserData.grupoUsuario) return true
+		if(extendida && nivelPermissao >= $rootScope.loggedUserData.grupoUsuario) return true
+		else if(!extendida && nivelPermissao == $rootScope.loggedUserData.grupoUsuario) return true
 		else return false;
 	}
 }]);

@@ -140,12 +140,12 @@ crossfitApp.run(function($rootScope, $location, LoginResource, $templateCache, $
 					$location.path('/');		
 				}
 			});
-		} else {
-			// Removendo qualquer timer($interval) que esteja sendo executado dentro da aplicacao.
-			if($rootScope.controleTimer) {
-				$interval.cancel($rootScope.controleTimer);
-				$rootScope.controleTimer = null;
-			}
+		}
+
+		// Removendo qualquer timer($interval) que esteja sendo executado dentro da aplicacao.
+		if($rootScope.controleTimer) {
+			$interval.cancel($rootScope.controleTimer);
+			$rootScope.controleTimer = null;
 		}
 
 		// Timer verificando se a sessão ainda esta ativa e se o usuario continua logado.

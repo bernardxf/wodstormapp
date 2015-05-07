@@ -16,7 +16,7 @@ class Leaderboard
 
 	public static function retornaLeaderboardPorData($data)
 	{
-		$sql = "SELECT aluno.nome as aluno, l.rx, l.observacao, l.reps, if(l.min = 0, '', CONCAT_WS(':', LPAD(l.min, 2, '0'), LPAD(l.sec, 2, '0'))) as tempo from Leaderboard as l
+		$sql = "SELECT aluno.nome as aluno, l.rx, l.observacao, l.reps, if(l.min = 0, '', CONCAT_WS(':', LPAD(l.min, 2, '0'), LPAD(l.sec, 2, '0'))) as tempo from leaderboard as l
 				join aluno on aluno.id_aluno = l.id_aluno
 				where l.id_organizacao = ? and l.data = ?
 				order by l.reps DESC, l.min, l.sec;";
@@ -27,7 +27,7 @@ class Leaderboard
 
 	public static function retornaLeaderboardPorDataEOrganizacao($data, $id_organizacao)
 	{
-		$sql = "SELECT aluno.nome as aluno, l.rx, l.observacao, l.reps, if(l.min = 0, '', CONCAT_WS(':', LPAD(l.min, 2, '0'), LPAD(l.sec, 2, '0'))) as tempo from Leaderboard as l
+		$sql = "SELECT aluno.nome as aluno, l.rx, l.observacao, l.reps, if(l.min = 0, '', CONCAT_WS(':', LPAD(l.min, 2, '0'), LPAD(l.sec, 2, '0'))) as tempo from leaderboard as l
 				join aluno on aluno.id_aluno = l.id_aluno
 				where l.id_organizacao = ? and l.data = ?
 				order by l.reps DESC, l.min, l.sec;";

@@ -854,6 +854,8 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 	$scope.cadAlunoDataset = null;
 	$scope.cadPresencaDataset = {data:year+'-'+month+'-'+day, presentes : new Array()};
 
+	$scope.presentesIniciais = null;
+
 
 	$scope.pesquisaAulas = function(){
 		var pesquisaAulaDataset = $scope.pesquisaAulaDataset;
@@ -867,17 +869,30 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 			if(!angular.isArray(response.data)){
 				$scope.cadPresencaDataset = response.data.aula;	
 				$scope.cadPresencaDataset.presentes = response.data.presenca;
+				$scope.presentesIniciais = response.data.presenca;
 			}
 		});
 
 		// Atualizando a lista dos presentes e da aula ativa a cada 15s.
 		$rootScope.controleTimer = $interval(function(){
-			PresencaResource.get({id_aula: $routeParams.aula}, function(response){
-				if(!angular.isArray(response.data)){
-					$scope.cadPresencaDataset = response.data.aula;	
-					$scope.cadPresencaDataset.presentes = response.data.presenca;
-				}
-			});
+			if($routeParams.aula) {
+				PresencaResource.get({id_aula: $routeParams.aula}, function(response){
+					if(!angular.isArray(response.data)){
+						var novosPresentes = response.data.presenca.filter(function(item){
+							for(var i in $scope.presentesIniciais) {
+								if(item.id_aluno == $scope.presentesIniciais[i].id_aluno) return false;
+							}
+
+							for(var i in $scope.cadPresencaDataset.presentes) {
+								if(item.id_aluno == $scope.cadPresencaDataset.presentes[i].id_aluno) return false;
+							}
+							
+							return true;
+						});
+						$scope.cadPresencaDataset.presentes = $scope.cadPresencaDataset.presentes.concat(novosPresentes);
+					}
+				});	
+			}
 		}, 1000*15);
 	};
 

@@ -890,6 +890,7 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 							return true;
 						});
 						$scope.cadPresencaDataset.presentes = $scope.cadPresencaDataset.presentes.concat(novosPresentes);
+						$scope.presentesIniciais = $scope.presentesIniciais.concat(novosPresentes);
 					}
 				});	
 			}

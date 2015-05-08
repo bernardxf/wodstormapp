@@ -8,6 +8,8 @@ var AppServices = angular.module('AppServices', [])
 					if(response.success){
 						$rootScope.logged = true;
 						$rootScope.loggedUserData = response.data.usuario;
+						$rootScope.sisConfig = response.data.configuracao;
+						
 						if(parseInt($rootScope.loggedUserData.grupoUsuario) < 3) $location.path('/dashboard');			
 						else $location.path('/leaderboard');
 

@@ -8,6 +8,7 @@ use Crossfit\Util\Response;
 use Crossfit\Dados\Usuario;
 use Crossfit\Dados\Organizacao;
 use Crossfit\Dados\Configuracao;
+use Crossfit\Dados\LogAcesso;
 
 class LoginController
 {
@@ -27,6 +28,14 @@ class LoginController
 			$usuario = Usuario::retornaUsuarioLogin($usuario, $senha, $organizacao);
 
 			if($usuario){
+				// Criando dados e salvando log de acesso do usuario.
+				$dadosLogAcesso = array(
+					'id_usuario' => (int)$usuario['id_usuario'],
+					'id_organizacao' => (int)$organizacao,
+					'ip_usuario' => $request->getClientIp()
+				);
+				LogAcesso::salvaLogAcesso($dadosLogAcesso);
+
 				$app["session"]->set("usuario_logado", true);
 				$app["session"]->set("usuario", $usuario);
 				$app["session"]->set("organizacao", $organizacao);

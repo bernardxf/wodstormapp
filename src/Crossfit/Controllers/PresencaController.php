@@ -37,9 +37,10 @@ class PresencaController
 		$response = new Response();
 
 		$aula = Aula::retornaSelecionado($id_aula);
+		$aulaAtiva = Aula::retornaIdAulaAtiva();
 		$presenca = AlunoAula::retornaSelecionado($id_aula);
 
-		$response->setData(array('aula' => $aula, 'presenca' => $presenca));
+		$response->setData(array('aula' => $aula, 'aulaAtiva' => $aulaAtiva, 'presenca' => $presenca));
 
 		return $response->getAsJson();
 	}
@@ -59,7 +60,8 @@ class PresencaController
 		$response = new Response();
 		$presencaDataset = json_decode($request->getContent());
 
-		AlunoAula::atualizaPresenca($id_aula, $presencaDataset);
+		$retorno = AlunoAula::atualizaPresenca($id_aula, $presencaDataset);
+		if(!$retorno) $response->addMessage('danger', 'Atenção', 'Não foi possivel atualizar os dados da presença!');
 
 		return $response->getAsJson();
 	}

@@ -85,22 +85,24 @@
 									<tr>
 										<th>Senha</th>
 										<th>Nome</th>
-										<th>Ação</th>
+										<th ng-show="exibeAcoes();">Ação</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="item in cadPresencaDataset.presentes">
 										<td>{{$index + 1}}</td>
 										<td>{{item.nome}}</td>
-										<td>
-											<a class="btn btn-sm btn-danger" ng-click="removeAlunoPresente(item);"><i class="fa fa-eraser"></i></a>
+										<td ng-show="exibeAcoes();">
+											<a class="btn btn-sm btn-danger" ng-click="removeAlunoPresente(item);">
+												<i class="fa fa-eraser"></i>
+											</a>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div> <!-- /.table-responsive -->
-						<button type="button" class="btn btn-success" ng-click="salvaPresenca();">Salvar</button>
-						<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoPresenca();">Cancelar</button>
+						<button type="button" class="btn btn-success" ng-click="salvaPresenca();" ng-show="exibeAcoes();">Salvar</button>
+						<button type="button" class="btn btn-danger" ng-click="cancelaEdicaoPresenca();">Voltar</button>
 					</div> <!-- /.portlet-content -->
 				</div> <!--/.portlet -->
 			</div> <!-- /.col -->

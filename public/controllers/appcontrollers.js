@@ -854,7 +854,13 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 	$scope.cadAlunoDataset = null;
 	$scope.cadPresencaDataset = {data:year+'-'+month+'-'+day, presentes : new Array()};
 
+	$scope.idAulaAtiva = null;
 	$scope.presentesIniciais = null;
+
+	// Controle para exibição das açoes de salvar e remover alunos da presença.
+	$scope.exibeAcoes = function(){
+		return $routeParams.aula == undefined || $scope.idAulaAtiva == $routeParams.aula;
+	}
 
 
 	$scope.pesquisaAulas = function(){
@@ -865,14 +871,20 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 	};
 
 	$scope.carregaCadPresenca = function(){
-		rest.get({id_aula: $routeParams.aula}).then(function(response){
-			if(!angular.isArray(response.data)){
+		// Buscando dados da presença caso esteja editando.
+		if($routeParams.aula) {
+			rest.get({id_aula: $routeParams.aula}).then(function(response){
 				$scope.cadPresencaDataset = response.data.aula;	
+				$scope.idAulaAtiva = response.data.aulaAtiva;
 				$scope.cadPresencaDataset.presentes = response.data.presenca;
 				$scope.presentesIniciais = response.data.presenca;
-			}
-		});
+				$scope.iniciarTimerPresentes();
+			});
+		}
 
+	};
+
+	$scope.iniciarTimerPresentes = function() {
 		// Atualizando a lista dos presentes e da aula ativa a cada 15s.
 		$rootScope.controleTimer = $interval(function(){
 			if($routeParams.aula) {
@@ -957,7 +969,7 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 		if(confirm('Realmente deseja apagar?')){
 			rest.remove({id_aula : presenca.id_aula}).then(function(response){
 				var index = $scope.aulaDataset.indexOf(presenca);
-				delete($scope.aulaDataset[index]);
+				$scope.aulaDataset.splice(index, 1);
 			});
 		}
 	};

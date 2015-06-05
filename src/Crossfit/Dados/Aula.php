@@ -38,4 +38,14 @@ class Aula
 		$resultado = Conexao::get()->delete('aula',array('id_aula' => $id_aula));
 		return $resultado;
 	}
+
+	public static function retornaIdAulaAtiva()
+	{
+		$sql = "SELECT a.id_aula from aula a 
+				where a.id_organizacao = ? and a.data = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') 
+				order by a.id_aula DESC 
+				limit 1";
+		$aula = Conexao::get()->fetchAssoc($sql, array(App::getSession()->get('organizacao')));
+		return (int)$aula['id_aula'];
+	}
 }

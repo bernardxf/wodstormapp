@@ -12,7 +12,7 @@ class RelPresenca
                 join contrato on contrato.id_aluno = aluno.id_aluno
                 where aluno.id_aluno in (
                         select DISTINCT(id_aluno) from alunos_aula 
-                        join aula on alunos_aula.id_aula = aula.id_aula
+                        join aula on alunos_aula.id_aula = aula.id_aula and aula.status = 'A'
                         where alunos_aula.id_organizacao = ?
                         and aula.data between ? and ?
                 )
@@ -31,7 +31,7 @@ class RelPresenca
                 join contrato on contrato.id_aluno = aluno.id_aluno
                 where aluno.id_aluno not in (
                         select DISTINCT(id_aluno) from alunos_aula 
-                        join aula on alunos_aula.id_aula = aula.id_aula
+                        join aula on alunos_aula.id_aula = aula.id_aula and aula.status = 'A'
                         where alunos_aula.id_organizacao = ?
                         and aula.data between ? and ?
                 )

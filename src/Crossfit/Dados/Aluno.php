@@ -38,6 +38,7 @@ class Aluno
 					join aula on aula.id_aula = alunos_aula.id_aula
 					where aula.data = ?
 					and id_aluno = a.id_aluno
+					and aula.status = 'A'
 				) presente
 				FROM aluno as a
 				JOIN contrato on contrato.id_aluno = a.id_aluno

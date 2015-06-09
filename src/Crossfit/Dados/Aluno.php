@@ -32,6 +32,7 @@ class Aluno
 					where contrato.status = 'A'
 					and alunos_aula.id_aluno = a.id_aluno
 					and aula.data between if(date_format(contrato.data_inicio, '%d') <= date_format(?, '%d'),CONCAT_WS('-',date_format(?, '%Y-%m'), date_format(contrato.data_inicio, '%d')),CONCAT_WS('-',date_format(DATE_SUB(?,INTERVAL 1 MONTH), '%Y-%m'), date_format(contrato.data_inicio, '%d'))) and ?
+					and aula.status = 'A'
 				) as total_aulas_periodo,
 				(
 					select aula.horario from alunos_aula

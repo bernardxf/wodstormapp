@@ -100,7 +100,7 @@ class AlunoAula
 
 	public static function removeAlunosAula($id_aula)
 	{
-		Conexao::get()->update('aula', array('status' => 'I', 'updated' => date('Y-m-d H:i:s')), array('id_aula' => $id_aula, 'id_organizacao' => App::getSession()->get('organizacao')));
+		Conexao::get()->update('aula', array('status' => 'I', 'deleted' => date('Y-m-d H:i:s')), array('id_aula' => $id_aula, 'id_organizacao' => App::getSession()->get('organizacao')));
 
 		return true;
 	}

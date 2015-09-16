@@ -8,14 +8,14 @@ class Desconto
 {
 	public static function retornaTodos()
 	{
-		$sql = 'select * from desconto where id_organizacao = ?';
+		$sql = "select * from desconto where status = 'A' and id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
 	public static function retornaTodosSimples()
 	{
-		$sql = "SELECT id_desconto, nome from desconto where id_organizacao = ?";
+		$sql = "SELECT id_desconto, nome from desconto where status = 'A' and id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 
 		return $resultado;
@@ -42,7 +42,7 @@ class Desconto
 
 	public static function removeDesconto($id_desconto)
 	{
-		$resultado = Conexao::get()->delete('desconto', array('id_desconto' => $id_desconto));
+		$resultado = Conexao::get()->update('desconto', array('status' => 'I'), array('id_desconto' => $id_desconto));
 		return $resultado;
 	}
 }

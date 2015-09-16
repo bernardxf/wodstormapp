@@ -8,14 +8,14 @@ class Plano
 {
 	public static function retornaTodos()
 	{
-		$sql = "select * from plano where id_organizacao = ?";
+		$sql = "select * from plano where status = 'A' and id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 		return $resultado;
 	}
 
 	public static function retornaTodosSimples()
 	{
-		$sql = "SELECT id_plano, nome from plano WHERE id_organizacao = ?";
+		$sql = "SELECT id_plano, nome from plano WHERE status = 'A' and id_organizacao = ?";
 		$resultado = Conexao::get()->fetchAll($sql, array(App::getSession()->get('organizacao')));
 
 		return $resultado;
@@ -41,8 +41,8 @@ class Plano
 	}
 
 	public static function removePlano($id_plano)
-	{
-		$resultado = Conexao::get()->delete('plano', array('id_plano' => $id_plano));
+	{	
+		$resultado = Conexao::get()->update('plano', array('status' => 'I'), array('id_plano' => $id_plano));
 		return $resultado;
 	}
 }

@@ -16,6 +16,7 @@ class RelPresenca
                         where alunos_aula.id_organizacao = ?
                         and aula.data between ? and ?
                 )
+                and aluno.status =  'A'
                 and aluno.id_organizacao = ? 
                 and exists (
                     select id_contrato from contrato
@@ -36,6 +37,7 @@ class RelPresenca
                         and aula.data between ? and ?
                 )
                 and aluno.id_organizacao = ? 
+                and aluno.status =  'A'
                 and exists (
                     select id_contrato from contrato
                     where (data_inicio <= ? and data_fim >= ?)

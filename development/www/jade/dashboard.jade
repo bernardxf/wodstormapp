@@ -1,0 +1,60 @@
+#dashboard(ng-init="loadDashboard();")
+	h1 
+		| Dashboard
+		.user
+		.sair
+	.content
+		.box-status.ativo
+			.icone
+			.titulo Alunos ativos
+			span {{dashboardDataset.dashboard.ativo}}
+		.box-status.inativo
+			.icone
+			.titulo Alunos inativos
+			span {{dashboardDataset.dashboard.inativo}}
+		.box-status.trancado
+			.icone
+			.titulo Alunos trancados
+			span {{dashboardDataset.dashboard.trancado}}
+		.box-status.finalizado
+			.icone
+			.titulo Alunos finalizados
+			span {{dashboardDataset.dashboard.finalizado}}
+		hr
+		.box
+			.titulo.aniversario Aniversariantes do mês
+			ws-pagination(total-items="dashboardDataset.aniversarios.length", ng-model="currentPage", items-per-page="itemsPerPage")
+			table
+				tr
+					th Aluno
+					th Data
+				tr(ng-repeat="aniversariante in dashboardDataset.aniversarios | startFrom: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage")
+					td {{aniversariante.nome}}
+					td {{aniversariante.data_nasc}}
+		.box.dir
+			.titulo.planos Planos Vencendo
+			table
+				tr
+					th Aluno
+					th Data
+				tr(ng-repeat="aluno in dashboardDataset.plano")
+					td {{aluno.nome}}
+					td {{aluno.data_fim}}
+		.box
+			.titulo.estacionamento Estacionamento Vencido
+			table
+				tr
+					th Aluno
+					th Data
+				tr(ng-repeat="aluno in dashboardDataset.estacionamentoVencido")
+					td {{aluno.nome}}
+					td {{aluno.plano_fim}}
+		.box.dir
+			.titulo.estacionamento Estacionamento Trancado
+			table
+				tr
+					th Aluno
+					th Placa
+				tr(ng-repeat="aluno in dashboardDataset.estacionamentoTrancado")
+					td {{aluno.nome}}
+					td {{aluno.placa}}

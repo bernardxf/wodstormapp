@@ -1,1 +1,0 @@
-alter table contrato modify column observacao varchar(500);

@@ -1,1 +1,0 @@
-alter table organizacao add column created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;

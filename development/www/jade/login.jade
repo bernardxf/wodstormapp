@@ -1,0 +1,21 @@
+.login
+	.sombra
+	.container
+		.logo
+		.box-login
+			.titulo Olá! Bem vindo(a) ao Box Admin!
+			.descricao Insira seus dadso para logar
+			form(novalidate)
+				p
+					label Usuário:
+					input(type="text", placeholder="Usuário", ng-model="loginDataset.usuario")
+					//- .msg-alert Usuário não cadastrao
+				p
+					label Senha:
+					input(type="password", placeholder="Senha", ng-model="loginDataset.senha")
+					//- .msg-alert Senha incorreta
+				p
+					label Org:
+					input(type="text", placeholder="Organização", ng-model="loginDataset.organizacao")
+				button(ng-click="login();", ng-disabled="form.$invalid") Confirmar
+		a(href="#") Esqueci minha senha

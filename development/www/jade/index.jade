@@ -1,0 +1,43 @@
+!!! 5
+html(ng-app="crossfitApp")
+	head
+		title Wodstorm - Box Admin
+		link(href='www/assets/styles/main.css', rel='stylesheet', type='text/css')
+		meta(charset='utf-8')
+	body(ng-switch on="$root.logged")
+		div(ng-switch-when="true")
+			.menu-lateral
+				.logo
+				ul
+					li
+						a.m1.active(href="#/dashboard") Dashboard
+					li
+						a.m2(href="#/aluno") Alunos
+					li
+						a.m3(href="#/aulaexp")
+							| Aula
+							br
+							| Experimental
+					li
+						a.m4(href="#/estacionamento") Estacionamento
+					li
+						a.m5(href="#/servicos") Serviços
+					li
+						a.m6(href="#/presenca") Presença
+					li
+						a.m7(href="#/relatorio") Relatórios
+					li
+						a.m8(href="#/financeiro") Financeiro
+					li
+						a.m9(href="#/configuracao") Configuração
+					li
+						a.m10(href="#/leaderboard") Leaderboard
+			.container
+				ng-view
+		div(ng-switch-default)
+			ng-view
+		include include.jade
+	//- .fundo
+	//- 	.popupContainer
+	//- 		.sair
+	//- 		.titulo Nova Movimentação

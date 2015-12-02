@@ -150,6 +150,28 @@ h1
 	top 0
 	padding-left 50px
 	width auto
+	.user
+	.sair
+		display block
+		font-size 12px
+		height 20px
+		line-height 21px
+		position absolute
+		top 30px
+		right 18%
+		&:before
+			content '\e61f'
+			display block
+			font-family icomoon
+			float left
+			font-size 20px
+			height 20px
+			margin 0 10px 0 0
+			width 20px
+	.sair
+		right 10%
+		&:before
+			content '\e619'
 
 // CONTENT
 .content
@@ -182,6 +204,7 @@ hr
 		margin-left 50px
 	.titulo
 		display block
+		float left
 		font-size 16px
 		height 55px
 		line-height 55px
@@ -200,32 +223,29 @@ hr
 			top -2px
 		&.estacionamento:after
 			content '\e60e'
-		a 
-			display block
-			float right
+	& > a 
+		display block
+		float right
+		height 25px
+		margin 16px 20px 0 0
+		position relative
+		width 25px
+		&:after
+			color #AEBDC8
+			font-family icomoon
+			font-size 25px
 			height 25px
-			margin 16px 20px 0 0
-			position relative
 			width 25px
-			&:after
-				color #AEBDC8
-				font-family icomoon
-				font-size 25px
-				height 25px
-				left 0px
-				position absolute
-				top -15px
-				width 25px
-			&.adicionar:after
-				content '\e621'
-			&.pesquisar:after
-				content '\e604'
+		&.adicionar:after
+			content '\e621'
+		&.pesquisar:after
+			content '\e604'
 	ws-pagination
 		display block
+		float right
 		height 45px
-		position absolute
-		top 5px
-		right 5px
+		margin 5px 5px 0 0
+		position relative
 		width 150px
 		.ws-pagination
 			display block
@@ -281,7 +301,7 @@ table
 			display table-cell
 			height 20px
 			line-height 20px
-			padding 15px
+			padding 10px
 			text-align center
 			&:first-child
 				border-left none

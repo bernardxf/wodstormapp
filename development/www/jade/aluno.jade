@@ -7,9 +7,9 @@
 		.box
 			.titulo 
 				| Lista de alunos
-				a(href='#', title='Adicionar').adicionar
-				a(href='#', title='Pesquisar').pesquisar
 			ws-pagination(total-items="alunoDataset.length", ng-model="paginaAtual", items-per-page="itensPorPagina")
+			a(href='#', title='Adicionar').adicionar
+			a(href='#', title='Pesquisar').pesquisar
 			table
 				tr
 					th Alunos

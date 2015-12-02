@@ -91,7 +91,7 @@ select
 				position relative
 				text-align center
 				&.active
-				&:active
+				&:hover
 					background-color #C02C0A
 					color #fff
 				&:after
@@ -176,6 +176,7 @@ hr
 	box-shadow 0 2px #D9D9DD
 	display block
 	float left
+	position relative
 	width 980px
 	&.dir
 		margin-left 50px
@@ -219,8 +220,49 @@ hr
 				content '\e621'
 			&.pesquisar:after
 				content '\e604'
-				
-
+	ws-pagination
+		display block
+		height 45px
+		position absolute
+		top 5px
+		right 5px
+		width 150px
+		.ws-pagination
+			display block
+			float left
+			width 100%
+			.voltarPagina
+			.avancarPagina
+				display block
+				height 45px
+				left 0
+				line-height 45px
+				position absolute
+				top 0
+				width 11px
+				&:after
+					color #a9a9ad
+					content '\e61c'
+					font-family icomoon
+					font-size 22px
+			.avancarPagina
+				left auto
+				right 0
+				&:after
+					content '\e61b'
+			.tituloPagina
+			.textoPaginas
+				display block
+				height 18px
+				line-height 18px
+				margin 0 auto
+				text-align center
+				width 125px
+				div
+					display inline-block
+					margin 0 2px
+			.tituloPagina
+				margin 5px auto 0
 // TABLE
 table
 	border-collapse collapse

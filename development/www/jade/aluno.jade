@@ -9,6 +9,7 @@
 				| Lista de alunos
 				a(href='#', title='Adicionar').adicionar
 				a(href='#', title='Pesquisar').pesquisar
+			ws-pagination(total-items="alunoDataset.length", ng-model="paginaAtual", items-per-page="itensPorPagina")
 			table
 				tr
 					th Alunos
@@ -17,7 +18,7 @@
 					th Fim Contrato
 					th Status
 					th Ação
-				tr(ng-repeat="aluno in alunoDataset | limitTo: 10")
+				tr(ng-repeat="aluno in alunoDataset | startFrom: (paginaAtual - 1) * itensPorPagina | limitTo: itensPorPagina")
 					td {{aluno.nome}}
 					td {{aluno.email}}
 					td {{aluno.tel_celular}}

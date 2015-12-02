@@ -57,63 +57,63 @@ AppControllers.controller('LogoutController', ['$scope', 'loginService', '$inter
 }]);
 
 
-AppControllers.controller('DashboardController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
-	$scope.dashboardDataset = null;
-	$scope.tituloAniversariantes = "Aniversariantes do Mês";
-	$scope.columnsAniversariantes = [
-	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
-	{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
-	];
-	$scope.botoesAniversariantes = [
-	{
-		label: "Imprimir",
-		route: "#/relAniversariantes"
-	}
-	];
+// AppControllers.controller('DashboardController', ['$scope', 'DashboardResource', function ($scope, DashboardResource) {
+// 	$scope.dashboardDataset = null;
+// 	$scope.tituloAniversariantes = "Aniversariantes do Mês";
+// 	$scope.columnsAniversariantes = [
+// 	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+// 	{name: "data_nasc", label: "Data", order: "2", tipo: 'text'}
+// 	];
+// 	$scope.botoesAniversariantes = [
+// 	{
+// 		label: "Imprimir",
+// 		route: "#/relAniversariantes"
+// 	}
+// 	];
 
-	$scope.tituloPlanosVencendo = "Planos Vencendo";
-	$scope.columnsPlanosVencendo = [
-	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
-	{name: "data_fim", label: "Data", order: "2", tipo: 'date'}
-	];
+// 	$scope.tituloPlanosVencendo = "Planos Vencendo";
+// 	$scope.columnsPlanosVencendo = [
+// 	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+// 	{name: "data_fim", label: "Data", order: "2", tipo: 'date'}
+// 	];
 
-	$scope.tituloEstacionamentoVencido = "Estacionamento Vencido";
-	$scope.columnsEstacionamentoVencido = [
-	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
-	{name: "plano_fim", label: "Data", order: "2", tipo: 'date'}
-	];
+// 	$scope.tituloEstacionamentoVencido = "Estacionamento Vencido";
+// 	$scope.columnsEstacionamentoVencido = [
+// 	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+// 	{name: "plano_fim", label: "Data", order: "2", tipo: 'date'}
+// 	];
 
-	$scope.tituloEstacionamentoTrancado = "Estacionamento Trancado";
-	$scope.columnsEstacionamentoTrancado = [
-	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
-	{name: "placa", label: "Placa", order: "2", tipo: 'text'}
-	];
+// 	$scope.tituloEstacionamentoTrancado = "Estacionamento Trancado";
+// 	$scope.columnsEstacionamentoTrancado = [
+// 	{name: "nome", label: "Nome", order: "1", tipo: 'text'},
+// 	{name: "placa", label: "Placa", order: "2", tipo: 'text'}
+// 	];
 
-	$scope.tituloPlanosTrancados = "Planos Trancado";
-	$scope.columnsPlanosTrancados = [
-	{name: "nome", label: "Nome", order: "1", tipo: 'text'}
-	];
+// 	$scope.tituloPlanosTrancados = "Planos Trancado";
+// 	$scope.columnsPlanosTrancados = [
+// 	{name: "nome", label: "Nome", order: "1", tipo: 'text'}
+// 	];
 
-	$scope.loadDashboard = function(){
-		DashboardResource.get({}, function(response){
-			$scope.dashboardDataset = response.data;
-		});
-	};
+// 	$scope.loadDashboard = function(){
+// 		DashboardResource.get({}, function(response){
+// 			$scope.dashboardDataset = response.data;
+// 		});
+// 	};
 
-	$scope.alunosDashboardDataset = null;
-	$scope.currentPage = 1;
-	$scope.itemsPerPage = 3;
-	$scope.maxSize = 10;
-	$scope.buscarAlunosDashboard = function(tipo){
-		DashboardResource.alunos({tipo:tipo}, function(response){
-			$scope.alunosDashboardDataset = response.data.alunos;
-		});
-	};
+// 	$scope.alunosDashboardDataset = null;
+// 	$scope.currentPage = 1;
+// 	$scope.itemsPerPage = 3;
+// 	$scope.maxSize = 10;
+// 	$scope.buscarAlunosDashboard = function(tipo){
+// 		DashboardResource.alunos({tipo:tipo}, function(response){
+// 			$scope.alunosDashboardDataset = response.data.alunos;
+// 		});
+// 	};
 
-	$scope.fecharAlunosDashboard = function(){
-		$scope.alunosDashboardDataset = null;
-	};
-}]);
+// 	$scope.fecharAlunosDashboard = function(){
+// 		$scope.alunosDashboardDataset = null;
+// 	};
+// }]);
 
 AppControllers.controller('Page404Controller', ['$scope', '$rootScope', function($scope, $rootScope){
 	
@@ -528,21 +528,8 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'Consul
 	$scope.cadAlunoDataset = null;
 	$scope.alunoFilter = null;
 
-	$scope.tituloAluno = "Alunos";
-	$scope.columnsAluno = [
-		{name: "nome", label: "Nome", order: "1"},
-		{name: "email", label: "Email", order: "2"},
-		{name: "tel_celular", label: "Celular", order: "3"},
-		{name: "data_fim", label: "Fim Contrato", order: "4"}
-	];
-
-	$scope.titulo                = $scope.tituloAluno;
-	$scope.gridData              = $scope.alunoDataset;
-	$scope.currentPage           = 1;
-	$scope.itemsPerPage          = 10;
-	$scope.showInputItemsPerPage = false;
-	$scope.maxSize               = 10;
-	$scope.columns               = $scope.columnsAluno;
+	$scope.paginaAtual = 1;
+	$scope.itensPorPagina = 10;
 
 	$scope.$watch('alunoFilter', function(newValue){
 		if(newValue){

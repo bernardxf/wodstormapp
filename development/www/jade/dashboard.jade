@@ -23,21 +23,22 @@
 		hr
 		.box
 			.titulo.aniversario Aniversariantes do mês
-			ws-pagination(total-items="dashboardDataset.aniversarios.length", ng-model="currentPage", items-per-page="itemsPerPage")
+			ws-pagination(total-items="dashboardDataset.aniversarios.length", ng-model="paginaAtual.aniversario", items-per-page="itensPorPagina")
 			table
 				tr
 					th Aluno
 					th Data
-				tr(ng-repeat="aniversariante in dashboardDataset.aniversarios | startFrom: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage")
+				tr(ng-repeat="aniversariante in dashboardDataset.aniversarios | startFrom: (paginaAtual.aniversario - 1) * itensPorPagina | limitTo: itensPorPagina")
 					td {{aniversariante.nome}}
 					td {{aniversariante.data_nasc}}
 		.box.dir
 			.titulo.planos Planos Vencendo
+			ws-pagination(total-items="dashboardDataset.plano.length", ng-model="paginaAtual.planoVencendo", items-per-page="itensPorPagina")
 			table
 				tr
 					th Aluno
 					th Data
-				tr(ng-repeat="aluno in dashboardDataset.plano")
+				tr(ng-repeat="aluno in dashboardDataset.plano | startFrom: (paginaAtual.planoVencendo - 1) * itensPorPagina | limitTo: itensPorPagina")
 					td {{aluno.nome}}
 					td {{aluno.data_fim}}
 		.box

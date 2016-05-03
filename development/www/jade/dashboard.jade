@@ -1,8 +1,7 @@
 #dashboard(ng-init="loadDashboard();")
 	h1 
 		| Dashboard
-		.user Crossfit BH
-		.sair Sair
+		ws-top-menu(usuario="loggedUserData.nome")
 	.content
 		.box-status.ativo
 			.icone

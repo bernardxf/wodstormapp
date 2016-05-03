@@ -23,9 +23,9 @@ var AppServices = angular.module('AppServices', [])
 
 		},
 		logout : function(){
-			$rootScope.logged = false;
 			LogoutResource.logout({}, function(response){
-				
+				$rootScope.logged = false;
+				$location.path('/');
 			});		
 		}
 	};

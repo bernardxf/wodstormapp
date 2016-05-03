@@ -33,7 +33,7 @@ crossfitApp.config(['$routeProvider',function($routeProvider){
 		templateUrl: templatePath + '/cad_estacionamento.html',
 		controller: 'EstacionamentoController'
 	}).when('/aulaexp', {
-		templateUrl: templatePath + '/aulaexp.html',
+		templateUrl: templatePath + '/aula_exp.html',
 		controller: 'AulaExpController'
 	}).when('/cad_aulaexp/:aulaexp?', {
 		templateUrl: templatePath + '/cad_aulaexp.html',

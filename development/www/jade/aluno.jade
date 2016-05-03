@@ -1,8 +1,7 @@
 #aluno(ng-init="carregaAluno();")
 	h1 
 		| Alunos
-		.user
-		.sair
+		ws-top-menu(usuario="loggedUserData.nome")
 	.content
 		.box
 			.titulo 
@@ -19,7 +18,7 @@
 					th Status
 					th Ação
 				tr(ng-repeat="aluno in alunoDataset | startFrom: (paginaAtual - 1) * itensPorPagina | limitTo: itensPorPagina")
-					td {{aluno.nome}}
+					td {{	aluno.nome}}
 					td {{aluno.email}}
 					td {{aluno.tel_celular}}
 					td {{aluno.data_fim}}

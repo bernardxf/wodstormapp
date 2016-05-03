@@ -1,4 +1,4 @@
-angular.module('AppDirectives', [])
+angular.module('AppDirectives')
 .controller('wsPaginationController', ['$scope', '$attrs', '$parse', function($scope, $attrs, $parse) {
 	var self = this,
 		ngModelCtrl = { $setViewValue: angular.noop };

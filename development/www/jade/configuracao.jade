@@ -1,137 +1,51 @@
-#configuracao
+#configuracao(ng-init="carregarDados();")
 	h1 
 		| Configuração
-		.user
-		.sair
+		ws-top-menu(usuario="loggedUserData.nome")
 	.content
 		.box
 			.titulo Editar Configurções
 			form
 				.tab
 					ul.tabs
-						li.active
-							a(href="#") Descontos
-						li
-							a(href="#") Pagamentos
-						li
-							a(href="#") Planos
+						li(ng-class="{active: tabAtiva == TAB_DESCONTO}")
+							a(ng-click="setTabAtiva(TAB_DESCONTO);") Descontos
+						li(ng-class="{active: tabAtiva == TAB_PAGAGAMENTOS}")
+							a(ng-click="setTabAtiva(TAB_PAGAGAMENTOS);") Pagamentos
+						li(ng-class="{active: tabAtiva == TAB_PLANOS}")
+							a(ng-click="setTabAtiva(TAB_PLANOS);") Planos
 					.tab-content
-						#decontos
+						#decontos(ng-show="tabAtiva == TAB_DESCONTO")
 							table
 								tr
 									th Nome
 									th % Desconto
-									th Observção
 									th Ação
-								tr
-									td Atleta
-									td 50%
-									td Atletas Federados
+								tr(ng-repeat="desconto in descontoDataset")
+									td {{desconto.nome}}
+									td {{desconto.porc_desc}}
 									td
 										a(href='#', title='Excluir').excluir
 										a(href='#', title='Editar').editar
-								tr
-									td Família
-									td 10%
-									td Parentesco 1 grau
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Pagamento à vista
-									td 12%
-									td Dinheiro ou Cartão de Débito
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Bolsista
-									td 100%
-									td 
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-						#pagamentos
+						#pagamentos(ng-show="tabAtiva == TAB_PAGAGAMENTOS")
 							table
 								tr
 									th Nome
-									th Código
-									th Observção
 									th Ação
-								tr
-									td Dinheiro
-									td 91
-									td Desconto 5%
+								tr(ng-repeat="forma in formaPagamentoDataset")
+									td {{forma.nome}}
 									td
 										a(href='#', title='Excluir').excluir
 										a(href='#', title='Editar').editar
-								tr
-									td Cheque
-									td 101
-									td Máximo 6x
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Cartão de Crédito
-									td 111
-									td Máximo 6x
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Cartão de Débito
-									td 112
-									td 
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Boleto
-									td 115
-									td 
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-						#planos
+						#planos(ng-show="tabAtiva == TAB_PLANOS")
 							table
 								tr
 									th Nome
 									th Valor
-									th Observção
 									th Ação
-								tr
-									td Mensal 2x
-									td R$250,00
-									td
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Mensal 2x
-									td R$250,00
-									td
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Mensal 2x
-									td R$250,00
-									td
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Mensal 2x
-									td R$250,00
-									td
-									td
-										a(href='#', title='Excluir').excluir
-										a(href='#', title='Editar').editar
-								tr
-									td Mensal 2x
-									td R$250,00
-									td
+								tr(ng-repeat="plano in planoDataset")
+									td {{plano.nome}}
+									td {{plano.valor}}
 									td
 										a(href='#', title='Excluir').excluir
 										a(href='#', title='Editar').editar

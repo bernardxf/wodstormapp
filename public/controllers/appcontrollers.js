@@ -9,7 +9,7 @@ AppControllers.controller("menuCtrl", ["$scope", "$rootScope", "controleAcessoRe
 
 	$rootScope.sideBarIsVisible = true;
 	$rootScope.headerIsVisible  = true;
-	controleAcessoResource.get({}, function(response){	
+	controleAcessoResource.get({}, function(response){
 		$scope.itensControleAcesso = response.data;
 	});
 
@@ -52,7 +52,7 @@ AppControllers.controller('LoginController', ['$scope', 'loginService', function
 AppControllers.controller('LogoutController', ['$scope', 'loginService', '$interval', '$rootScope', function ($scope, loginService, $interval, $rootScope) {
 	$interval.cancel($rootScope.timerLogado);
 	$rootScope.timerLogado = null;
-	loginService.logout();	
+	loginService.logout();
 
 }]);
 
@@ -116,7 +116,7 @@ AppControllers.controller('DashboardController', ['$scope', 'DashboardResource',
 }]);
 
 AppControllers.controller('Page404Controller', ['$scope', '$rootScope', function($scope, $rootScope){
-	
+
 }]);
 
 AppControllers.controller('PlanoController', ['$scope','$routeParams', '$location', 'PlanoResource', 'RESTService', function ($scope, $routeParams, $location, PlanoResource, RESTService) {
@@ -166,7 +166,7 @@ AppControllers.controller('PlanoController', ['$scope','$routeParams', '$locatio
 		if(confirm('Realmente deseja apagar?')){
 			// PlanoResource.remove({id_plano: plano.id_plano}, function(response){
 			// 	$scope.carregaPlano();
-			// });			
+			// });
 
 			rest.remove({id_plano: plano.id_plano}).then(function(response){
 				var index = $scope.planoDataset.indexOf(plano);
@@ -181,7 +181,7 @@ AppControllers.controller('FormaPagamentoController', ['$scope', '$routeParams',
 	var rest = new RESTService(FormaPagamentoResource);
 
 	$scope.formapagamentoDataset = null;
-	
+
 	$scope.carregaFormaPagamento = function(){
 		// FormaPagamentoResource.get({id_forma_pagamento : $routeParams.formapagamento},function(response){
 		// 	$scope.formapagamentoDataset = response.data;
@@ -253,13 +253,13 @@ AppControllers.controller('DescontoController', ['$scope','$routeParams', '$loca
 	$scope.carregaCadDesconto = function(){
 		// DescontoResource.get({id_desconto: $routeParams.desconto}, function(response){
 		// 	if(!angular.isArray(response.data)){
-		// 		$scope.descontoDataset = response.data;	
+		// 		$scope.descontoDataset = response.data;
 		// 	}
 		// });
 
 		rest.get({id_desconto: $routeParams.desconto}).then(function(response){
 			if(!angular.isArray(response.data)){
-				$scope.descontoDataset = response.data;	
+				$scope.descontoDataset = response.data;
 			}
 		});
 	};
@@ -311,19 +311,19 @@ AppControllers.controller('EstacionamentoController', ['$scope','$routeParams', 
 
 	$scope.carregaCadEstacionamento = function(){
 		// EstacionamentoResource.get({id_estacionamento: $routeParams.estacionamento}, function(response){
-		// 	$scope.selectAluno = response.data.selectAluno;	
+		// 	$scope.selectAluno = response.data.selectAluno;
 		// 	$timeout(function(){
 		// 		if(!angular.isArray(response.data.estacionamento)){
-		// 			$scope.cadEstacionamentoDataset = response.data.estacionamento;	
+		// 			$scope.cadEstacionamentoDataset = response.data.estacionamento;
 		// 		}
 		// 	});
 		// });
 
 		rest.get({id_estacionamento: $routeParams.estacionamento}).then(function(response){
-			$scope.selectAluno = response.data.selectAluno;	
+			$scope.selectAluno = response.data.selectAluno;
 			$timeout(function(){
 				if(!angular.isArray(response.data.estacionamento)){
-					$scope.cadEstacionamentoDataset = response.data.estacionamento;	
+					$scope.cadEstacionamentoDataset = response.data.estacionamento;
 				}
 			});
 		})
@@ -388,7 +388,7 @@ AppControllers.controller('AulaExpController', ['$scope', '$routeParams', '$loca
 					delete newValue[key];
 				}
 			});
-			localStorage.setItem('wsAulaExpFilter', JSON.stringify(newValue));	
+			localStorage.setItem('wsAulaExpFilter', JSON.stringify(newValue));
 		}
 	}, true);
 
@@ -467,10 +467,10 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 
 
 	$scope.alunoFilter = {bairro: null};
-	
+
 	$scope.carregaRelAluno = function(){
 		RelAlunoResource.get({},function(response){
-			$scope.selectAluno = response.data;	
+			$scope.selectAluno = response.data;
 		});
 
 		$scope.relatorioAlunoBairro();
@@ -479,7 +479,7 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 	$scope.pesquisaRelAluno = function(){
 		RelAlunoResource.pesquisa($scope.relalunoDataset,function(response){
 			$scope.relAlunoResponseDataset = response.data;
-		});	
+		});
 	};
 
 	$scope.pesquisaRelAlunoIdade = function(){
@@ -491,7 +491,7 @@ AppControllers.controller('RelAlunoController', ['$scope', 'RelAlunoResource', f
 	$scope.relatorioAlunoBairro = function(){
 		RelAlunoResource.get({filtro: 'bairro'},function(response){
 			$scope.relAlunosBairroDataset = response.data;
-		});	
+		});
 	};
 
 	$scope.filtrarAluno = function(bairro){
@@ -546,7 +546,7 @@ AppControllers.controller('AlunoController', ['$scope', 'AlunoResource', 'Consul
 
 	$scope.$watch('alunoFilter', function(newValue){
 		if(newValue){
-			localStorage.setItem('wsAlunoFilter', JSON.stringify(newValue));	
+			localStorage.setItem('wsAlunoFilter', JSON.stringify(newValue));
 		}
 	}, true);
 
@@ -651,8 +651,8 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 		// 		if(!angular.isArray(response.data.contrato)){
 		// 			$scope.cadContratoDataset = response.data.contrato;
 		// 		} else {
-		// 			$scope.cadContratoDataset = {'id_aluno' : aluno, 'status' : 'A'};	
-		// 		}	
+		// 			$scope.cadContratoDataset = {'id_aluno' : aluno, 'status' : 'A'};
+		// 		}
 		// 	});
 		// });
 
@@ -664,8 +664,8 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 				if(!angular.isArray(result.data.contrato)){
 					$scope.cadContratoDataset = result.data.contrato;
 				} else {
-					$scope.cadContratoDataset = {'id_aluno' : aluno, 'status' : 'A'};	
-				}	
+					$scope.cadContratoDataset = {'id_aluno' : aluno, 'status' : 'A'};
+				}
 			});
 		});
 	};
@@ -751,7 +751,7 @@ AppControllers.controller('ContratoController', ['$scope', 'ContratoResource', '
 
 		dtFimAtual.setDate(dtFimComputada.getDate()+parseInt(qtdDiasTrancados));
 		var ano = dtFimAtual.getFullYear(),
-		mes = month[dtFimAtual.getMonth()],				
+		mes = month[dtFimAtual.getMonth()],
 		dia = dtFimAtual.getDate().toString();
 		if(dia.length == 1) dia = "0"+dia;
 		contrato.data_fim = ano+"-"+mes+"-"+dia;
@@ -795,26 +795,26 @@ AppControllers.controller('ServicoController', ['$scope','$routeParams', '$locat
 
 	$scope.carregaCadServico = function(){
 		// ServicoResource.get({id_servico: $routeParams.servico}, function(response){
-		// 	$scope.selectAluno = response.data.selectAluno;	
+		// 	$scope.selectAluno = response.data.selectAluno;
 		// 	$timeout(function(){
 		// 		if(!angular.isArray(response.data.servico)){
-		// 			$scope.servicoDataset = response.data.servico;	
+		// 			$scope.servicoDataset = response.data.servico;
 		// 		}
 		// 	});
 		// });
 
 		rest.get({id_servico: $routeParams.servico}).then(function(result){
-			$scope.selectAluno = result.data.selectAluno;	
+			$scope.selectAluno = result.data.selectAluno;
 			$timeout(function(){
 				if(!angular.isArray(result.data.servico)){
-					$scope.servicoDataset = result.data.servico;	
+					$scope.servicoDataset = result.data.servico;
 				}
 			});
 		});
 	};
 
 	$scope.salvaServico = function(){
-		var servico = $scope.servicoDataset;		
+		var servico = $scope.servicoDataset;
 		// ServicoResource.save(servico, function(response){
 		// 	$location.path('/servico');
 		// });
@@ -874,7 +874,7 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 		// Buscando dados da presença caso esteja editando.
 		if($routeParams.aula) {
 			rest.get({id_aula: $routeParams.aula}).then(function(response){
-				$scope.cadPresencaDataset = response.data.aula;	
+				$scope.cadPresencaDataset = response.data.aula;
 				$scope.idAulaAtiva = response.data.aulaAtiva;
 				$scope.cadPresencaDataset.presentes = response.data.presenca;
 				$scope.presentesIniciais = response.data.presenca;
@@ -898,13 +898,13 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 							for(var i in $scope.cadPresencaDataset.presentes) {
 								if(item.id_aluno == $scope.cadPresencaDataset.presentes[i].id_aluno) return false;
 							}
-							
+
 							return true;
 						});
 						$scope.cadPresencaDataset.presentes = $scope.cadPresencaDataset.presentes.concat(novosPresentes);
 						$scope.presentesIniciais = $scope.presentesIniciais.concat(novosPresentes);
 					}
-				});	
+				});
 			}
 		}, 1000*15);
 	};
@@ -918,7 +918,7 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 		} else {
 			AlunoResource.alunosPresenca({nome: $scope.cadPesquisaAluno.nome, data: data}, function(response){
 				$scope.cadAlunoDataset = response.data;
-			});	
+			});
 		}
 	};
 
@@ -939,7 +939,7 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 				}
 			} else {
 				aluno.senha = $scope.cadPresencaDataset.presentes.length+1;
-				$scope.cadPresencaDataset.presentes.push(aluno);	
+				$scope.cadPresencaDataset.presentes.push(aluno);
 			}
 		}
 	};
@@ -984,7 +984,7 @@ AppControllers.controller('PresencaController', ['$scope', '$rootScope','$routeP
 					return {
 						title: 'Observações do aluno',
 						text: aluno.observacao_presenca
-					}				
+					}
 				}
 			}
 		});
@@ -1008,7 +1008,7 @@ AppControllers.controller('RelMetricaContratoController', ['$scope', 'RelMetrica
 		RelMetricaContratoResource.pesquisa(pesquisa,function(response){
 			$scope.relMetricaContratoResponseDataset = [response.data];
 			$scope.alunosMetricaSelecionada = null;
-		});	
+		});
 	};
 
 	$scope.buscaAlunosPorStatus = function(tipo){
@@ -1052,7 +1052,7 @@ AppControllers.controller('RelPresencaController', ['$scope', 'RelPresencaResour
 		RelPresencaResource.pesquisa(pesquisa,function(response){
 			$scope.relPresencaResponseDataset = response.data;
 			$scope.alunosPresencaSelecionada = null;
-		});	
+		});
 	};
 
 	$scope.buscaAlunosPorPresenca = function(tipo){
@@ -1075,14 +1075,14 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 	$scope.relaulaDataset = null;
 	$scope.relAulaResponseDataset = null;
 	$scope.chart = null;
-	
+
 	$scope.pesquisaRelAula = function(){
 		$('#bar-chart svg, .morris-hover').remove();
 		var pesquisa = $scope.relaulaDataset;
 		RelAulaResource.pesquisa(pesquisa,function(response){
 			$scope.relAulaResponseDataset = response.data;
 			$scope.loadChart();
-		});	
+		});
 	};
 
 	$scope.loadChart = function(){
@@ -1112,7 +1112,7 @@ AppControllers.controller('RelAulaController', ['$scope', 'RelAulaResource', fun
 		angular.forEach($scope.relAulaResponseDataset, function(item){
 			values.push(item[key]);
 		});
-		return values;	
+		return values;
 	}
 }]);
 
@@ -1120,14 +1120,14 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 	$scope.relservicoDataset = null;
 	$scope.relServicoResponseDataset = null;
 	$scope.chart = null;
-	
+
 	$scope.pesquisaRelServico = function(){
 		$('#bar-chart svg, .morris-hover').remove();
 		var pesquisa = $scope.relservicoDataset;
 		RelServicoResource.pesquisa(pesquisa,function(response){
 			$scope.relServicoResponseDataset = response.data;
 			$scope.loadChart();
-		});	
+		});
 	};
 
 	$scope.loadChart = function(){
@@ -1156,7 +1156,7 @@ AppControllers.controller('RelServicoController', ['$scope', 'RelServicoResource
 		angular.forEach($scope.relServicoResponseDataset, function(item){
 			values.push(item[key]);
 		});
-		return values;	
+		return values;
 	}
 }]);
 
@@ -1176,7 +1176,7 @@ AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootS
 				$rootScope.loggedUserData = response.data;
 			}
 
-			$location.path('/perfil');	
+			$location.path('/perfil');
 			MessageService.processMessages(new Array({type: 'success', title:'Atualização concluida', message:"Alteração de perfil concluida."}));
 		});
 	};
@@ -1189,11 +1189,11 @@ AppControllers.controller('PerfilController', ['$scope', '$routeParams', '$rootS
 				MessageService.processMessages(new Array({type: 'danger', title:'Erro ao alterar senha!', message:"Nova senha e sua confirmação devem possuir o mesmo valor."}))
 			} else {
 				PerfilResource.atualizaSenha(perfil, function(){
-					$location.path('/perfil');	
+					$location.path('/perfil');
 					MessageService.processMessages(new Array({type: 'success', title:'Atualização concluida', message:"Alteração de senha concluida."}));
 				});
 			}
-		}	
+		}
 	};
 
 	$scope.cancelaPerfil = function(){
@@ -1253,7 +1253,7 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 		ano: now.getFullYear(),
 		mes: null
 	};
-	
+
 	$scope.carregaFinanceiro = function(){
 		FinanceiroResource.get({ano: $scope.filtroFinanceiro.ano}, function(response){
 			$scope.financeiroDataset = response.data.dadosFinanceiro;
@@ -1283,8 +1283,8 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 			$scope.listaCategorias = response.data.categorias;
 			$timeout(function(){
 				if(!angular.isArray(response.data.dadosFinanceiro)) {
-					$scope.cadFinanceiroDataset = response.data.dadosFinanceiro;	
-				}	
+					$scope.cadFinanceiroDataset = response.data.dadosFinanceiro;
+				}
 			});
 		});
 	};
@@ -1293,7 +1293,7 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 		var movimento = $scope.cadFinanceiroDataset;
 		FinanceiroResource.save(movimento, function(response){
 			$location.path('/financeiro');
-		});	
+		});
 	};
 
 	$scope.cancelaEdicaoMovimento = function(){
@@ -1342,7 +1342,7 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 			} else {
 				valorTotal = parseFloat(valorTotal) - parseFloat(financeiro.valor);
 			}
-			
+
 		});
 		return valorTotal;
 	};
@@ -1355,8 +1355,8 @@ AppControllers.controller('FinanceiroController', ['$scope','$routeParams', '$lo
 			resolve: {
 				items: function(){
 					return {
-						
-					}				
+
+					}
 				}
 			}
 		});
@@ -1498,7 +1498,7 @@ AppControllers.controller('ConfiguracaoController', ['$scope', 'ConfiguracaoReso
 				MessageService.processMessages(new Array({type: 'danger', title:'Erro ao salvar configurações', message:"Houve algum erro ao tentar salvar suas configurações, entre em contato com o administrador"}));
 			}
 			//$scope.configuracaoDataset = response.data;
-		});	
+		});
 	}
 }]);
 
@@ -1530,8 +1530,8 @@ AppControllers.controller('ModalAgrupadorController', ['$scope', '$modalInstance
 		var agrupadorDataset = $scope.agrupadorDataset;
 		if(agrupadorDataset.nome) {
 			AgrupadorResource.save(agrupadorDataset, function(response){
-				$modalInstance.close();	
-			});	
+				$modalInstance.close();
+			});
 		}
 	};
 

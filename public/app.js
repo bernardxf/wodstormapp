@@ -133,11 +133,11 @@ crossfitApp.run(function($rootScope, $location, LoginResource, $templateCache, $
 					$rootScope.loggedUserData = response.data.usuario;
 					$rootScope.sisConfig = response.data.configuracao;
 					if(next.originalPath == '/') {
-						if(parseInt($rootScope.loggedUserData.grupoUsuario) < 3) $location.path('/dashboard');			
+						if(parseInt($rootScope.loggedUserData.grupoUsuario) < 3) $location.path('/dashboard');
 						else $location.path('/leaderboard');
 					}
 				} else {
-					$location.path('/');		
+					$location.path('/');
 				}
 			});
 		}
@@ -209,7 +209,7 @@ crossfitApp.factory('AulaExpResource', ['$resource', function ($resource) {
 
 crossfitApp.factory('RelAlunoResource', ['$resource', function ($resource) {
 	return $resource('api/relaluno', {filtro: '@filtro'}, {
-		pesquisa: {method: 'POST'}, 
+		pesquisa: {method: 'POST'},
 		idade: {method: 'POST', url: 'api/relaluno/idade', params: {data_ini: '@data_ini',data_fim: '@data_fim'}}
 	});
 }]);
@@ -267,7 +267,7 @@ crossfitApp.factory("controleAcessoResource", ["$resource", function($resource) 
 
 //Servico para busca de cep
 crossfitApp.factory('ConsultaCepResource', ['$resource', function ($resource) {
-	return $resource('http://cep.correiocontrol.com.br/:cep.json',{cep:'@cep'});
+	return $resource('https://viacep.com.br/ws/:cep/json/',{cep:'@cep'});
 }]);
 
 crossfitApp.factory('FinanceiroResource', ['$resource', function ($resource) {
@@ -293,4 +293,3 @@ crossfitApp.factory('LeaderboardResource', ['$resource', function ($resource) {
 crossfitApp.factory('ConfiguracaoResource', ['$resource', function ($resource) {
 	return $resource('api/configuracao', {});
 }]);
-
